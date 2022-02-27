@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './css/Navbar.css';
 import NavHead from './NavHead';
@@ -25,13 +24,15 @@ function Navbar() {
 
   window.addEventListener('resize', showButton);
 
+  
   return (
     <>
+    
       <NavHead></NavHead>
       <nav className='navbar'>
-          <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+          <Link to='/' className='navbar-logo' onClick={closeMobileMenu} >
             E-BOARD
-            <i class='fab fa-typo3' />
+            <i className='fab fa-typo3' />
           </Link>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
@@ -47,8 +48,10 @@ function Navbar() {
                 to='/services'
                 className='nav-links'
                 onClick={closeMobileMenu}
+                activeClassName='is-active'
+                exact={true}
               >
-                Services
+                About us
               </Link>
             </li>
             <li className='nav-item'>
@@ -74,6 +77,7 @@ function Navbar() {
           
       
       </nav>
+      
     </>
   );
 }
