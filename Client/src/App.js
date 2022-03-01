@@ -9,6 +9,7 @@ import SignUp from './components/pages/SignUp';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/pages/Login';
 import Admin from './components/pages/Admin';
+import NotFounds from './components/pages/NotFound';
 function App() {
   return (
     <>
@@ -21,6 +22,7 @@ function App() {
           <Route path='/login' component={Login} />
           <Route path='/sign-up' component={SignUp} />
           <Route path='/Eboard/auth/admin' component={Admin} />
+          <Route path='**' component={NotFounds} />
         </Switch>
       </Router>
     </>
