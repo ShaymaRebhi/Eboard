@@ -1,0 +1,14 @@
+GET http://localhost:3000/user/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibWhhbWRpLm1vdWhlYjMyQGVzcHJpdC50biIsImlhdCI6MTY0NjIzODA1MX0.aiCnVqEMz-MdSG8LaWnHrMGSSswcAV2pBq3faMyrOMo
+###
+GET http://localhost:3000/user/connect
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibWhhbWRpLm1vdWhlYjMyQGVzcHJpdC50biIsImlhdCI6MTY0NjIzODA1MX0.aiCnVqEMz-MdSG8LaWnHrMGSSswcAV2pBq3faMyrOMo
+
+###
+POST http://localhost:3000/user/login
+Content-Type: application/json
+
+{
+    "email":"mhamdi.mouheb32@esprit.tn",
+    "Password":"123448888"
+}

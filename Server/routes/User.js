@@ -1,20 +1,17 @@
 var express = require('express');
 var router = express.Router();
 const UserController = require('../controllers/UserController')
-const verify =require('./VerifyToken')
-/* GET users listing. */
-router.get('/',verify,(req,res)=>{
-    res.json({
-        Users:{
-            title:'hellooo',
-            description:'just for test'
-        }
-    });
-})
+const authenticateToken =require('./VerifyToken')
+require('dotenv').config()  
 
-router.get('/all', UserController.getAll);
+/* GET users listing. */
+
+router.get('/connect',authenticateToken,UserController.getUserConnect);
+
+router.get('/all',authenticateToken,UserController.getAll);
 
 router.post('/signup',UserController.signup);
 
 router.post('/login',UserController.signin);
+
 module.exports = router;
