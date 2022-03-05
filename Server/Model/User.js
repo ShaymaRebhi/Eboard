@@ -5,14 +5,6 @@ var Schema =mongoose.Schema;
 const bcrypt = require('bcrypt');
 
 var User= new Schema({
-    FirstName:{
-        type:String,
-        required : true
-    },
-    LastName:{
-        type:String,
-        required:true
-    },
     email:{
         type:String,
         required:true
@@ -23,26 +15,22 @@ var User= new Schema({
     },
     role:{
         type : String ,
-        enum : ['ADMIN','ORGANIZATION','TEACHER','STUDENT'] ,
-        required : true
-    },
-    Sexe:{
-        type : String ,
-        enum : ['HOMME','FEMME'] ,
-        required : true
+        enum : ['ADMIN','ORGANIZATION','TEACHER','STUDENT'],
+        required:true 
     },
     Adresse:{
-        type : String ,
-        required : true
+        type : String
+       
+       
     },
-    BirthDate:{
-        type : Date,
-        default:Date.now 
+    Phone:{
+        type:Number
+        
     },
     Etat:{
         type:Boolean,
-        default:false,
-        required:true,
+        default:false
+       
     }
 
 },{ timestamps : true })

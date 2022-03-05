@@ -1,14 +1,44 @@
 GET http://localhost:3000/user/all
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibWhhbWRpLm1vdWhlYjMyQGVzcHJpdC50biIsImlhdCI6MTY0NjIzODA1MX0.aiCnVqEMz-MdSG8LaWnHrMGSSswcAV2pBq3faMyrOMo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic3R1ZGVudEBlc3ByaXQudG4iLCJyb2xlIjoiU1RVREVOVCIsImlhdCI6MTY0NjQ0NTQ1MywiZXhwIjoxNjQ2NDQ1NTEzfQ.ornTSMWPZ25iejVMk9usC0i3Q61ymT7us-KRmnyJvJg
 ###
 GET http://localhost:3000/user/connect
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibWhhbWRpLm1vdWhlYjMyQGVzcHJpdC50biIsImlhdCI6MTY0NjIzODA1MX0.aiCnVqEMz-MdSG8LaWnHrMGSSswcAV2pBq3faMyrOMo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic3R1ZGVudEBlc3ByaXQudG4iLCJyb2xlIjoiU1RVREVOVCIsImlhdCI6MTY0NjQ0NTQ1MywiZXhwIjoxNjQ2NDQ1NTEzfQ.ornTSMWPZ25iejVMk9usC0i3Q61ymT7us-KRmnyJvJg
 
 ###
 POST http://localhost:3000/user/login
 Content-Type: application/json
 
 {
-    "email":"mhamdi.mouheb32@esprit.tn",
-    "Password":"123448888"
+    "email":"student@esprit.tn",
+    "Password":"123456"
 }
+
+###
+
+POST http://localhost:3000/user/login
+Content-Type: application/json
+
+{
+    "email":"student@esprit.tn",
+    "Password":"123456"
+}
+
+###
+POST http://localhost:3000/user/login
+Content-Type: application/json
+
+{
+    "email":"teacher@esprit.tn",
+    "Password":"123456"
+}
+
+
+###
+POST http://localhost:3000/user/login
+Content-Type: application/json
+
+{
+    "email":"student@esprit.tn",
+    "Password":"123456"
+}
+

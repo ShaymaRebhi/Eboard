@@ -10,6 +10,7 @@ router.get('/connect',authenticateToken,UserController.getUserConnect);
 
 router.get('/all',authenticateToken,UserController.getAll);
 
+
 router.post('/signup',UserController.signup);
 
 router.post('/login',UserController.signin);
