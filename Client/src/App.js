@@ -9,6 +9,7 @@ import SignUp from './components/pages/SignUp';
 import NavHead from './components/NavHead';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/pages/Login';
+import Classroom from './components/pages/Classroom';
 function App() {
   return (
     <>
@@ -20,8 +21,12 @@ function App() {
           <Route path='/products' component={Products} />
           <Route path='/login' component={Login} />
           <Route path='/sign-up' component={SignUp} />
+          <Route path='/classroom' component={Classroom} />
+          
+
         </Switch>
       </Router>
+      
     </>
   );
 }
