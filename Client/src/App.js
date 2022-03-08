@@ -10,6 +10,7 @@ import NavHead from './components/NavHead';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/pages/Login';
 import QuizList from "./components/Quiz/QuizList";
+import CreateQuiz from "./components/Quiz/CreateQuiz";
 function App() {
   return (
     <>
@@ -22,6 +23,9 @@ function App() {
           <Route path='/login' component={Login} />
           <Route path='/sign-up' component={SignUp} />
           <Route path='/quizList' component={QuizList}/>
+          <Route path='/formAddquiz/:id'>
+            <CreateQuiz/>
+          </Route>
         </Switch>
       </Router>
     </>
