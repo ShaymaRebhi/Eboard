@@ -9,26 +9,20 @@ import SignUp from './components/pages/SignUp';
 import NavHead from './components/NavHead';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/pages/Login';
-import QuizList from "./components/Quiz/QuizList";
-import CreateQuiz from "./components/Quiz/CreateQuiz";
 function App() {
   return (
-    <>
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/services' component={Services} />
-          <Route path='/products' component={Products} />
-          <Route path='/login' component={Login} />
-          <Route path='/sign-up' component={SignUp} />
-          <Route path='/quizList' component={QuizList}/>
-          <Route path='/formAddquiz/:id'>
-            <CreateQuiz/>
-          </Route>
-        </Switch>
-      </Router>
-    </>
+      <>
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route path='/' exact component={Home} />
+            <Route path='/services' component={Services} />
+            <Route path='/products' component={Products} />
+            <Route path='/login' component={Login} />
+            <Route path='/sign-up' component={SignUp} />
+          </Switch>
+        </Router>
+      </>
   );
 }
 
