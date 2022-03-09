@@ -10,8 +10,13 @@ require('dotenv').config()
 
 exports.getUserConnect = async(req,res) => {
     await User.find({email:req.user.name}).then(User=>{
-        return res.status(200).json(User);
-        
+        if(req.user.role=="STUDENT"){
+            Student.find({User:User}).then(Student=>{
+                return res.status(200).json(Student);
+            })
+        }else{
+            return res.status(200).json(User);
+        }
     }).catch(err=>{
         return res.json(err);
     })
