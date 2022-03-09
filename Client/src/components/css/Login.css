@@ -47,6 +47,33 @@
   
  
   }
+span {
+    font-size: 12px;
+    padding: 3px;
+    display: none !important;
+}
+input:invalid[focused="true"] ~ span{
+  display: block !important;
+}
+input[type="email"]:invalid[focused="true"] {
+    border:10px solid red !important;
+    border-top: 0px !important;
+    border-bottom: 0px !important;
+    border-right: 0px !important;
+}
+
+input[type="password"]:invalid[focused="true"]{
+  border:10px solid red !important;
+  border-top: 0px !important;
+  border-bottom: 0px !important;
+  border-right: 0px !important;
+
+}
+input[type='checkbox']:invalid[focused="true"] ~ .form-check-label{
+  background-color: red;
+}
+  
+
   .register-photo form input[type="password"]{
 
     border:10px solid #B6CDDC;
@@ -93,7 +120,7 @@
   
   @media (max-width:991px) {
     .register-photo form {
-      padding: 40px;
+      padding: 40px ;
     }
   }
   
