@@ -137,12 +137,12 @@ function CreateQuiz() {
         setQuestions(optionOfQuestion)
     }
 
-    /*const copyQuestion = (i) => {
+    const copyQuestion = (i) => {
         let cq = [...questions]
         var newQuestion = cq[i]
 
         setQuestions([...questions, newQuestion])
-    }*/
+    }
 
     const deleteQuestion = (i) => {
         let q = [...questions]
@@ -228,8 +228,8 @@ function CreateQuiz() {
                                       <AccordionDetails className="add_question">
                                           <div className="add_question_top">
                                               <input type="text" className="question" placeholder="Question" value={ques.questionText} onChange={(e)=>{changeQuestion(e.target.value, i)}}/>
-                                              {/*<CropOriginalIcon style={{color:"#5f6368"}} />
-                                             <Select className="select" style={{color:"#5f6368", fontsize:"13px"}} >
+                                              {/*<CropOriginalIcon style={{color:"#5f6368"}} />*/}
+                                             {/*<Select className="select" style={{color:"#5f6368", fontsize:"13px"}} >
                                                 <MenuItem id="text" value="Text" > <SubjectIcon style={{marginRight:"10px"}}/> Paragraph</MenuItem>
                                                 <MenuItem id="checkbox" value="checkbox"><CheckBoxIcon style={{marginRight:"10px", color:"#70757a"}} checked /> Checkbox</MenuItem>
                                                 <MenuItem id="radio" value="Radio" > <Radio style={{marginRight:"10px", color:"#70757a"}} checked /> Multiple Choice </MenuItem>
@@ -296,9 +296,9 @@ function CreateQuiz() {
                                                   <IconButton aria-label="new question" onClick={() => {addNewQuestionField(i)}} >
                                                       <BsFillBookmarkPlusFill style={{color:"blue"}}/>
                                                   </IconButton>
-                                                  {/*<IconButton aria-label="Copy question" onClick={() => {copyQuestion(i)}}>
+                                                  <IconButton aria-label="Copy question" onClick={() => {copyQuestion(i)}}>
                                                          <FaRegCopy/>
-                                                  </IconButton>*/}
+                                                  </IconButton>
                                                   <IconButton aria-label="delete question" onClick={() => {deleteQuestion(i)}} >
                                                       <BsFillBookmarkXFill style={{color:"red"}}/>
                                                   </IconButton>
