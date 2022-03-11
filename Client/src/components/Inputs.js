@@ -14,7 +14,7 @@ const Inputs = (props) => {
     <div>
         
       <input {...inputProps} onChange={onChange} onBlur={handleFocus} focused={focused.toString()}></input>
-      <span className="text-danger">{errorMessage}</span>
+      <span className="text-danger spanLogin">{errorMessage}</span>
    
     </div>
   )
