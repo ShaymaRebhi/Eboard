@@ -1,0 +1,263 @@
+.cardClass {
+    padding: 4rem;
+    background: #fff;
+    
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  .cards__Class__container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content:space-evenly ;
+    max-width: 1120px;
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  .cards__Class__wrapper {
+    position: relative;
+    margin: 50px 0 45px;
+  }
+  
+  .cards__Class__items {
+    margin-bottom: 24px;
+    
+  }
+  
+  .cards__Class__item {
+    display: flex;
+    flex: 1;
+    margin: 0 1rem;
+    border-radius: 10px;
+    height: 400px;
+    width: 360px;
+    background  :linear-gradient(3deg, rgba(37,57,78,-8) 1%, rgba(139,177,192,1) 90%, rgba(196,215,229,1) 106%);
+  }
+  
+  .cards__Class__item__link {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
+    -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+    filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+  }
+  
+  .cards__Class__item__pic-wrap {
+    
+    width: 100%;
+   height: 160px;
+    overflow: hidden;
+  }
+  
+  .fade__Class-img {
+    animation-name: fade-img;
+    animation-duration: 2s;
+  }
+  
+  .cards__Class__item__pic-wrap::after {
+    content: attr(data-category);
+    
+    bottom: 0;
+    margin-left: 10px;
+    padding: 6px 8px;
+    max-width: calc((100%) - 60px);
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+   
+    box-sizing: border-box;
+  }
+  
+  .cards__Class__item__img {
+    
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: 70%;
+    max-height: 100%;
+    object-fit: cover;
+    transition: all 0.2s linear;
+  }
+ 
+  
+  .cards__Class__item__img:hover {
+    transform: scale(1.1);
+  }
+  
+  .cards__Class__item__info {
+    padding: 17px 0px 0px;
+    height: 238px;
+  }
+  
+  .cards__Class__item__course {
+    color: #252e48;
+    font-size: 20px;
+    text-align: center;
+    line-height: 24px;
+    
+  }
+  .cards__Class__item__teacher {
+    color: #252e48;
+    font-size: 13px;
+    text-align: center;
+    line-height: 24px;
+    
+  }
+  .cards__Class__item__class {
+    color: #252e48;
+    font-size: 10px;
+    text-align: center;
+    line-height: 12px;
+    
+  }
+  .icons {
+    position: absolute;
+    top:70%;
+    left: 45%;
+    transform: translate(-50% ,-50%);  
+    display: flex;
+    justify-content : space-between;
+  
+  
+  }
+  
+  .icons li{
+   
+      list-style: none;   
+  
+  }
+  .icons li i{
+    
+      width: 35px;
+      text-align: center;
+      color: #252e48;
+      margin: 0 6px;
+      background: #fff;
+      display: inline-block;
+      border-radius: 60px;
+      box-shadow: 0 0 2px #888;
+     
+      
+  }
+  .icons :hover{
+    color: darkgoldenrod;
+    transform: scale(1.1);
+    
+  }
+  .react {
+    position: absolute;
+    top:78%;
+    left: 45%;
+    transform: translate(-50% ,-50%);  
+    display: flex;
+    justify-content : space-between;
+  
+  
+  }
+  .react li{
+   
+      list-style: none;   
+  
+  }
+  .react li i{
+    
+      width: 25px;
+      text-align: center;
+      color: #252e48;
+      margin: 0 6px;
+      background: #fff;
+      display: inline-block;
+      border-radius: 60px;
+      box-shadow: 0 0 2px #888;
+     
+      
+  }
+  .react :hover{
+    color: darkgoldenrod;
+    transform: scale(1.1);
+    
+  }
+  .meet-btns {
+    margin-top: 93px;
+    margin-left: 12px;
+    height: 34px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: red;
+    display: inline-block;
+    border-radius: 10px;   
+  }
+  .meet-btns .fas {
+    line-height: 2;
+  }
+  .meet-btns :hover{
+    padding-left: 10px;
+    padding-right: 10px;
+  transition: all 0.3s ease-out !important;
+  
+  transition: 250ms !important;
+  }
+
+  .offline-btns{
+    margin-top: 93px;
+    margin-left: 12px;
+    height: 34px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: grey;
+    display: inline-block;
+    border-radius: 10px;  
+  }
+  .offline-btns .fas {
+    line-height: 2;
+  }
+  
+  .cardMedia {
+    paddingTop: '81.25%';
+    borderRadius: '50%';
+    margin: '28px';
+}
+.image-container img {
+  background: white;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  padding: 5px;
+  position: absolute ;
+  top: 5%;
+  
+ 
+  transform: translate(127px,45px);
+
+}
+  
+  @media only screen and (min-width: 1200px) {
+    .content__blog__container {
+      width: 84%;
+    }
+  }
+  
+  @media only screen and (min-width: 1024px) {
+    .cards__Class__items {
+      display: flex;
+    }
+  }
+  
+  @media only screen and (max-width: 1024px) {
+    .cards__Class__item {
+      margin-bottom: 2rem;
+    }
+  }
+  
