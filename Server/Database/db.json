@@ -1,0 +1,5 @@
+{
+    "mongo":{
+        "uri":"mongodb+srv://mouheb:1234@cluster0.oxdj1.mongodb.net/Eboard?retryWrites=true&w=majority"
+    }
+}

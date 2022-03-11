@@ -1,10 +1,13 @@
 import React from 'react';
+import { Navbar } from 'reactstrap';
 import '../App.css';
 import { Button } from './Button';
 import './css/HeroSection.css';
 
 function HeroSection() {
   return (
+    <>
+    
     <div className="container-fluid">
     <div className='hero-container'>
       
@@ -27,6 +30,7 @@ function HeroSection() {
       </div>
     </div>
     </div>
+    </>
   );
 }
 
