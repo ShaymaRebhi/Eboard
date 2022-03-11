@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPowerOff,faLocationDot } from '@fortawesome/free-solid-svg-icons'
+import { faPowerOff,faLocationDot,faPhone,faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import React from 'react'
 import './css/NavHead.css'
 import { Link } from 'react-router-dom'
@@ -17,8 +17,8 @@ function NavHead() {
                                     
                                     <div className="top-left">
                                         <ul className="list-main">
-                                            <li><i className="ti-headphone-alt"></i> +216 50 566 033</li>
-                                            <li><i className="ti-email"></i>eboard@esprit.tn</li>
+                                            <li><i className="ti-headphone-alt"></i><FontAwesomeIcon className="iconNavHead" icon={faPhone} /> +216 50 566 033</li>
+                                            <li><i className="ti-email"></i><FontAwesomeIcon className="iconNavHead" icon={faEnvelope} /> eboard@esprit.tn</li>
                                         </ul>
                                     </div>
 
@@ -29,8 +29,8 @@ function NavHead() {
                                     <div className="right-content">
                                         <ul className="list-main">
                                             
-                                            <li><Link to="" className="href"> <FontAwesomeIcon icon={faLocationDot} /> Location</Link></li>
-                                            <li><Link to="/login" className="href"><FontAwesomeIcon icon={faPowerOff} /> Login</Link></li>
+                                            <li><Link to="" className="href"> <FontAwesomeIcon className="iconNavHead" icon={faLocationDot} /> Location</Link></li>
+                                            <li><Link to="/login" className="href"><FontAwesomeIcon className="iconNavHead" icon={faPowerOff} /> Login</Link></li>
                                             
                                         </ul>
                                     </div>

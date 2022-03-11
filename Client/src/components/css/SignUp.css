@@ -1,15 +1,22 @@
-.register-photo {
+.signup{
+    display: flex;
+    justify-content: center;
+    width: 100%  !important;
+}
+   
+
+.signup-photo {
     background: #f1f7fc;
     padding: 80px 0;
     
   } 
-  .register-photo .image-holder {
+  .signup-photo  .image-holder {
     display: table-cell;
     width: auto;
     background: url('/images/login.png') center center no-repeat; 
     background-size: cover;
   }
-  .register-photo .image-holder .hr{
+  .signup-photo  .image-holder .hr{
       width: 50px;
       background-color: #FFF;
       border-radius: 30px;
@@ -17,65 +24,29 @@
       margin-right: auto;
       height: 10px;
   }
-  .register-photo .image-holder h1,h2,h3,h4,h5,h6,p{
+  .signup-photo  .image-holder h1,h2,h3,h4,h5,h6,p{
     color: #FFF;
   }
-  .register-photo .image-holder .content{
-      margin: 130px 30px 30px 30px;
+  .signup-photo  .image-holder .content{
+     
     text-align: center;
   }
-  .register-photo .form-container {
+  .signup-photo  .form-container {
     display: table;
     max-width: 900px;
     width: 90%;
     margin: 0 auto;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
   }
-  .register-photo form {
+  .signup-photo  form {
     display: table-cell;
-    width: 420px;
+    width: 750px;
     background: #8EB2CD;
     padding: 40px 50px;
     color:#676767 ;
     
   }
-  .register-photo form input[type="email"]{
-
-    border:10px solid #B6CDDC;
-    border-top: 0px;
-    border-bottom: 0px;
-    border-right: 0px;
-  
- 
-  }
-.spanLogin {
-    font-size: 12px;
-    padding: 3px;
-    display: none !important;
-}
-input:invalid[focused="true"] ~ span{
-  display: block !important;
-}
-input[type="email"]:invalid[focused="true"] {
-    border:10px solid red !important;
-    border-top: 0px !important;
-    border-bottom: 0px !important;
-    border-right: 0px !important;
-}
-
-input[type="password"]:invalid[focused="true"]{
-  border:10px solid red !important;
-  border-top: 0px !important;
-  border-bottom: 0px !important;
-  border-right: 0px !important;
-
-}
-input[type='checkbox']:invalid[focused="true"] ~ .form-check-label{
-  background-color: red;
-}
-  
-
-  .register-photo form input[type="password"]{
+  .signup-photo  form input[type="email"]{
 
     border:10px solid #B6CDDC;
     border-top: 0px;
@@ -85,20 +56,32 @@ input[type='checkbox']:invalid[focused="true"] ~ .form-check-label{
  
   }
 
-  .register-photo form input[type='email']::placeholder{
+
+
+  .signup-photo  form input[type="password"]{
+
+    border:10px solid #B6CDDC;
+    border-top: 0px;
+    border-bottom: 0px;
+    border-right: 0px;
+  
+ 
+  }
+
+  .signup-photo  form input[type='email']::placeholder{
       color: #BDBDBD;
       
 
   }
-  .register-photo form input[type='password']::placeholder{
+  .signup-photo  form input[type='password']::placeholder{
     color: #BDBDBD;
 }
 
-  .register-photo form h1,label{
+  .signup-photo  form h1,label{
       color: #FFF;
   }
   
-  .register-photo form .row .btn {
+  .signup-photo  form .row .btn {
       font-size: 14px;
      color: #FFF;
      border: 1px solid #FFF;
@@ -108,31 +91,31 @@ input[type='checkbox']:invalid[focused="true"] ~ .form-check-label{
       margin-right: 0px;
   }
 
-  .register-photo form .row .btn:hover {
+  .signup-photo  form .row .btn:hover {
     background-color: #4c7391;
 }
-.register-photo form .row .btn:focus {
+.signup-photo  form .row .btn:focus {
     background-color: #4c7391;
 }
-.register-photo form .row .btn:active {
+.signup-photo  form .row .btn:active {
     background-color: #4c7391;
 }
 
   
   @media (max-width:991px) {
-    .register-photo form {
+    .signup-photo  form {
       padding: 40px ;
     }
     
   }
   
-  .register-photo form h2 {
+  .signup-photo  form h2 {
     font-size: 24px;
     line-height: 1.5;
     margin-bottom: 30px;
   }
   
-  .register-photo form .form-control {
+  .signup-photo  form .form-control {
     background: #f7f9fc;
     border: none;
     border-bottom: 1px solid #dfe7f1;
@@ -144,12 +127,12 @@ input[type='checkbox']:invalid[focused="true"] ~ .form-check-label{
     height: 40px;
   }
   
-  .register-photo form .form-check {
+  .signup-photo  form .form-check {
     font-size: 13px;
     line-height: 20px;
   }
   
-  .register-photo form .btn-primary {
+  .signup-photo  form .btn-primary {
     background: #65A2D1;
     border: none;
     border-radius: 4px;
@@ -160,15 +143,15 @@ input[type='checkbox']:invalid[focused="true"] ~ .form-check-label{
     outline: none !important;
   }
   
-  .register-photo form .btn-primary:hover, .register-photo form .btn-primary:active {
+  .signup-photo  form .btn-primary:hover, .signup-photo  form .btn-primary:active {
     background: #3273a5;
   }
   
-  .register-photo form .btn-primary:active {
+  .signup-photo  form .btn-primary:active {
     transform: translateY(1px);
   }
   
-  .register-photo form .already {
+  .signup-photo  form .already {
     display: block;
     text-align: center;
     font-size: 12px;

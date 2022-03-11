@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { faUserTie,faChalkboardUser,faGraduationCap } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope} from '@fortawesome/free-solid-svg-icons'
 
 import Footer from '../Footer'
 import './../css/Login.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import Inputs from '../Inputs'
 const Login = () => {
   const [values,setValues]=useState({
@@ -13,8 +13,6 @@ const Login = () => {
     actor:""
 
   })
-
-
 const input1=[
   {
     id:1,
@@ -69,25 +67,9 @@ const input1=[
             <form method="post" onSubmit={handleSubmit}>
                
                 <h1 className="text-center ">LOGIN ACCOUNT</h1>
-                <label className="text-white pt-4">Login As:</label>
-                <div className="row justify-content-md-center">
-                    <div className="col-md-4 col-md-offset-1 margin">
-                      <input type="radio" className="btn-check" id="btn-check-outlined" autoComplete="off" name="actor" value="Organization" required></input>
-                      <label className="btn btn-outline-primary" htmlFor="btn-check-outlined"><FontAwesomeIcon icon={faUserTie} />Organization </label>
-                    </div>
-                    <div className="col-md-4 col-md-offset-1 ">
-                      <input type="radio" className="btn-check" id="btn-check-outlined1" autoComplete="off" name="actor" value="Teacher" required></input>
-                      <label className="btn btn-outline-primary" htmlFor="btn-check-outlined1"><FontAwesomeIcon icon={faChalkboardUser} /> Teacher</label>
-                    </div>
-                    <div className="col-md-4 col-md-offset-1 pb-3">
-                      <input type="radio" className="btn-check" id="btn-check-outlined2" autoComplete="off" name="actor" value="Student" required></input>
-                      <label className="btn btn-outline-primary" htmlFor="btn-check-outlined2"><FontAwesomeIcon icon={faGraduationCap} /> Student</label>
-                    </div>
-
-
-                </div>
+               
                   
-                <div className="mb-3 ">
+                <div className="mb-3 pt-4">
                   <div className="col">
                    
                  
@@ -100,11 +82,13 @@ const input1=[
                  
                 </div>
               
-               
                     <div className="form-check"><label className="form-check-label"><Inputs className="form-check-input" type="checkbox"></Inputs>Stay logined.</label></div>
              
+                
                 <div className="mb-3"><button className="btn btn-primary d-block w-100" type="submit">Login</button></div><Link className="already" to="/sign-up"><p> You don't have an account ?  Sign up here. </p></Link>
+               
             </form>
+           
         </div>
     </div>
     <Footer></Footer>
