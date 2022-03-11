@@ -169,4 +169,107 @@
     display: flex;
     justify-content: center;
 }
+.add_question_icon{
 
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+.new_question_span{
+    font-size: 12px;
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+.add_question_icon:hover .new_question_span{
+    visibility: visible;
+}
+.Copy_question_icon{
+
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+.Copy_question_span{
+    font-size: 12px;
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+.Copy_question_icon:hover .Copy_question_span{
+    visibility: visible;
+}
+.delete_question_icon{
+
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+.delete_question_span{
+    font-size: 12px;
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+.delete_question_icon:hover .delete_question_span{
+    visibility: visible;
+}
+.delete_option_icon{
+
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+.delete_option_span{
+    font-size: 12px;
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+.delete_option_icon:hover .delete_option_span{
+    visibility: visible;
+}

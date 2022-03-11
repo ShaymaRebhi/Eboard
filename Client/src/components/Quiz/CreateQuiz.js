@@ -265,8 +265,9 @@ function CreateQuiz() {
                                                       &nbsp;
                                                       &nbsp;
 
-                                                      <IconButton aria-label="delete" >
-                                                          <BsFillDashCircleFill onClick={()=> {removeOption(i,j)}}/>
+                                                      <IconButton className="delete_option_icon" aria-label="delete" >
+                                                          <BsFillDashCircleFill  onClick={()=> {removeOption(i,j)}}/>
+                                                          <span className="delete_option_span">Delete option</span>
                                                       </IconButton>
                                                   </div>
 
@@ -293,14 +294,17 @@ function CreateQuiz() {
                                           ): ""}
                                           <div className="add_footer">
                                               <div className="add_question_bottom">
-                                                  <IconButton aria-label="new question" onClick={() => {addNewQuestionField(i)}} >
+                                                  <IconButton className="add_question_icon" aria-label="new question" onClick={() => {addNewQuestionField(i)}} >
                                                       <BsFillBookmarkPlusFill style={{color:"blue"}}/>
+                                                      <span className="new_question_span">New question</span>
                                                   </IconButton>
-                                                  <IconButton aria-label="Copy question" onClick={() => {copyQuestion(i)}}>
+                                                  <IconButton className="Copy_question_icon" aria-label="Copy question" onClick={() => {copyQuestion(i)}}>
                                                          <FaRegCopy/>
+                                                         <span className="Copy_question_span">Copy question</span>
                                                   </IconButton>
-                                                  <IconButton aria-label="delete question" onClick={() => {deleteQuestion(i)}} >
+                                                  <IconButton className="delete_question_icon" aria-label="delete question" onClick={() => {deleteQuestion(i)}} >
                                                       <BsFillBookmarkXFill style={{color:"red"}}/>
+                                                      <span className="delete_question_span">Delete question</span>
                                                   </IconButton>
                                                   <span style={{color:"#5f6368", fontSize: "13px"}}>Required </span> <Switch name="checkedA" color="primary"  checked={ques.required} onChange={(e)=>{changeRequiredValue(e.target.checked, i)}}/>
 
