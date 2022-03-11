@@ -13,7 +13,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {BsTrash, BsFillDashCircleFill, BsPatchCheckFill, BsFillBookmarkPlusFill, BsFillBookmarkXFill} from 'react-icons/bs';
 import {FaRegCopy} from 'react-icons/fa';
 import {BiAddToQueue} from 'react-icons/bi';
-import {FaTrashAlt} from 'react-icons/fa';
+import {GiChoice} from 'react-icons/gi';
 import {AiFillFileAdd} from 'react-icons/ai';
 
 import { IconButton } from '@material-ui/core';
@@ -237,19 +237,21 @@ function CreateQuiz() {
                                           </div>
                                           {ques.options.map( (op, j)=>(
                                               <div className="add_question_body" key={j}>
-                                                  {
+                                                  {/*{
                                                       (ques.questionType!=="text") ?
                                                           <input type={ques.questionType} style={{marginRight:"10px"}}/> :
                                                           <ShortTextIcon style={{marginRight:"10px"}} />
-                                                  }
+                                                  }*/}
 
                                                   <div className="optionstyle">
+                                                      <GiChoice style={{fontSize:"18px"}}/> {j+1} :
+                                                      &nbsp;
                                                       <input type="text" className="text_input" placeholder="option" value={ques.options[j].optionText}
                                                              onChange={(e)=>{changeOptionValue(e.target.value, i , j)}}/>
                                                       <BsPatchCheckFill/>
                                                       <Switch className="text_input2" name="checkedA" color="primary" aria-label="Is Valid" checked={ques.options[j].IsValid}
                                                                onChange={(e)=>{changeIsValidValue(e.target.checked, i , j)}}/>
-                                                      &nbsp;
+
                                                       &nbsp;
                                                       &nbsp;
                                                       &nbsp;
@@ -306,7 +308,8 @@ function CreateQuiz() {
                                                       <BsFillBookmarkXFill style={{color:"red"}}/>
                                                       <span className="delete_question_span">Delete question</span>
                                                   </IconButton>
-                                                  <span style={{color:"#5f6368", fontSize: "13px"}}>Required </span> <Switch name="checkedA" color="primary"  checked={ques.required} onChange={(e)=>{changeRequiredValue(e.target.checked, i)}}/>
+                                                  <span style={{color:"#5f6368", fontSize: "13px"}}>Required </span>
+                                                  <Switch name="checkedA" color="primary"  checked={ques.required} onChange={(e)=>{changeRequiredValue(e.target.checked, i)}}/>
 
                                               </div>
                                           </div>
