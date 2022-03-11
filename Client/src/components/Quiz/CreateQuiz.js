@@ -191,6 +191,7 @@ function CreateQuiz() {
                       </div>
                   </div>
                   <br/>
+
                   {questions.map((ques,i) => (
                           <div>
                               <Accordion expanded={questions[i].open} className={questions[i].open ? 'add_border' :""}>
@@ -235,6 +236,7 @@ function CreateQuiz() {
                                                 <MenuItem id="radio" value="Radio" > <Radio style={{marginRight:"10px", color:"#70757a"}} checked /> Multiple Choice </MenuItem>
                                              </Select>*/}
                                           </div>
+                                          <ol type="A">
                                           {ques.options.map( (op, j)=>(
                                               <div className="add_question_body" key={j}>
                                                   {/*{
@@ -242,10 +244,10 @@ function CreateQuiz() {
                                                           <input type={ques.questionType} style={{marginRight:"10px"}}/> :
                                                           <ShortTextIcon style={{marginRight:"10px"}} />
                                                   }*/}
-
+                                                    <li>
                                                   <div className="optionstyle">
-                                                      <GiChoice style={{fontSize:"18px"}}/> {j+1} :
-                                                      &nbsp;
+
+
                                                       <input type="text" className="text_input" placeholder="option" value={ques.options[j].optionText}
                                                              onChange={(e)=>{changeOptionValue(e.target.value, i , j)}}/>
                                                       <BsPatchCheckFill/>
@@ -272,6 +274,7 @@ function CreateQuiz() {
                                                           <span className="delete_option_span">Delete option</span>
                                                       </IconButton>
                                                   </div>
+                                                    </li>
 
                                               </div>
                                           ))}
@@ -294,6 +297,7 @@ function CreateQuiz() {
                                               </div>
 
                                           ): ""}
+                                          </ol>
                                           <div className="add_footer">
                                               <div className="add_question_bottom">
                                                   <IconButton className="add_question_icon" aria-label="new question" onClick={() => {addNewQuestionField(i)}} >
@@ -321,6 +325,7 @@ function CreateQuiz() {
                           </div>
                       ))
                   }
+
                   <div className="SaveQuiz">
                         <button className="btn btn-success " onClick={handelListQuiz}>Save</button>
                   </div>
