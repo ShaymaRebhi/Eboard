@@ -14,6 +14,7 @@ import Admin from './components/pages/Admin';
 import NotFounds from './components/pages/NotFound';
 import Login from './components/pages/Login';
 import Classroom from './components/pages/Classroom';
+import DisplayQuiz from "./components/Quiz/DisplayQuiz";
 function App() {
   return (
       <>
@@ -27,6 +28,7 @@ function App() {
             <Route path='/sign-up' component={SignUp} />
             <Route path='/quizList' component={QuizList}/>
             <Route path='/formAddquiz/:id'><CreateQuiz/></Route>
+            <Route path='/displayQuiz' component={DisplayQuiz}/>
             <Route path='/Eboard/auth/admin' component={Admin} />
             <Route path='/classroom' component={Classroom} />
             <Route path='**' component={NotFounds} />

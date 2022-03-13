@@ -1,0 +1,54 @@
+{
+    "Title":"TWIN",
+    "Class": "4TWIN3",
+    "Description": "this is TWIN quiz please answer all this question ",
+    "question":[{"questionTitle": "What is React ?",
+                  "options" : [
+                          {"optionText": "FrameWork", "IsValid" : false},
+                          {"optionText": "Libraries", "IsValid" : true},
+                          {"optionText": "Programming Language", "IsValid" : false},
+                          {"optionText": "IDE", "IsValid" : false}
+                              ]
+                  },
+                {"questionTitle": "What is Angular ?",
+                  "options" : [
+                    {"optionText": "FrameWork", "IsValid" : true},
+                    {"optionText": "Libraries", "IsValid" : false},
+                    {"optionText": "Programming Language", "IsValid" : false},
+                    {"optionText": "IDE", "IsValid" : false}
+                  ]
+                },
+                {"questionTitle": "What is Django ?",
+                  "options" : [
+                    {"optionText": "FrameWork", "IsValid" : true},
+                    {"optionText": "Libraries", "IsValid" : false},
+                    {"optionText": "Programming Language", "IsValid" : false},
+                    {"optionText": "IDE", "IsValid" : false}
+                  ]
+                },
+                {"questionTitle": "What is Spring ?",
+                  "options" : [
+                    {"optionText": "FrameWork", "IsValid" : true},
+                    {"optionText": "Libraries", "IsValid" : false},
+                    {"optionText": "Programming Language", "IsValid" : false},
+                    {"optionText": "IDE", "IsValid" : false}
+                  ]
+                },
+                {"questionTitle": "What is WebStorm ?",
+                  "options" : [
+                    {"optionText": "FrameWork", "IsValid" : false},
+                    {"optionText": "Libraries", "IsValid" : false},
+                    {"optionText": "Programming Language", "IsValid" : false},
+                    {"optionText": "IDE", "IsValid" : true}
+                  ]
+                },
+                {"questionTitle": "What is java ?",
+                  "options" : [
+                    {"optionText": "FrameWork", "IsValid" : false},
+                    {"optionText": "Libraries", "IsValid" : false},
+                    {"optionText": "Programming Language", "IsValid" : true},
+                    {"optionText": "IDE", "IsValid" : false}
+                  ]
+                }
+                ]
+}
