@@ -48,6 +48,13 @@
   
  
   }
+  .register-photo form input[type="text"]{
+    border:10px solid #B6CDDC !important;
+    border-top: 0px;
+    border-bottom: 0px;
+    border-right: 0px;
+
+  }
 .spanLogin {
     font-size: 12px;
     padding: 3px;
@@ -61,6 +68,12 @@ input[type="email"]:invalid[focused="true"] {
     border-top: 0px !important;
     border-bottom: 0px !important;
     border-right: 0px !important;
+}
+input[type="text"]:invalid[focused="true"] {
+  border:10px solid red !important;
+  border-top: 0px !important;
+  border-bottom: 0px !important;
+  border-right: 0px !important;
 }
 
 input[type="password"]:invalid[focused="true"]{
@@ -85,11 +98,17 @@ input[type='checkbox']:invalid[focused="true"] ~ .form-check-label{
  
   }
 
+
   .register-photo form input[type='email']::placeholder{
       color: #BDBDBD;
       
 
   }
+  .register-photo form input[type='text']::placeholder{
+    color: #BDBDBD !important;
+    
+
+}
   .register-photo form input[type='password']::placeholder{
     color: #BDBDBD;
 }

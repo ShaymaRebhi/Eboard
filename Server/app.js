@@ -5,14 +5,17 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 const userRoute = require('./routes/User') 
+const bodyparser = require("body-parser")
 
 require('dotenv/config');
 //------------la modéfication --------------------
-
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
 
 var mongoose=require('mongoose');
 var config=require('./database/db.json')
 mongoose.connect(config.mongo.uri,{userNewUrlParser: true,useUnifiedTopology:true},()=>console.log("CONNETED DB"));
+
 
 
 
@@ -31,7 +34,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(bodyparser());
+app.use(express.json({limit:'200mb'}));
+app.use(bodyparser.urlencoded({extended:true}));
+app.use('/uploadsFolder', express.static(path.join(__dirname, '/uploads')));
 app.use('/', indexRouter);
 app.use('/user', userRoute);
 // catch 404 and forward to error handler

@@ -40,9 +40,9 @@
   }
   .signup-photo  form {
     display: table-cell;
-    width: 750px;
+    width: 450px;
     background: #8EB2CD;
-    padding: 40px 50px;
+    padding: 80px 50px;
     color:#676767 ;
     
   }
@@ -56,6 +56,15 @@
  
   }
 
+  .signup-photo  form input[type="text"]{
+
+    border:10px solid #B6CDDC;
+    border-top: 0px;
+    border-bottom: 0px;
+    border-right: 0px;
+  
+ 
+  }
 
 
   .signup-photo  form input[type="password"]{
@@ -73,6 +82,11 @@
       
 
   }
+  .signup-photo  form input[type='text']::placeholder{
+    color: #BDBDBD;
+    
+
+}
   .signup-photo  form input[type='password']::placeholder{
     color: #BDBDBD;
 }

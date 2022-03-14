@@ -1,18 +1,33 @@
-import React, { useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { faEnvelope} from '@fortawesome/free-solid-svg-icons'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import Footer from '../Footer'
-import './../css/Login.css'
-import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import Inputs from '../Inputs'
+import Footer from '../Footer';
+import './../css/Login.css';
+import Inputs from '../Inputs';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/inject-style';
+import 'react-toastify/dist/ReactToastify.css';
+import  { useHistory } from 'react-router-dom'
+import { AxiosResponse, AxiosError } from 'axios'
+import { sessionService } from 'redux-react-session';
+
 const Login = () => {
-  const [values,setValues]=useState({
+  
+ 
+  
+const history=useHistory();
+const state={
+      email:null,
+      password:null,
+      login:false,
+      store:null
+    }
+    
+const [values,setValues]=useState({
     email:"",
-    password:"",
-    actor:""
-
-  })
+    password:""
+})
 const input1=[
   {
     id:1,
@@ -35,19 +50,82 @@ const input1=[
   }
 ]
 
-
-  const handleSubmit =(e)=>{
-    e.preventDefault();
-    const Data= new FormData(e.target)
-    console.log(Object.fromEntries(Data.entries()))
-  }
-
   const onChange=(e)=>{
     setValues({...values,[e.target.name]:e.target.value});
   }
-  console.log(values)
+  
+  
+
+
+  const handleSubmit =(e)=>{
+
+    e.preventDefault();
+    const Data= new FormData(e.target)
+    
+
+    axios.post("http://localhost:3000/user/login",{
+      "email":values.email,
+      "Password":values.password
+    }).then(Response=>{
+      
+      localStorage.setItem('login',JSON.stringify({
+        Logined:true,
+        Role:Response.data.User.role,
+        AccessToken:Response.data.AccessToken
+      }))
+
+      const token =Response.data.AccessToken;
+
+      sessionService.saveSession(token).then(()=>{
+           sessionService.saveUser(Response.data.User).then(()=>{
+                console.log("session creacted")
+           }).catch(err=>console.error(err));
+      }).catch(err=>console.error(err))
+      if(Response.data.User.role=="STUDENT"){
+        history.push("/classroom");
+      }else if(Response.data.User.role=="TEACHER"){
+        history.push("/Teacher");
+      }else if(Response.data.User.role=="ORGANIZATION"){
+        history.push("/Organization");
+      }
+     
+       // history.replace("/classroom")
+      
+    }).catch((reason: AxiosError)=>{
+          if(reason.response.status===408) {
+            toast.error('Please contact the admin to activate your account', {
+              position: "bottom-right" 
+            });
+          }else{
+            toast.error('Email or password inccorect', {
+              position: "bottom-right" 
+             });
+          }
+            
+      
+        //addToast("test error", { appearance: 'error' });
+    })
+  }
+  var getObject = JSON.parse(localStorage.getItem('login'));
+
   return (
+    
+    <>
+
     <div>
+    <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+      />
+      </div>
+  
       <div className="register-photo">
         <div className="form-container">
             <div className="image-holder">
@@ -93,8 +171,8 @@ const input1=[
     </div>
     <Footer></Footer>
 
-    </div>
+    </>
   )
 }
 
-export default Login
+export default Login;

@@ -3,8 +3,21 @@ import { faPowerOff,faLocationDot,faPhone,faEnvelope } from '@fortawesome/free-s
 import React from 'react'
 import './css/NavHead.css'
 import { Link } from 'react-router-dom'
+import  { useHistory } from 'react-router-dom'
 
 function NavHead() {
+    var getObject = JSON.parse(localStorage.getItem('login'));
+    const history=useHistory(); 
+
+
+const logout=()=>{
+    localStorage.setItem('login',JSON.stringify({
+        Logined:false,
+        Role:null,
+        AccessToken:null
+      }))
+    window.location.href="/";
+}
   return (
     <div>
      
@@ -30,7 +43,8 @@ function NavHead() {
                                         <ul className="list-main">
                                             
                                             <li><Link to="" className="href"> <FontAwesomeIcon className="iconNavHead" icon={faLocationDot} /> Location</Link></li>
-                                            <li><Link to="/login" className="href"><FontAwesomeIcon className="iconNavHead" icon={faPowerOff} /> Login</Link></li>
+                                           {getObject.Logined && <li ><Link className="href" onClick={logout}><FontAwesomeIcon className="iconNavHead" icon={faPowerOff} /> Logout</Link></li>}
+                                           {!getObject.Logined &&<li ><Link to="/login" className="href"><FontAwesomeIcon className="iconNavHead" icon={faPowerOff} /> Login</Link></li>}
                                             
                                         </ul>
                                     </div>
@@ -39,7 +53,7 @@ function NavHead() {
                             </div>
                         </div>
                     </div>
-            </header>
+        </header>
     </div>
   )
 }
