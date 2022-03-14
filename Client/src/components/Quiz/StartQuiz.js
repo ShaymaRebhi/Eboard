@@ -5,7 +5,7 @@ import {BiSmile} from 'react-icons/bi';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Accordion from '@material-ui/core/Accordion'
 
-function StartQuiz(onQuizStart) {
+function StartQuiz({onQuizStart}) {
   return (
       <Accordion>
 
