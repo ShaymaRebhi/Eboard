@@ -4,12 +4,15 @@ import { Navbar } from 'reactstrap';
 import '../App.css';
 import { Button } from './Button';
 import './css/HeroSection.css';
-
+import Sliders from './Slider';
+import Slider from './Slider';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 function HeroSection() {
   return (
     <>
     
-    <div className="container-fluid">
+    <div className="container-fluid mb-5">
     <div className='hero-container'>
       
       <h1>E-BOARD <br/>LEARNING</h1><br />
@@ -19,18 +22,25 @@ function HeroSection() {
       
       <div className='hero-btns'>
         
-        <Button
+      <Link to='/login' className='btn-mobile'> <Button
           className='btns'
           buttonStyle='btn--primary'
           buttonSize='btn--large'
           onClick={console.log('hey')}
         >
           GET STARTED <i className='far fa-play-circle' />
-        </Button>
+        </Button></Link>
        
       </div>
+     
     </div>
+   
     </div>
+    
+    <div className="container">
+      <Sliders></Sliders>
+    </div>
+    
     </>
   );
 }

@@ -29,7 +29,7 @@ const logout=()=>{
                                 <div className="col-sm-6">
                                     
                                     <div className="top-left">
-                                        <ul className="list-main">
+                                        <ul className="list-main pt-2">
                                             <li><i className="ti-headphone-alt"></i><FontAwesomeIcon className="iconNavHead" icon={faPhone} /> +216 50 566 033</li>
                                             <li><i className="ti-email"></i><FontAwesomeIcon className="iconNavHead" icon={faEnvelope} /> eboard@esprit.tn</li>
                                         </ul>
@@ -40,7 +40,7 @@ const logout=()=>{
                                 <div className="col-sm-6">
         
                                     <div className="right-content">
-                                        <ul className="list-main">
+                                        <ul className="list-main pt-2">
                                             
                                             <li><Link to="" className="href"> <FontAwesomeIcon className="iconNavHead" icon={faLocationDot} /> Location</Link></li>
                                            {getObject.Logined && <li ><Link className="href" onClick={logout}><FontAwesomeIcon className="iconNavHead" icon={faPowerOff} /> Logout</Link></li>}

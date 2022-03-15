@@ -25,11 +25,14 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^5.3.0",
     "react-scripts": "3.4.1",
+    "react-show-more-text": "^1.5.2",
+    "react-slick": "^0.28.1",
     "react-toast-notifications": "^2.5.1",
     "react-toastify": "^8.2.0",
     "react-uuid": "^1.0.2",
     "reactstrap": "^9.0.1",
     "redux-react-session": "^2.6.1",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.3"
   },
   "scripts": {

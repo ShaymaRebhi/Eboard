@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import './App.css';
 import Home from './components/pages/Home';
@@ -15,7 +15,11 @@ import Login from './components/pages/Login';
 import Classroom from './components/pages/Classroom';
 import SideBar from './SideBar';
 import AboutUs from './components/pages/AboutUs';
+import ContactUs from './components/pages/ContactUs';
 function App() {
+
+
+
   return (
       <>
         <Router>
@@ -26,7 +30,7 @@ function App() {
             <>
             <Navbar />
               <Route exact path='/' exact component={Home} />
-              <Route exact path='/services' component={Services} />
+              <Route exact path='/Contactus' component={ContactUs} />
               <Route exact path='/Aboutus' component={AboutUs} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/sign-up' component={SignUp} />

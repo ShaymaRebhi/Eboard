@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './css/Navbar.css';
+import Inputs from './Inputs';
 import NavHead from './NavHead';
 
 function Navbar() {
@@ -33,7 +34,9 @@ function Navbar() {
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu} >
             E-BOARD
             <i className='fab fa-typo3' />
+            
           </Link>
+          
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
@@ -56,7 +59,7 @@ function Navbar() {
             </li>
             <li className='nav-item'>
               <Link
-                to='/Contact'
+                to='/Contactus'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >

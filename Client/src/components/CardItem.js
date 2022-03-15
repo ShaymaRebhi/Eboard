@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import ReactShowMoreText from 'react-show-more-text';
 function CardItem(props) {
   return (
     <>
@@ -14,9 +14,25 @@ function CardItem(props) {
             />
           </figure>
           <div className='cards__item__info'>
-            <h5 className='cards__item__text'>{props.text}</h5>
+          <div className="row">
+            <div className="col-sm-3">
+                 <div className="dateCaption">{props.date}</div>
+            </div>
+            <div className="col-sm-9">
+                    <h1 className='cards__item__text'>{props.text}</h1>
+            </div>    
           </div>
+          
+          </div>
+          <p className=" text-center image___caption___description">
+           
+            <ReactShowMoreText more="Show more" less="Show less" lines={3}>
+              {props.desc}
+            </ReactShowMoreText>
+           
+            </p> 
         </Link>
+        
       </li>
     </>
   );
