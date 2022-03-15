@@ -23,7 +23,7 @@ function QuestionQuiz({data , onAnswerUpdate, numberOfQuestions, activeQuestion,
             setError('');
         }
     }
-    const nextClickHandler = (e) => {
+    const nextClickHandler = () => {
         if(selected === '') {
             return setError('Please select one option!');
         }
@@ -47,8 +47,9 @@ function QuestionQuiz({data , onAnswerUpdate, numberOfQuestions, activeQuestion,
                   <div className="control-Quiz" ref={radioWrapper}>
                       {data.options.map((option, i ) =>(
                           <label className="radio has-background-light labeloption" key={i}>
-                              <input className="inputoption" type="radio" name="option" value={option.optionText} onChange={changeHandler}/>
+                              <input className="inputoption" type="radio" name="option" value={option.IsValid} onChange={changeHandler}/>
                               {option.optionText}
+
                           </label>
                       ))}
                   </div>
