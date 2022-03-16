@@ -11,7 +11,22 @@ require('dotenv').config()
 const bcrypt = require('bcrypt');
 
 //#######################  AUthentification && signUp  ####################
+exports.UploadFile= async(req,res)=>{
+    await User.findOne({_id:req.params.id},function(err,user){
+        if(err) return res.status(503).json({error:err});
+        
+        const objct={
+            file:req.file.filename,
+            fileType:req.file.mimetype
+        }
+        user=_.extend(user,objct);
+        user.save((err,User)=>{
+            if(err) return res.status(500).json({error:err})
+            if(User)return res.status(200).json(User);
+        })
 
+    })
+}
 exports.signin = async(req,res) => {
 
     const {error}=loginValidation(req.body);
@@ -45,22 +60,9 @@ exports.signup = async(req,res) => {
     await User.findOne({
         email : req.body.email            
     }).exec( (error,user) => {
-        if (user ) return res.status(400).json({message : 'User already registred'})
+        if (user ) return res.status(407).json({message : 'User already registred'})
         
-     
-     const UserData={
-        email:req.body.email,
-        Password:req.body.Password,
-        role:req.body.role,
-        file:req.file.filename,
-        fileType:req.file.mimetype,
-        Adresse:req.body.Adresse,
-        Phone:req.body.Phone
-     }   
-    
-    const _user=new User(UserData);
-
-
+    const _user=new User(req.body);
     _user.save((error,User)=>{
         if(error) return res.status(402).json({Error:"Account error"});
         req.body.User=User._id;
@@ -76,14 +78,14 @@ exports.signup = async(req,res) => {
         const _Organization=new Organization(req.body);
 
         _Organization.save((error,Organization)=>{
-            if(error) return res.status(402).json({Error:"Organization error"});
+            if(error) return res.status(402).json({Error:"Organization error"+error});
             res.status(200).json(Organization);
         })
     }else if(req.body.role=="TEACHER"){
         
         const _Teacher=new Teacher(req.body);
         _Teacher.save((error,Teacher)=>{
-            if(error) return res.status(402).json({Error:"Teacher error"});
+            if(error) return res.status(402).json({Error:"Teacher error"+error});
             res.status(200).json(Teacher);
         })
 
@@ -92,7 +94,7 @@ exports.signup = async(req,res) => {
         const _Student=new Student(req.body);
 
         _Student.save((error,Student)=>{
-            if(error) return res.status(402).json({Error:"Admin error"});
+            if(error) return res.status(402).json({Error:"Student error"+error});
             res.status(200).json(Student);
         })
 

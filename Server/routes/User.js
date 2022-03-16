@@ -15,6 +15,8 @@ router.get('/all',authenticateToken,UserController.getAll);
 
 router.put('/update/:id',authenticateToken,UserController.UpdateProfile)
 
+router.put('/upload/:id',authenticateToken,upload.single('file'),UserController.UploadFile)
+
 router.delete('/delete/:id',authenticateToken,UserController.DeleteProfile)
 
 router.post('/signup',upload.single('file'),UserController.signup);

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import CardItem from "./CardItem";
+import Images from "./Images";
+
 import SlideItems from "./SlideItems";
+
 
 export default class Sliders extends Component {
   constructor(props) {
@@ -70,7 +72,8 @@ export default class Sliders extends Component {
             />
           </div>
         </Slider>
-     
+      <br />
+ 
       </div>
     );
   }

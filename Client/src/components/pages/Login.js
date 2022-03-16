@@ -160,7 +160,7 @@ const input1=[
                  
                 </div>
               
-                    <div className="form-check"><label className="form-check-label"><Inputs className="form-check-input" type="checkbox"></Inputs>Stay logined.</label></div>
+                    <div className="form-check"><label className="form-check-label"><Inputs className="form-check-input" type="checkbox"></Inputs>Stay logined for a week.</label></div>
              
                 
                 <div className="mb-3"><button className="btn btn-primary d-block w-100" type="submit">Login</button></div><Link className="already" to="/sign-up"><p> You don't have an account ?  Sign up here. </p></Link>

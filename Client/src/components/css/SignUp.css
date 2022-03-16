@@ -40,12 +40,21 @@
   }
   .signup-photo  form {
     display: table-cell;
-    width: 450px;
+    width: 520px;
     background: #8EB2CD;
     padding: 80px 50px;
     color:#676767 ;
     
   }
+  .btn-outline-primary{
+    border-color: #fdfdfd !important;
+    color: #fdfdfd !important;
+    margin-left: 12px;
+  }
+  .btn-outline-primary:hover{
+    background-color:#80c3f7 !important;
+  }
+ 
   .signup-photo  form input[type="email"]{
 
     border:10px solid #B6CDDC;
@@ -76,7 +85,15 @@
   
  
   }
+  .signup-photo  form input[type="Number"]{
 
+    border:10px solid #B6CDDC;
+    border-top: 0px;
+    border-bottom: 0px;
+    border-right: 0px;
+  
+ 
+  }
   .signup-photo  form input[type='email']::placeholder{
       color: #BDBDBD;
       
@@ -91,6 +108,9 @@
     color: #BDBDBD;
 }
 
+.signup-photo  form input[type='Number']::placeholder{
+  color: #BDBDBD;
+}
   .signup-photo  form h1,label{
       color: #FFF;
   }
