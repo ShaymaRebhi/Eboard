@@ -4,12 +4,15 @@ import "./DisplayQuiz.css"
 import QuestionQuiz from "./QuestionQuiz";
 import quizdata from './../../Quiz.json';
 import EndQuiz from "./EndQuiz";
+import CheckQuizAnswers from "./CheckQuizAnswers";
 let interval;
 function DisplayQuiz() {
     const [step, setStep] = useState(1);
     const [activeQuestion, setActiveQuestion]= useState(0);
     const [answers, setAnswers]= useState([]);
+    const [showAnswers, setShowAnswers] = useState(false);
     const [time, setTime] = useState(0);
+    const [modal, setModal] = useState(false);
 
 
     useEffect(() => {
@@ -25,6 +28,10 @@ function DisplayQuiz() {
         }, 1000);
 
     }
+
+    const toggle = () => {
+        setModal(!modal);
+    }
   return (
     <div className="DisplayQuiz">
         { step === 1 && <StartQuiz onQuizStart={quizStartHandler}/>}
@@ -39,9 +46,18 @@ function DisplayQuiz() {
         { step === 3 && <EndQuiz
         results={answers}
         data={quizdata.question}
-        onAnswersCheck={() => {}}
+        onAnswersCheck={() => (setShowAnswers(true), setModal(true))}
         time={time}
         />}
+
+        {showAnswers && <CheckQuizAnswers
+            onClose={() => setShowAnswers(false)}
+            results={answers}
+            data={quizdata.question}
+            modal = {modal}
+            toggle = {toggle}
+        />  }
+
     </div>
   )
 }

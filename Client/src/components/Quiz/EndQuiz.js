@@ -18,11 +18,13 @@ function EndQuiz({results, data, onAnswersCheck, time}) {
 
   useEffect(() => {
     let correct = 0;
-    console.log(results)
+    let optioncorrect = "";
     results.forEach((result, index) => {
-      if(result.a === 'true'){
+      result.b.map((op,i)=>(
+      optioncorrect=op.optionText
+      ))
+      if(result.a === optioncorrect){
         correct++;
-        console.log(result);
       }
     });
     setCorrectAnswers(correct);
@@ -40,7 +42,7 @@ function EndQuiz({results, data, onAnswersCheck, time}) {
                 <p className="scoreQuiz">{correctAnswers} of {data.length}</p>
                 <p className="scoreQuiz2"><strong>{Math.floor((correctAnswers / data.length) * 100)} %</strong></p>
                 <p className="timeQuiz"><strong>Your time :</strong> {formatTime(time)}</p>
-                <button className="btn btn-info " onClick={onAnswersCheck}>Check your answers</button>
+                <button className="btn btn-info mr-2 " onClick={onAnswersCheck}>Check your answers</button>
               </div>
             </div>
           </AccordionDetails>

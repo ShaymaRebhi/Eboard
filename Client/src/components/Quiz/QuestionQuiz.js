@@ -1,7 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react'
 import AccordionDetails from "@material-ui/core/AccordionDetails";
-import quiz from "../../Quiz.json";
-import {BiSmile} from "react-icons/bi";
 import Accordion from "@material-ui/core/Accordion";
 import "./QuestionQuiz.css"
 
@@ -27,7 +25,8 @@ function QuestionQuiz({data , onAnswerUpdate, numberOfQuestions, activeQuestion,
         if(selected === '') {
             return setError('Please select one option!');
         }
-        onAnswerUpdate(prevState => [...prevState, {q: data.questionTitle, a:selected }]);
+        onAnswerUpdate(prevState => [...prevState, {q: data.questionTitle, a:selected ,b:data.options.filter(option => option.IsValid)
+        }]);
         setSelected('');
         if(activeQuestion < numberOfQuestions -1){
             onSetActiveQuestion(activeQuestion + 1);
@@ -47,7 +46,7 @@ function QuestionQuiz({data , onAnswerUpdate, numberOfQuestions, activeQuestion,
                   <div className="control-Quiz" ref={radioWrapper}>
                       {data.options.map((option, i ) =>(
                           <label className="radio has-background-light labeloption" key={i}>
-                              <input className="inputoption" type="radio" name="option" value={option.IsValid} onChange={changeHandler}/>
+                              <input className="inputoption" type="radio" name="option" value={option.optionText} onChange={changeHandler}/>
                               {option.optionText}
 
                           </label>
