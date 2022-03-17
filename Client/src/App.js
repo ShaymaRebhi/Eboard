@@ -8,7 +8,7 @@ import QuizList from "./components/Quiz/QuizList";
 import CreateQuiz from "./components/Quiz/CreateQuiz";
 
 import NotFounds from './components/pages/NotFound';
-import Classroom from './components/pages/Classroom';
+
 import SignUp from './components/pages/Auth/SignUp';
 
 import ContactUs from './components/pages/Home/ContactUs';
@@ -18,6 +18,9 @@ import Admin from './components/pages/Auth/Admin';
 import Home from './components/pages/Home/Home';
 import Navbar from './components/pages/Shared/Navbar';
 import ClassInside from './components/Course/ClassInside';
+import Classroom from './components/Classroom/Classroom';
+import DisplayQuiz from './components/Quiz/DisplayQuiz';
+
 function App() {
 
 
@@ -39,6 +42,8 @@ function App() {
               
               <Route exact path='/sign-up' component={SignUp} />
               <Route exact path='/quizList' component={QuizList}/>
+              <Route exact path='/displayQuiz' component={DisplayQuiz}/>
+              
               <Route exact path='/formAddquiz/:id'><CreateQuiz/></Route>
               <Route exact path='/classroom' component={Classroom} />
               <Route path='/class' component={ClassInside} />

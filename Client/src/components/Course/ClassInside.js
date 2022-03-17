@@ -1,4 +1,4 @@
-import Footer from '../Footer'
+import Footer from '../pages/Shared/Footer'
 import SideBar from '../SideBar/Sidebar';
 import React from 'react'
 import MenuCours from './MenuCours';

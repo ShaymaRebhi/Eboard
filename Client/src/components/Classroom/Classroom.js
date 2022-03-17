@@ -1,5 +1,5 @@
 import React from 'react'
-import Footer from '../Footer'
+import Footer from '../pages/Shared/Footer'
 //import CardItem from '../CardItem';
 import '../css/CardClass.css';
 import CardClass from './CardClass';
