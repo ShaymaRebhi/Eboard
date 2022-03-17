@@ -77,7 +77,6 @@
   }
   
   .cards__Class__item__img {
-    
     top: 0;
     right: 0;
     bottom: 0;
@@ -99,6 +98,7 @@
   .cards__Class__item__info {
     padding: 17px 0px 0px;
     height: 238px;
+    
   }
   
   .cards__Class__item__course {
@@ -225,8 +225,8 @@
   }
   
   .cardMedia {
-    paddingTop: '81.25%';
-    borderRadius: '50%';
+    padding-Top: '81.25%';
+    border-Radius: '50%';
     margin: '28px';
 }
 .image-container img {
