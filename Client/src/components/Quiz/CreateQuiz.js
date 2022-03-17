@@ -1,6 +1,6 @@
 import React,{useState}  from 'react'
 import "./CreateQuiz.css"
-import Footer from "../Footer";
+import Footer from "../pages/Shared/Footer";
 
 
 import Switch from '@material-ui/core/Switch';
