@@ -1,0 +1,43 @@
+.modal-head{
+    display: flex;
+    justify-content:space-between ;
+    border-bottom: 2.5px solid rgba(140,177,192,1) ;
+}
+.closeCheck1{
+    display: flex;
+    justify-content: end;
+}
+.modal-card-end{
+    display: flex;
+    justify-content: center;
+}
+
+.modal-is-active{
+
+    background-color: white;
+}
+.modal-card-title{
+    color: black;
+}
+.question-quiz-option{
+    color : black;
+}
+.questionScore{
+    display: flex;
+    justify-content: space-between;
+}
+.modal-card-body-content{
+    background-color: white;
+}
+.backgroundsuccess{
+    background-color: green;
+    color: white;
+}
+.backgrounddanger{
+    background-color:red;
+    color: white;
+}
+.backgroundlink{
+    background-color: blue;
+    color: white;
+}
