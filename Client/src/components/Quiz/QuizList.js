@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import "./QuizList.css"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faCirclePlus} from '@fortawesome/free-solid-svg-icons'
+
 import Footer from "../Footer";
 import uuid from "react-uuid";
 import {useHistory} from "react-router-dom";

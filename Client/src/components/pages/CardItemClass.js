@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegFolder , FaRegFile , FaRegComment ,FaRegGrinHearts,FaRegAngry } from "react-icons/fa";
-import { Button } from '../Button';
 
 
 function CardItemClass(props) {
@@ -14,7 +13,7 @@ function CardItemClass(props) {
           <div className='cards__Class__item__pic-wrap' >
             <img
               className='cards__Class__item__img'
-              alt='Travel Image'
+              alt='Travel '
               src={props.src}
             />
             

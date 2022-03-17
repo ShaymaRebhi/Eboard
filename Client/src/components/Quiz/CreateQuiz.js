@@ -1,30 +1,24 @@
-import React,{useState,useEffect}  from 'react'
+import React,{useState}  from 'react'
 import "./CreateQuiz.css"
 import Footer from "../Footer";
 
-import CropOriginalIcon from '@material-ui/icons/CropOriginal';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem'
+
 import Switch from '@material-ui/core/Switch';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
+
 import ShortTextIcon from '@material-ui/icons/ShortText';
-import SubjectIcon from '@material-ui/icons/Subject';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import {BsTrash, BsFillDashCircleFill, BsPatchCheckFill, BsFillBookmarkPlusFill, BsFillBookmarkXFill} from 'react-icons/bs';
+
+import { BsFillDashCircleFill, BsPatchCheckFill, BsFillBookmarkPlusFill, BsFillBookmarkXFill} from 'react-icons/bs';
 import {FaRegCopy} from 'react-icons/fa';
 import {BiAddToQueue} from 'react-icons/bi';
-import {GiChoice} from 'react-icons/gi';
-import {AiFillFileAdd} from 'react-icons/ai';
+
 
 import { IconButton } from '@material-ui/core';
-import FilterNoneIcon from '@material-ui/icons/FilterNone';
-import AddcircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+
 import Accordion from '@material-ui/core/Accordion'
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Typography from '@material-ui/core/Typography'
+
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Button from '@material-ui/core/Button';
-import Radio from '@material-ui/core/Radio';
+
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import {useHistory} from "react-router-dom";
 
