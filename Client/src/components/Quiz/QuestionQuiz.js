@@ -25,7 +25,7 @@ function QuestionQuiz({data , onAnswerUpdate, numberOfQuestions, activeQuestion,
         if(selected === '') {
             return setError('Please select one option!');
         }
-        onAnswerUpdate(prevState => [...prevState, {q: data.questionTitle, a:selected ,b:data.options.filter(option => option.IsValid)
+        onAnswerUpdate(prevState => [...prevState, {q: data.questionTitle,s:data.score, a:selected ,b:data.options.filter(option => option.IsValid)
         }]);
         setSelected('');
         if(activeQuestion < numberOfQuestions -1){
@@ -51,6 +51,9 @@ function QuestionQuiz({data , onAnswerUpdate, numberOfQuestions, activeQuestion,
 
                           </label>
                       ))}
+                  </div>
+                  <div className="scorehandler">
+                        <h6 className="scorehandler2">Score: {data.score}</h6>
                   </div>
                     {error && <div className="has-text-danger errorquiz">{error}</div>}
                   <button className="btn btn-primary mt-4" onClick={nextClickHandler}>Next</button>

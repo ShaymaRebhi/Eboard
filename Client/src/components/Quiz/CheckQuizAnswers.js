@@ -18,7 +18,10 @@ function CheckQuizAnswers({onClose, results,modal,toggle}) {
                             )),
 
                                 <li key={i} className="mb-6 list-group-item">
+                                    <div className="questionScore">
                                     <p className="question-quiz-option"><strong>{result.q}</strong></p>
+                                    <p className="question-quiz-option"><strong>Score: {result.s}</strong></p>
+                                    </div>
                                     <p className={result.a === optioncorrect ? 'backgroundsuccess  p-2' :
                                         'backgrounddanger p-2'}>Your answer: {result.a}</p>
                                     {result.a !== optioncorrect && <p className="backgroundlink p-2">Correct answer: {optioncorrect}</p> }

@@ -21,3 +21,10 @@
 .inputoption{
     margin-right: 10px;
 }
+.scorehandler{
+    display: flex;
+    justify-content: end;
+}
+.scorehandler2{
+    color: blue;
+}

@@ -3,6 +3,7 @@
     "Class": "4TWIN3",
     "Description": "this is TWIN quiz please answer all this question ",
     "question":[{"questionTitle": "What is React ?",
+                  "score" : 2,
                   "options" : [
                           {"optionText": "FrameWork", "IsValid" : false},
                           {"optionText": "Libraries", "IsValid" : true},
@@ -11,6 +12,7 @@
                               ]
                   },
                 {"questionTitle": "What is Angular ?",
+                  "score" : 4,
                   "options" : [
                     {"optionText": "FrameWork", "IsValid" : true},
                     {"optionText": "Libraries", "IsValid" : false},
@@ -19,6 +21,7 @@
                   ]
                 },
                 {"questionTitle": "What is Django ?",
+                  "score" : 10,
                   "options" : [
                     {"optionText": "FrameWork", "IsValid" : true},
                     {"optionText": "Libraries", "IsValid" : false},
@@ -27,6 +30,7 @@
                   ]
                 },
                 {"questionTitle": "What is Spring ?",
+                  "score" : 10,
                   "options" : [
                     {"optionText": "FrameWork", "IsValid" : true},
                     {"optionText": "Libraries", "IsValid" : false},
@@ -35,6 +39,7 @@
                   ]
                 },
                 {"questionTitle": "What is WebStorm ?",
+                  "score" : 6,
                   "options" : [
                     {"optionText": "FrameWork", "IsValid" : false},
                     {"optionText": "Libraries", "IsValid" : false},
@@ -43,6 +48,7 @@
                   ]
                 },
                 {"questionTitle": "What is java ?",
+                  "score" : 10,
                   "options" : [
                     {"optionText": "FrameWork", "IsValid" : false},
                     {"optionText": "Libraries", "IsValid" : false},

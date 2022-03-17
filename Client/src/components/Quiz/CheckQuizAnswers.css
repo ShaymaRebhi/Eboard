@@ -21,7 +21,10 @@
 }
 .question-quiz-option{
     color : black;
-    border-bottom: 1.5px solid rgba(140,177,192,1) ;
+}
+.questionScore{
+    display: flex;
+    justify-content: space-between;
 }
 .modal-card-body-content{
     background-color: white;

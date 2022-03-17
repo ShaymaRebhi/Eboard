@@ -40,7 +40,8 @@ function CreateQuiz() {
                         {optionText: "IDE", IsValid : false}
                 ],
                 open: true,
-                required : false
+                required : false,
+                score:5
                 }]
     )
     const [quiz, setQuizs] = useState(
@@ -79,6 +80,12 @@ function CreateQuiz() {
         newQuiz[i].Title = text ;
         setQuizs(newQuiz);
         console.log(newQuiz)
+    }
+    const changeQuestionScore = (text, i) => {
+        var newQuestion = [...questions];
+        newQuestion[i].score = text ;
+        setQuestions(newQuestion);
+        console.log(newQuestion)
     }
     const changeQuizClass = (text, i) => {
         var newQuiz = [...quiz];
@@ -296,8 +303,15 @@ function CreateQuiz() {
                                                   } />
                                               </div>
 
+
                                           ): ""}
                                           </ol>
+                                          <div className="score_question">
+                                              <span style={{color:"blue", fontSize: "13px"}}>Score :  </span>
+                                              <input type="text" className="text_input_score" placeholder="score" value={ques.score}
+                                                     onChange={(e)=>{changeQuestionScore(e.target.value, i )}}/>
+                                          </div>
+
                                           <div className="add_footer">
                                               <div className="add_question_bottom">
                                                   <IconButton className="add_question_icon" aria-label="new question" onClick={() => {addNewQuestionField(i)}} >
