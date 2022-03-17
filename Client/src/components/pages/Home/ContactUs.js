@@ -1,7 +1,7 @@
 import React from 'react'
-import { Button } from '../Button'
-import '../css/ContactUs.css'
-import Footer from '../Footer'
+import { Button } from './Buttons/Button'
+import '../../css/ContactUs.css'
+import Footer from '../Shared/Footer'
 function ContactUs() {
   return (
     <div>

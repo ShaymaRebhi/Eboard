@@ -32,12 +32,11 @@
   color: #fff;
   margin-top: -40px;
   justify-self: start;
-  margin-left: 50px;
+  margin-right: 290px;
   cursor: pointer;
   text-decoration: none;
   font-size: 2rem;
-  display: flex;
-  align-items: center;
+ 
 }
 .navbar-logo:hover{
   color: #fff;
@@ -57,7 +56,7 @@
   text-align: left;
   width: 60vw;
   justify-content: end;
-  margin-right: 50px;
+  
 }
 .nav-menu :hover{
   color: #fff;

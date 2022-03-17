@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './css/Navbar.css';
-import Inputs from './Inputs';
+import '../../css/Navbar.css';
+
 import NavHead from './NavHead';
 
 function Navbar() {
@@ -24,7 +24,8 @@ function Navbar() {
   }, []);
 
   window.addEventListener('resize', showButton);
-
+  const [selected, setSelected] = useState('home');
+  const [selectedMedia, setSelectedMedia] = useState('home'); 
   
   return (
     <>
@@ -42,7 +43,7 @@ function Navbar() {
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <li className='nav-item'>
-              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+              <Link to='/' className='nav-links' title="Home" selected={selected === 'home'} onClick={() => setSelected('home') && closeMobileMenu}>
                 Home
               </Link>
             </li>
@@ -51,8 +52,7 @@ function Navbar() {
                 to='/Aboutus'
                 className='nav-links'
                 onClick={closeMobileMenu}
-                activeClassName='is-active'
-                exact={true}
+                
               >
                 About us
               </Link>

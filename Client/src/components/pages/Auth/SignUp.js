@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../../App.css';
-import Footer from '../Footer';
-import Inputs from '../Inputs';
+import '../../../App.css';
+import Footer from '../Shared/Footer';
+import Inputs from '../../Inputs';
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import '../css/SignUp.css';
+import '../../css/SignUp.css';
 import { faUserTie,faChalkboardUser,faGraduationCap} from '@fortawesome/free-solid-svg-icons'
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
@@ -31,7 +31,7 @@ export default function SignUp() {
     Sexe:"",
     BirthDate:""
   })
-  const [file, setSelectedFile] = useState(null);
+ 
 
 const input1=[
   {
@@ -47,7 +47,7 @@ const input1=[
 ]
 
 const password1=[
-  ,{
+  {
     id:2,
     name:"password",
     type:"password",
@@ -85,7 +85,6 @@ const password1=[
       "Password":values.password,
       "role":values.role,
       "Adresse":values.Adresse,
-      "file":file,
       "Cin":Number(values.Cin),
       "Name":values.Name,
       "FirstName":values.FirstName,
@@ -160,15 +159,15 @@ const password1=[
                 <div className="mb-3 pt-4">
                   <div className='row'>
                     <div className='col-sm-6'>
-                       <Inputs name="FirstName" type="text" className="form-control" placeholder="FirstName" errorMessage="FirstName required " disabled={values.role=="ORGANIZATION"} onChange={onChange} hide={values.role=="ORGANIZATION"} required></Inputs>
+                       <Inputs name="FirstName" type="text" className="form-control" placeholder="FirstName" errorMessage="FirstName required " disabled={values.role==="ORGANIZATION"} onChange={onChange} hide={values.role==="ORGANIZATION"} required></Inputs>
                       
                     </div>
                     <div className='col-sm-6'>
-                     <Inputs name="LastName" type="text" className="form-control" placeholder="LastName" errorMessage="LastName required " disabled={values.role=="ORGANIZATION"} onChange={onChange} hide={values.role=="ORGANIZATION"} required></Inputs>
+                     <Inputs name="LastName" type="text" className="form-control" placeholder="LastName" errorMessage="LastName required " disabled={values.role==="ORGANIZATION"} onChange={onChange} hide={values.role==="ORGANIZATION"} required></Inputs>
     
                     </div>
                     <div className='col-sm-12 mt-3 mb-2'>
-                     <Inputs name="BirthDate" type="date" className="form-control"  errorMessage="Birth Date required " disabled={values.role=="ORGANIZATION"} onChange={onChange} hide={values.role=="ORGANIZATION"} required></Inputs>
+                     <Inputs name="BirthDate" type="date" className="form-control"  errorMessage="Birth Date required " disabled={values.role==="ORGANIZATION"} onChange={onChange} hide={values.role==="ORGANIZATION"} required></Inputs>
 
                     </div>
                   </div>
@@ -176,28 +175,28 @@ const password1=[
                     
                      <div className=" col-sm-12 mb-2 mt-2" >
                         
-                     <Inputs name="Name" type="text" className="form-control" placeholder="Name" errorMessage="Name required " disabled={values.role!="ORGANIZATION"} onChange={onChange} hide={values.role!="ORGANIZATION"} required></Inputs>
+                     <Inputs name="Name" type="text" className="form-control" placeholder="Name" errorMessage="Name required " disabled={values.role!=="ORGANIZATION"} onChange={onChange} hide={values.role!=="ORGANIZATION"} required></Inputs>
                       <div className='row'>
                         <div className='col-sm-6'>
-                          <Inputs name="Cin" type="text" className="form-control" placeholder="Cin" maxLength={8} minLength={8} errorMessage="Cin required " onChange={onChange} disabled={values.role=="ORGANIZATION"} hide={values.role=="ORGANIZATION"} required></Inputs>
+                          <Inputs name="Cin" type="text" className="form-control" placeholder="Cin" maxLength={8} minLength={8} errorMessage="Cin required " onChange={onChange} disabled={values.role==="ORGANIZATION"} hide={values.role==="ORGANIZATION"} required></Inputs>
 
                         </div>
                         <div className='col-sm-6'>
-                          {values.role!="ORGANIZATION" && <Select options={options} name="Sexe" onChange={handleChange} value={options.find(obj => obj.value === selectedValue)}  placeholder="Gender"/>}
+                          {values.role!=="ORGANIZATION" && <Select options={options} name="Sexe" onChange={handleChange} value={options.find(obj => obj.value === selectedValue)}  placeholder="Gender"/>}
                         </div>
                       </div>
 
                         {input1.map(input=>(
-                            <div className=" col-sm-12 mb-2 mt-2" >
-                                <Inputs key={input.id} {...input} value={values[input.name]} onChange={onChange} ></Inputs>
+                            <div className=" col-sm-12 mb-2 mt-2"key={input.id} >
+                                <Inputs  {...input} value={values[input.name]} onChange={onChange} ></Inputs>
                             </div>
                         ))}
                         
                      </div>
                      <div className='row'>
                         {password1.map(input=>(
-                            <div className='col-sm-6 mb-2'>
-                                <Inputs key={input.id} {...input} value={values[input.name]} onChange={onChange} ></Inputs>
+                            <div className='col-sm-6 mb-2' key={input.id}>
+                                <Inputs  {...input} value={values[input.name]} onChange={onChange} ></Inputs>
                             </div>
                         ))}
                       <div className='col-sm-12'>

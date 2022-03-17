@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar } from 'reactstrap';
-import '../App.css';
-import { Button } from './Button';
-import './css/HeroSection.css';
+
+import '../../../App.css';
+import { Button } from '../../pages/Home/Buttons/Button';
+import '../../css/HeroSection.css';
 import Sliders from './Slider';
-import Slider from './Slider';
+
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 function HeroSection() {
+
   return (
     <>
     

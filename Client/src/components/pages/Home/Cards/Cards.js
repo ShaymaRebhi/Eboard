@@ -1,8 +1,8 @@
 import React from 'react';
-import './css/Cards.css';
+import '../../../css/Cards.css';
 import CardItem from './CardItem';
-import Inputs from './Inputs';
-import { Button } from './Button';
+
+import { Button } from '../Buttons/Button';
 import { Link } from 'react-router-dom';
 
 function Cards() {

@@ -1,8 +1,8 @@
 import React from 'react';
-import '../../App.css';
-import '../css/AboutUs.css';
-import '../css/About.css'
-import Footer from '../Footer';
+import '../../../App.css';
+import '../../css/AboutUs.css';
+import '../../css/About.css'
+import Footer from '../Shared/Footer';
 import { Link } from 'react-router-dom';
 import Button from '@restart/ui/esm/Button';
 export default function AboutUs() {

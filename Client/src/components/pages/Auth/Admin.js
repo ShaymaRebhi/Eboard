@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import '../css/Admin.css'
-import Inputs from '../Inputs'
+import '../../css/Admin.css'
+import Inputs from '../../Inputs'
 
 
 function Admin() {

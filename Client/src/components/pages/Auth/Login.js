@@ -1,36 +1,27 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-import Footer from '../Footer';
-import './../css/Login.css';
-import Inputs from '../Inputs';
+import './../../css/Login.css';
+import Inputs from '../../Inputs';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/inject-style';
 import 'react-toastify/dist/ReactToastify.css';
 import  { useHistory } from 'react-router-dom'
-import { AxiosResponse, AxiosError } from 'axios'
-import { sessionService } from 'redux-react-session';
-
+import {  AxiosError } from 'axios'
+import { setCookie } from '../../../Helpers/Auth';
+import ClipLoader from "react-spinners/ClipLoader";
+import { ButtonsLogin } from './Buttons/ButtonsLogin';
 const Login = () => {
-  
- 
-  
+let [loading, setLoading] = useState(false);
+
 const history=useHistory();
-const state={
-      email:null,
-      password:null,
-      login:false,
-      store:null
-    }
-    
 const [values,setValues]=useState({
     email:"",
     password:""
 })
 const input1=[
   {
-    id:1,
+    id:0,
     name:"email",
     type:"email",
     className:"form-control ",
@@ -39,7 +30,7 @@ const input1=[
     required:true
   
   },{
-    id:2,
+    id:1,
     name:"password",
     type:"password",
     className:"form-control",
@@ -50,42 +41,38 @@ const input1=[
   }
 ]
 
-  const onChange=(e)=>{
+const onChange=(e)=>{
     setValues({...values,[e.target.name]:e.target.value});
-  }
+}
   
   
-
+var getObject={
+    Logined:false
+}
 
   const handleSubmit =(e)=>{
 
     e.preventDefault();
     const Data= new FormData(e.target)
-    
-
-    axios.post("https://eboardbackend2022.herokuapp.com/user/login",{
+    const DataSet={
       "email":values.email,
       "Password":values.password
-    }).then(Response=>{
-      
+    }
+   
+    axios.post(`${process.env.REACT_APP_API_URL}user/login`,DataSet).then(Response=>{
+      setLoading(true)
       localStorage.setItem('login',JSON.stringify({
         Logined:true,
         Role:Response.data.User.role,
         AccessToken:Response.data.AccessToken
       }))
-
       const token =Response.data.AccessToken;
-
-      sessionService.saveSession(token).then(()=>{
-           sessionService.saveUser(Response.data.User).then(()=>{
-                console.log("session creacted")
-           }).catch(err=>console.error(err));
-      }).catch(err=>console.error(err))
-      if(Response.data.User.role=="STUDENT"){
+      setCookie("token",token);
+      if(Response.data.User.role==="STUDENT"){
         history.push("/classroom");
-      }else if(Response.data.User.role=="TEACHER"){
+      }else if(Response.data.User.role==="TEACHER"){
         history.push("/Teacher");
-      }else if(Response.data.User.role=="ORGANIZATION"){
+      }else if(Response.data.User.role==="ORGANIZATION"){
         history.push("/Organization");
       }
      
@@ -101,17 +88,31 @@ const input1=[
               position: "bottom-right" 
              });
           }
-            
+          setLoading(false)
       
         //addToast("test error", { appearance: 'error' });
+    }).finally(res=>{
+      setLoading(false)
     })
   }
+  
   var getObject = JSON.parse(localStorage.getItem('login'));
-
+    if(localStorage.getItem('login')!==null ){
+      if(getObject.Logined){
+        if(getObject.Role==="STUDENT"){
+          history.push("/classroom");
+        }else if(getObject.Role==="ORGANIZATION"){
+          history.push("/ORG");
+        }if(getObject.Role==="TEACHER"){
+          history.push("/Teacher");
+        }
+      }
+    }
+  
   return (
     
     <>
-
+   
     <div>
     <ToastContainer
               position="top-right"
@@ -125,10 +126,15 @@ const input1=[
               pauseOnHover
       />
       </div>
-  
+      
       <div className="register-photo">
         <div className="form-container">
+          
             <div className="image-holder">
+            <Link to="/"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-house-door-fill text-white svg_change_place" viewBox="0 0 16 16">
+                <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+            </svg></Link>
+            
               <div className="content">
                             <h5>Nice to see you again</h5>
                             <h1>
@@ -142,18 +148,22 @@ const input1=[
                             </p>
               </div>
             </div>
+            
             <form method="post" onSubmit={handleSubmit}>
-               
-                <h1 className="text-center ">LOGIN ACCOUNT</h1>
-               
-                  
+                
+                <h1 className="text-center mb-4 mt-5">LOGIN ACCOUNT</h1>
+
+                <ButtonsLogin text1="Facebook" text2="Gmail" text3="Sign Up"></ButtonsLogin>
+                 <div className='text-white text-center'>
+                    <hr />Or login with your email
+                </div>  
                 <div className="mb-3 pt-4">
                   <div className="col">
                    
                  
-                  {input1.map(input=>(
-                     <div className=" col-sm-12 mb-2" >
-                        <Inputs key={input.id} {...input} value={values[input.name]} onChange={onChange} ></Inputs>
+                  {input1.map(v=>(
+                     <div className=" col-sm-12 mb-2" key={v.id}>
+                        <Inputs   {...v} value={values[v.name]} onChange={onChange} ></Inputs>
                      </div>
                   ))}
                   </div>
@@ -163,13 +173,13 @@ const input1=[
                     <div className="form-check"><label className="form-check-label"><Inputs className="form-check-input" type="checkbox"></Inputs>Stay logined for a week.</label></div>
              
                 
-                <div className="mb-3"><button className="btn btn-primary d-block w-100" type="submit">Login</button></div><Link className="already" to="/sign-up"><p> You don't have an account ?  Sign up here. </p></Link>
+                <div className="mb-3"><button className="btn btn-primary d-block w-100" type="submit">{loading ? <ClipLoader className="text-white" loading={loading}  size={25} /> : "Login"}</button></div><Link to="" className="already"><p > Forget password ? </p></Link>
                
             </form>
            
         </div>
     </div>
-    <Footer></Footer>
+   
 
     </>
   )
