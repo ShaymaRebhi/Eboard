@@ -1,17 +1,22 @@
-import React from 'react';
+import React  from 'react';
 import { Link } from 'react-router-dom';
-import { FaRegFolder , FaRegFile , FaRegComment ,FaRegGrinHearts,FaRegAngry } from "react-icons/fa";
-import { Button } from '../Button';
+import { FaRegFolder , FaRegFile , FaRegComment ,FaRegGrinHearts,FaRegAngry,FaEllipsisV} from "react-icons/fa";
+import '../css/CardClass.css';
 
 
 function CardItemClass(props) {
   return (
     
     <>
-    
+       
       <li className='cards__Class__item' >
         <Link className='cards__Class__item__link' to={props.path}>
           <div className='cards__Class__item__pic-wrap' >
+          <div className='dropdown'><FaEllipsisV></FaEllipsisV> 
+         
+        
+          </div>
+          
             <img
               className='cards__Class__item__img'
               alt='Travel Image'
@@ -57,8 +62,11 @@ function CardItemClass(props) {
         
           
         </Link>
+        
       </li>
+      
     </>
+    
   );
 }
 

@@ -1,36 +1,52 @@
 import React from 'react';
-import Navbar from './components/Navbar';
+
 import './App.css';
-import Home from './components/pages/Home';
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Services from './components/pages/Services';
-import Products from './components/pages/Products';
-import SignUp from './components/pages/SignUp';
-import NavHead from './components/NavHead';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import QuizList from "./components/Quiz/QuizList";
 import CreateQuiz from "./components/Quiz/CreateQuiz";
-import Admin from './components/pages/Admin';
+
 import NotFounds from './components/pages/NotFound';
-import Login from './components/pages/Login';
 import Classroom from './components/pages/Classroom';
+import SignUp from './components/pages/Auth/SignUp';
+
+import ContactUs from './components/pages/Home/ContactUs';
+import AboutUs from './components/pages/Home/AboutUs';
+import Login from './components/pages/Auth/Login';
+import Admin from './components/pages/Auth/Admin';
+import Home from './components/pages/Home/Home';
+import Navbar from './components/pages/Shared/Navbar';
+import ClassInside from './components/Course/ClassInside';
 function App() {
+
+
+
   return (
       <>
         <Router>
-          <Navbar />
+          
           <Switch>
-            <Route path='/' exact component={Home} />
-            <Route path='/services' component={Services} />
-            <Route path='/products' component={Products} />
-            <Route path='/login' component={Login} />
-            <Route path='/sign-up' component={SignUp} />
-            <Route path='/quizList' component={QuizList}/>
-            <Route path='/formAddquiz/:id'><CreateQuiz/></Route>
-            <Route path='/Eboard/auth/admin' component={Admin} />
-            <Route path='/classroom' component={Classroom} />
-            <Route path='**' component={NotFounds} />
+                
+                  <Route exact path='/Eboard/auth/admin' component={Admin} />
+                   <Route exact path='/login' component={Login} />
+                
+            <>
+            <Navbar />
+              <Route exact path='/'  component={Home} />
+              <Route exact path='/Contactus' component={ContactUs} />
+              <Route exact path='/Aboutus' component={AboutUs} />
+              
+              <Route exact path='/sign-up' component={SignUp} />
+              <Route exact path='/quizList' component={QuizList}/>
+              <Route exact path='/formAddquiz/:id'><CreateQuiz/></Route>
+              <Route exact path='/classroom' component={Classroom} />
+              <Route path='/class' component={ClassInside} />
+            </>
+            <Route component={NotFounds} />
+           
           </Switch>
+          
         </Router>
       </>
   );

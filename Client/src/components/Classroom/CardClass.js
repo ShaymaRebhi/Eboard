@@ -1,14 +1,21 @@
 import React from 'react';
 import '../css/CardClass.css';
 import CardItemClass from './CardItemClass';
+import { Grid, Label, Segment ,  } from 'semantic-ui-react';
+
 
 function CardClass() {
   return (
-    <div className='cardClass'>
-      <h1>Find your courses!</h1>
-      <div className='cards__Class__container'>
-        <div className='cards__Class__wrapper'>
-          
+      
+        
+      <div className='cards__Class__wrapper'>
+      <Grid columns={1} rows={3}>
+    <Grid.Column>
+      <Segment raised>
+        <Label as='a' color='red' ribbon>
+          Classes
+        </Label>
+      
           <ul className='cards__Class__items'>
             <CardItemClass
               src='images/react.jpeg'
@@ -16,7 +23,7 @@ function CardClass() {
               teacher='MR Emine Zribi'
               class='4 TWIN 3'
               meet ='IN MEETING NOW'
-              path='#'
+              path='/class'
               src1='images/emine.jpg'
             
             />
@@ -26,23 +33,29 @@ function CardClass() {
               teacher='MRS Ameni Aoun'
               class='4 TWIN 3'
               meet ='OFFLINE'             
-              path='#'
+              path='/class'
               src1='images/amina.jpg'
             />
+            
             <CardItemClass
               src='images/nodejs.jpg'
               course='Javascript coté serveur'
               teacher='MR Mohamed Amine Chebbi'
               class='4 TWIN 3'
               meet ='OFFLINE'
-              path='#'
+              path='/class'
               src1='images/med.jpg'
             />
           </ul>
-        </div>
+       
+          
+      </Segment>
+      </Grid.Column>
+      </Grid>
       </div>
-    </div>
+    
   );
 }
+
 
 export default CardClass;
