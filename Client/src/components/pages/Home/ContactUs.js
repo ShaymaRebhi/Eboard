@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button } from './Buttons/Button'
 import '../../css/ContactUs.css'
-import Footer from '../Shared/Footer'
 function ContactUs() {
   return (
     <div>
@@ -95,7 +94,7 @@ function ContactUs() {
                 </div>
             </div>
         </div>
-        <Footer></Footer>
+       
     </div>
   )
 }

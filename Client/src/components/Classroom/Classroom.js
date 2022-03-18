@@ -11,11 +11,9 @@ import RecentActivites from './RecentActivities';
 function Classroom() {
   return (
     <div>
-
-  <div style={{display: 'flex'}}> 
-  <SideBar style={{flex: '0 auto '}}></SideBar> 
+  <div style={{display: 'flex'}}>
   
-  <div className='inside-container'>
+ <div>
   <AddClassComponent /> 
   
   <CardClass></CardClass> 
@@ -24,7 +22,7 @@ function Classroom() {
   </div>
   <RecentActivites></RecentActivites>
   </div>
-<Footer></Footer>
+
 
     </div>
     

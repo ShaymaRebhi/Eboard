@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../../App.css';
-import Footer from '../Shared/Footer';
+
 import Inputs from '../../Inputs';
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import '../../css/SignUp.css';
@@ -216,7 +216,6 @@ const password1=[
            
         </div>
     </div>
-    <Footer></Footer>
 
     </div>
   )
