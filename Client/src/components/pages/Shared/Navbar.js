@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { NavDropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../../css/Navbar.css';
 
@@ -31,7 +30,7 @@ function Navbar() {
   return (
     <>
     
-      
+      <NavHead></NavHead>
       <nav className='navbar'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu} >
             E-BOARD
@@ -67,7 +66,7 @@ function Navbar() {
                 Contact us
               </Link>
             </li>
-            
+
             <li>
               <Link
                 to='/sign-up'
@@ -76,9 +75,7 @@ function Navbar() {
               >
                 Sign Up
               </Link>
-
             </li>
-
           </ul>
           
       
