@@ -287,7 +287,6 @@
 }
 
 .text_input_score:focus {
-    border-bottom: 1.5px solid rgba(140,177,192,1);
     background-color: #F4FAF9;
 }
 .score_question{

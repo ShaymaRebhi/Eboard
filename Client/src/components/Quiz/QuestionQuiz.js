@@ -22,8 +22,8 @@ function QuestionQuiz({data , onAnswerUpdate, numberOfQuestions, activeQuestion,
         }
     }
     const nextClickHandler = () => {
-        if(selected === '') {
-            return setError('Please select one option!');
+        if(data.required && selected === '') {
+            return setError('Question required select one option!');
         }
         onAnswerUpdate(prevState => [...prevState, {q: data.questionTitle,s:data.score, a:selected ,b:data.options.filter(option => option.IsValid)
         }]);

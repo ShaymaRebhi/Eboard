@@ -27,7 +27,7 @@ function QuizList() {
   return (
     <>
         <div className="headers text-center">
-            <h3>Quiz List</h3>
+            <h1>Quiz List</h1>
             <button className="btn btn--primary"  onClick={handelformadd}>Add Quiz</button>
         </div>
         <div className="container pb-5 ">

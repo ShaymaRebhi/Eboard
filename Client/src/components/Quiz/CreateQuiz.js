@@ -1,24 +1,14 @@
 import React,{useState}  from 'react'
 import "./CreateQuiz.css"
 import Footer from "../pages/Shared/Footer";
-
-
 import Switch from '@material-ui/core/Switch';
-
-import ShortTextIcon from '@material-ui/icons/ShortText';
-
 import { BsFillDashCircleFill, BsPatchCheckFill, BsFillBookmarkPlusFill, BsFillBookmarkXFill} from 'react-icons/bs';
 import {FaRegCopy} from 'react-icons/fa';
 import {BiAddToQueue} from 'react-icons/bi';
-
-
 import { IconButton } from '@material-ui/core';
-
 import Accordion from '@material-ui/core/Accordion'
-
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Button from '@material-ui/core/Button';
-
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import {useHistory} from "react-router-dom";
 
@@ -33,7 +23,6 @@ function CreateQuiz() {
                         {optionText: "Programming Language", IsValid : false},
                         {optionText: "IDE", IsValid : false}
                 ],
-                open: true,
                 required : false,
                 score:5
                 }]
@@ -60,7 +49,6 @@ function CreateQuiz() {
                     {optionText: "Programming Language", IsValid : false},
                     {optionText: "IDE", IsValid : false}
                 ],
-                open: true,
                 required : false
             }
             ]
@@ -178,13 +166,10 @@ function CreateQuiz() {
                       <div className="Quiz_form_top">
                           {quiz.map((qz,i)=>(
                               <>
-                                  {/*<label htmlFor="Title" className="ca">Quiz Name :</label>*/}
                                   <input type="text" id="Title" className="Quiz_form_top_Name" placeholder="Title"
                                          value={qz.Title} onChange={(e)=>{changeQuizTitle(e.target.value, i)}} />
-                                  {/*<label htmlFor="class" className="ca">class :</label>*/}
                                   <input type="text" id="class" className="Quiz_form_top_class" placeholder="Class"
                                          value={qz.Class} onChange={(e)=>{changeQuizClass(e.target.value, i)}} />
-                                  {/*<label htmlFor="Description" className="ca">Description :</label>*/}
                                   <input type="text" id="Description" className="Quiz_form_top_desc" placeholder="Description"
                                          value={qz.Description} onChange={(e)=>{changeQuizDescription(e.target.value, i)}} />
                               </>
@@ -195,56 +180,16 @@ function CreateQuiz() {
 
                   {questions.map((ques,i) => (
                           <div>
-                              <Accordion expanded={questions[i].open} className={questions[i].open ? 'add_border' :""}>
-                                  {/*<AccordionSummary aria-controls="panel1a-content" id="panel1a-header" elevation={1} style={{width:'100%'}}>
-
-                         {questions[i].open ? (
-
-                             <div className="saved_questions">
-                             <Typography style={{fontsize:"15px", fontWeight:"400",letterSpacing: '.1px',lineHeight:'24px',paddingBottom: "8px"}}>
-                                 {i+1}. {questions[i].questionText}</Typography>
-
-                                 {ques.options.map( (op, j)=>(
-                                     <div key={j}>
-                                         <div style={{display: 'flex',}}>
-                                         <FormControlLabel style={{marginLeft:"Spx", marginBottom: "Spx"}} disabled control={<input type={ques.questionType}
-                                             color="primary" style={{marginRight: '3px', }} required={ques.type}/>} label={
-                                             <Typography style={{
-                                                 fontFamily: 'Roboto,Arial, sans-serif',
-                                                 fontSize: ' 13px',
-                                                 fontWeight: '400',
-                                                 letterSpacing: '.2px',
-                                                 lineHeight: '20px',
-                                                 color: '#202124'}}>
-                                                 {ques.options[j].optionText}
-                                             </Typography>
-                                         }/>
-                                         </div>
-                                     </div>
-                                     ))}
-                             </div>
-                         ):""}
-                    </AccordionSummary>*/}
-
+                              <Accordion  className={'add_border'}>
                                   <div className="question_boxes">
                                       <AccordionDetails className="add_question">
                                           <div className="add_question_top">
                                               <input type="text" className="question" placeholder="Question" value={ques.questionText} onChange={(e)=>{changeQuestion(e.target.value, i)}}/>
                                               {/*<CropOriginalIcon style={{color:"#5f6368"}} />*/}
-                                             {/*<Select className="select" style={{color:"#5f6368", fontsize:"13px"}} >
-                                                <MenuItem id="text" value="Text" > <SubjectIcon style={{marginRight:"10px"}}/> Paragraph</MenuItem>
-                                                <MenuItem id="checkbox" value="checkbox"><CheckBoxIcon style={{marginRight:"10px", color:"#70757a"}} checked /> Checkbox</MenuItem>
-                                                <MenuItem id="radio" value="Radio" > <Radio style={{marginRight:"10px", color:"#70757a"}} checked /> Multiple Choice </MenuItem>
-                                             </Select>*/}
                                           </div>
                                           <ol type="A">
                                           {ques.options.map( (op, j)=>(
                                               <div className="add_question_body" key={j}>
-                                                  {/*{
-                                                      (ques.questionType!=="text") ?
-                                                          <input type={ques.questionType} style={{marginRight:"10px"}}/> :
-                                                          <ShortTextIcon style={{marginRight:"10px"}} />
-                                                  }*/}
                                                     <li>
                                                   <div className="optionstyle">
 
@@ -282,21 +227,11 @@ function CreateQuiz() {
 
                                           {ques.options.length < 5 ? (
                                               <div className="add_question_body">
-                                                  <FormControlLabel disabled control={
-
-                                                      (ques.questionType!=="text") ?
-                                                          <input type={ques.questionType}  color="primary" inputProps={{ 'aria-label': 'secondary checkbox' }} style={{marginLeft:"10px",marginRight:"10px"}} disabled/> :
-                                                          <ShortTextIcon style={{marginRight:"10px"}} />
-
-                                                  } label={
                                                       <div>
-                                                            <BiAddToQueue/>
-                                                          {/*<input type="text" className="text_input" style={{fontSize:"13px",width:"60px"}} placeholder="Add other"/>*/}
+                                                          <BiAddToQueue/>
                                                           <Button size="small"  style={{textTransform: 'none',color:"rgba(140,177,192,1)",fontSize:"13px",fontWeight:"600"}} onClick={()=>{addOption(i)}}>Add Option</Button>
                                                       </div>
-                                                  } />
                                               </div>
-
 
                                           ): ""}
                                           </ol>
