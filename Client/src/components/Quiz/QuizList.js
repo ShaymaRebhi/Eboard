@@ -60,7 +60,7 @@ function QuizList() {
                 </tbody>
             </table>
         </div>
-        <Footer/>
+        
     </>
   )
 }

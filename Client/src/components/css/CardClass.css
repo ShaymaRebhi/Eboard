@@ -279,6 +279,10 @@
 .ui.menu:last-child{
   margin-top: 0px;
 }
+.add {
+    position: unset !Important;
+    height: fit-content;
+}
   @media only screen and (min-width: 1200px) {
     .content__blog__container {
       width: 84%;
