@@ -10,6 +10,7 @@ function HomeEboard() {
     return (
         <div>
             <Navbar />
+            <div className='spacing_3la_3ajla'>
             <PrivateRoute
               path="/"
               exact
@@ -30,7 +31,7 @@ function HomeEboard() {
               exact
               component={SignUp}
             />
-
+      </div>
 <Footer />
         </div>
     )

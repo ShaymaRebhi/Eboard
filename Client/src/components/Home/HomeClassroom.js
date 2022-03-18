@@ -1,12 +1,9 @@
 import React from 'react';
-import { Container, Grid } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import PrivateRoute from "../../Routes/PrivateRoute";
 import SideBar from '../SideBar/Sidebar';
 import Classroom from '../Classroom/Classroom';
-import ClassInside from '../Course/ClassInside';
-import QuizList from "../Quiz/QuizList";
-import CreateQuiz from "../Quiz/CreateQuiz";
-import Navbar from '../pages/Shared/Navbar';
+
 import '../SideBar/Sidebar.css'
 import NavbarInside from '../NavbarInside/NavbarInside';
 
@@ -14,6 +11,7 @@ import NavbarInside from '../NavbarInside/NavbarInside';
 function HomeClassroom(){
     return (
         <div>
+            <div className='spacing_3la_3ajlaa'>
             <NavbarInside />
             <Grid stackable celled="internally">
         <Grid.Row>
@@ -32,6 +30,8 @@ function HomeClassroom(){
           </Grid.Column>
         </Grid.Row>
       </Grid>
+
+      </div>
         </div>
     )
 }

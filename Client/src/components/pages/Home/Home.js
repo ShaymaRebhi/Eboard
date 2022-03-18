@@ -7,8 +7,10 @@ import HeroSection from './HeroSection';
 function Home() {
   return (
     <>
-      <HeroSection />
-      <Cards />
+     
+        <HeroSection />
+         
+        <Cards />
       
     </>
   );

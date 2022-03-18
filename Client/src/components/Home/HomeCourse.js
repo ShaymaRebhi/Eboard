@@ -13,6 +13,7 @@ import NavbarInside from '../NavbarInside/NavbarInside';
 function HomeCourse(){
     return (
         <div>
+          <div className='spacing_3la_3ajlaa'>
              <NavbarInside />
           <Grid stackable celled="internally">
             <Grid.Row >
@@ -41,6 +42,7 @@ function HomeCourse(){
 
               </Grid.Row>
               </Grid>
+              </div>
               </div>
     )
 }

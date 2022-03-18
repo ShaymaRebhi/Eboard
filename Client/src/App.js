@@ -26,6 +26,8 @@ import { BrowserRouter }  from "react-router-dom";
 import HomeClassroom from './components/Home/HomeClassroom';
 import HomeCourse from './components/Home/HomeCourse';
 import Page_404 from './components/Home/404';
+import ForgetPwd from './components/pages/Auth/ForgetPwd';
+import ResetPwd from './components/pages/Auth/ResetPwd';
 
 function App() {
 
@@ -41,6 +43,8 @@ function App() {
            
             <Route exact path='/Eboard/auth/admin' component={Admin} />
             <Route exact path='/login' component={Login} />
+            <Route path="/forget" component={ForgetPwd} />
+            <Route exact path='/reset/:id' component={ResetPwd} />
                 
             <Route
             path="/"
