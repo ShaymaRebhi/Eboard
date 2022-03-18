@@ -200,22 +200,8 @@ function CreateQuiz() {
                                                       <Switch className="text_input2" name="checkedA" color="primary" aria-label="Is Valid" checked={ques.options[j].IsValid}
                                                                onChange={(e)=>{changeIsValidValue(e.target.checked, i , j)}}/>
 
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
-                                                      &nbsp;
 
-                                                      <IconButton className="delete_option_icon" aria-label="delete" >
+                                                      <IconButton className="delete_option_icon px-5 " aria-label="delete" >
                                                           <BsFillDashCircleFill  onClick={()=> {removeOption(i,j)}}/>
                                                           <span className="delete_option_span">Delete option</span>
                                                       </IconButton>
