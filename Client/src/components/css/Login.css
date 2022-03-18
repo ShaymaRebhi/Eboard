@@ -1,6 +1,6 @@
 .register-photo {
    
-    padding: 30px 0;
+    padding: 90px 0;
     border-radius: 0% 10% 10% 0% !important;
     
   } 
@@ -199,7 +199,30 @@ input[type='checkbox']:invalid[focused="true"] ~ .form-check-label{
     font-size: 13px;
     line-height: 20px;
   }
-  
+  .register-photo .image-holders {
+    height: 500px;
+    display: table-cell;
+    width: auto;
+    background: url('/images/login.png') center center    no-repeat; 
+    background-size: cover;
+  }
+  .register-photo .image-holders .hr{
+    width: 50px;
+    background-color: #FFF;
+    border-radius: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 10px;
+}
+.register-photo .image-holders h1,h2,h3,h4,h5,h6,p{
+  color: #FFF;
+  margin: 10px;
+
+}
+.register-photo .image-holders .contents{
+  margin: 30px 30px 30px 30px;
+  text-align: center;
+}
   .register-photo form .btn-primary {
     background: #65A2D1;
     border: none;
@@ -222,10 +245,20 @@ input[type='checkbox']:invalid[focused="true"] ~ .form-check-label{
   .register-photo form .already {
     display: block;
     text-align: center;
-    font-size: 12px;
-    color: #6f7a85;
-    opacity: 0.9;
-    text-decoration: none;
+    
+    font-size: 13px;
   }
   
-  
+  @media (max-width:833px){
+    .image-holders{
+      display: none  !important;
+    }
+    .register-photo .image-holders {
+      
+     margin-left: 50px;
+     margin-right: 50px;
+    }
+    .register-photo form{
+      height: 550px !important;
+    }
+  }
