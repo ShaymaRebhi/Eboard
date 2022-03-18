@@ -7,7 +7,6 @@ const jwt = require("jsonwebtoken")
 const {loginValidation}=require('../Validation/Validation.js')
 var nodemailer = require('nodemailer');
 const _=require("lodash")
-const fetch=require('node-fetch')
 require('dotenv').config()  
 const bcrypt = require('bcrypt');
 
@@ -55,87 +54,6 @@ exports.signin = async(req,res) => {
     }
         
     })
-}
-
-exports.facebookSignin=async(req,res)=>{
-    const {userID,AccessToken}=req.body;
-    const url = `https://graph.facebook.com/v13.0/${userID}/?fields=name,email,picture,first_name,last_name,gender,birthday,location&locale=en_FR&access_token=${AccessToken}`;
-    fetch(url,{
-        method:'GET'
-    }).then(response=> response.json())
-    .then(response=>{
-        let Sexe="";
-        const { name, email, picture,first_name,last_name,gender,birthday,location } = response;
-        if(gender=="male"){
-            Sexe="HOMME"
-            
-        }else{
-            Sexe="FEMME"
-        }
-      
-       
-     User.findOne({email:email},function(err,user){
-            if(err){
-               return res.status(400).json({ Error:err+email })
-            }else{
-                if(user){
-                    const user1={name:user.email,role:user.role}
-                    const token =jwt.sign(user1,process.env.JWT_SECRET,{expiresIn: "1h"});
-                    res.json({User:user,AccessToken: token})
-                }else{
-                    console.log(name+" "+email+" "+" "+picture.data.url+" "+first_name+" "+last_name+" "+Sexe+" "+birthday+" "+location.name)
-                    let password =bcrypt.hashSync(email + process.env.JWT_SECRET,10);
-                    let datas={
-                        email:email,
-                        password:password,
-                        role:"STUDENT",
-                        Adresse:location.name,
-                        file:picture.data.url
-                    }   
-                    user = new User(datas);
-                    
-                    user.save((err, data) => {
-                        if (err) {
-                          console.log("ERROR FACEBOOK LOGIN ON USER SAVE", err);
-                          return res.status(400).json({
-                            error: "User signup failed with facebook",
-                          });
-                        }
-                        let StudentDataSet={
-                            FirstName:first_name,
-                            LastName:last_name,
-                            Sexe:Sexe,
-                            //BirthDate:birthday,
-                            User:data
-                        }
-                        
-                        const _Student=new Student({
-                            FirstName:first_name,
-                            LastName:last_name,
-                            Sexe:Sexe,
-                            BirthDate:birthday,
-                            Cin:Math.floor(10000000 + Math.random() * 90000000),
-                            User:data
-                        });
-                        _Student.save((error,Student)=>{
-                        if(error) return res.status(402).json({Error:"Student error"+error});
-                            
-                        
-                        const user1={name:user.email,role:user.role}
-                        const token =jwt.sign(user1,process.env.JWT_SECRET,{expiresIn: "1h"});
-                        res.json({User:user,AccessToken: token})
-                     })
-                  })
-                      
-                  
-                   
-                }
-    
-            }
-            
-        })
-    })
-
 }
 exports.signup = async(req,res) => {
 
