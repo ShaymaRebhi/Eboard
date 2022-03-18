@@ -26,4 +26,6 @@ router.post('/login',UserController.signin);
 router.post('/forgetpassword',UserController.forgetPasswordEmailSend);
 router.post('/resetpassword',UserController.resetPasswordEmailSend);
 
+router.post('/facebookLogin',UserController.facebookSignin)
+
 module.exports = router;
