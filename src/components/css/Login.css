@@ -1,6 +1,41 @@
 
-
-
+.loading-spinner{
+  background-color: red;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+  z-index: 9999999999;
+  overflow: hidden;
+}
+.loading {
+  position: fixed;
+  left: 0px;
+  top: 0;
+  width: 99%;
+  height: 100%;
+  z-index: 9999999999;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.9);
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+.css-193cotn {
+  position: fixed; /* or absolute */
+  top: 50%;
+  left: 45%;
+}
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 8em;
+  height: 8em;
+  display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -4.05em;
+}
 .register-photo {
   background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 15%, rgba(206,220,223,1) 100%);
     height: 100%;
