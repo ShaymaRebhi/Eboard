@@ -5,13 +5,17 @@ import CardItem from './CardItem';
 import { Button } from '../Buttons/Button';
 import { Link } from 'react-router-dom';
 
+
 function Cards() {
   return (
+    
     <div className='cards'>
+     
       <h1>Actualities</h1>
       <div className='cards__container'>
         <div className='cards__wrapper'>
           <ul className='cards__items'>
+            
             <CardItem
               src='https://insights.som.yale.edu/sites/default/files/styles/square/public/2022-03/Information%20inundation.webp?h=6dade3ba&itok=ed0KKLP6'
               text='Study: An Abundance of Media Fuels Polarization'

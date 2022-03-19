@@ -1,6 +1,6 @@
 .cards {
   padding: 4rem;
-  background: #fff;
+  
 }
 
 h1 {
@@ -28,8 +28,8 @@ h1 {
 
 .cards__item {
   display: flex;
-  flex: 1;
-  margin: 0 1rem;
+  flex:1 ;
+  margin: 1rem 1rem;
   border-radius: 10px;
 }
 
@@ -37,7 +37,7 @@ h1 {
     display: flex;
     flex-flow: column;
     width: 100%;
-    box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
+    box-shadow: 0 6px 20px rgba(153, 154, 155, 0.17);
     -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
     filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
     border-radius: 10px;
@@ -47,6 +47,7 @@ h1 {
   }
 
 .cards__item__pic-wrap {
+  
   position: relative;
   width: 100%;
   padding-top: 67%;
@@ -85,7 +86,7 @@ h1 {
   right: 0;
   bottom: 0;
   left: 0;
-  display: block;
+  display: flex;
   width: 100%;
   max-width: 100%;
   height: 100%;
