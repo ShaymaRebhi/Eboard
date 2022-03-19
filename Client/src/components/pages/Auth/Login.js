@@ -11,7 +11,6 @@ import {  AxiosError } from 'axios'
 import { setCookie } from '../../../Helpers/Auth';
 import ClipLoader from "react-spinners/ClipLoader";
 import { ButtonsLogin } from './Buttons/ButtonsLogin';
-import FacebookLogin from 'react-facebook-login';
 import ReactFacebookLogin from 'react-facebook-login';
 const Login = () => {
 let [loading, setLoading] = useState(false);
@@ -160,7 +159,7 @@ var getObject={
     
     <>
    
-    <div>
+    <div className='background_login'>
     <ToastContainer
               position="top-right"
               autoClose={5000}
@@ -198,11 +197,15 @@ var getObject={
             </div>
             
             <form method="post" onSubmit={handleSubmit}>
-                
+                <div className='mobil_hom_icon'>
+                    <Link to="/"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" className="bi bi-house-door-fill text-white svg_change_place" viewBox="0 0 16 16">
+                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                     </svg></Link>
+                </div>
                 <h1 className="text-center mb-4 mt-5">LOGIN ACCOUNT</h1>
                 <ReactFacebookLogin
                     appId="544343623593746"
-                    autoLoad={true}
+                    autoLoad={false}
                     cssClass="btnFacebook"
                     fields="name,email,picture,first_name,last_name"
                     callback={responseFacebook}

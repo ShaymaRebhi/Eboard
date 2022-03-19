@@ -71,6 +71,16 @@
     width: 100%
   }
 }
+
+@media(max-width:667px){
+  .btn--large {
+    padding: 5px 10px !important;
+    font-size: 20px !important;
+    width: 150px !important;
+    font-size: 15px !important;
+  }
+}
+
 .btn--large:hover,
 .btn--medium:hover {
   transition: all 0.3s ease-out !important;

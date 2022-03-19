@@ -169,7 +169,7 @@
 }
 .header.shop .topbar {
 	border: none;
-	padding: 5px 0px;
+	padding: 12px 0px;
 }
 .header.shop .nav-inner {
 	margin-right: 188px;
@@ -202,7 +202,8 @@
 }
 .header.shop .right-content{
 	float:right;
-	margin-right: 60px;
+	margin-right: 80px;
+	margin-top: -35px;
 }
 .header.shop .list-main li {
 	display: inline-block;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import '../../../App.css';
 
 import Inputs from '../../Inputs';
@@ -11,8 +11,13 @@ import axios from 'axios';
 import {  toast, ToastContainer } from 'react-toastify';
 import {  AxiosError } from 'axios'
 import Select from 'react-select'
+import ClipLoader from "react-spinners/ClipLoader";
 export default function SignUp() {
- 
+  let [loading, setLoading] = useState(false);
+  const history=useHistory();
+  function componentDidMount(p) {
+    setTimeout(() => {history.push("/login")}, p) // redirect in 5 secs
+  }
   const options = [
     { value: 'HOMME', label: 'MEN' },
     { value: 'FEMME', label: 'WOMAN' },
@@ -79,7 +84,7 @@ const password1=[
   
     console.log(Object.fromEntries(Data.entries()).role)
 
-
+    setLoading(true)
     axios.post("https://eboardbackend2022.herokuapp.com/user/signup",{
       "email":values.email,
       "Password":values.password,
@@ -98,15 +103,16 @@ const password1=[
       toast.success('Account added successfuly please sign in  ', {
         position: "bottom-right" 
       });
-       
-    }).catch((reason: AxiosError<{additionalInfo:string}>) => {
-          console.log(reason.response.status)
-     
-          toast.error('Error  ', {
+      componentDidMount(5000);
+    }).catch(err => {
+          
+          toast.error('Account already exist try to login or contact the admin', {
                     position: "bottom-right" 
             });
        
         //addToast("test error", { appearance: 'error' });
+    }).finally(res=>{
+      setLoading(false)
     })
   }
 
@@ -208,7 +214,7 @@ const password1=[
                  
                 </div>
                 <div className="mb-3">
-                  <button className="btn btn-primary d-block w-100" type="submit">Create</button>
+                  <button className="btn btn-primary d-block w-100" type="submit">{loading ? <ClipLoader  color='#FFF' loading={loading}  size={20} /> : "Create"}</button>
                 </div>
                 <Link className="already" to="/login"><p> You  have an account ?  Sign in here. </p></Link>
                

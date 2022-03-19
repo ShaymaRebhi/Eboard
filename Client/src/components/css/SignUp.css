@@ -3,13 +3,12 @@
     justify-content: center;
     width: 100%  !important;
 }
-   
-
 .signup-photo {
-    background: #f1f7fc;
-    padding: 80px 0;
-    
-  } 
+  padding: 18px 50px 0px 0px;
+  
+}  
+
+
   .signup-photo  .image-holder {
     display: table-cell;
     width: auto;
@@ -44,7 +43,7 @@
     background: #8EB2CD;
     padding: 80px 50px;
     color:#676767 ;
-    
+    height: 100%;
   }
   .btn-outline-primary{
     border-color: #fdfdfd !important;
@@ -194,4 +193,41 @@
     text-decoration: none;
   }
   
+  @media (max-width:650px){
+    .signup-photo form {
+      display: table-cell;
+      width: 520px;
+      background: #8EB2CD;
+      padding: 80px 50px;
+      color: #676767;
+      height: 100%;
+  }
+    .signup-photo form input[type="text"] {
+      margin-top: 15px;
+      margin-bottom: 15px;
+  }
+    .signup-photo form input[type="email"] {
+      
+      margin-top: 15px;
+  }
+  .signup-photo form input[type="password"] {
+      
+    margin-top: 15px;
+  }
+  .css-1s2u09g-control{
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+ 
+  .signup-photo {
+    background: #f1f7fc;
+     padding: 0px 0; 
+     width: 100%;
+}
+.signup-photo form input[type="number"] {
+    
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
   
+  }
