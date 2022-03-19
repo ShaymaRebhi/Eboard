@@ -1,23 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Button } from './Buttons/Button'
 import '../../css/ContactUs.css'
-import ClipLoader from "react-spinners/ClipLoader";
 function ContactUs() {
-
-    const [loading, setLoading] = useState(true);
-    useEffect(() => {
-      const loadData = async () => {
-        await new Promise((r) => setTimeout(r, 2000));
-        setLoading((loading) => !loading);
-      };
-      loadData();
-    }, [])
 
   return (
     <div>
-       {loading&& <div className="loading" >
-            <ClipLoader className="loader" color='white'  loading={loading} css="margin:0px auto" size={70} />
-        </div>}
+  
       <div className="container  contact3 py-5">
             <div className="row no-gutters mt-5 ml-5 mr-5 mb-5">
                 <div className="container">
