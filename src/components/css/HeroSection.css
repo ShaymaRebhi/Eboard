@@ -1,7 +1,7 @@
 
 
 .hero-container {
-  background: url('/images/home.png') center center no-repeat; 
+  background: url('../../Assets/Images/home.png') center center no-repeat; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
