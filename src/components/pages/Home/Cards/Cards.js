@@ -54,7 +54,7 @@ function Cards() {
           </ul>
            <ul className="text-center">
             <Link to='/' className='btn-mobile'>
-              <Button>More Actualities</Button>
+              <Button buttonSize='btn--large'>More Actualities</Button>
             </Link>
            </ul>
         </div>

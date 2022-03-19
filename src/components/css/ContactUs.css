@@ -53,3 +53,31 @@
     background: -o-linear-gradient(left, #ff6a5b 0%, #ff4d7e 100%);
     background: linear-gradient(to right, #ff6a5b 0%, #ff4d7e 100%);
   }
+
+  @media (max-width:650px){
+    .contact3 .card-shadow {
+      background-image: url("/images/6100996.jpg");
+      width: 300px;
+      margin-left: -35px;
+        background-repeat: no-repeat;
+        background-size: 80%;
+        background-position: center;
+      height: 400px;
+    -webkit-box-shadow: 0px 0px 30px rgba(115, 128, 157, 0.1);
+    box-shadow: 0px 0px 30px rgba(115, 128, 157, 0.1);
+  }
+  .card{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    /* justify-content: left; */
+    margin-left: -130px;
+    width: 420px;
+  }
+  }

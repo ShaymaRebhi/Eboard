@@ -1,8 +1,10 @@
+
+
+
 .register-photo {
-   
-    padding: 90px 0;
-    border-radius: 0% 10% 10% 0% !important;
-    
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 15%, rgba(206,220,223,1) 100%);
+    height: 100%;
+    padding: 90px 0;    
   } 
   .register-photo .image-holder {
     
@@ -39,7 +41,7 @@
     border-radius: 0% 10% 10% 0% !important;
     display: table;
     max-width: 900px;
-    max-height: 900px !important;
+    height: 100%;
     width: 100%;
     margin: 0 auto;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
@@ -47,6 +49,7 @@
   .register-photo form {
     border-radius: 0% 3% 3% 0% !important; 
     display: table-cell;
+    height: 100% !important;
     width: 420px;
     background: #8EB2CD;
     padding: 20px 30px;
@@ -160,22 +163,7 @@ input[type='checkbox']:invalid[focused="true"] ~ .form-check-label{
 }
 
   
-  @media (max-width:991px) {
-    .register-photo form {
-      padding: 40px ;
-    }
-    
-  }
 
-  @media (max-width:819px){
-    .image-holder{
-      display: none  !important;
-    }
-    .register-photo .image-holder {
-     margin-left: 50px;
-     margin-right: 50px;
-    }
-  }
   
   .register-photo form h2 {
     font-size: 24px;
@@ -248,7 +236,9 @@ input[type='checkbox']:invalid[focused="true"] ~ .form-check-label{
     
     font-size: 13px;
   }
-  
+  .mobil_hom_icon{
+    display: none;
+  }
   @media (max-width:833px){
     .image-holders{
       display: none  !important;
@@ -259,6 +249,33 @@ input[type='checkbox']:invalid[focused="true"] ~ .form-check-label{
      margin-right: 50px;
     }
     .register-photo form{
-      height: 550px !important;
+      height: 800px !important;
+    }
+  }
+
+  @media (max-width:600px) {
+    .register-photo form {
+      padding: 40px ;
+    }
+    
+  }
+
+  @media (max-width:819px){
+    .mobil_hom_icon{
+      display: flex;
+      justify-content: end;
+      
+    }
+    .image-holder{
+      display: none  !important;
+    }
+    .register-photo .image-holder {
+     margin-left: 50px;
+     margin-right: 50px;
+    }
+    .register-photo{
+      padding: 0px !important;
+      border-radius: 0px !important;
+      
     }
   }

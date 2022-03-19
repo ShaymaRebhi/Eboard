@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './App.css';
-
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import { BrowserRouter as Router,Redirect, Route, Switch } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -19,6 +19,7 @@ import HomeCourse from './components/Home/HomeCourse';
 import Page_404 from './components/Home/404';
 import ForgetPwd from './components/pages/Auth/ForgetPwd';
 import ResetPwd from './components/pages/Auth/ResetPwd';
+import SignUp from './components/pages/Auth/SignUp';
 
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
             <Route exact path='/login' component={Login} />
             <Route path="/forget" component={ForgetPwd} />
             <Route exact path='/reset/:id' component={ResetPwd} />
-                
+            <Route  exact path='/sign-up' component={SignUp} />
             <Route
             path="/"
             exact
@@ -54,11 +55,7 @@ function App() {
             exact
             render={(props) => <HomeEboard {...props} />}
           />
-          <Route
-            path="/sign-up"
-            exact
-            render={(props) => <HomeEboard {...props} />}
-          />
+         
           <Route
             path="/classroom"
             exact

@@ -1,18 +1,21 @@
 .cards {
-  padding: 4rem;
+ 
   
 }
 
 h1 {
   text-align: center;
 }
-
+.cards__items li{
+  text-decoration: none;
+  list-style: none;
+}
 .cards__container {
   display: flex;
   flex-flow: column;
   align-items: center;
   max-width: 1120px;
-  width: 90%;
+  width: 100%;
   margin: 0 auto;
   
 }
@@ -35,7 +38,8 @@ h1 {
 
   .cards__item__link {
     display: flex;
-    flex-flow: column;
+    flex-wrap: wrap;
+    
     width: 100%;
     box-shadow: 0 6px 20px rgba(153, 154, 155, 0.17);
     -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
@@ -45,7 +49,15 @@ h1 {
     text-decoration: none;
     
   }
-
+  .cards__item__links {
+   
+    width: 100%;
+   
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    
+  }
 .cards__item__pic-wrap {
   
   position: relative;
@@ -109,28 +121,74 @@ h1 {
   text-align: left;
 
 }
-
+.cards ul{
+  margin-left: -40px;
+}
 .image___caption___description{
   color: rgb(0, 0, 0) !important;
   font-family: 'Montserrat', sans-serif;
   margin:0px 30px 30px;
   font-weight: lighter;
 }
-
+.bg-card-aboutus{
+  background-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 10px 10px 30px rgba(0, 0, 0,0.2) !important;
+  margin: 10px 10px;
+  border-radius: 20px !important;
+}
+.hr_about_us{
+  width: 0%;
+  min-width: 20%;
+  max-width: 100%;
+  margin: 0 auto;
+  border: none;
+  border-bottom: 1px solid rgb(189, 189, 189);
+  position: relative;
+  transition: box-shadow 200ms ease-in-out;
+  box-shadow: 0px 0px 0px 0px #f9f9f9;
+  margin-bottom: 30px;
+}
 @media only screen and (min-width: 1200px) {
   .content__blog__container {
     width: 84%;
   }
+  
 }
 
+
+@media(max-width:667px){
+  .cards__container {
+   width: 400px !important;
+   padding-left: -650px !important;
+   text-align: left;
+   text-justify: auto;
+    
+  }
+  .dateCaption{
+    background-color: #8EB2CD;
+    margin-top: -18px;
+    color: white;
+    height: 60px;
+    width: 90px;
+    font-size: 17pt;
+    padding: 10px;
+  }
+  .image___caption___description{
+    text-align: left !important;
+    margin-bottom: 30px !important;
+  }
+}
 @media only screen and (min-width: 1024px) {
   .cards__items {
     display: flex;
+    text-decoration: none;
+    list-style: none;
   }
 }
 
 @media only screen and (max-width: 1024px) {
   .cards__item {
     margin-bottom: 2rem;
+    list-style: none;
   }
 }
