@@ -1,49 +1,70 @@
+# Getting Started with Create React App
 
-<!-- Logo -->
-<p align="center">
-  <a href="#">
-    <img height="150" width="320" src="https://i.postimg.cc/C1cdB79s/logo.png">
-  </a>
-</p>
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-<h2 align="center" >
-  Leading the way in e-learning :wedding:.
-</h2>
+## Available Scripts
 
-<!-- Badges -->
-<p align="center">
-  
-</p>
+In the project directory, you can run:
 
-## :mega: About E-Board
+### `npm start`
 
-E-BOARD Smart Virtual Classroom is A collaborative web conferencing tool with an online whiteboard, 
-breakout rooms, and screen sharingcapabilities for teachers and tutors who want to conduct highly 
-interactive live online teaching sessions
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-## :wrench: Installation & Usage
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-- Clone the Master branch
-- Go to Client directory by typing "cd Client" and run "npm install"
-- Go to Server directory by typing "cd Server" and run "npm install"
-- Run "node server.js" in the server directory
-- Run "npm run start" in the client directory
-- Go to http://localhost:3000 and Enjoy ;)
+### `npm test`
 
-## :bulb: Devoloped With MERN stack
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-<p align="center">
-  <img height="50" src="https://www.alioze.com/wp-content/uploads/2016/11/react-js.png" />
-  <img height="50" src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" />
-  <img height="50" src="https://miro.medium.com/max/6668/1*XP-mZOrIqX7OsFInN2ngRQ.png" />
-  <img height="50" src="https://framalibre.org/sites/default/files/leslogos/mongodb-logo.jpg" />
-</p>
+### `npm run build`
 
-- React Js 
-- Node Js 
-- Express Js 
-- Mongo Db 
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## :man_astronaut: Show your support
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-Give a ⭐️ if this project helped you!
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
