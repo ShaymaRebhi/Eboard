@@ -8,9 +8,7 @@ import 'react-toastify/dist/inject-style';
 import 'react-toastify/dist/ReactToastify.css';
 import  { useHistory } from 'react-router-dom'
 import {  AxiosError } from 'axios'
-import { setCookie } from '../../../Helpers/Auth';
 import ClipLoader from "react-spinners/ClipLoader";
-import { ButtonsLogin } from './Buttons/ButtonsLogin';
 const ForgetPwd = () => {
 let [loading, setLoading] = useState(false);
 
