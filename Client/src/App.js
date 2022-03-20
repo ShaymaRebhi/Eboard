@@ -20,7 +20,6 @@ import SignUp from './components/pages/Auth/SignUp';
 
 import ContactUs from './components/pages/Home/ContactUs';
 import AboutUs from './components/pages/Home/AboutUs';
-import Login from './components/pages/Auth/Login';
 import Admin from './components/pages/Auth/Admin';
 import Home from './components/pages/Home/Home';
 import Navbar from './components/pages/Shared/Navbar';

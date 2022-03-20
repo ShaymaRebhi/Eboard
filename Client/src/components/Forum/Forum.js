@@ -1,6 +1,5 @@
 import React,{useState}  from 'react'
 import '../css/Admin.css'
-import Footer from "../Footer";
 import {Link} from "react-router-dom";
 
 
@@ -16,7 +15,7 @@ function Forum() {
                     </div>
                 </div>
             </div>
-            <Footer/>
+            
         </div>
     )
 }
