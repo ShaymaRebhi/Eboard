@@ -1,0 +1,71 @@
+html,
+body,
+#root {
+    height : 80%
+}
+.DisplayQuestionBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80%;
+}
+.card-HomeWork{
+    border-top: 15px solid rgba(140,177,192,1) ;
+    border-left: 15px solid rgba(140,177,192,1) ;
+    border-right: 15px solid rgba(140,177,192,1) ;
+    border-bottom: 15px solid rgba(140,177,192,1) ;
+    background-color: white;
+    border-radius: 8px;
+    padding: 60px 40px;
+    text-transform: capitalize;
+    max-width: 400px;
+    width: 100%;
+
+
+}
+.saveadd{
+    display: flex;
+    justify-content: center;
+}
+.labelHomeWork{
+    color: blue;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 16px;
+}
+.text_input_homeWork {
+    outline: none;
+    border: none;
+    height: 40px;
+    width: 100px;
+    /* width: 490px;*/
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: .2px;
+    color:  #202124;
+}
+.text_input_homeWork:focus {
+    border-bottom: 1.5px solid rgba(140,177,192,1);
+    background-color: #F4FAF9;
+}
+.text_input_homeWork_question {
+    outline: none;
+    border: none;
+    height: 40px;
+    width: 250px;
+    /* width: 490px;*/
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: .2px;
+    color:  #202124;
+}
+.text_input_homeWork_question:focus {
+    border-bottom: 1.5px solid rgba(140,177,192,1);
+    background-color: #F4FAF9;
+}
+.card-content-HomeWork{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
