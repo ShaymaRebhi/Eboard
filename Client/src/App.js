@@ -14,6 +14,10 @@ import Admin from './components/pages/Admin';
 import NotFounds from './components/pages/NotFound';
 import Login from './components/pages/Login';
 import Classroom from './components/pages/Classroom';
+import CreateForum from "./components/Forum/CreateForum";
+import Forums from "./components/Forum/Forums";
+import Forum from "./components/Forum/Forum";
+
 function App() {
   return (
       <>
@@ -29,7 +33,12 @@ function App() {
             <Route path='/formAddquiz/:id'><CreateQuiz/></Route>
             <Route path='/Eboard/auth/admin' component={Admin} />
             <Route path='/classroom' component={Classroom} />
+            <Route path='/forum/new' component={CreateForum} />
+            <Route path='/forums' component={Forums} />
+            <Route path='/forum/:id' component={Forum} />
+
             <Route path='**' component={NotFounds} />
+
           </Switch>
         </Router>
       </>
