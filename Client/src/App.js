@@ -9,6 +9,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CreateQuiz from "./components/Quiz/CreateQuiz";
 
 import NotFounds from './components/pages/NotFound';
+import Login from './components/pages/Login';
+import Classroom from './components/pages/Classroom';
+import CreateForum from "./components/Forum/CreateForum";
+import Forums from "./components/Forum/Forums";
+import Forum from "./components/Forum/Forum";
+
 
 import SignUp from './components/pages/Auth/SignUp';
 
@@ -29,6 +35,7 @@ import Page_404 from './components/Home/404';
 import ForgetPwd from './components/pages/Auth/ForgetPwd';
 import ResetPwd from './components/pages/Auth/ResetPwd';
 
+
 function App() {
 
 
@@ -38,7 +45,9 @@ function App() {
         <BrowserRouter>
           
           <Switch>
-                
+             <Route path='/forum/new' component={CreateForum} />
+            <Route path='/forums' component={Forums} />
+            <Route path='/forum/:id' component={Forum} />            
              
            
             <Route exact path='/Eboard/auth/admin' component={Admin} />
