@@ -20,6 +20,7 @@ import Page_404 from './components/Home/404';
 import ForgetPwd from './components/pages/Auth/ForgetPwd';
 import ResetPwd from './components/pages/Auth/ResetPwd';
 import SignUp from './components/pages/Auth/SignUp';
+import Chat from './components/ChatBot/Chat';
 
 
 function App() {
@@ -28,7 +29,10 @@ function App() {
 
   return (
       <>
-     
+        <div className='chatbot'>
+             <Chat></Chat>
+        </div>
+        
         <BrowserRouter>
           
           <Switch>
