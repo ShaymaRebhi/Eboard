@@ -1,0 +1,30 @@
+.Questionquiz{
+    color: black;
+    border-bottom: 1.5px solid rgba(140,177,192,1) ;
+}
+.labeloption{
+    color: black;
+}
+.errorquiz{
+    color: red;
+}
+.labeloption{
+    display: block;
+    text-align: left;
+    padding: 15px;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+.labeloption{
+    margin-left:0 ;
+}
+.inputoption{
+    margin-right: 10px;
+}
+.scorehandler{
+    display: flex;
+    justify-content: end;
+}
+.scorehandler2{
+    color: blue;
+}

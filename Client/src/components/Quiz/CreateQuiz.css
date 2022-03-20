@@ -273,3 +273,25 @@
 .delete_option_icon:hover .delete_option_span{
     visibility: visible;
 }
+
+.text_input_score {
+    outline: none;
+    border: none;
+    height: 40px;
+    width: 40px;
+    /* width: 490px;*/
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: .2px;
+    color:  #202124;
+}
+
+.text_input_score:focus {
+    border-bottom: 1.5px solid rgba(140,177,192,1);
+    background-color: #F4FAF9;
+}
+.score_question{
+  display: flex;
+    justify-content: end;
+    align-items: center;
+}

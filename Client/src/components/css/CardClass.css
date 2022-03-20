@@ -1,6 +1,7 @@
 .cardClass {
     padding: 4rem;
     background: #fff;
+    margin-left: 3rem;
     
   }
   
@@ -12,32 +13,42 @@
     display: flex;
     flex-flow: column;
     align-items: center;
-    justify-content:space-evenly ;
     max-width: 1120px;
     width: 90%;
     margin: 0 auto;
+   
   }
-  
+  .all-container{
+    margin-top:5rem ;
+  }
   .cards__Class__wrapper {
     position: relative;
     margin: 50px 0 45px;
+    
+  
   }
   
   .cards__Class__items {
-    margin-bottom: 24px;
+    padding: 4px;
     
+   
   }
   
   .cards__Class__item {
+    
     display: flex;
     flex: 1;
     margin: 0 1rem;
     border-radius: 10px;
-    height: 400px;
-    width: 360px;
+    height: 350px;
+    width: 260px;
     background  :linear-gradient(3deg, rgba(37,57,78,-8) 1%, rgba(139,177,192,1) 90%, rgba(196,215,229,1) 106%);
   }
-  
+
+  .cards__Class__item:hover{
+    transform: scale(1.1);
+   
+  }
   .cards__Class__item__link {
     display: flex;
     flex-flow: column;
@@ -51,7 +62,7 @@
   }
   
   .cards__Class__item__pic-wrap {
-    
+    position: relative;
     width: 100%;
    height: 160px;
     overflow: hidden;
@@ -62,22 +73,7 @@
     animation-duration: 2s;
   }
   
-  .cards__Class__item__pic-wrap::after {
-    content: attr(data-category);
-    
-    bottom: 0;
-    margin-left: 10px;
-    padding: 6px 8px;
-    max-width: calc((100%) - 60px);
-    font-size: 12px;
-    font-weight: 700;
-    color: #fff;
-   
-    box-sizing: border-box;
-  }
-  
   .cards__Class__item__img {
-    
     top: 0;
     right: 0;
     bottom: 0;
@@ -91,14 +87,10 @@
     transition: all 0.2s linear;
   }
  
-  
-  .cards__Class__item__img:hover {
-    transform: scale(1.1);
-  }
-  
   .cards__Class__item__info {
     padding: 17px 0px 0px;
     height: 238px;
+    
   }
   
   .cards__Class__item__course {
@@ -112,7 +104,7 @@
     color: #252e48;
     font-size: 13px;
     text-align: center;
-    line-height: 24px;
+    line-height: 3px;
     
   }
   .cards__Class__item__class {
@@ -124,7 +116,7 @@
   }
   .icons {
     position: absolute;
-    top:70%;
+    top:73%;
     left: 45%;
     transform: translate(-50% ,-50%);  
     display: flex;
@@ -132,7 +124,34 @@
   
   
   }
+  .dropdown {
+   position: absolute;
+   color: grey;
+   font: bold;
+   right: 0;
+   
   
+  }
+  .drop {
+    position: absolute;
+    transform: translateX(-45%);
+    width: 300px;
+    transform: translateX( -45%);
+    background-color: var(--bg);
+    border: var(--border) ;
+    border-radius : var(--border- radius);
+    padding: 1rem;
+    overflow: hidden;
+  }
+  menu-item {
+    height: 50px;
+    display: flex;
+    align-items : center;
+    border-radius : var(--border-radius);
+    transition: background var(--speed) ;
+    padding: 0.5rem;
+    }
+
   .icons li{
    
       list-style: none;   
@@ -156,9 +175,10 @@
     transform: scale(1.1);
     
   }
+
   .react {
     position: absolute;
-    top:78%;
+    top:81%;
     left: 45%;
     transform: translate(-50% ,-50%);  
     display: flex;
@@ -189,13 +209,22 @@
     transform: scale(1.1);
     
   }
+  .ui-card{
+    margin-top: 9rem;
+    margin-left: 5rem;
+  }
+  .inside-container{
+    margin-top: 3rem;
+    margin-left: 9rem;
+    margin-bottom: 3rem;
+  }
   .meet-btns {
-    margin-top: 93px;
+    margin-top: 67px;
     margin-left: 12px;
-    height: 34px;
+    height: 29px;
     padding-left: 10px;
     padding-right: 10px;
-    background: red;
+    background: #db2828;
     display: inline-block;
     border-radius: 10px;   
   }
@@ -211,9 +240,9 @@
   }
 
   .offline-btns{
-    margin-top: 93px;
+    margin-top: 67px;
     margin-left: 12px;
-    height: 34px;
+    height: 29px;
     padding-left: 10px;
     padding-right: 10px;
     background: grey;
@@ -225,8 +254,8 @@
   }
   
   .cardMedia {
-    paddingTop: '81.25%';
-    borderRadius: '50%';
+    padding-Top: '81.25%';
+    border-Radius: '50%';
     margin: '28px';
 }
 .image-container img {
@@ -236,13 +265,24 @@
   border-radius: 50%;
   padding: 5px;
   position: absolute ;
-  top: 5%;
+  right: 210px;
+  top: 1%;
   
  
   transform: translate(127px,45px);
-
-}
   
+}
+.invitations{
+  background-color: transparent;
+  margin: -4.875em  -0.5em!important;
+}
+.ui.menu:last-child{
+  margin-top: 0px;
+}
+.add {
+    position: unset !Important;
+    height: fit-content;
+}
   @media only screen and (min-width: 1200px) {
     .content__blog__container {
       width: 84%;
