@@ -4,7 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-const userRoute = require('./routes/User') 
+const userRoute = require('./routes/User')
+const quizRoute = require('./routes/Quiz')
 const bodyparser = require("body-parser")
 
 require('dotenv/config');
@@ -36,7 +37,7 @@ app.use(bodyparser.urlencoded({extended:true}));
 app.use('/uploadsFolder', express.static(path.join(__dirname, '/uploads')));
 
 app.use('/user', userRoute);
-
+app.use('/quiz', quizRoute);
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));
 })
