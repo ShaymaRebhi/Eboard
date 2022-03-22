@@ -1,7 +1,7 @@
 var mongoose=require('mongoose')
 var Schema =mongoose.Schema;
 
-var Quiz = new Schema ({
+var Task = new Schema ({
     Title:{
         type:String,
         required:true
@@ -10,15 +10,20 @@ var Quiz = new Schema ({
         type:String,
         required:true
     },
-    Description:{
+    CreationDate:{
+        type:Date,
+        default:Date.now,
+    },
+    questionTitle:{
         type:String,
         required:true
     },
-    Questions:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'QuestionQuiz'
-    }]
+    TypeRec:{
+        type:String,
+        required:true
+    }
+
 
 })
 
-module.exports = mongoose.model('Quiz',Quiz);
+module.exports = mongoose.model('Task',Task);

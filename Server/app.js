@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cors = require('cors');
 const userRoute = require('./routes/User')
 const quizRoute = require('./routes/Quiz')
+const taskRoute = require('./routes/Task')
 const bodyparser = require("body-parser")
 
 require('dotenv/config');
@@ -38,6 +39,7 @@ app.use('/uploadsFolder', express.static(path.join(__dirname, '/uploads')));
 
 app.use('/user', userRoute);
 app.use('/quiz', quizRoute);
+app.use('/task', taskRoute);
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));
 })

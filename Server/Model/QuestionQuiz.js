@@ -3,13 +3,17 @@ var Schema =mongoose.Schema;
 
 var QuestionQuiz = new Schema ({
     questionText:{
-        type:String
+        type:String,
+        required:true,
     },
     Required :{
-        type:Boolean
+        type:Boolean,
+        required:true,
+        default:true
     },
     Score:{
-        type:Number
+        type:Number,
+        required:true
     },
     owner:{
         type: mongoose.Schema.Types.ObjectId,
