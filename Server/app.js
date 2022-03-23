@@ -6,6 +6,8 @@ var logger = require('morgan');
 var cors = require('cors');
 const userRoute = require('./routes/User')
 const quizRoute = require('./routes/Quiz')
+const optionRoute = require('./routes/Option')
+const questionRoute = require('./routes/QuestionQuiz')
 const taskRoute = require('./routes/Task')
 const bodyparser = require("body-parser")
 
@@ -39,6 +41,8 @@ app.use('/uploadsFolder', express.static(path.join(__dirname, '/uploads')));
 
 app.use('/user', userRoute);
 app.use('/quiz', quizRoute);
+app.use('/option', optionRoute);
+app.use('/question', questionRoute);
 app.use('/task', taskRoute);
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));
