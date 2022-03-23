@@ -2,6 +2,21 @@ const Quiz = require('../Model/Quiz')
 const Option = require('../Model/Option')
 const Question = require('../Model/QuestionQuiz')
 
+exports.GetQuiz = async (req,res,next) =>{
+    try {
+        Quiz.find().then((Quiz)=>res.json(Quiz));
+
+    } catch (error) {
+        res.status(404).json({message : error.message});
+    }
+}
+exports.deleteQuiz = async (req,res) =>{
+    Quiz.deleteOne({ _id: req.params.id })
+        .then(deleteConfirmation => res.json(deleteConfirmation))
+        .catch(err => res.status(400).json(err));
+}
+
+
 
 exports.AddQuiz = async(req,res)=>{
 
