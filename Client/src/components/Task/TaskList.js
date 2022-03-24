@@ -1,17 +1,18 @@
 import React, {useState} from 'react'
-import './HomeWorkList.css'
+import './TaskList.css'
 
 import Footer from "../pages/Shared/Footer";
-import uuid from "react-uuid";
+//import uuid from "react-uuid";
 import {useHistory} from "react-router-dom";
 import {FaTrash} from 'react-icons/fa' ;
 import {GrUpdate} from 'react-icons/gr' ;
 
-function HomeWorkList() {
+function TaskList() {
   const history = useHistory();
   const handelformadd = () => {
-    const id_ = uuid();
-    history.push("/formAddHomeWork/"+id_);
+    //const id_ = uuid();
+    //history.push("/formAddHomeWork/"+id_);
+      history.push("/formAddHomeWork/");
   }
   const Date1 = new Date(Date.now())
   const [homeWork, setHomeWork] = useState(
@@ -69,4 +70,4 @@ function HomeWorkList() {
   )
 }
 
-export default HomeWorkList
+export default TaskList
