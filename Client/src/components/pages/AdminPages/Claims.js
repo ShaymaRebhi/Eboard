@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Reclamations() {
+function Claim() {
   return (
 
     <div>
@@ -9,4 +9,4 @@ function Reclamations() {
   )
 }
 
-export default Reclamations
+export default Claim

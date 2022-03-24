@@ -35,7 +35,7 @@ export const SidebarData=[
     },
     {
         title:' Reclamations',
-        path:'/Eboard/Reclamations',
+        path:'/Eboard/Claim',
         icon:<MDIcons.MdFeedback />,
         cName:'nav-text'
     },

@@ -24,6 +24,7 @@ import Chat from './components/ChatBot/Chat';
 import ChatUser from './components/pages/Chat/ChatUser';
 import AdminPage from './components/pages/Admin/AdminPage';
 import HomeAdmin from './components/Home/HomeAdmin';
+import NavBarAndFooterForTheAuth from './components/Home/NavBarAndFooterForTheAuth';
 
 
 function App() {
@@ -64,7 +65,7 @@ function App() {
               render={(props) => <HomeAdmin {...props} />}
             />
             <Route
-              path="/Eboard/Reclamations"
+              path="/Eboard/Claim"
               exact
               render={(props) => <HomeAdmin {...props} />}
             />
@@ -79,6 +80,11 @@ function App() {
             <Route  exact path='/sign-up' component={SignUp} />
             <Route
             path="/chat"
+            exact
+            render={(props) => <HomeEboard {...props} />}
+          />
+          <Route
+            path="/Reclamation"
             exact
             render={(props) => <HomeEboard {...props} />}
           />
@@ -97,7 +103,16 @@ function App() {
             exact
             render={(props) => <HomeEboard {...props} />}
           />
-         
+          <Route
+            path="/Claim"
+            exact
+            render={(props) => <NavBarAndFooterForTheAuth {...props} />}
+          />
+         <Route
+            path="/ClaimList"
+            exact
+            render={(props) => <NavBarAndFooterForTheAuth {...props} />}
+          />
           <Route
             path="/classroom"
             exact

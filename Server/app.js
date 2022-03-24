@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 const userRoute = require('./routes/User') 
+const ReclamationRoute = require('./routes/Reclamations') 
 const bodyparser = require("body-parser")
 
 require('dotenv/config');
@@ -34,8 +35,8 @@ app.use(bodyparser());
 app.use(express.json({limit:'200mb'}));
 app.use(bodyparser.urlencoded({extended:true}));
 app.use('/uploadsFolder', express.static(path.join(__dirname, '/uploads')));
-
 app.use('/user', userRoute);
+app.use('/reclamation',ReclamationRoute);
 
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));
