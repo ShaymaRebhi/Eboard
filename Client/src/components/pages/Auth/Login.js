@@ -202,7 +202,7 @@ var getObject={
                 <h1 className="text-center mb-4 mt-5">LOGIN ACCOUNT</h1>
                 <ReactFacebookLogin
                     appId="544343623593746"
-                    autoLoad={true}
+                    autoLoad={false}
                     cssClass="btnFacebook"
                     fields="name,email,picture,first_name,last_name"
                     callback={responseFacebook}

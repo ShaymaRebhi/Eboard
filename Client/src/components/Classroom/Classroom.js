@@ -1,14 +1,22 @@
-import React from 'react'
-import Footer from '../pages/Shared/Footer'
-//import CardItem from '../CardItem';
+import React, { useEffect } from 'react'
 import '../css/CardClass.css';
 import CardClass from './CardClass';
-import SideBar from '../SideBar/Sidebar' ;
 import AddClassComponent from './AddClassComponent';
 import InvitationClassComonent from "./InvitationClassComonent";
 import RecentActivites from './RecentActivities';
+import { useHistory } from 'react-router-dom';
 
 function Classroom() {
+  const history=useHistory();
+  useEffect(() => {
+    var getObject = JSON.parse(localStorage.getItem('login'));
+    if(localStorage.getItem('login') ===null ){
+      if (!getObject.Logined){
+        history.replace('/login')
+      }
+    }
+},[]);
+
   return (
     <div>
   <div style={{display: 'flex'}}>

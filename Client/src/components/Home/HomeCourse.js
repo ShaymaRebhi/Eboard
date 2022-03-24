@@ -9,6 +9,9 @@ import CreateQuiz from '../Quiz/CreateQuiz';
 import DisplayQuiz from '../Quiz/DisplayQuiz';
 import '../SideBar/Sidebar.css'
 import NavbarInside from '../NavbarInside/NavbarInside';
+import Feed from '../Course/Feed';
+import { Theme } from '../Course/Theme';
+import Members from '../Course/Members';
 
 function HomeCourse(){
     return (
@@ -26,16 +29,28 @@ function HomeCourse(){
               <Grid.Column width={12} >
                   <div className="insideCour">
             <PrivateRoute
+              path="/feed"
+              exact component={Feed}
+            />
+            <PrivateRoute
+              path="/theme"
+              exact component={Theme}
+            />
+            <PrivateRoute
               path="/quizlist"
               exact component={QuizList}
             />
-            <PrivateRoute
+             <PrivateRoute
               path="/createquiz"
               exact component={CreateQuiz}
             />
             <PrivateRoute
               path="/displayQuiz"
               exact component ={DisplayQuiz}
+            />
+            <PrivateRoute
+              path="/members"
+              exact component ={Members}
             />
            </div>
             </Grid.Column>

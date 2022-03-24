@@ -35,7 +35,7 @@ function SideBar(){
                 </Menu.Item>
               </Link>
 
-              <Link to="/">
+              <Link to="/calendar">
                 <Menu.Item>
                 <Icon  name='calendar outline' size='large'  />
                 </Menu.Item>

@@ -12,7 +12,7 @@ export default class MenuCours extends Component {
     return (
       <Menu size='large' vertical>
            <Header as='h2' image='/images/school.png' content='React Course' />
-           <Link to="/quizlist">
+           <Link to="/feed">
         <Menu.Item
         
           name='flow'
@@ -21,6 +21,17 @@ export default class MenuCours extends Component {
         >
           <Label color='teal'>1</Label>
           <Icon name='sitemap' />Flow
+        </Menu.Item>
+        </Link>
+        <Link to="/theme">
+        <Menu.Item
+        
+          name='Theme'
+          active={activeItem === 'Theme'}
+          onClick={this.handleItemClick}
+        >
+          <Label >1</Label>
+          <Icon name='server' />Theme
         </Menu.Item>
         </Link>
         <Link to="/createquiz">
@@ -62,6 +73,7 @@ export default class MenuCours extends Component {
           <Label>1</Label>
           <Icon name='chat' /> Discussion
         </Menu.Item>
+        <Link to="/members">
         <Menu.Item
           name='members'
           active={activeItem === 'members'}
@@ -70,6 +82,7 @@ export default class MenuCours extends Component {
           <Label>1</Label>
           <Icon name='user' /> Members
         </Menu.Item>
+        </Link>
         <br>
         </br>
         <br></br>

@@ -6,6 +6,7 @@ import Classroom from '../Classroom/Classroom';
 
 import '../SideBar/Sidebar.css'
 import NavbarInside from '../NavbarInside/NavbarInside';
+import Calendar from '../Classroom/Calendar';
 
 
 function HomeClassroom(){
@@ -24,6 +25,11 @@ function HomeClassroom(){
               path="/classroom"
               exact
               component={Classroom}
+            />
+            <PrivateRoute
+              path="/calendar"
+              exact
+              component={Calendar}
             />
             
             </div>
