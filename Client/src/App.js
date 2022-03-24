@@ -21,6 +21,9 @@ import ForgetPwd from './components/pages/Auth/ForgetPwd';
 import ResetPwd from './components/pages/Auth/ResetPwd';
 import SignUp from './components/pages/Auth/SignUp';
 import Chat from './components/ChatBot/Chat';
+import ChatUser from './components/pages/Chat/ChatUser';
+import AdminPage from './components/pages/Admin/AdminPage';
+import HomeAdmin from './components/Home/HomeAdmin';
 
 
 function App() {
@@ -40,10 +43,45 @@ function App() {
              
            
             <Route exact path='/Eboard/auth/admin' component={Admin} />
+            <Route
+              path="/Eboard/home"
+              exact
+              render={(props) => <HomeAdmin {...props} />}
+            />
+            <Route
+              path="/Eboard/Teachers"
+              exact
+              render={(props) => <HomeAdmin {...props} />}
+            />
+            <Route
+              path="/Eboard/Organization"
+              exact
+              render={(props) => <HomeAdmin {...props} />}
+            />
+            <Route
+              path="/Eboard/Students"
+              exact
+              render={(props) => <HomeAdmin {...props} />}
+            />
+            <Route
+              path="/Eboard/Reclamations"
+              exact
+              render={(props) => <HomeAdmin {...props} />}
+            />
+            <Route
+              path="/Eboard/Supports"
+              exact
+              render={(props) => <HomeAdmin {...props} />}
+            />
             <Route exact path='/login' component={Login} />
             <Route path="/forget" component={ForgetPwd} />
             <Route exact path='/reset/:id' component={ResetPwd} />
             <Route  exact path='/sign-up' component={SignUp} />
+            <Route
+            path="/chat"
+            exact
+            render={(props) => <HomeEboard {...props} />}
+          />
             <Route
             path="/"
             exact

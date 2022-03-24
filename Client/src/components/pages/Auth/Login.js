@@ -70,7 +70,8 @@ var getObject={
       localStorage.setItem('login',JSON.stringify({
         Logined:true,
         Role:Response.data.User.role,
-        AccessToken:Response.data.AccessToken
+        AccessToken:Response.data.AccessToken,
+        User:Response.data.User
       }))
       
       const token =Response.data.AccessToken;
@@ -130,7 +131,8 @@ var getObject={
         localStorage.setItem('login',JSON.stringify({
           Logined:true,
           Role:response.data.User.role,
-          AccessToken:response.data.AccessToken
+          AccessToken:response.data.AccessToken,
+          User:response.data.User
         }))
         
         const token =response.data.AccessToken;
