@@ -2,7 +2,7 @@
 <!-- Logo -->
 <p align="center">
   <a href="#">
-    <img height="150" width="320" src="https://i.postimg.cc/C1cdB79s/logo.png">
+    <img  width="720" src="https://user-images.githubusercontent.com/49197543/159977057-7a2b9525-399a-430e-b516-1f74f73227ca.png">
   </a>
 </p>
 
