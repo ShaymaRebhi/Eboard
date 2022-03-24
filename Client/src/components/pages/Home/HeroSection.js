@@ -8,6 +8,7 @@ import Sliders from './Slider';
 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+
 function HeroSection() {
 
   return (
@@ -15,11 +16,12 @@ function HeroSection() {
     
     <div className="container-fluid mb-5">
     <div className='hero-container'>
-      
-      <h1>E-BOARD <br/>LEARNING</h1><br />
-      <p>Lorem ipsum dolor sit amet, consectetuer <br />
-      adipiscing elit, sed diam nonummy nibh<br />
-      euismod tincidunt ut laoreet dolore magna </p>
+
+      <h1>E-BOARD LEARNING</h1><br />
+      <p>La formation en ligne, terme recommandé en France par la DGLFLF,
+         ou encore l'apprentissage en ligne, l'e-formation ou l'e-learning, désignent
+         l'ensemble des solutions et moyens permettant l'apprentissage par des moyens
+          électroniques.</p>
       
       <div className='hero-btns'>
         

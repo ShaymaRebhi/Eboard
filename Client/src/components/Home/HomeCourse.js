@@ -9,8 +9,14 @@ import CreateQuiz from '../Quiz/CreateQuiz';
 import DisplayQuiz from '../Quiz/DisplayQuiz';
 import '../SideBar/Sidebar.css'
 import NavbarInside from '../NavbarInside/NavbarInside';
+import { useHistory } from 'react-router-dom';
 
 function HomeCourse(){
+  const history=useHistory();
+
+  if(localStorage.getItem('login')===null ){
+        history.push("/login");  
+    }
     return (
         <div>
           <div className='spacing_3la_3ajlaa'>

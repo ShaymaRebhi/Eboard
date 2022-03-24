@@ -43,7 +43,9 @@ function Navbar() {
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <li className='nav-item'>
-              <Link to='/' className='nav-links' title="Home" selected={selected === 'home'} onClick={() => setSelected('home') && closeMobileMenu}>
+              <Link to='/' 
+              className='nav-links'
+               title="Home" onClick={closeMobileMenu}>
                 Home
               </Link>
             </li>

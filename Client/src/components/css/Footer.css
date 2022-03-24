@@ -139,6 +139,8 @@
 @media screen and (max-width: 820px) {
   .footer-links {
     padding-top: 2rem;
+    padding-left: 50px;
+    
   }
 
   .footer-input {

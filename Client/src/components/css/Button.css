@@ -49,13 +49,14 @@
 }
 .btnGoogle { 
   margin:5px;
-  width: 165px;
-  height:35px;
+  width: 100%;
+  height:40px;
+  text-align: center !important;
   border-radius: 4px;
-  background: #db3236;
-  color:white;
+  background: #EA4335 !important;
+  color:white !important;
   border:0px transparent;
-  text-align: center;
+  
 }
 .btnFacebook:hover {
   background: #3b5998;
@@ -71,6 +72,16 @@
     width: 100%
   }
 }
+
+@media(max-width:667px){
+  .btn--large {
+    padding: 5px 10px !important;
+    font-size: 20px !important;
+    width: 150px !important;
+    font-size: 15px !important;
+  }
+}
+
 .btn--large:hover,
 .btn--medium:hover {
   transition: all 0.3s ease-out !important;

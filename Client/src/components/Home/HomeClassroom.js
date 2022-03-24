@@ -6,9 +6,15 @@ import Classroom from '../Classroom/Classroom';
 
 import '../SideBar/Sidebar.css'
 import NavbarInside from '../NavbarInside/NavbarInside';
+import { useHistory } from 'react-router-dom';
 
 
 function HomeClassroom(){
+  const history=useHistory();
+
+  if(localStorage.getItem('login')===null ){
+        history.push("/login");  
+    }
     return (
         <div>
             <div className='spacing_3la_3ajlaa'>

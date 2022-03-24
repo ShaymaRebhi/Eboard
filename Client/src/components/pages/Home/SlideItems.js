@@ -4,9 +4,9 @@ function SlideItems(props) {
   return (
     <div>
         
-       <li className='cards__item'>
       
-        <Link className='cards__item__link' to={props.path}>
+      <div className='mx-3'>
+        <Link className='cards__item__links ' to={props.path}>
           <figure className='cards__item__pic-wrap' >
             <img
               className='cards__item__img'
@@ -15,8 +15,8 @@ function SlideItems(props) {
             />
           </figure>
         </Link>
-        
-      </li>
+        </div>
+     
     </div>
   )
 }

@@ -8,9 +8,7 @@ import 'react-toastify/dist/inject-style';
 import 'react-toastify/dist/ReactToastify.css';
 import  { useHistory } from 'react-router-dom'
 import {  AxiosError } from 'axios'
-import { setCookie } from '../../../Helpers/Auth';
 import ClipLoader from "react-spinners/ClipLoader";
-import { ButtonsLogin } from './Buttons/ButtonsLogin';
 const ForgetPwd = () => {
 let [loading, setLoading] = useState(false);
 
@@ -113,20 +111,20 @@ var getObject={
                     <h1 className="text-center text-white mb-4 mt-5">Forget password ?</h1>
                     <hr className="hr" />
                     <p>Follow the steps to recover your account. <br/>An email will be sent to you contain a url click to him and put the new password and enjoy.</p>
-                    <br/><Link to="/login" className="already text-white mt-5"><p > <b>Go back to the login page</b> </p></Link>
+                   
               </div>
             </div>
             
-            <form method="post " onSubmit={handleSubmit} className="text-center">
+            <form method="post " onSubmit={handleSubmit} >
                 
-               
+               <div className="text-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-lock-fill text-white mt-5" viewBox="0 0 16 16">
                         <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
-                    </svg>
+                    </svg></div>
                     <h1 className="text-center mb-5 ">PASSWORD RESET</h1>
                 <Inputs type="email" onChange={onChange} name="email" className="form-control" placeholder="Email ID" errorMessage="It should be a valid email adress!" required></Inputs>
                 <div className=""><button className="btn btn-primary d-block w-100" type="submit">{loading ? <ClipLoader color='#FFF' loading={loading}  size={20}/> : "Reset"}</button></div>
-                
+                <Link to="/login" className="already text-white mt-5"><p > <b>Go back to the login page</b> </p></Link>
             </form>
            
         </div>

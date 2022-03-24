@@ -1,31 +1,17 @@
 import React from 'react';
 
 import './App.css';
-
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import { BrowserRouter as Router,Redirect, Route, Switch } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import CreateQuiz from "./components/Quiz/CreateQuiz";
-
-import NotFounds from './components/pages/NotFound';
-import Login from './components/pages/Login';
-import Classroom from './components/pages/Classroom';
-import CreateForum from "./components/Forum/CreateForum";
-import Forums from "./components/Forum/Forums";
-import Forum from "./components/Forum/Forum";
 
 
-import SignUp from './components/pages/Auth/SignUp';
-
-import ContactUs from './components/pages/Home/ContactUs';
-import AboutUs from './components/pages/Home/AboutUs';
+import Login from './components/pages/Auth/Login';
 import Admin from './components/pages/Auth/Admin';
-import Home from './components/pages/Home/Home';
-import Navbar from './components/pages/Shared/Navbar';
 
 
-import DisplayQuiz from './components/Quiz/DisplayQuiz';
 import HomeEboard from './components/Home/HomeEboard';
 import { BrowserRouter }  from "react-router-dom";
 import HomeClassroom from './components/Home/HomeClassroom';
@@ -33,6 +19,11 @@ import HomeCourse from './components/Home/HomeCourse';
 import Page_404 from './components/Home/404';
 import ForgetPwd from './components/pages/Auth/ForgetPwd';
 import ResetPwd from './components/pages/Auth/ResetPwd';
+import SignUp from './components/pages/Auth/SignUp';
+import Chat from './components/ChatBot/Chat';
+import ChatUser from './components/pages/Chat/ChatUser';
+import AdminPage from './components/pages/Admin/AdminPage';
+import HomeAdmin from './components/Home/HomeAdmin';
 
 
 function App() {
@@ -41,19 +32,56 @@ function App() {
 
   return (
       <>
+        <div className='chatbot'>
+             <Chat></Chat>
+        </div>
+        
         <BrowserRouter>
           
           <Switch>
-             <Route path='/forum/new' component={CreateForum} />
-            <Route path='/forums' component={Forums} />
-            <Route path='/forum/:id' component={Forum} />            
+                
              
            
             <Route exact path='/Eboard/auth/admin' component={Admin} />
+            <Route
+              path="/Eboard/home"
+              exact
+              render={(props) => <HomeAdmin {...props} />}
+            />
+            <Route
+              path="/Eboard/Teachers"
+              exact
+              render={(props) => <HomeAdmin {...props} />}
+            />
+            <Route
+              path="/Eboard/Organization"
+              exact
+              render={(props) => <HomeAdmin {...props} />}
+            />
+            <Route
+              path="/Eboard/Students"
+              exact
+              render={(props) => <HomeAdmin {...props} />}
+            />
+            <Route
+              path="/Eboard/Reclamations"
+              exact
+              render={(props) => <HomeAdmin {...props} />}
+            />
+            <Route
+              path="/Eboard/Supports"
+              exact
+              render={(props) => <HomeAdmin {...props} />}
+            />
             <Route exact path='/login' component={Login} />
             <Route path="/forget" component={ForgetPwd} />
             <Route exact path='/reset/:id' component={ResetPwd} />
-                
+            <Route  exact path='/sign-up' component={SignUp} />
+            <Route
+            path="/chat"
+            exact
+            render={(props) => <HomeEboard {...props} />}
+          />
             <Route
             path="/"
             exact
@@ -69,11 +97,7 @@ function App() {
             exact
             render={(props) => <HomeEboard {...props} />}
           />
-          <Route
-            path="/sign-up"
-            exact
-            render={(props) => <HomeEboard {...props} />}
-          />
+         
           <Route
             path="/classroom"
             exact
