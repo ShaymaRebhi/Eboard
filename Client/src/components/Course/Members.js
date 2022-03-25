@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Divider , List ,Image , Header, Segment, Icon} from "semantic-ui-react";
+import AddUserToClassComponent from './AddUserToClassComponent';
 
 export default class Members extends Component {
   render() {
@@ -7,7 +8,7 @@ export default class Members extends Component {
       <div>
           <Segment>
           <Header  floated='right'> 
-          <Icon name=" user plus" size="mini" color='grey' corner/>
+         <AddUserToClassComponent />
              </Header>
             
           <Divider horizontal>Teachers
@@ -28,7 +29,7 @@ export default class Members extends Component {
   <br/>
   <Segment>
   <Header  floated='right'> 
-          <Icon name=" user plus" size="mini" color='grey' corner/>
+  <AddUserToClassComponent />
              </Header>
   <Divider horizontal>Students</Divider>
    
