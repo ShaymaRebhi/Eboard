@@ -12,7 +12,7 @@ export default class MenuCours extends Component {
     return (
       <Menu size='large' vertical>
            <Header as='h2' image='/images/school.png' content='React Course' />
-           <Link to="">
+           <Link to="/feed">
         <Menu.Item
         
           name='flow'
@@ -23,7 +23,18 @@ export default class MenuCours extends Component {
           <Icon name='sitemap' />Flow
         </Menu.Item>
         </Link>
-        <Link to="">
+        <Link to="/theme">
+        <Menu.Item
+        
+          name='Theme'
+          active={activeItem === 'Theme'}
+          onClick={this.handleItemClick}
+        >
+          <Label >1</Label>
+          <Icon name='server' />Theme
+        </Menu.Item>
+        </Link>
+        <Link to="/createquiz">
         <Menu.Item
           name='homework'
           active={activeItem === 'homework'}
@@ -33,6 +44,7 @@ export default class MenuCours extends Component {
           <Icon name='file alternate' /> Homework
         </Menu.Item>
 </Link>
+<Link to ="/displayQuiz">
         <Menu.Item
           name='exam'
           active={activeItem === 'exam'}
@@ -40,8 +52,10 @@ export default class MenuCours extends Component {
         >
           <Label>1</Label>
           <Icon name='compose' /> Exam
+          
         </Menu.Item>
-        
+        </Link>
+        <Link to ="/hi">
         <Menu.Item
           name='quiz'
           active={activeItem === 'quiz'}
@@ -50,6 +64,7 @@ export default class MenuCours extends Component {
           <Label>1</Label>
           <Icon name='time' /> Quiz
         </Menu.Item>
+        </Link>
         <Menu.Item
           name='disc'
           active={activeItem === 'disc'}
@@ -58,6 +73,7 @@ export default class MenuCours extends Component {
           <Label>1</Label>
           <Icon name='chat' /> Discussion
         </Menu.Item>
+        <Link to="/members">
         <Menu.Item
           name='members'
           active={activeItem === 'members'}
@@ -66,6 +82,7 @@ export default class MenuCours extends Component {
           <Label>1</Label>
           <Icon name='user' /> Members
         </Menu.Item>
+        </Link>
         <br>
         </br>
         <br></br>

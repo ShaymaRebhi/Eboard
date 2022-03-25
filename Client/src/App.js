@@ -2,9 +2,10 @@ import React from 'react';
 
 import './App.css';
 
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import { BrowserRouter as Router,Redirect, Route, Switch } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import QuizList from "./components/Quiz/QuizList";
+
 import CreateQuiz from "./components/Quiz/CreateQuiz";
 
 import NotFounds from './components/pages/NotFound';
@@ -17,9 +18,16 @@ import Login from './components/pages/Auth/Login';
 import Admin from './components/pages/Auth/Admin';
 import Home from './components/pages/Home/Home';
 import Navbar from './components/pages/Shared/Navbar';
-import ClassInside from './components/Course/ClassInside';
-import Classroom from './components/Classroom/Classroom';
+
+
 import DisplayQuiz from './components/Quiz/DisplayQuiz';
+import HomeEboard from './components/Home/HomeEboard';
+import { BrowserRouter }  from "react-router-dom";
+import HomeClassroom from './components/Home/HomeClassroom';
+import HomeCourse from './components/Home/HomeCourse';
+import Page_404 from './components/Home/404';
+import ForgetPwd from './components/pages/Auth/ForgetPwd';
+import ResetPwd from './components/pages/Auth/ResetPwd';
 
 function App() {
 
@@ -27,32 +35,95 @@ function App() {
 
   return (
       <>
-        <Router>
+        <BrowserRouter>
           
           <Switch>
                 
-                  <Route exact path='/Eboard/auth/admin' component={Admin} />
-                   <Route exact path='/login' component={Login} />
+             
+           
+            <Route exact path='/Eboard/auth/admin' component={Admin} />
+            <Route exact path='/login' component={Login} />
+            <Route path="/forget" component={ForgetPwd} />
+            <Route exact path='/reset/:id' component={ResetPwd} />
                 
-            <>
-            <Navbar />
-              <Route exact path='/'  component={Home} />
-              <Route exact path='/Contactus' component={ContactUs} />
-              <Route exact path='/Aboutus' component={AboutUs} />
-              
-              <Route exact path='/sign-up' component={SignUp} />
-              <Route exact path='/quizList' component={QuizList}/>
-              <Route exact path='/displayQuiz' component={DisplayQuiz}/>
-              
-              <Route exact path='/formAddquiz/:id'><CreateQuiz/></Route>
-              <Route exact path='/classroom' component={Classroom} />
-              <Route path='/class' component={ClassInside} />
-            </>
-            <Route component={NotFounds} />
+            <Route
+            path="/"
+            exact
+            render={(props) => <HomeEboard {...props} />}
+          />
+          <Route
+            path="/Contactus"
+            exact
+            render={(props) => <HomeEboard {...props} />}
+          />
+          <Route
+            path="/Aboutus"
+            exact
+            render={(props) => <HomeEboard {...props} />}
+          />
+          <Route
+            path="/sign-up"
+            exact
+            render={(props) => <HomeEboard {...props} />}
+          />
+          <Route
+            path="/classroom"
+            exact
+            render={(props) => <HomeClassroom {...props} />}
+          />
+          <Route
+            path="/calendar"
+            exact
+            render={(props) => <HomeClassroom {...props} />}
+          />
+          <Route
+            path="/class"
+            exact
+            render={(props) => <HomeCourse {...props} />}
+          />
+          <Route
+            path="/quizlist"
+            exact
+            render={(props) => <HomeCourse {...props} />}
+          />
+          <Route
+            path="/createquiz"
+            exact
+            render={(props) => <HomeCourse {...props} />}
+          />
+          <Route
+            path="/feed"
+            exact
+            render={(props) => <HomeCourse {...props} />}
+          />
+          <Route
+            path="/theme"
+            exact
+            render={(props) => <HomeCourse {...props} />}
+          />
+          <Route
+            path="/members"
+            exact
+            render={(props) => <HomeCourse {...props} />}
+          />
+          <Route
+            path="/displayQuiz"
+            exact
+            render={(props) => <HomeCourse {...props} />}
+          />
+          <Route
+            path="/404"
+            exact
+            render={(props) => <Page_404 {...props} />}
+          />
+          <Redirect to="/404" />
+         
            
           </Switch>
           
-        </Router>
+          
+          </BrowserRouter>
+          
       </>
   );
 }

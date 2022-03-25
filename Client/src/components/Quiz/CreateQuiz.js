@@ -262,7 +262,7 @@ function CreateQuiz() {
 
 
           </div>
-          <Footer/>
+          
       </div>
   )
 }

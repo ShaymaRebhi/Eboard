@@ -114,14 +114,15 @@ export default function AddClassComponent() {
 
   return (
     <div>
-      <Button
+      <Button 
         circular
         content="Create Class"
         icon="add"
         onClick={() => dis({ type: "OPEN_MODAL", dimmer: "blurring" })}
       />
 
-      <Modal 
+      <Modal  className="add"
+
         dimmer={dimmer}
         open={open}
         onClose={() => dis({ type: "CLOSE_MODAL" })}
