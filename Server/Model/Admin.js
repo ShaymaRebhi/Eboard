@@ -2,27 +2,28 @@ var mongoose=require('mongoose')
 var Schema =mongoose.Schema;
 
 var Admin =new Schema({
+    
     FirstName:{
         type:String,
-        default:"Teacher"
-        
+        required : true
     },
     LastName:{
         type:String,
-        default:"Teacher"
-        
+        required:true
     },
     BirthDate:{
         type:Date,
+        required:true,
         default:Date.now
     },
     Cin:{
         type:Number,
-        unique:true
+        required:true
     },
     Sexe:{
         type:String,
-        enum:["HOMME","FEMME"]
+        enum:["HOMME","FEMME"],
+        required:true
     },
     User:{
         type : mongoose.Schema.Types.ObjectId,
