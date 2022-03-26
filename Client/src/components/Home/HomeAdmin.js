@@ -15,8 +15,8 @@ export default function HomeAdmin() {
         history.push("/Eboard/auth/admin");
     }else{
       if(data.User.role!=="ADMIN"){
-        localStorage.clear();
-        history.push("/login");
+       
+        history.push("/404");
       }
     }
   

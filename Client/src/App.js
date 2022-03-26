@@ -22,7 +22,6 @@ import ResetPwd from './components/pages/Auth/ResetPwd';
 import SignUp from './components/pages/Auth/SignUp';
 import Chat from './components/ChatBot/Chat';
 import ChatUser from './components/pages/Chat/ChatUser';
-import AdminPage from './components/pages/Admin/AdminPage';
 import HomeAdmin from './components/Home/HomeAdmin';
 
 

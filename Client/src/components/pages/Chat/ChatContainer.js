@@ -20,7 +20,7 @@ export default function ChatContainer({currentUser,currenChat,socket}) {
           setMessages(res.data);
         })
       }
-    },[currenChat]);
+    },[messages]);
 
     const handleSendMsg=(msg)=>{
       socket.current.emit("send-msg",{
@@ -81,13 +81,13 @@ export default function ChatContainer({currentUser,currenChat,socket}) {
         <div className="chat-messages">
         {messages && messages.map((message) => {
           return (
-            <div  key={uuidv4()}>
+            <div ref={scrollRef}  key={uuidv4()}>
               <div
                 className={`message ${
                   message.fromSelf ? "sended" : "recieved"
                 }`}
               >
-                <div ref={scrollRef} className="content ">
+                <div className="content ">
                   <p>{message.message}</p>
                 </div>
               </div>

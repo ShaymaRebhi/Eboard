@@ -120,7 +120,10 @@ var getObject={
           history.push("/ORG");
         }if(getObject.Role==="TEACHER"){
           history.push("/Teacher");
+        }else if(getObject.Role==="ADMIN"){
+          history.push("/Eboard/auth/admin");
         }
+         
       }
     }
     
@@ -153,6 +156,8 @@ var getObject={
 
         history.push("/Organization");
 
+      }else if(response.data.User.role==="ADMIN"){
+        history.push("/Eboard/auth/admin");
       }
         toast.success('Welcome', {
           position: "bottom-right" 
