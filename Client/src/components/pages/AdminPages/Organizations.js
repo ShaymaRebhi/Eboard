@@ -8,12 +8,19 @@ import {IconContext} from 'react-icons';
 import { Link } from 'react-router-dom';
 import * as IOIcons from "react-icons/io";
 import Admin  from '../../../Assets/Images/admin.jpg'
-import { Button } from '../Home/Buttons/Button';
+import Switch from '@material-ui/core/Switch';
 function Organizations() {
+
+    const [checked,setChecked]=React.useState(false);
+    const changeRequiredValue = (rq,i) => {
+        console.log(i);
+        if(checked) setChecked(false);
+        setChecked(true);
+    }
     const columns = [
         { field: 'id', headerName: 'ID', width: 220 },
         { field: 'Name', headerName: 'Name', width: 300 },
-        { field: 'Action', headerName: 'Action', width: 150,renderCell: (params)=>{
+        { field: 'Action', headerName: 'Action', width: 100,renderCell: (params)=>{
             return (
                 <div>
                     <IconContext.Provider value={{color:'#8EB2CD'}}>
@@ -21,16 +28,27 @@ function Organizations() {
                         <Link to="#"><MDICons.MdDeleteForever></MDICons.MdDeleteForever></Link>
                     </IconContext.Provider>
                 </div>
-            )} },
+            )} },{ field: 'Status', headerName: 'Status', width: 100,renderCell: (params)=>{
+                return (
+                    <div>
+                        <Switch onChange={(e)=>changeRequiredValue(e.target.checked,params.id)} checked={checked}/>
+                    </div>
+                )} }
        
       ];
       const rows = [
-        { id: 1, Name: 'ESPRIT'},
+        { id: 1, Name: 'ESPRIT',id:1},
         { id: 2, Name: 'TEK-UP'},
-        
+        { id: 3, Name: 'ESPRIT'},
+        { id: 4, Name: 'ESPRIT'},
+        { id: 5, Name: 'ESPRIT'},
+        { id: 6, Name: 'ESPRIT'},
       ];
 
       const Table=styled.div`
+         h1{
+              padding-top:50px;
+          }
         .butoons{
             font-size:2rem;
             background-color:#8EB2CD;
@@ -57,6 +75,7 @@ function Organizations() {
       .table{
           font-size:15pt;
           border:#8EB2CD;
+         
 
       }
       .MuiDataGrid-root .MuiDataGrid-cell:focus-within {
@@ -69,12 +88,12 @@ function Organizations() {
    
     <Table>
    
-        <img src={Admin} alt="cover" className='img-fluid'></img>
+       <h1>Organizations</h1>
         <button className='butoons'><IOIcons.IoIosAddCircle /></button>
          <Box
                 sx={{
-                    height: 300,
-                    width: 1,
+                    height: 400,
+                    width: 750,
                     backgroundColor: '#FFF',
                     fontSize:'50px'
                 }}

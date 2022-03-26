@@ -10,11 +10,14 @@ import Home from '../pages/AdminPages/Home';
 import { useHistory } from 'react-router-dom';
 export default function HomeAdmin() {
     const history=useHistory();
-
+    const data=  JSON.parse(localStorage.getItem('login'));
   if(localStorage.getItem('login')===null ){
-    
         history.push("/Eboard/auth/admin");
-    
+    }else{
+      if(data.User.role!=="ADMIN"){
+        localStorage.clear();
+        history.push("/login");
+      }
     }
   
   return (

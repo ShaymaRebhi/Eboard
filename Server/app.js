@@ -5,8 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 const userRoute = require('./routes/User') 
+const ChatRoute = require('./routes/Chat') 
 const bodyparser = require("body-parser")
-
+const socket=require('socket.io')
 require('dotenv/config');
 //------------la modéfication --------------------
 var multer  = require('multer')
@@ -35,7 +36,9 @@ app.use(express.json({limit:'200mb'}));
 app.use(bodyparser.urlencoded({extended:true}));
 app.use('/uploadsFolder', express.static(path.join(__dirname, '/uploads')));
 
+app.use('/chat',ChatRoute);
 app.use('/user', userRoute);
+
 
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));

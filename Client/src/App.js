@@ -41,7 +41,8 @@ function App() {
           <Switch>
                 
              
-           
+         
+            <Route exact path="/chat" component={ChatUser} />
             <Route exact path='/Eboard/auth/admin' component={Admin} />
             <Route
               path="/Eboard/home"
@@ -77,11 +78,7 @@ function App() {
             <Route path="/forget" component={ForgetPwd} />
             <Route exact path='/reset/:id' component={ResetPwd} />
             <Route  exact path='/sign-up' component={SignUp} />
-            <Route
-            path="/chat"
-            exact
-            render={(props) => <HomeEboard {...props} />}
-          />
+            
             <Route
             path="/"
             exact

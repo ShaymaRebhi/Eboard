@@ -13,12 +13,10 @@ export const SidebarData=[
         path:'/Eboard/home',
         icon:<AiIcons.AiFillHome />,
         cName:'nav-text'
-    }
-    ,
-    {
-        title:' Organizations',
-        path:'/Eboard/Organization',
-        icon:<FAIcons.FaUserSecret />,
+    },{
+        title:' Students',
+        path:'/Eboard/Students',
+        icon:<FAIcons.FaUsers />,
         cName:'nav-text'
     },
     {
@@ -27,12 +25,14 @@ export const SidebarData=[
         icon:<GIIcons.GiTeacher />,
         cName:'nav-text'
     },
+    
     {
-        title:' Students',
-        path:'/Eboard/Students',
-        icon:<FAIcons.FaUsers />,
+        title:' Organizations',
+        path:'/Eboard/Organization',
+        icon:<FAIcons.FaUserSecret />,
         cName:'nav-text'
     },
+    
     {
         title:' Reclamations',
         path:'/Eboard/Reclamations',

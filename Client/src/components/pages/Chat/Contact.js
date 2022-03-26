@@ -1,6 +1,8 @@
 import React,{useState,useEffect} from 'react'
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../../Assets/Images/logo.png'
+import * as AIICons from "react-icons/ai"
 function Contact({contacts,currentUser,changeChat}) {
     const [currentUserName,setCurrentUserName]=useState(undefined);
     const [currentUserImage,setCurrentUserImage]=useState(undefined);
@@ -20,7 +22,53 @@ function Contact({contacts,currentUser,changeChat}) {
         changeChat(contacts);
     }
 
-    const Container=styled.div`
+    
+  return (
+    <>
+     {
+         currentUserImage && currentUserImage &&(
+             <Container>
+                <div className='brand'>
+                    <img src={logo} alt="logo"></img>
+                    
+                    <Link to="/login" className='icon'><AIICons.AiFillHome/></Link>
+               
+                </div>  
+                <div className='contacts'>
+                    {
+                        contacts.map((contact,index)=>{
+                            return(
+                            <div onClick={()=>changeCurrentChat(index,contact)} className={`contact ${index === Currentselected ? "selected" :""}`} key={index} >
+                                <div className='avatar'>
+                                    
+                                        <img src={`https://ui-avatars.com/api/?name=${contact.FirstName}+${contact.LastName}`} alt='avatar'></img>
+                                </div>
+                                <div className='username'>
+                                    <h3>{contact.FirstName+" "+contact.LastName}</h3>
+                                    
+                                </div>
+                            </div>
+                            )
+                        })
+                    }
+                    
+                     
+                </div>
+                <div className='current-user'>
+                <div className='avatar'>
+                                <img src={`https://ui-avatars.com/api/?name=${currentUser.email}`} alt='avatar'></img>
+                                </div>
+                                <div className='username'>
+                                    <h3>{currentUser.email.split('@')[0]}</h3>
+                                </div>
+                </div>
+             </Container>
+         )
+     }
+    </>
+  )
+}
+const Container=styled.div`
         display:grid;
         grid-template-rows:10% 75% 15%;
         overflow:hidden;
@@ -34,6 +82,14 @@ function Contact({contacts,currentUser,changeChat}) {
             gap:1rem;
             img{
                 height:2rem;
+            }
+            .icon{
+                position: absolute;
+                color:white;
+                font-size:3rem;
+                right:3%;
+                
+               
             }
             h3{
                 color:white;
@@ -58,7 +114,7 @@ function Contact({contacts,currentUser,changeChat}) {
                 }
             }
             .selected{
-                background-color:red !important;
+                background-color:#0d4b7a !important;
                 
             }
             .contact{
@@ -128,45 +184,4 @@ function Contact({contacts,currentUser,changeChat}) {
         }
 
     `
-  return (
-    <>
-     {
-         currentUserImage && currentUserImage &&(
-             <Container>
-                <div className='brand'>
-                    <img src={logo} alt="logo"></img>
-                </div>  
-                <div className='contacts'>
-                    {
-                        contacts.map((contact,index)=>{
-                            return(
-                            <div onClick={()=>changeCurrentChat(index,contact)} className={`contact ${index === Currentselected ? "selected" :""}`} key={index} >
-                                <div className='avatar'>
-                                        <img src={`http://localhost:3000/uploadsFolder/${contact.User.file}`} alt='avatar'></img>
-                                </div>
-                                <div className='username'>
-                                    <h3>{contact.FirstName+" "+contact.LastName}</h3>
-                                </div>
-                            </div>
-                            )
-                        })
-                    }
-                    
-                     
-                </div>
-                <div className='current-user'>
-                <div className='avatar'>
-                                <img src={`http://localhost:3000/uploadsFolder/${currentUser.file}`} alt='avatar'></img>
-                                </div>
-                                <div className='username'>
-                                    <h3>{currentUser.email.split('@')[0]}</h3>
-                                </div>
-                </div>
-             </Container>
-         )
-     }
-    </>
-  )
-}
-
 export default Contact

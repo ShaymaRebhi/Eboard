@@ -14,9 +14,9 @@ export default function TeachersList() {
     { field: 'id', headerName: 'ID', width: 10 },
     { field: 'FirstName', headerName: 'FirstName', width: 120 },
     { field: 'LastName', headerName: 'LastName', width: 120 },
-    { field: 'Email', headerName: 'Email', width: 220 },
+    { field: 'Email', headerName: 'Email', width: 350 },
     { field: 'CIN', headerName: 'CIN', width: 120 },
-    { field: 'Gender', headerName: 'Gender', width: 80 },
+    { field: 'Gender', headerName: 'Gender', width: 100 },
     { field: 'Action', headerName: 'Action', width: 80,renderCell: (params)=>{
         return (
             <div>
@@ -33,7 +33,8 @@ export default function TeachersList() {
     { id: 2, FirstName: 'Shayma',LastName:"Rebhi",Email:"shayma.rebhi@esprit.tn",CIN:12547963,Gender:"W"},
     { id: 3, FirstName: 'Hassen',LastName:"Oueslati",Email:"hassen.oueslati@esprit.tn",CIN:19436658,Gender:"M"},
     { id: 4, FirstName: 'Wael',LastName:"Amri",Email:"wael.amri@esprit.tn",CIN:19463753,Gender:"M"},
-    { id: 5, FirstName: 'Badis',LastName:"Raissi",Email:"badis.raissi@esprit.tn",CIN:12547853,Gender:"M"}
+    { id: 5, FirstName: 'Badis',LastName:"Raissi",Email:"badis.raissi@esprit.tn",CIN:12547853,Gender:"M"},
+    { id: 6, FirstName: 'Badis',LastName:"Raissi",Email:"badis.raissi@esprit.tn",CIN:12547853,Gender:"M"}
     
   ];
 
@@ -75,11 +76,11 @@ export default function TeachersList() {
     <div>
          <Table>
                     
-                    <img src={Admin} alt="cover" className='img-fluid'></img>
+                    <h1>Teachers</h1>
                     <button className='butoons'><IOIcons.IoIosAddCircle /></button>
                       <Box
                             sx={{
-                                height: 300,
+                                height: 400,
                                 backgroundColor: '#FFF',
                                 fontSize:'50px'
                             }}

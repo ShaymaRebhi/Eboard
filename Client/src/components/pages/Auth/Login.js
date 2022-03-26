@@ -18,7 +18,7 @@ import { Gmail } from './Buttons/Gmail';
 
 const Login = () => {
 let [loading, setLoading] = useState(false);
-
+let [Facebookloading, setFacebookLoading] = useState(false);
 const history=useHistory();
 const [values,setValues]=useState({
     email:"",
@@ -123,11 +123,13 @@ var getObject={
         }
       }
     }
+    
     const responseFacebook = (response) => {
       console.log(response);
-      
+      setFacebookLoading(true)
       axios.post(`${process.env.REACT_APP_API_URL}user/facebookLogin`,{AccessToken:response.accessToken ,userID:response.userID ,email:response.email,picture:response.picture.data.url}
       ).then(response=>{
+        setFacebookLoading(false);
         localStorage.setItem('login',JSON.stringify({
           Logined:true,
           Role:response.data.User.role,
@@ -155,11 +157,23 @@ var getObject={
         toast.success('Welcome', {
           position: "bottom-right" 
          });
-      }).catch(err=>{
-          toast.error('Erro :'+err, {
+      }).catch((reason: AxiosError)=>{
+        if(reason.response.status===408) {
+          toast.error('Please contact the admin to activate your account', {
             position: "bottom-right" 
           });
-      })
+        }else{
+          toast.error('Email or password inccorect', {
+            position: "bottom-right" 
+           });
+        }
+        setFacebookLoading(false);
+    
+            //addToast("test error", { appearance: 'error' });
+        }).finally(res=>{
+          setFacebookLoading(false);
+        })
+    
     }
     const responseGoogle = (response) => {
       console.log(response);
@@ -215,8 +229,8 @@ var getObject={
                 <ReactFacebookLogin
                     appId="544343623593746"
                     render={renderProps => (
-                      <Facebook text="Signin with Facebook" onClick={renderProps.onClick}></Facebook>
-                      
+                     // Facebookloading ? <div className='text-center'><ClipLoader  color='#FFF' loading={Facebookloading}  size={20} /></div>: <Facebook text="Signin with Facebook" type="button" onClick={renderProps.onClick}></Facebook> 
+                     <Facebook icon={!Facebookloading} text={Facebookloading ? <ClipLoader  color='#FFF' loading={Facebookloading}  size={20} /> : "Signin with Facebook"} type="button" onClick={renderProps.onClick}></Facebook>
                     )}
                     autoLoad={false}
                     cssClass="btnFacebook"
@@ -228,7 +242,7 @@ var getObject={
                     clientId="714307659254-amb3fmov1ncdjcfcf2qvogl93ev90gm3.apps.googleusercontent.com"
                     buttonText="Login with Google"
                     render={renderProps => (
-                      <Gmail text2="Signin with Gmail" onClick={renderProps.onClick} disabled={renderProps.disabled}></Gmail>
+                      <Gmail text2="Signin with Gmail" type="button" onClick={renderProps.onClick} disabled={renderProps.disabled}></Gmail>
                      
                     )}
                     onSuccess={responseGoogle}
@@ -237,7 +251,7 @@ var getObject={
                     
                     cookiePolicy={'single_host_origin'}
                   />
-                  <SignUpBtn text="Create account"></SignUpBtn>
+                  <SignUpBtn type="button" text="Create account"></SignUpBtn>
                 
                  <div className='text-white text-center'>
                     <hr />Or login with your email
