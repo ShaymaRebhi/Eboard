@@ -3,22 +3,26 @@ var Schema =mongoose.Schema;
 
 var Student =new Schema({
     FirstName:{
-        type:String
+        type:String,
+        required : true
     },
     LastName:{
-        type:String
+        type:String,
+        required:true
     },
     BirthDate:{
         type:Date,
+        required:true,
         default:Date.now
     },
     Cin:{
         type:Number,
-        unique:true
+        required:true
     },
     Sexe:{
         type:String,
-        enum:["HOMME","FEMME"]
+        enum:["HOMME","FEMME"],
+        required:true
     },
     User:{
         type : mongoose.Schema.Types.ObjectId,
