@@ -100,6 +100,11 @@ function App() {
             render={(props) => <HomeClassroom {...props} />}
           />
           <Route
+            path="/calendar"
+            exact
+            render={(props) => <HomeClassroom {...props} />}
+          />
+          <Route
             path="/class"
             exact
             render={(props) => <HomeCourse {...props} />}
@@ -111,6 +116,21 @@ function App() {
           />
           <Route
             path="/createquiz"
+            exact
+            render={(props) => <HomeCourse {...props} />}
+          />
+          <Route
+            path="/feed"
+            exact
+            render={(props) => <HomeCourse {...props} />}
+          />
+          <Route
+            path="/theme"
+            exact
+            render={(props) => <HomeCourse {...props} />}
+          />
+          <Route
+            path="/members"
             exact
             render={(props) => <HomeCourse {...props} />}
           />
