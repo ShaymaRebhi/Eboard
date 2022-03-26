@@ -18,6 +18,12 @@ var User= new Schema({
         enum : ['ADMIN','ORGANIZATION','TEACHER','STUDENT'],
         required:true 
     },
+    file:{
+        type:String
+    },
+    fileType:{
+        type:String
+    },
     Adresse:{
         type : String
        
@@ -31,6 +37,10 @@ var User= new Schema({
         type:Boolean,
         default:false
        
+    },
+    resetLink:{
+        data:String,
+        default:''
     }
 
 },{ timestamps : true })
@@ -46,4 +56,4 @@ User.methods = {
 }
 
 
-module.exports=mongoose.model('user',User);
+module.exports=mongoose.model('users',User);
