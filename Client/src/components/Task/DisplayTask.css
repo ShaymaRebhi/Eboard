@@ -7,9 +7,15 @@
 }
 .tasktitle{
     color: rgba(140,177,192,1);
-
+    border-bottom: 1.5px solid rgba(140,177,192,1) ;
+    text-align: left;
 }
-.DisplayQuestionBox{
+.taskresponse1{
+    text-align: left;
+    border-bottom: 1.5px solid rgba(140,177,192,1) ;
+    color: rgba(140,177,192,1);
+}
+.DisplayTaskkBox{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,9 +30,11 @@
     border-radius: 8px;
     padding: 80px 60px;
     text-transform: capitalize;
-    max-width: 1000px;
+    max-width: 700px;
     width: 100%;
     display: flex;
+    justify-content: space-between;
+
 
 
 

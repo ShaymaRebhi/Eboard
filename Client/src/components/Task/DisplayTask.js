@@ -11,30 +11,19 @@ function DisplayTask() {
       [{
         Title: "React Hook",
         Theme: "seance 1",
-        questionTitle: "question 1",
+        questionTitle: "what is React ?",
         QuestionFile: 'https://www.practiceportuguese.com/wp-content/uploads/2020/06/asking-questions-800x534.jpg',
         QuestionResponseFile:questionFile
       }]
   )
-    const handleChangeStatus = ({ meta, file }, status) => {
-        console.log(meta, file, status);
-        if (status === "done") {
-            setQuestionFile(questionFile.concat(file));
-            console.log("hassen"+questionFile)
-        }
-        if (status === "removed") {
-            let questionFile = questionFile.slice();
-            questionFile = questionFile.filter((u) => {
-                return u !== file;
-            });
-            setQuestionFile(questionFile);
-            console.log("hassen"+questionFile)
-        }
+    const changeTaskFile = (text, i) => {
+        var newTask = [...task];
+        newTask[i].QuestionResponseFile = text;
+        setTask(newTask);
+        console.log(newTask)
     }
-
     return (
-      <div className="DisplayQuestionBox">
-        <Accordion>
+      <div className="DisplayTaskkBox">
             {task.map((task,index)=>(
                 <div className="card-display-task" key={index}>
                     <div className="task-data">
@@ -47,14 +36,14 @@ function DisplayTask() {
                       </div>
                             <br/>
                       <div>
-                        <p className="taskquestion"><strong>Question : </strong>{task.questionTitle}</p>
+                        <p className="taskquestion">{task.questionTitle}</p>
                       </div>
                         <br/>
                         <img src={task.QuestionFile} alt="image" />
                     </div>
                     <div className="task-response">
 
-                        <h1 className="tasktitle">Response</h1>
+                        <h1 className="taskresponse1">Response</h1>
                         {/*<div className="wrapper">
                             <div className="file-upload">
                                 <input type="file" name="fileresponse" multiple HTMLInputElement={task.QuestionResponseFile} onChange={(e)=>{changeTaskFile(e.target.files,index)}}/>
@@ -62,17 +51,22 @@ function DisplayTask() {
                             </div>
                         </div>*/}
                         <div>
-                            <Dropzone onChangeStatus={handleChangeStatus}
-                                styles={{ dropzone: { minHeight: 120, maxHeight: 250 } }}
-                            />
+                            <div className="wrapper">
+                                <div className="file-upload">
+                                    <input type="file" name="fileresponse" multiple HTMLInputElement={task.QuestionResponseFile} onChange={(e)=>{changeTaskFile(e.target.files,index)}}/>
+                                    <i className="fa fa-arrow-up"/>
+                                </div>
+                            </div>
                         </div>
-                        <div className="saveadd">
+
+                        <div className="saveadd p-5">
                             <button className="btn btn-success" type="submit" onClick={()=>{}}>Send</button>
                         </div>
+
                     </div>
+
                 </div>
             ))}
-        </Accordion>
       </div>
   )
 }

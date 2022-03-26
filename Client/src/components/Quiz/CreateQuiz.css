@@ -2,7 +2,6 @@
     color: black;
 }
 .Quiz_form{
-    background-color: #ecf4ff;
     height: 100%;
     padding-bottom: 30px;
 }
@@ -134,7 +133,7 @@
     outline: none;
     border: none;
     height: 40px;
-    width: 250px;
+    width: 200px;
    /* width: 490px;*/
     font-family: Roboto, Arial, sans-serif;
     font-size: 14px;
@@ -159,6 +158,7 @@
 
 .add_border{
     border-left: 8px solid #65A2D1 ;
+    border-right: 8px solid #65A2D1 ;
 }
 
 
@@ -293,4 +293,14 @@
   display: flex;
     justify-content: end;
     align-items: center;
+}
+
+@media (max-width:720px) {
+    .add_question_bottom{
+        flex-direction: column;
+    }
+    .text_input{
+        width: 100px;
+    }
+
 }

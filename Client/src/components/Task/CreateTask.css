@@ -18,25 +18,27 @@ body,
     border-radius: 8px;
     padding: 60px 40px;
     text-transform: capitalize;
-    max-width: 400px;
+    max-width: 600px;
     width: 100%;
 
 
 }
 .saveadd{
     display: flex;
-    justify-content: center;
+    justify-content: end;
 }
 .labelHomeWork{
-    color: blue;
+
+    color: black;
     font-family: Roboto, Arial, sans-serif;
     font-size: 16px;
+    font-weight: bold;
 }
 .text_input_homeWork {
     outline: none;
     border: none;
     height: 40px;
-    width: 100px;
+    width: 150px;
     /* width: 490px;*/
     font-family: Roboto, Arial, sans-serif;
     font-size: 14px;
@@ -52,13 +54,14 @@ body,
     outline: none;
     border: none;
     height: 40px;
-    width: 250px;
+    width: 150px;
     /* width: 490px;*/
     font-family: Roboto, Arial, sans-serif;
     font-size: 14px;
     font-weight: 400;
     letter-spacing: .2px;
     color:  #202124;
+
 }
 .text_input_homeWork_question:focus {
     border-bottom: 1.5px solid rgba(140,177,192,1);
@@ -67,5 +70,25 @@ body,
 .card-content-HomeWork{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+}
+.addtasktitle{
+    text-align: left;
+    color: rgba(140,177,192,1);
+    border-bottom: 1.5px solid black ;
+}
+@media (max-width:500px) {
+    .card-content-HomeWork{
+        flex-direction: column;
+    }
+
+    .card-HomeWork{
+        display: flex;
+        flex-direction: column;
+    }
+    .directioninput{
+        flex-direction: column;
+    }
+
+
+
 }
