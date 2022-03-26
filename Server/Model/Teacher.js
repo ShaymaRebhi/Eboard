@@ -5,30 +5,30 @@ var Schema =mongoose.Schema;
 var Teacher =new Schema({
     FirstName:{
         type:String,
-        default:"Teacher"
-        
+        required : true
     },
     LastName:{
         type:String,
-        default:"Teacher"
-        
+        required:true
     },
     BirthDate:{
         type:Date,
+        required:true,
         default:Date.now
     },
     Cin:{
         type:Number,
-        unique:true
+        required:true
     },
     Sexe:{
         type:String,
-        enum:["HOMME","FEMME"]
-        
+        enum:["HOMME","FEMME"],
+        required:true
     },
     User:{
         type : mongoose.Schema.Types.ObjectId,
-        ref:'users'
+        ref:'users',
+        required:true
     }
 
 })
