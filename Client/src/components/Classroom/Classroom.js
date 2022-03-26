@@ -4,18 +4,8 @@ import CardClass from './CardClass';
 import AddClassComponent from './AddClassComponent';
 import InvitationClassComonent from "./InvitationClassComonent";
 import RecentActivites from './RecentActivities';
-import { useHistory } from 'react-router-dom';
 
 function Classroom() {
-  const history=useHistory();
-  useEffect(() => {
-    var getObject = JSON.parse(localStorage.getItem('login'));
-    if(localStorage.getItem('login') ===null ){
-      if (!getObject.Logined){
-        history.replace('/login')
-      }
-    }
-},[]);
 
   return (
     <div>

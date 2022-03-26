@@ -34,14 +34,14 @@ export default class MenuCours extends Component {
           <Icon name='server' />Theme
         </Menu.Item>
         </Link>
-        <Link to="/createquiz">
+        <Link to="/TaskList">
         <Menu.Item
-          name='homework'
-          active={activeItem === 'homework'}
+          name='task'
+          active={activeItem === 'task'}
           onClick={this.handleItemClick}
         >
           <Label>51</Label>
-          <Icon name='file alternate' /> Homework
+          <Icon name='file alternate' /> Task
         </Menu.Item>
 </Link>
 <Link to ="/displayQuiz">
@@ -55,7 +55,7 @@ export default class MenuCours extends Component {
           
         </Menu.Item>
         </Link>
-        <Link to ="/hi">
+        <Link to ="/quizlist">
         <Menu.Item
           name='quiz'
           active={activeItem === 'quiz'}
