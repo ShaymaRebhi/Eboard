@@ -8,8 +8,8 @@ POST http://localhost:3000/user/login
 Content-Type: application/json
 
 {
-    "email":"student@esprit.tn",
-    "Password":"123456"
+    "email":"mhamdi.mouheb12@esprit.tn",
+    "Password":"123456Mo"
 }
 
 ###
@@ -18,7 +18,7 @@ POST http://localhost:3000/user/login
 Content-Type: application/json
 
 {
-    "email":"student@esprit.tn",
+    "email":"admin@esprit.tn",
     "Password":"123456"
 }
 
@@ -37,7 +37,7 @@ POST http://localhost:3000/user/login
 Content-Type: application/json
 
 {
-    "email":"student@esprit.tn",
+    "email":"Student@esprit.tn",
     "Password":"123456"
 }
 
