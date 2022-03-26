@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from "react";
 import styled from 'styled-components';
-import { getAllMessagesRoute, sendMessagesRoute } from '../../../utils/api';
+import { getAllMessagesRoute, getUserConnect, sendMessagesRoute } from '../../../utils/api';
 import ChatInput from './ChatInput';
 import { v4 as uuidv4 } from "uuid";
 
@@ -9,7 +9,20 @@ import { v4 as uuidv4 } from "uuid";
 export default function ChatContainer({currentUser,currenChat,socket}) {
     const [messages, setMessages] = useState([]);
     const scrollRef = useRef();
+    const [userName,SetUserName]=useState(undefined);
     const [arrivalMessage, setArrivalMessage] = useState(null);
+    useEffect(()=>{
+        
+      axios.get(getUserConnect,{
+           headers: {
+               'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+           }
+       }).then(res=>{
+           console.log(res.data);
+           SetUserName(res.data[0].FirstName+' '+res.data[0].LastName)
+       })
+    
+   },[userName])
 
     useEffect(()=>{
       if(currenChat){
@@ -74,7 +87,7 @@ export default function ChatContainer({currentUser,currenChat,socket}) {
                 </div>
                 
                 <div className='username'>
-                    <h3>{currentUser.email.split('@')[0]} </h3>
+                    <h3>{userName} </h3>
                 </div>
             </div>
         </div>
@@ -104,8 +117,9 @@ display: grid;
 grid-template-rows: 10% 80% 10%;
 gap: 0.1rem;
 overflow: hidden;
-@media screen and (min-width: 720px) and (max-width: 1080px) {
+@media screen and (min-width: 610px) and (max-width: 1080px) {
   grid-template-rows: 15% 70% 15%;
+ 
 }
 .chat-header {
   display: flex;
@@ -114,7 +128,7 @@ overflow: hidden;
   
   .user-details {
     background-color:#0d4b7a;
-    width:60%;
+    width:122vh;
     border-radius:5px;
     padding:11px;
     display: flex;

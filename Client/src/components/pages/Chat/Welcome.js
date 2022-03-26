@@ -1,14 +1,23 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Robot from "../../../Assets/Images/bot.gif"
+import { getUserConnect } from '../../../utils/api';
 function Welcome() {
     
     const [currentUser,setCurrentUser]=useState(undefined);
     const history=useHistory();
     useEffect(()=>{
+        axios.get(getUserConnect ,{
+            headers: {
+                'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+            }
+        }).then(res=>{
+            console.log(res.data);
+            setCurrentUser(res.data[0].FirstName+' '+res.data[0].LastName)
+        })
         
-          setCurrentUser(JSON.parse(localStorage.getItem('login')).User.email.split('@')[0])
         
     },[])
   return (

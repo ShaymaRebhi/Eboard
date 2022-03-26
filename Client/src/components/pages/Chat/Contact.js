@@ -3,19 +3,25 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../../Assets/Images/logo.png'
 import * as AIICons from "react-icons/ai"
+import axios from 'axios';
+import { getUserConnect } from '../../../utils/api';
 function Contact({contacts,currentUser,changeChat}) {
     const [currentUserName,setCurrentUserName]=useState(undefined);
-    const [currentUserImage,setCurrentUserImage]=useState(undefined);
+    
     const [Currentselected,setCurrentSelected]=useState(undefined);
     
     
     useEffect(()=>{
-       
-        if(currentUser){
-            setCurrentUserImage(currentUser.file);
-            setCurrentUserName(currentUser.FirstName+' '+currentUser.LastName)
-
-        }
+        
+       axios.get(getUserConnect,{
+            headers: {
+                'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+            }
+        }).then(res=>{
+            console.log(res.data);
+            setCurrentUserName(res.data[0].FirstName+' '+res.data[0].LastName)
+        })
+     
     },[currentUser])
     const changeCurrentChat=(index,contacts)=>{
         setCurrentSelected(index);
@@ -25,8 +31,7 @@ function Contact({contacts,currentUser,changeChat}) {
     
   return (
     <>
-     {
-         currentUserImage && currentUserImage &&(
+     
              <Container>
                 <div className='brand'>
                     <img src={logo} alt="logo"></img>
@@ -56,15 +61,15 @@ function Contact({contacts,currentUser,changeChat}) {
                 </div>
                 <div className='current-user'>
                 <div className='avatar'>
-                                <img src={`https://ui-avatars.com/api/?name=${currentUser.email}`} alt='avatar'></img>
+                                <img src={`https://ui-avatars.com/api/?name=mouheb+mhamdi`} alt='avatar'></img>
                                 </div>
                                 <div className='username'>
-                                    <h3>{currentUser.email.split('@')[0]}</h3>
+                                    <h3>{currentUserName}</h3>
                                 </div>
                 </div>
              </Container>
-         )
-     }
+         
+     
     </>
   )
 }

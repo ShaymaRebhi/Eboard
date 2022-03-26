@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import '../css/Admin.css'
 import {Link} from "react-router-dom";
-import Footer from "../Footer";
-import Navbar from "../Navbar";
 import axios from "axios";
 import { useParams } from "react-router"
 
@@ -23,7 +21,6 @@ function Forum() {
 
     return (
         <div>
-            <Navbar />
             <div className="bodyy" style={{padding: '2% 0% 2%'}}>
                 <div className="container">
                     <div className="container-fluid mt-100">
@@ -119,7 +116,6 @@ function Forum() {
 
                 </div>
             </div>
-            <Footer/>
         </div>
     )
 }
