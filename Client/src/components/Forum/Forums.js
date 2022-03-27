@@ -1,29 +1,28 @@
 import React,{useState,useEffect}  from 'react'
 import './Forum.css'
 import Footer from "../Footer";
-import {affichage, selectForum} from "../../redux/slices/ForumSlice";
+import {affichage, selectForum,supprimer} from "../../redux/slices/ForumSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import axios from "axios";
-
+import { NavLink} from 'react-router-dom'
+import Navbar from "../Navbar";
+import CreateForum from "./CreateForum";
 
 function Forums() {
     const dispatch = useDispatch();
     const  forums = useSelector(selectForum );
-
-    const [fs,setFs] = useState([])
-    const fetchForums = async () => {
-        const response = await axios.get(
-            "http://localhost:3000/forum/all"
-        ).then(res => {setFs(res.data);console.log(res.data)});
-    };
     useEffect(() => {
-        //dispatch(affichage)
-    fetchForums()
+        dispatch(affichage())
     }, [dispatch]);
+
+    const Delete =(id) =>{
+        dispatch(supprimer(id))
+    };
+
     return (
         <div>
-            <div className="bodyy">
+            <Navbar />
+            <div className="bodyy" style={{padding: '2% 0% 2%'}}>
                 <div className="container">
                     <div className="row">
 
@@ -40,16 +39,18 @@ function Forums() {
                                 </div>
                             </div>
                         </div>
-                        {fs.map((f) => (
+                        <div>{(forums.length===0)? 'No data found!':''}</div><br/>
+
+                        {forums.map((f,i) => (
                             <div
                                 className="card row-hover pos-relative py-3 px-3 mb-3 border-warning border-top-0 border-right-0 border-bottom-0 rounded-0">
                                 <div className="row align-items-center">
                                     <div className="col-md-8 mb-3 mb-sm-0">
                                         <h5>
-                                            <a href="#" className="text-primary">{f.Title}</a>
+                                            <NavLink to={`/forum/${(f!==null)?f._id:''}`} className="text-primary">{(f!==null)?f.Title:''}</NavLink>
                                         </h5>
                                         <p className="text-sm"><span className="op-6" style={{color:'rgb(122 116 116)'}}>Posted</span> <a className="text-black"
-                                                                                                                                          href="#">{f.Date}</a>
+                                                                                                                                          href="#">{(f!==null)?f.Date:''}</a>
                                             <span className="op-6" style={{color:'rgb(122 116 116)'}} >&nbsp; by </span> <a className="text-black" href="#">aaa</a>
                                         </p>
                                         <div className="text-sm op-5"><a className="text-black mr-2" href="#">#C++</a> <a
@@ -62,8 +63,15 @@ function Forums() {
                                                 className="d-block text-sm">141 Votes</span></div>
                                             <div className="col px-1"><i className="ion-ios-chatboxes-outline icon-1x"></i>
                                                 <span className="d-block text-sm">122 Replys</span></div>
-                                            <div className="col px-1"><i className="ion-ios-eye-outline icon-1x"></i> <span
-                                                className="d-block text-sm">290 Views</span></div>
+                                            <div className="col px-1">
+                                                <i className="ion-ios-eye-outline icon-1x"></i>
+                                                <span className="d-block text-sm">290 Views</span>
+                                            </div>
+                                            <div className="col px-1">
+                                                <a href="javascript:void(0)" onClick={()=>Delete(f._id)}>
+                                                    <i className="fa fa-trash"/>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -72,6 +80,29 @@ function Forums() {
                         ))}
 
 
+                    </div>
+                    <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Create a Forum
+                    </button>
+
+                    <div style={{margin:'10% 0% 0% 0%'}} className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-dialog" role="document">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="exampleModalLabel" style={{color:'#000'}}>Create a forum</h5>
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div className="modal-body">
+                                    <CreateForum/>
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

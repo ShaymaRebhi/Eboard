@@ -4,7 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-const userRoute = require('./routes/User') 
+const userRoute = require('./routes/User')
+
 
 require('dotenv/config');
 //------------la modéfication --------------------
@@ -18,8 +19,8 @@ mongoose.connect(config.mongo.uri,{userNewUrlParser: true,useUnifiedTopology:tru
 
 //-------------------------------------------
 var indexRouter = require('./routes/index');
-var userRouter = require('./routes/User');
 var forumRouter = require('./routes/Forum');
+const commentRouter = require('./routes/Comment')
 
 var app = express();
 
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/user', userRoute);
 app.use('/forum',forumRouter);
+app.use('/comment',commentRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

@@ -20,8 +20,9 @@ var Forum =new Schema({
     },
     User:{
         type:mongoose.Schema.Types.ObjectId,ref:'user',
-    }
+    },
+    Comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'comment'}]
 
 
-})
-module.exports = mongoose.model('Forum',Forum);
+});
+module.exports = mongoose.model('forum',Forum);
