@@ -6,7 +6,7 @@ var Quiz = new Schema ({
         type:String,
         required:true
     },
-    Class:{
+    Theme:{
         type:String,
         required:true
     },
