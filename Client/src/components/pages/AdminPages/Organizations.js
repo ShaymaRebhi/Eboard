@@ -58,8 +58,8 @@ function Organizations() {
                 background-color:#4c7391;
             }
         }
-        margin:0px 250px 0px 250px;
         margin-left:auto;
+        margin-right:auto;
         height: 400px;
         width:50%;
         

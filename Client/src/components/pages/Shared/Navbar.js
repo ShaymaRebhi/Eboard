@@ -24,8 +24,6 @@ function Navbar() {
   }, []);
 
   window.addEventListener('resize', showButton);
-  const [selected, setSelected] = useState('home');
-  const [selectedMedia, setSelectedMedia] = useState('home'); 
   
   return (
     <>

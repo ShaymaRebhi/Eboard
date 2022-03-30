@@ -6,7 +6,6 @@ import SignUp from '../pages/Auth/SignUp';
 import ContactUs from '../pages/Home/ContactUs';
 import AboutUs from '../pages/Home/AboutUs';
 import Footer from '../pages/Shared/Footer';
-import ChatUser from '../pages/Chat/ChatUser';
 function HomeEboard() {
   
     return (
@@ -19,11 +18,7 @@ function HomeEboard() {
               exact
               component={Home}
             />
-            <PrivateRoute
-              path="/chat"
-              exact
-              component={ChatUser}
-            />
+           
             <PrivateRoute
               path="/Contactus"
               exact
