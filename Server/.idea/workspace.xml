@@ -2,29 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="923abaec-0f51-4318-aa23-44b094adba5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Button.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/CardItem.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Cards.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Footer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Forum/CreateForum.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Forum/CreateForum.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Forum/Forum.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Forum/Forum.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Forum/Forums.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Forum/Forums.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/HeroSection.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Home/HomeClassroom.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Home/HomeClassroom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Home/HomeCourse.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Home/HomeCourse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Home/HomeEboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Home/HomeEboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/NavHead.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Navbar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/pages/Chat/ChatContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/pages/Chat/ChatContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/pages/Chat/Contact.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/pages/Chat/Contact.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/pages/Chat/Welcome.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/pages/Chat/Welcome.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/utils/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/utils/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/OptionController.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/OptionController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/QuestionQuizController.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/QuestionQuizController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/QuizController.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/QuizController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/TaskController.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/TaskController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Task.js" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Task.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/Option.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/Option.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/QuestionQuiz.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/QuestionQuiz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/Quiz.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/Quiz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/Task.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/Task.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +64,8 @@
       <workItem from="1648334661035" duration="372000" />
       <workItem from="1648337268671" duration="836000" />
       <workItem from="1648338167062" duration="344000" />
+      <workItem from="1648499533735" duration="2300000" />
+      <workItem from="1648668097354" duration="7430000" />
     </task>
     <servers />
   </component>

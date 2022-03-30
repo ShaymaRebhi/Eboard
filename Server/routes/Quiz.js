@@ -4,7 +4,8 @@ require('dotenv').config()
 const QuizController = require('../Controllers/QuizController')
 
 router.post('/add',QuizController.AddQuiz);
-router.get('/',QuizController.GetQuiz)
-router.delete('/:id',QuizController.deleteQuiz)
-
+router.get('/',QuizController.GetQuiz);
+router.get('/:id',QuizController.GetOneQuiz);
+router.delete('/:id',QuizController.deleteQuiz);
+router.put('/update',QuizController.updateQuiz);
 module.exports = router;

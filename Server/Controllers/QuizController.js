@@ -12,7 +12,7 @@ exports.GetQuiz = async (req,res,next) =>{
 }
 exports.deleteQuiz = async (req,res) =>{
     Quiz.deleteOne({ _id: req.params.id })
-        .then(deleteConfirmation => res.json(deleteConfirmation))
+        .then(res.status(200).send(`Quiz is succussffully deleted`))
         .catch(err => res.status(400).json(err));
 }
 
@@ -26,7 +26,7 @@ exports.AddQuiz = async(req,res)=>{
     });
 
    await _Option.save();
-    const optionID = [_Option._id];
+    const optionID = _Option._id;
     const _Question = new Question({
         questionText : req.body.questionText,
         Required :req.body.Required,
@@ -38,7 +38,7 @@ exports.AddQuiz = async(req,res)=>{
     const questionID = _Question._id;
     const _Quiz = new Quiz({
         Title : req.body.Title,
-        Class :req.body.Class,
+        Theme :req.body.Theme,
         Description :req.body.Description,
         Questions :questionID,
     });
@@ -50,4 +50,22 @@ exports.AddQuiz = async(req,res)=>{
                             message:'quiz Created',
                         });
     })
+}
+
+exports.updateQuiz = async(req,res)=>{
+  const quiz =  await Quiz.findOne({_id:req.body._id});
+    const newQuiz=await Quiz.findByIdAndUpdate(quiz._id,req.body).then((Quiz)=>{
+        return res.status(200).send(`Quiz is succussffully Updated`);
+    }).catch(err=>{
+        return res.json(err);
+    });
+}
+
+exports.GetOneQuiz = async(req,res) => {
+    await Quiz.findOne({_id:req.params.id})
+        .then(Quiz=>{
+            return res.status(200).json(Quiz);
+        }).catch(err=>{
+            return res.json(err);
+        });
 }
