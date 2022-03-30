@@ -4,7 +4,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-const userRoute = require('./routes/User') 
+const userRoute = require('./routes/User')
+var forumRouter = require('./routes/Forum');
+const quizRoute = require('./routes/Quiz')
+const optionRoute = require('./routes/Option')
+const questionRoute = require('./routes/QuestionQuiz')
+const taskRoute = require('./routes/Task')
 const ChatRoute = require('./routes/Chat') 
 const bodyparser = require("body-parser")
 const socket=require('socket.io')
@@ -38,6 +43,11 @@ app.use('/uploadsFolder', express.static(path.join(__dirname, '/uploads')));
 
 app.use('/chat',ChatRoute);
 app.use('/user', userRoute);
+app.use('/quiz', quizRoute);
+app.use('/option', optionRoute);
+app.use('/question', questionRoute);
+app.use('/task', taskRoute);
+app.use('/forum',forumRouter);
 
 
 app.get("/",(req,res)=>{

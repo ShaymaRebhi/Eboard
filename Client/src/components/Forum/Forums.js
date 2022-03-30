@@ -1,6 +1,5 @@
 import React,{useState,useEffect}  from 'react'
 import './Forum.css'
-import Footer from "../Footer";
 import {affichage, selectForum} from "../../redux/slices/ForumSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -76,7 +75,6 @@ function Forums() {
                 </div>
 
             </div>
-            <Footer/>
         </div>
     )
 }

@@ -9,47 +9,79 @@ import CreateQuiz from '../Quiz/CreateQuiz';
 import DisplayQuiz from '../Quiz/DisplayQuiz';
 import '../SideBar/Sidebar.css'
 import NavbarInside from '../NavbarInside/NavbarInside';
+import Feed from '../Course/Feed';
+import { Theme } from '../Course/Theme';
+import Members from '../Course/Members';
+import DisplayTask from "../Task/DisplayTask";
+import createTask from "../Task/CreateTask";
+import CreateTask from "../Task/CreateTask";
+import taskList from "../Task/TaskList";
+import TaskList from "../Task/TaskList";
 import { useHistory } from 'react-router-dom';
 
 function HomeCourse(){
-  const history=useHistory();
+    const history=useHistory();
 
-  if(localStorage.getItem('login')===null ){
-        history.push("/login");  
+    if(localStorage.getItem('login')===null ){
+        history.push("/login");
     }
     return (
         <div>
-          <div className='spacing_3la_3ajlaa'>
-             <NavbarInside />
-          <Grid stackable celled="internally">
-            <Grid.Row >
-              <Grid.Column className="sideb">
-                <SideBar />
-              </Grid.Column>
-              <Grid.Column width={3}>
-                <MenuCours />
-              </Grid.Column>
-              <Grid.Column width={12} >
-                  <div className="insideCour">
-            <PrivateRoute
-              path="/quizlist"
-              exact component={QuizList}
-            />
-            <PrivateRoute
-              path="/createquiz"
-              exact component={CreateQuiz}
-            />
-            <PrivateRoute
-              path="/displayQuiz"
-              exact component ={DisplayQuiz}
-            />
-           </div>
-            </Grid.Column>
+            <div className='spacing_3la_3ajlaa'>
+                <NavbarInside />
+                <Grid stackable celled="internally">
+                    <Grid.Row >
+                        <Grid.Column className="sideb">
+                            <SideBar />
+                        </Grid.Column>
+                        <Grid.Column width={3}>
+                            <MenuCours />
+                        </Grid.Column>
+                        <Grid.Column width={12} >
+                            <div className="insideCour">
+                                <PrivateRoute
+                                    path="/feed"
+                                    exact component={Feed}
+                                />
+                                <PrivateRoute
+                                    path="/theme"
+                                    exact component={Theme}
+                                />
+                                <PrivateRoute
+                                    path="/quizlist"
+                                    exact component={QuizList}
+                                />
+                                <PrivateRoute
+                                    path="/createquiz"
+                                    exact component={CreateQuiz}
+                                />
+                                <PrivateRoute
+                                    path="/displayQuiz"
+                                    exact component ={DisplayQuiz}
+                                />
+                                <PrivateRoute
+                                    path="/displayTask"
+                                    exact component ={DisplayTask}
+                                />
+                                <PrivateRoute
+                                    path="/formAddTask"
+                                    exact component ={CreateTask}
+                                />
+                                <PrivateRoute
+                                    path="/tasklist"
+                                    exact component ={TaskList}
+                                />
+                                <PrivateRoute
+                                    path="/members"
+                                    exact component ={Members}
+                                />
+                            </div>
+                        </Grid.Column>
 
-              </Grid.Row>
-              </Grid>
-              </div>
-              </div>
+                    </Grid.Row>
+                </Grid>
+            </div>
+        </div>
     )
 }
 export default HomeCourse ;

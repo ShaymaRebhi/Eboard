@@ -1,6 +1,5 @@
 import React,{useState}  from 'react'
 import '../css/Admin.css'
-import Footer from "../Footer";
 import { useDispatch } from 'react-redux'
 import {createForum} from "../../redux/slices/ForumSlice";
 
@@ -54,7 +53,6 @@ function CreateForum() {
                     </div>
                 </div>
             </div>
-            <Footer/>
         </div>
     )
 }

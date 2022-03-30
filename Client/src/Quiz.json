@@ -3,7 +3,8 @@
     "Class": "4TWIN3",
     "Description": "this is TWIN quiz please answer all this question ",
     "question":[{"questionTitle": "What is React ?",
-                  "score" : 2,
+                  "score" : 10,
+                  "required" : true,
                   "options" : [
                           {"optionText": "FrameWork", "IsValid" : false},
                           {"optionText": "Libraries", "IsValid" : true},
@@ -12,7 +13,8 @@
                               ]
                   },
                 {"questionTitle": "What is Angular ?",
-                  "score" : 4,
+                  "score" : 1,
+                  "required" : false,
                   "options" : [
                     {"optionText": "FrameWork", "IsValid" : true},
                     {"optionText": "Libraries", "IsValid" : false},
@@ -22,6 +24,7 @@
                 },
                 {"questionTitle": "What is Django ?",
                   "score" : 10,
+                  "required" : false,
                   "options" : [
                     {"optionText": "FrameWork", "IsValid" : true},
                     {"optionText": "Libraries", "IsValid" : false},
@@ -30,7 +33,8 @@
                   ]
                 },
                 {"questionTitle": "What is Spring ?",
-                  "score" : 10,
+                  "score" : 5,
+                  "required" : false,
                   "options" : [
                     {"optionText": "FrameWork", "IsValid" : true},
                     {"optionText": "Libraries", "IsValid" : false},
@@ -39,7 +43,8 @@
                   ]
                 },
                 {"questionTitle": "What is WebStorm ?",
-                  "score" : 6,
+                  "score" : 1,
+                  "required" : false,
                   "options" : [
                     {"optionText": "FrameWork", "IsValid" : false},
                     {"optionText": "Libraries", "IsValid" : false},
@@ -48,7 +53,8 @@
                   ]
                 },
                 {"questionTitle": "What is java ?",
-                  "score" : 10,
+                  "score" : 3,
+                  "required" : true,
                   "options" : [
                     {"optionText": "FrameWork", "IsValid" : false},
                     {"optionText": "Libraries", "IsValid" : false},

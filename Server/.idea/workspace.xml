@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="923abaec-0f51-4318-aa23-44b094adba5c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Button.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/CardItem.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Cards.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Footer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Forum/CreateForum.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Forum/CreateForum.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Forum/Forum.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Forum/Forum.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Forum/Forums.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Forum/Forums.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/HeroSection.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Home/HomeClassroom.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Home/HomeClassroom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Home/HomeCourse.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Home/HomeCourse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Home/HomeEboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Home/HomeEboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/NavHead.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Navbar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/pages/Chat/ChatContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/pages/Chat/ChatContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/pages/Chat/Contact.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/pages/Chat/Contact.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/pages/Chat/Welcome.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/pages/Chat/Welcome.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/utils/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/utils/api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="26ed5oc2diOOhAYVczWDuH9uUg5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="923abaec-0f51-4318-aa23-44b094adba5c" name="Changes" comment="" />
+      <created>1647787808124</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1647787808124</updated>
+      <workItem from="1647787810289" duration="1450000" />
+      <workItem from="1647798435105" duration="5190000" />
+      <workItem from="1647816674316" duration="3007000" />
+      <workItem from="1647865937475" duration="8674000" />
+      <workItem from="1647890274191" duration="21000" />
+      <workItem from="1647890705149" duration="5570000" />
+      <workItem from="1647897365281" duration="3492000" />
+      <workItem from="1647956363890" duration="2130000" />
+      <workItem from="1647964262989" duration="2499000" />
+      <workItem from="1648064041819" duration="6190000" />
+      <workItem from="1648129580879" duration="923000" />
+      <workItem from="1648329920467" duration="506000" />
+      <workItem from="1648330993849" duration="665000" />
+      <workItem from="1648333902539" duration="704000" />
+      <workItem from="1648334661035" duration="372000" />
+      <workItem from="1648337268671" duration="836000" />
+      <workItem from="1648338167062" duration="344000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
