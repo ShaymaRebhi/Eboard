@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="923abaec-0f51-4318-aa23-44b094adba5c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Task/CreateTask.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Task/CreateTask.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Task/TaskList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Task/TaskList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/TaskController.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/TaskController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Task.js" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Task.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/Task.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/Task.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

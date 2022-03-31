@@ -1,31 +1,42 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './TaskList.css'
-
-//import uuid from "react-uuid";
 import {useHistory} from "react-router-dom";
 import {FaTrash} from 'react-icons/fa' ;
 import {GrUpdate} from 'react-icons/gr' ;
+import {getAllTasks,deleteTask} from "../../utils/Task";
+import {toast, ToastContainer} from "react-toastify";
 
 function TaskList() {
-  const history = useHistory();
+    const [task, setTask] = useState([])
+
+    const getTasks=()=>{
+        getAllTasks((res)=> {
+            setTask(res.data)
+        })
+    }
+    useEffect(()=>{
+        getTasks();
+    })
+    const history = useHistory();
   const handelformadd = () => {
       history.push("/formAddTask/");
   }
-    const assignHomeWork= () => {
+  const assignHomeWork= () => {
         history.push("/formAddTask/");
-    }
-  const Date1 = new Date(Date.now())
-  const [homeWork, setHomeWork] = useState(
-      [{Title : "React Hook",
-          Theme:"seance 1",
-          CreationDate : Date1.getDate() + "/" + (Date1.getMonth() + 1) + "/" + Date1.getFullYear(),
-          questionTitle: "question 1",
-          QuestionFile: '',
-          QuestionResponseFile:""
-      },]
-  )
+  }
   return (
       <>
+          <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+          />
         <div className="headers text-center">
           <h1>Task List</h1>
           <button className="btn btn--primary"  onClick={handelformadd}>Add Quiz</button>
@@ -42,14 +53,20 @@ function TaskList() {
             </thead>
 
             <tbody>
-            {homeWork.map((h,i)=>(
-                <tr>
-                  <td>{h.Title}</td>
-                  <td>{h.Theme}</td>
-                  <td>{h.CreationDate}</td>
+            {task.map((t,i)=>(
+                <tr key={i}>
+                  <td>{t.Title}</td>
+                  <td>{t.Theme}</td>
+                  <td>{t.CreationDate}</td>
                   <td> <button className="btn btn-outline-primary"  onClick={handelformadd}><GrUpdate/> </button>
-                    <button className="btn btn-outline-danger"  onClick={handelformadd}> <FaTrash/> </button>
-                      <button className="btn btn-outline-success"onClick={assignHomeWork}>Assign</button>
+                    <button className="btn btn-outline-danger"  onClick={()=>deleteTask(t._id, ()=>{
+                        toast.success('Task deleted successfuly', {
+                        position: "bottom-right"
+                    })
+                    },
+                        getTasks()
+                    )}> <FaTrash/> </button>
+                      <button className="btn btn-outline-success" onClick={assignHomeWork}>Assign</button>
                   </td>
                 </tr>
             ))}
