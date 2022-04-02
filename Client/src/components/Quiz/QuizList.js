@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import "./QuizList.css"
 
 import uuid from "react-uuid";
@@ -7,29 +7,46 @@ import {FaTrash} from 'react-icons/fa' ;
 import {GrUpdate} from 'react-icons/gr' ;
 import {Button, Statistic, Icon, Divider, Item, Header, Segment, Grid, Dropdown, Confirm,} from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import {getAllQuizs,deleteQuiz} from "../../utils/Quiz";
+import {toast, ToastContainer} from "react-toastify";
 
 
 function QuizList() {
     const history = useHistory();
+    const [quiz, setQuizs] = useState([
+        {Title : "",
+            Theme:"",
+            Description:"",
+            questions :[]
+        }]
+    )
+    const getQuizs=()=>{
+        getAllQuizs((res)=> {
+            setQuizs(res.data)
+        })
+    }
+    useEffect(()=>{
+        getQuizs();
+    })
     const assignHomeWork= () => {
         history.push("/assignHomeWork");
     }
     const handelformadd = () => {
         history.push("/createquiz");
     }
-    const [quiz, setQuizs] = useState(
-        [{Title : "React Hook",
-            Theme:"seance1",
-            Description:"this is React Hooks quiz please answer all this question and good lock",
-            questions :[
-
-            ]
-
-        },
-        ]
-    )
   return (
     <>
+        <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+        />
         {/*<img src="../../../public/images/quiz.jpg" alt="quizpicture" name="imagequiz" width="50%" />*/}
         <div className="headers text-center">
             <h1>Quiz List</h1>
@@ -53,7 +70,13 @@ function QuizList() {
                         <td>{q.Theme}</td>
                         <td>{q.Description}</td>
                         <td> <button className="btn btn-outline-primary"  onClick={handelformadd}><GrUpdate/> </button>
-                            <button className="btn btn-outline-danger"  onClick={handelformadd}> <FaTrash/> </button>
+                            <button className="btn btn-outline-danger"  onClick={()=>deleteQuiz(q._id,()=>{
+                                    toast.success('Task deleted successfuly', {
+                                        position: "bottom-right"
+                                    })
+                                },
+                                getQuizs()
+                            )}> <FaTrash/> </button>
                             <button className="btn btn-outline-success" onClick={assignHomeWork}>Assign</button>
                         </td>
                     </tr>
