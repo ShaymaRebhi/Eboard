@@ -114,6 +114,11 @@ function App() {
                 render={(props) => <HomeCourse {...props} />}
             />
             <Route
+                path="/updateQuiz/:id"
+                exact
+                render={(props) => <HomeCourse {...props} />}
+            />
+            <Route
                 path="/feed"
                 exact
                 render={(props) => <HomeCourse {...props} />}
@@ -145,6 +150,11 @@ function App() {
             />
             <Route
                 path="/formAddTask"
+                exact
+                render={(props) => <HomeCourse {...props} />}
+            />
+            <Route
+                path="/updateTask/:id"
                 exact
                 render={(props) => <HomeCourse {...props} />}
             />
