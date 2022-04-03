@@ -9,7 +9,7 @@ import { faUserTie,faChalkboardUser,faGraduationCap} from '@fortawesome/free-sol
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import {  toast, ToastContainer } from 'react-toastify';
-import {  AxiosError } from 'axios'
+
 import Select from 'react-select'
 import ClipLoader from "react-spinners/ClipLoader";
 export default function SignUp() {

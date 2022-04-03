@@ -1,15 +1,12 @@
 import React,{useState}  from 'react'
 import "./CreateQuiz.css"
-import Footer from "../pages/Shared/Footer";
 import Switch from '@material-ui/core/Switch';
 import { BsFillDashCircleFill, BsPatchCheckFill, BsFillBookmarkPlusFill, BsFillBookmarkXFill} from 'react-icons/bs';
-import {FaRegCopy} from 'react-icons/fa';
 import {BiAddToQueue} from 'react-icons/bi';
 import { IconButton } from '@material-ui/core';
 import Accordion from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Button from '@material-ui/core/Button';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import {useHistory} from "react-router-dom";
 import Select from "react-select";
 

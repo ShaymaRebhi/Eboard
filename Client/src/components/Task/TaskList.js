@@ -15,7 +15,7 @@ function TaskList() {
         history.push("/formAddTask/");
     }
   const Date1 = new Date(Date.now())
-  const [homeWork, setHomeWork] = useState(
+  const [homeWork] = useState(
       [{Title : "React Hook",
           Theme:"seance 1",
           CreationDate : Date1.getDate() + "/" + (Date1.getMonth() + 1) + "/" + Date1.getFullYear(),

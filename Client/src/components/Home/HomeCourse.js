@@ -13,9 +13,7 @@ import Feed from '../Course/Feed';
 import { Theme } from '../Course/Theme';
 import Members from '../Course/Members';
 import DisplayTask from "../Task/DisplayTask";
-import createTask from "../Task/CreateTask";
 import CreateTask from "../Task/CreateTask";
-import taskList from "../Task/TaskList";
 import TaskList from "../Task/TaskList";
 import { useHistory } from 'react-router-dom';
 

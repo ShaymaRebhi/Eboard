@@ -12,7 +12,7 @@ function Courses() {
            <Feed>
      <Feed.Event>
        <Feed.Label>
-         <img src='images/emine.jpg' />
+         <img src='images/emine.jpg'  alt='tof'/>
        </Feed.Label>
        <Feed.Content>
         <strong>Emine Zribi </strong>  added a new cours :  <a> Correction atelier</a>

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, {useState} from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
@@ -38,8 +39,7 @@ const hidenavbar=()=>{
             
             </Link>
             <Link to="#"  className='navbar_brand '>
-                    <img src={logo} alr="logo"></img>
-            </Link>
+                    <img src={logo} alr="logo" /></Link>
             <Link onClick={logout} className='stretched-link'>
                 <IoIcons.IoLogOut ></IoIcons.IoLogOut>
             </Link>

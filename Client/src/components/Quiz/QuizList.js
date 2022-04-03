@@ -1,12 +1,9 @@
 import React, {useState} from 'react'
 import "./QuizList.css"
 
-import uuid from "react-uuid";
 import {useHistory} from "react-router-dom";
 import {FaTrash} from 'react-icons/fa' ;
 import {GrUpdate} from 'react-icons/gr' ;
-import {Button, Statistic, Icon, Divider, Item, Header, Segment, Grid, Dropdown, Confirm,} from "semantic-ui-react";
-import { Link } from "react-router-dom";
 
 
 function QuizList() {
@@ -17,7 +14,7 @@ function QuizList() {
     const handelformadd = () => {
         history.push("/createquiz");
     }
-    const [quiz, setQuizs] = useState(
+    const [quiz] = useState(
         [{Title : "React Hook",
             Theme:"seance1",
             Description:"this is React Hooks quiz please answer all this question and good lock",

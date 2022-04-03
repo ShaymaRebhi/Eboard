@@ -7,8 +7,6 @@ import Welcome from './Welcome';
 import ChatContainer from './ChatContainer';
 import { io } from 'socket.io-client';
 import { host } from '../../../utils/api';
-import { Link } from 'react-router-dom';
-import * as AIICons from "react-icons/ai"
 export default function ChatUser() {
   const socket=useRef();
   const [contacts,setContacts]=useState([]);

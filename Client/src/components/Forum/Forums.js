@@ -1,6 +1,6 @@
 import React,{useState,useEffect}  from 'react'
 import './Forum.css'
-import {affichage, selectForum} from "../../redux/slices/ForumSlice";
+import { selectForum} from "../../redux/slices/ForumSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import axios from "axios";

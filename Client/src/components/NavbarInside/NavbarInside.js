@@ -6,7 +6,7 @@ import NavHead from '../pages/Shared/NavHead';
 
 function NavbarInside() {
   const [click, setClick] = useState(false);
-  const [button, setButton] = useState(true);
+  const [ setButton] = useState(true);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);

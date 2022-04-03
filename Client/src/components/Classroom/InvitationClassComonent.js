@@ -1,5 +1,5 @@
 import { Grid, Image, Label, Segment, Button, Card } from "semantic-ui-react";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 
 

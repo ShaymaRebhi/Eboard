@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, Label, Menu , Icon, Header } from 'semantic-ui-react'
+import {  Label, Menu , Icon, Header } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
 export default class MenuCours extends Component {
   state = { activeItem: 'inbox' }
