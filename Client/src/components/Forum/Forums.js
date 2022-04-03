@@ -1,11 +1,10 @@
 import React,{useState,useEffect}  from 'react'
 import './Forum.css'
-import Footer from "../Footer";
 import {affichage, selectForum,supprimer} from "../../redux/slices/ForumSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { NavLink} from 'react-router-dom'
-import Navbar from "../Navbar";
+
 import CreateForum from "./CreateForum";
 
 function Forums() {
@@ -21,7 +20,7 @@ function Forums() {
 
     return (
         <div>
-            <Navbar />
+         
             <div className="bodyy" style={{padding: '2% 0% 2%'}}>
                 <div className="container">
                     <div className="row">
@@ -107,7 +106,7 @@ function Forums() {
                 </div>
 
             </div>
-            <Footer/>
+            
         </div>
     )
 }

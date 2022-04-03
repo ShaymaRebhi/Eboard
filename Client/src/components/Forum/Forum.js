@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import '../css/Admin.css'
-import Footer from "../Footer";
-import Navbar from "../Navbar";
 import { useParams } from "react-router"
 import  * as api from "../../utils/Forum";
 
@@ -65,7 +63,7 @@ function Forum() {
 
     return (
         <div>
-            <Navbar />
+            
             <div className="bodyy" style={{padding: '2% 0% 2%'}}>
                 <div className="container">
                     <div className="container-fluid mt-100">
@@ -161,7 +159,7 @@ function Forum() {
 
                 </div>
             </div>
-            <Footer/>
+            
         </div>
     )
 }
