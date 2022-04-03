@@ -14,3 +14,12 @@ export const deleteQuiz  = (id, callback)=>{
     axios.delete(url+`/quiz/${id}`).then((message)=> callback(message))
         .catch((err)=> callback(err));
 }
+
+export const getOneQuiz  = (id, callback)=>{
+    axios.get(url+`/quiz/${id}`).then((res)=> {callback(res)})
+}
+
+export const updateQuiz  = (id,quiz, callback)=>{
+    axios.post(url+`/quiz/update/${id}`,quiz).then((message)  => callback(message))
+        .catch((err)=> callback(err));
+}

@@ -1,12 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import "./QuizList.css"
-
-import uuid from "react-uuid";
 import {useHistory} from "react-router-dom";
 import {FaTrash} from 'react-icons/fa' ;
 import {GrUpdate} from 'react-icons/gr' ;
-import {Button, Statistic, Icon, Divider, Item, Header, Segment, Grid, Dropdown, Confirm,} from "semantic-ui-react";
-import { Link } from "react-router-dom";
 import {getAllQuizs,deleteQuiz} from "../../utils/Quiz";
 import {toast, ToastContainer} from "react-toastify";
 
@@ -24,6 +20,9 @@ function QuizList() {
         getAllQuizs((res)=> {
             setQuizs(res.data)
         })
+    }
+    const getQuizEditPage = (id) => {
+        history.push(`/updateQuiz/${id}`);
     }
     useEffect(()=>{
         getQuizs();
@@ -69,7 +68,7 @@ function QuizList() {
                         <td>{q.Title}</td>
                         <td>{q.Theme}</td>
                         <td>{q.Description}</td>
-                        <td> <button className="btn btn-outline-primary"  onClick={handelformadd}><GrUpdate/> </button>
+                        <td> <button className="btn btn-outline-primary"  onClick={()=>getQuizEditPage(q._id)}><GrUpdate/> </button>
                             <button className="btn btn-outline-danger"  onClick={()=>deleteQuiz(q._id,()=>{
                                     toast.success('Task deleted successfuly', {
                                         position: "bottom-right"

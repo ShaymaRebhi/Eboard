@@ -27,13 +27,21 @@ exports.AddQuiz = async(req,res) => {
         });
     })
 }
-
-exports.updateQuiz = async(req,res)=>{
-  const quiz =  await Quiz.findOne({_id:req.body._id});
-    const newQuiz=await Quiz.findByIdAndUpdate(quiz._id,req.body).then((Quiz)=>{
-        return res.status(200).send(`Quiz is succussffully Updated`);
-    }).catch(err=>{
-        return res.json(err);
+exports.updateQuiz = async(req,res)=> {
+    Quiz.findById(req.params.id, function (err,quiz){
+        if(!quiz)
+            res.status(404).send('data is not found');
+        else
+            quiz.Title = req.body.Title;
+            quiz.Theme = req.body.Theme;
+            quiz.Description = req.body.Description;
+            quiz.Questions = req.body.Questions
+            quiz.save().then(quiz => {
+                res.json('Quiz is succussffully Updated');
+            })
+                .catch(err => {
+                    res.status(400).send("Update not possible");
+                });
     });
 }
 

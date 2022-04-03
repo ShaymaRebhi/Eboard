@@ -8,16 +8,19 @@ var Quiz = new Schema ({
     },
     Theme:{
         type:String,
-        required:true
+    /*    required:true*/
     },
     Description:{
         type:String,
         required:true
     },
-    Questions:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'QuestionQuiz'
-    }]
+    Questions:{
+        type:[],
+    },
+    User:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'user',
+    }
 
 })
 
