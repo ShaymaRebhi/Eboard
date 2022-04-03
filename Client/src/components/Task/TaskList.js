@@ -3,7 +3,7 @@ import './TaskList.css'
 import {useHistory} from "react-router-dom";
 import {FaTrash} from 'react-icons/fa' ;
 import {GrUpdate} from 'react-icons/gr' ;
-import {getAllTasks,deleteTask} from "../../utils/Task";
+import {getAllTasks, deleteTask, getOneTask} from "../../utils/Task";
 import {toast, ToastContainer} from "react-toastify";
 
 function TaskList() {
@@ -14,6 +14,10 @@ function TaskList() {
             setTask(res.data)
         })
     }
+    const getTaskpage = (id) => {
+            history.push(`/updateTask/${id}`);
+    }
+
     useEffect(()=>{
         getTasks();
     })
@@ -58,7 +62,7 @@ function TaskList() {
                   <td>{t.Title}</td>
                   <td>{t.Theme}</td>
                   <td>{t.CreationDate}</td>
-                  <td> <button className="btn btn-outline-primary"  onClick={handelformadd}><GrUpdate/> </button>
+                  <td> <button className="btn btn-outline-primary"  onClick={()=>getTaskpage(t._id)}><GrUpdate/> </button>
                     <button className="btn btn-outline-danger"  onClick={()=>deleteTask(t._id, ()=>{
                         toast.success('Task deleted successfuly', {
                         position: "bottom-right"

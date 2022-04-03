@@ -27,13 +27,23 @@ exports.addTask = async(req,res) => {
     })
 }
 
-exports.updateTask = async(req,res)=>{
-    const task =  await Task.findOne({_id:req.body._id});
-    const newtask=await Task.findByIdAndUpdate(task._id,req.body).then((Task)=>{
-        return res.status(200).send(`Task is succussffully Updated`);
-    }).catch(err=>{
-        return res.json(err);
-    })
+exports.updateTask = async(req,res)=> {
+    Task.findById(req.params.id, function (err,task){
+        if(!task)
+            res.status(404).send('data is not found');
+        else
+            task.Title = req.body.Title;
+            task.Theme = req.body.Theme;
+            task.questionTitle = req.body.questionTitle;
+            task.QuestionFile = req.body.QuestionFile
+
+            task.save().then(task => {
+                res.json('task updated');
+            })
+            .catch(err => {
+                    res.status(400).send("Update not possible");
+            });
+    });
 }
 
 exports.GetOneTask = async(req,res) => {

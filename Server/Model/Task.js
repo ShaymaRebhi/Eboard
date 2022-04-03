@@ -8,7 +8,7 @@ var Task = new Schema ({
     },
     Theme:{
         type:String,
-        required:true
+        //required:true
     },
     CreationDate:{
         type:Date,
@@ -18,9 +18,13 @@ var Task = new Schema ({
         type:String,
         required:true
     },
-    TypeRec:{
+    QuestionFile:{
         type:String,
-        required:true
+        //required:true
+    },
+    QuestionResponseFile:{
+        type:String,
+        //required:true
     }
 
 
