@@ -148,7 +148,7 @@ const password1=[
                
                 <h1 className="text-center ">CREATE ACCOUNT</h1>
                 <label className="text-white pt-4">Login As:</label>
-                <div className="flex-nowrap" onClick={onChange}>
+                <div className="flex-nowrap w-100 p-4" onClick={onChange}>
                     
                       <input type="radio"  className="btn-check " id="btn-check-outlined" autoComplete="off" name="role" value="ORGANIZATION" required></input>
                       <label className="btn btn-outline-primary " htmlFor="btn-check-outlined"><FontAwesomeIcon icon={faUserTie} />Organization </label>
@@ -162,7 +162,7 @@ const password1=[
 
 
                 </div>
-                <div className="mb-3 pt-4">
+                <div className="mb-3 ">
                   <div className='row'>
                     <div className='col-sm-6'>
                        <Inputs name="FirstName" type="text" className="form-control" placeholder="FirstName" errorMessage="FirstName required " disabled={values.role==="ORGANIZATION"} onChange={onChange} hide={values.role==="ORGANIZATION"} required></Inputs>

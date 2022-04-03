@@ -101,6 +101,11 @@ function App() {
                 render={(props) => <HomeClassroom {...props} />}
             />
             <Route
+                path="/Reclamation"
+                exact
+                render={(props) => <HomeClassroom {...props} />}
+            />
+            <Route
                 path="/class"
                 exact
                 render={(props) => <HomeCourse {...props} />}
