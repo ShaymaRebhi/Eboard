@@ -12,7 +12,7 @@ export default class MenuCours extends Component {
     return (
       <Menu size='large' vertical>
            <Header as='h2' image='/images/school.png' content='React Course' />
-           <Link to="/quizlist">
+           <Link to="/feed">
         <Menu.Item
         
           name='flow'
@@ -23,14 +23,25 @@ export default class MenuCours extends Component {
           <Icon name='sitemap' />Flow
         </Menu.Item>
         </Link>
-        <Link to="/createquiz">
+        <Link to="/theme">
         <Menu.Item
-          name='homework'
-          active={activeItem === 'homework'}
+        
+          name='Theme'
+          active={activeItem === 'Theme'}
+          onClick={this.handleItemClick}
+        >
+          <Label >1</Label>
+          <Icon name='server' />Theme
+        </Menu.Item>
+        </Link>
+        <Link to="/TaskList">
+        <Menu.Item
+          name='task'
+          active={activeItem === 'task'}
           onClick={this.handleItemClick}
         >
           <Label>51</Label>
-          <Icon name='file alternate' /> Homework
+          <Icon name='file alternate' /> Task
         </Menu.Item>
 </Link>
 <Link to ="/displayQuiz">
@@ -44,7 +55,7 @@ export default class MenuCours extends Component {
           
         </Menu.Item>
         </Link>
-        <Link to ="/hi">
+        <Link to ="/quizlist">
         <Menu.Item
           name='quiz'
           active={activeItem === 'quiz'}
@@ -62,6 +73,7 @@ export default class MenuCours extends Component {
           <Label>1</Label>
           <Icon name='chat' /> Discussion
         </Menu.Item>
+        <Link to="/members">
         <Menu.Item
           name='members'
           active={activeItem === 'members'}
@@ -70,6 +82,7 @@ export default class MenuCours extends Component {
           <Label>1</Label>
           <Icon name='user' /> Members
         </Menu.Item>
+        </Link>
         <br>
         </br>
         <br></br>

@@ -1,7 +1,5 @@
-import axios from "axios";
+export const host="http://localhost:3000";
 
-const api = axios.create({
-   baseURL: `${process.env.REACT_APP_API_URL}/`,
-});
-
-export default api;
+export const sendMessagesRoute=`${host}/chat/add`;
+export const getAllMessagesRoute=`${host}/chat/all`;
+export const getUserConnect=`${host}/user/connect`;

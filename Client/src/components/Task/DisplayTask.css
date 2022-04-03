@@ -1,0 +1,93 @@
+.taskTheme{
+    color: black;
+}
+.taskquestion{
+    color: black;
+    text-align: left;
+}
+.tasktitle{
+    color: rgba(140,177,192,1);
+    border-bottom: 1.5px solid rgba(140,177,192,1) ;
+    text-align: left;
+}
+.taskresponse1{
+    text-align: left;
+    border-bottom: 1.5px solid rgba(140,177,192,1) ;
+    color: rgba(140,177,192,1);
+}
+.DisplayTaskkBox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+}
+.card-display-task{
+    border-top: 15px solid rgba(140,177,192,1) ;
+    border-left: 15px solid rgba(140,177,192,1) ;
+    border-right: 15px solid rgba(140,177,192,1) ;
+    border-bottom: 15px solid rgba(140,177,192,1) ;
+    background-color: white;
+    border-radius: 8px;
+    padding: 80px 60px;
+    text-transform: capitalize;
+    max-width: 700px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+
+
+
+}
+.task-data{
+    display: flex;
+    flex-direction: column;
+
+}
+.task-response{
+display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    /*align-items: center;*/
+    justify-content: center;
+}
+.wrapper .file-upload {
+    height: 150px;
+    width: 150px;
+    border-radius: 100px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #FFFFFF;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom, #2590EB 50%, #FFFFFF 50%);
+    background-size: 100% 200%;
+    transition: all 1s;
+    color: #FFFFFF;
+    font-size: 100px;
+}
+.wrapper .file-upload input[type=file] {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+.wrapper .file-upload:hover {
+    background-position: 0 -100%;
+    color: #2590EB;
+}
+@media (max-width:800px) {
+    .card-display-task{
+        flex-direction: column;
+    }
+    
+}
