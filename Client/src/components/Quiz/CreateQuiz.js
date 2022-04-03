@@ -1,21 +1,16 @@
 import React,{useState}  from 'react'
 import "./CreateQuiz.css"
-import Footer from "../pages/Shared/Footer";
 import Switch from '@material-ui/core/Switch';
 import { BsFillDashCircleFill, BsPatchCheckFill, BsFillBookmarkPlusFill, BsFillBookmarkXFill} from 'react-icons/bs';
-import {FaRegCopy} from 'react-icons/fa';
 import {BiAddToQueue} from 'react-icons/bi';
 import { IconButton } from '@material-ui/core';
 import Accordion from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Button from '@material-ui/core/Button';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import {useHistory} from "react-router-dom";
 import Select from "react-select";
 import {addQuiz} from "../../utils/Quiz";
 import {toast, ToastContainer} from "react-toastify";
-import {addQuestionQuiz} from "../../utils/QuestionQuiz";
-
 
 function CreateQuiz() {
     const [quiz, setQuizs] = useState(
@@ -27,13 +22,10 @@ function CreateQuiz() {
     const [Questions,setQuestions] = useState([
         {questionText: "",
             options : [
-                {optionText: "", IsValid : false},
-                {optionText: "", IsValid : false},
-                {optionText: "", IsValid : false},
                 {optionText: "", IsValid : false}
             ],
             required : false,
-            score:0
+            score:null
         }]
     )
     const listTheme = [
@@ -113,21 +105,12 @@ function CreateQuiz() {
         }
         setQuestions(q)
     }
-
-    /*const requiredQuestion = (i) =>{
-        var reqQuestion = [...questions];
-
-        reqQuestion[i].required =  ! requiredQuestion[i].required
-
-        console.log( reqQuestion[i].required+" "+i);
-        setQuestions(reqQuestion)
-    }*/
     const addNewQuestionField = () => {
         var newQuestion = [...Questions];
 
         newQuestion.push({questionText: "",
                 options: [{optionText: "" ,IsValid: false}],
-                score: 0,
+                score: null,
                 required: false})
         setQuestions(newQuestion)
     }
@@ -136,7 +119,6 @@ function CreateQuiz() {
     }
     const SaveQuiz = () => {
 
-        //const newQuestion =Questions
         const newQuiz ={
             Title : quiz.Title,
             Theme : quiz.Theme,
@@ -144,10 +126,6 @@ function CreateQuiz() {
             Questions:Questions
         }
         console.log(newQuiz);
-/*
-        addQuestionQuiz(newQuestion,()=>console.log(newQuestion))
-*/
-
         addQuiz(newQuiz,() =>(
             toast.success('Task added successfuly', {
                 position: "bottom-right"
@@ -194,7 +172,7 @@ function CreateQuiz() {
                                       options={listTheme}
                                       placeholder="Select Theme"
                                    />
-                                  <input type="text" id="Description" className="Quiz_form_top_desc" placeholder="Description"
+                                  <input type="text" id="Description" className="Quiz_form_top_desc" placeholder="Write Description here"
                                          value={quiz.Description} onChange={(e)=>{changeQuizDescription(e.target.value)}} />
                               </>
 
