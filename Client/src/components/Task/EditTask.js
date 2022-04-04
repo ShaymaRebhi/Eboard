@@ -58,7 +58,7 @@ function EditTask() {
             />
             <Accordion>
                 <div className="card-HomeWork" >
-                    <h1 className="addtasktitle">Add Task</h1>
+                    <h1 className="addtasktitle">Update Task</h1>
                     <br/>
                     <div className="card-content-HomeWork">
                         <div style={{display:"flex"}} className="directioninput">

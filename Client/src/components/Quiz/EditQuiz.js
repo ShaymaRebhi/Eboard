@@ -32,9 +32,6 @@ function EditQuiz() {
     )
 
     const listTheme = [
-        { value: 'seance1', label: 'seance1' },
-        { value: 'seance2', label: 'seance2' },
-        { value: 'seance3', label: 'seance3' }
     ]
     const history = useHistory();
     const changeQuizTitle = (text) => {
@@ -43,12 +40,12 @@ function EditQuiz() {
         setQuizs(newQuiz);
         console.log(newQuiz)
     }
-    const changeQuizTheme = (text) => {
+    /*const changeQuizTheme = (text) => {
         var newQuiz = {...quiz};
         newQuiz.Theme = text ;
         setQuizs(newQuiz);
         console.log(newQuiz)
-    }
+    }*/
     const changeQuizDescription = (text) => {
         var newQuiz = {...quiz};
         newQuiz.Description = text ;
@@ -168,6 +165,7 @@ function EditQuiz() {
                         <div className="Quiz_title_section">
                             <div className="Quiz_form_top">
                                 <>
+                                    <h1 style={{color:"rgba(140,177,192,1)", fontSize:"35px"}}>Update Quiz</h1>
                                     <input type="text" id="Title" className="Quiz_form_top_Name" placeholder="Write Title here"
                                            value={quiz.Title} onChange={(e)=>{changeQuizTitle(e.target.value)}} />
                                     <br/>
