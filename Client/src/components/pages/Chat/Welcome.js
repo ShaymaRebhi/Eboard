@@ -1,13 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import Robot from "../../../Assets/Images/bot.gif"
 import { getUserConnect } from '../../../utils/api';
 function Welcome() {
     
     const [currentUser,setCurrentUser]=useState(undefined);
-    const history=useHistory();
     useEffect(()=>{
         axios.get(getUserConnect ,{
             headers: {

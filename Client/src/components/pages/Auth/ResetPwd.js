@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import  { useHistory } from 'react-router-dom'
 import {  AxiosError } from 'axios'
 import ClipLoader from "react-spinners/ClipLoader";
+import styled from 'styled-components';
 
 const ResetPwd = () => {
 let [loading, setLoading] = useState(false);
@@ -127,7 +128,7 @@ var getObject={
     />
       </div>
       
-      <div className="register-photo">
+      <Forgetpwd >
         <div className="form-container">
           
             <div className="image-holders">
@@ -162,11 +163,209 @@ var getObject={
             </form>
            
         </div>
-    </div>
+    </Forgetpwd>
    
 
     </>
   )
 }
+const Forgetpwd=styled.div`
+.loading-spinner{
+  background-color: red;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+  z-index: 9999999999;
+  overflow: hidden;
+}
+.loading {
+  position: fixed;
+  left: 0px;
+  top: 0;
+  width: 99%;
+  height: 100%;
+  z-index: 9999999999;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.9);
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+     .svg_change_place{
+   margin-left: 30px !important;
+   margin-top: -20px !important;
+    text-align: right;
+    
+  }
+   background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 15%, rgba(206,220,223,1) 100%);
+    height: 100%;
+    min-height:100vh;
+    padding: 90px 0; 
+    form {
+      .row .btn:hover {
+        background-color: #4c7391;
+    }
+    .row .btn:focus {
+    background-color: #4c7391;
+    }
+  .row .btn:active {
+      background-color: #4c7391;
+  }
+.mobil_hom_icon{
+    display: none;
+  }
+h2 {
+    font-size: 24px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+  }
+  .btn-primary:active {
+    transform: translateY(1px);
+  }
+  .already {
+    display: block;
+    text-align: center;
+    
+    font-size: 13px;
+  }
+  .btn-primary:hover, .btn-primary:active {
+    background: #3273a5;
+  }
+  .form-control {
+    background: #f7f9fc;
+    border: none;
+    border-bottom: 1px solid #dfe7f1;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    color: inherit;
+    text-indent: 6px;
+    height: 40px;
+  }
+  .form-check {
+    font-size: 13px;
+    line-height: 20px;
+  }
+  .btn-primary {
+    background: #65A2D1;
+    border: none;
+    border-radius: 4px;
+    padding: 11px;
+    box-shadow: none;
+    margin-top: 35px;
+    text-shadow: none;
+    outline: none !important;
+  }
+      .row .btn {
+      font-size: 14px;
+     color: #FFF;
+     border: 1px solid #FFF;
+     input[type='password']::placeholder{
+      color: #BDBDBD;
+    }
+    input[type='Number']::placeholder{
+    color: #BDBDBD;
+  }
+    }
+    h1,label{
+        color: #FFF;
+    }
+    border-radius: 0% 3% 3% 0% !important; 
+    display: table-cell;
+    height: 100% !important;
+    width: 420px;
+    background: #8EB2CD;
+    padding: 20px 30px;
+    color:#676767 ;
+    input[type="email"]{
 
+    border:10px solid #B6CDDC;
+    border-top: 0px;
+    border-bottom: 0px;
+    border-right: 0px;
+
+    input[type="text"]{
+    border:10px solid #B6CDDC !important;
+    border-top: 0px;
+    border-bottom: 0px;
+    border-right: 0px;
+
+  }
+}
+    
+  }
+  .image-holders{
+    
+    display: table-cell;
+    width: auto;
+    background: url('/images/login.png') center center no-repeat; 
+    background-size: cover;
+    .hr{
+      width: 50px;
+      background-color: #FFF;
+      border-radius: 30px;
+      margin-left: auto;
+      margin-right: auto;
+      height: 10px;
+  }
+  h1,h2,h3,h4,h5,h6,p{
+    color: #FFF;
+    margin: 10px;
+  
+  }
+  .contents{
+      margin: 80px 30px 30px 30px;
+    text-align: center;
+  }
+  
+  }
+  .form-container {
+    border-radius: 0% 10% 10% 0% !important;
+    display: table;
+    max-width: 900px;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+  }
+  @media (max-width:833px){
+        .image-holders{
+            display: none  !important;
+          }
+        .image-holders {
+            
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+        form{
+            height: 800px !important;
+          }
+      }
+      @media (max-width:600px) {
+          form {
+            padding: 40px ;
+          }
+          
+        }
+      @media (max-width:819px){
+        .mobil_hom_icon{
+          display: flex;
+          justify-content: end;
+          
+        }
+        .image-holders{
+          display: none  !important;
+        }
+        .image-holders {
+        margin-left: 50px;
+        margin-right: 50px;
+        }
+        
+          padding: 0px !important;
+          border-radius: 0px !important;
+          
+        
+      }
+`;
 export default ResetPwd;

@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button, Form, Message } from "semantic-ui-react";
 import '../css/CardClass.css';
 
@@ -8,13 +8,9 @@ import '../css/CardClass.css';
 function FormTheme(props) {
   const [titre, SetTitre] = useState("");
   const [description, SetDescription] = useState("");
-  const [dateCreation, SetDateCreation] = useState(Date.now());
-  const [formClassName, SetFormClassName] = useState("");
-  const [formSuccessMessage, SetFormSuccessMessage] = useState("");
-  const [formErrorMessage, SetFormErrorMessage] = useState("");
-  const CurrentClass = JSON.parse(localStorage.getItem(""));
 
-  const seanceId = props.seanceId;
+  const [formClassName] = useState("");
+
 
   
 

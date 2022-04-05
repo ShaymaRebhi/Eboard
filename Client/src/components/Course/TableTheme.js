@@ -5,14 +5,10 @@ import {
   Grid,
   Header,
   Segment,
-  Accordion,
-  Button ,
-  Divider,
-  Transition,
-  Image
+  
 } from "semantic-ui-react";
 import ModalConfirmDelete from "./ModalConfirmDelete";
-import { Link, BrowserRouter as Router   } from "react-router-dom";
+import { Link  } from "react-router-dom";
 import ModalTheme from "./ModalTheme";
 import '../css/CardClass.css';
 import Courses from "./Courses";

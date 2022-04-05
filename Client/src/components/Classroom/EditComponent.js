@@ -1,6 +1,6 @@
-import React, { components }  from 'react';
+import React  from 'react';
 import { useState } from "react";
-import { Button, Dropdown, Modal } from "semantic-ui-react";
+import {  Dropdown, Modal } from "semantic-ui-react";
 export function EditComponent(){
     const [modalOpen, SetModalOpen] = useState(false);
   

@@ -6,16 +6,15 @@ import Dropzone from "react-dropzone-uploader";
 import {
   Button,
   Dimmer,
-  Dropdown,
+
   Form,
   Header,
   Loader,
   Message,
-  Select,
+ 
 } from "semantic-ui-react";
-import styled from 'styled-components';
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import TextareaAutosize from "react-textarea-autosize";
 

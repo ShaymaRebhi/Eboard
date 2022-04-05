@@ -8,6 +8,7 @@ import '../SideBar/Sidebar.css'
 import NavbarInside from '../NavbarInside/NavbarInside';
 import Calendar from '../Classroom/Calendar';
 import { useHistory } from 'react-router-dom';
+import Reclamation from '../Reclamations/Reclamation';
 
 
 function HomeClassroom(){
@@ -36,6 +37,11 @@ function HomeClassroom(){
                                     path="/calendar"
                                     exact
                                     component={Calendar}
+                                />
+                                <PrivateRoute
+                                    path="/Reclamation"
+                                    exact
+                                    component={Reclamation}
                                 />
 
                             </div>

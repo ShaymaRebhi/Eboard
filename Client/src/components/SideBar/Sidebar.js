@@ -1,16 +1,13 @@
 import { Link } from "react-router-dom";
 import {
   Card,
-  Image, 
+
   Icon,
-  Message,
+
   Menu,  
-  Label,
+
   Grid, 
-  Divider,
-  Dropdown,
-  Segment,
-  Step,
+ 
 } from "semantic-ui-react";
 import React  from 'react';
 import '../css/Sidebar.css';

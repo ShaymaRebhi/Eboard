@@ -8,7 +8,7 @@ import {IconContext} from 'react-icons';
 import { Link } from 'react-router-dom';
 import * as IOIcons from "react-icons/io";
 import Admin  from '../../../Assets/Images/admin.jpg'
-import { Button } from '../Home/Buttons/Button';
+import Student from '../../../Assets/Images/student.jpg'
 function Students() {
   const columns = [
     { field: 'id', headerName: 'ID', width: 10 },
@@ -20,7 +20,7 @@ function Students() {
     { field: 'Action', headerName: 'Action', width: 80,renderCell: (params)=>{
         return (
             <div>
-                <IconContext.Provider value={{color:'#8EB2CD'}}>
+                <IconContext.Provider value={{color:'#8EB2CD',size: '18px'}}>
                     <Link to="#"><FaICons.FaEdit></FaICons.FaEdit></Link>&nbsp;&nbsp;&nbsp;&nbsp;
                     <Link to="#"><MDICons.MdDeleteForever></MDICons.MdDeleteForever></Link>
                 </IconContext.Provider>
@@ -38,51 +38,17 @@ function Students() {
     
   ];
 
-  const Table=styled.div`
-    .butoons{
-        font-size:2rem;
-        background-color:#8EB2CD;
-        border:none;
-        color:#fff;
-        &:hover{
-            background-color:#4c7391;
-        }
-    }
-    margin:0px 100px 0px 250px;
-    margin-left:auto;
-    height: 800px;
-    width:70%;
-    
-  
-    img{
-        top:0;
-        width:450px;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-    }
-    background-image:url('${Admin}') ;
-  .table{
-      font-size:15pt;
-      border:#8EB2CD;
-
-  }
-  .MuiDataGrid-root .MuiDataGrid-cell:focus-within {
-        outline: none !important;
-        border:none !important;
-  }     
-  `;
   return (
     <div>
     <Table>
                
-               <h1>Students</h1>
+              <div className='h1' img={Student}> <h1>Students</h1></div>
                <button className='butoons'><IOIcons.IoIosAddCircle /></button>
                  <Box
                        sx={{
-                           height: 400,
-                           backgroundColor: '#FFF',
-                           fontSize:'50px'
+                           height: 430,
+                           backgroundColor: '#FFF'
+                          
                        }}
              >
                    <DataGrid
@@ -102,4 +68,56 @@ function Students() {
   )
 }
 
+const Table=styled.div`
+h1:last-child{
+  font-size:4rem !important;
+  text-transform:uppercase;
+}
+.h1{
+  width:100%;
+  height:200px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  
+  background-color:#8cb1cc;
+  color:white;
+}
+button{
+            margin-bottom:10px;
+            display:flex;
+            justify-content:end;
+        }
+.butoons{
+    font-size:2rem;
+    background-color:#8EB2CD;
+    border:none;
+    color:#fff;
+    &:hover{
+        background-color:#4c7391;
+    }
+}
+margin-left:auto;
+margin-right:auto;
+width:70%;
+
+
+img{
+    top:0;
+    width:450px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+background-image:url('${Admin}') ;
+.table{
+
+  border:#8EB2CD;
+
+}
+.MuiDataGrid-root .MuiDataGrid-cell:focus-within {
+    outline: none !important;
+    border:none !important;
+}     
+`;
 export default Students

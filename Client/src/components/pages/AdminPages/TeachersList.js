@@ -8,24 +8,38 @@ import {IconContext} from 'react-icons';
 import { Link } from 'react-router-dom';
 import * as IOIcons from "react-icons/io";
 import Admin  from '../../../Assets/Images/admin.jpg'
-import { Button } from '../Home/Buttons/Button';
+import Switch from '@material-ui/core/Switch';
 export default function TeachersList() {
+  const [checked,setChecked]=React.useState(false);
+    const changeRequiredValue = (rq,i) => {
+        console.log(i);
+        if(checked) {setChecked(false);}
+        else{
+            setChecked(true);
+        }
+    }
   const columns = [
     { field: 'id', headerName: 'ID', width: 10 },
     { field: 'FirstName', headerName: 'FirstName', width: 120 },
     { field: 'LastName', headerName: 'LastName', width: 120 },
-    { field: 'Email', headerName: 'Email', width: 350 },
+    { field: 'Email', headerName: 'Email', width: 230 },
     { field: 'CIN', headerName: 'CIN', width: 120 },
     { field: 'Gender', headerName: 'Gender', width: 100 },
+    { field: 'Status', headerName: 'Status', width: 100,renderCell: (params)=>{
+      return (
+          <div>
+              <Switch onChange={(e)=>changeRequiredValue(e.target.checked,params.id)} checked={checked}/>
+          </div>
+      )} },
     { field: 'Action', headerName: 'Action', width: 80,renderCell: (params)=>{
         return (
             <div>
-                <IconContext.Provider value={{color:'#8EB2CD'}}>
+                <IconContext.Provider value={{color:'#8EB2CD',size: '18px'}}>
                     <Link to="#"><FaICons.FaEdit></FaICons.FaEdit></Link>&nbsp;&nbsp;&nbsp;&nbsp;
                     <Link to="#"><MDICons.MdDeleteForever></MDICons.MdDeleteForever></Link>
                 </IconContext.Provider>
             </div>
-        )} },
+        )} }
    
   ];
   const rows = [
@@ -36,47 +50,15 @@ export default function TeachersList() {
     { id: 5, FirstName: 'Badis',LastName:"Raissi",Email:"badis.raissi@esprit.tn",CIN:12547853,Gender:"M"},
     { id: 6, FirstName: 'Badis',LastName:"Raissi",Email:"badis.raissi@esprit.tn",CIN:12547853,Gender:"M"}
     
+    
   ];
 
-  const Table=styled.div`
-    .butoons{
-        font-size:2rem;
-        background-color:#8EB2CD;
-        border:none;
-        color:#fff;
-        &:hover{
-            background-color:#4c7391;
-        }
-    }
-    margin:0px 100px 0px 250px;
-    margin-left:auto;
-    height: 800px;
-    width:70%;
-    
   
-    img{
-        top:0;
-        width:450px;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-    }
-    background-image:url('${Admin}') ;
-  .table{
-      font-size:15pt;
-      border:#8EB2CD;
-
-  }
-  .MuiDataGrid-root .MuiDataGrid-cell:focus-within {
-        outline: none !important;
-        border:none !important;
-  }     
-  `;
   return (
     <div>
          <Table>
                     
-                    <h1>Teachers</h1>
+                    <div className='h1'><h1>Teachers</h1></div>
                     <button className='butoons'><IOIcons.IoIosAddCircle /></button>
                       <Box
                             sx={{
@@ -101,3 +83,54 @@ export default function TeachersList() {
     </div>
   )
 }
+const Table=styled.div`
+  h1:last-child{
+  font-size:4rem !important;
+  text-transform:uppercase;
+}
+.h1{
+  width:100%;
+  height:200px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  
+  background-color:#8cb1cc;
+  color:white;
+}
+button{
+            margin-bottom:10px;
+        }
+    .butoons{
+        font-size:2rem;
+        background-color:#8EB2CD;
+        border:none;
+        color:#fff;
+        &:hover{
+            background-color:#4c7391;
+        }
+    }
+    margin-left:auto;
+    margin-right:auto;
+    height: 800px;
+    width:70%;
+    
+  
+    img{
+        top:0;
+        width:450px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+    background-image:url('${Admin}') ;
+  .table{
+      
+      border:#8EB2CD;
+
+  }
+  .MuiDataGrid-root .MuiDataGrid-cell:focus-within {
+        outline: none !important;
+        border:none !important;
+  }     
+  `;
