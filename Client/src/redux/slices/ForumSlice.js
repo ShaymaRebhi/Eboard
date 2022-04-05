@@ -7,29 +7,30 @@ export const createForum = createAsyncThunk(
     "forum",
     async (forum, thunkAPI) => {
         const response = await api.createForum(forum);
+        console.log(response.data)
         return response.data;
     }
 );
 
 let initialState = {
-    forums: [],
+    values: [],
 };
 export const ForumSlice = createSlice({
     name: "Forum",
     initialState,
     reducers: {
         getForums: ( state ,action)=> {
-            state.forums = action.payload
+            state.values = action.payload
         },
         deleteForum:(state ,action)=>{
             const payload=action.payload;
-            state.forums=state.values.filter((forum)=>forum._id!==payload);
+            state.values=state.values.filter((forum)=>forum._id!==payload);
         }
 
     },
     extraReducers: {
         [createForum.fulfilled]: (state, action) => {
-            state.forums.push(action.payload.data);
+            state.values.push(action.payload);
         },
 
     },
@@ -42,13 +43,11 @@ export const {
     deleteForum
 } = ForumSlice.actions;
 
-//thunk
+
 export const affichage = () => async (dispatch) => {
     try {
-        const { data } = await api.getForums();
-
-        dispatch(getForums(data.data));
-        console.log(data.data)
+        const {data} = await api.getForums();
+        dispatch(getForums(data));
     } catch (error) {
         console.log(error.message);
     }
@@ -62,7 +61,7 @@ export const supprimer = (id) => async (dispatch) => {
         console.log(error.message);
     }
 };
-export const selectForum = (state) => state.forums;
+export const selectForum = (state) => state.forumSlice.values;
 
 
 export default ForumSlice.reducer;

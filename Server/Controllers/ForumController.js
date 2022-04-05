@@ -1,4 +1,4 @@
-const User =require('../Model/User')
+const Comment =require('../Model/Comment')
 const Forum =require('../Model/Forum')
 const {loginValidation}=require('../Validation/Validation.js')
 
@@ -16,7 +16,7 @@ exports.add = async (req,res) => {
     try{
         console.log(req.body);
         await forum.save();
-        res.send("Forum added");
+        res.send(forum);
 
     }catch(err){
         res.send(err);
@@ -24,7 +24,7 @@ exports.add = async (req,res) => {
     }
 }
 exports.getAll = async(req,res) => {
-    await Forum.find({}).populate('User').then(Forum=>{
+    await Forum.find({}).populate('User').populate('Comments').exec().then(Forum=>{
         return res.status(200).json(Forum);
     }).catch(err=>{
         return res.json(err);
@@ -32,7 +32,7 @@ exports.getAll = async(req,res) => {
 }
 
 exports.findById = async(req,res) => {
-    await Forum.findOne({_id:req.params.id}).populate('User').then(Forum=>{
+    await Forum.findOne({_id:req.params.id}).populate('User').populate('Comments').then(Forum=>{
         return res.status(200).json(Forum);
     }).catch(err=>{
         return res.json(err);

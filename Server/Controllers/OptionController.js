@@ -3,7 +3,7 @@ const Option = require('../Model/Option');
 
 exports.GetOption = async (req,res,next) =>{
     try {
-        Option.find().then(()=>res.json(Option));
+        Option.find().then((Option)=>res.json(Option));
 
     } catch (error) {
         res.status(404).json({message : error.message});
@@ -12,7 +12,7 @@ exports.GetOption = async (req,res,next) =>{
 
 exports.deleteOption = async (req,res) =>{
     Option.deleteOne({ _id: req.params.id })
-        .then(deleteConfirmation => res.json(deleteConfirmation))
+        .then(res.status(200).send(`Option is succussffully deleted`))
         .catch(err => res.status(400).json(err));
 }
 exports.addOption = async(req,res) => {
@@ -25,4 +25,22 @@ exports.addOption = async(req,res) => {
             message: 'option Created'
         });
     })
+}
+
+exports.updateOption = async(req,res)=>{
+    const option =  await Option.findOne({_id:req.body._id});
+    const newOption=await Option.findByIdAndUpdate(option._id,req.body).then((Option)=>{
+        return res.status(200).send(`Option is succussffully Updated`);
+    }).catch(err=>{
+        return res.json(err);
+    })
+}
+
+exports.GetOneOption = async(req,res) => {
+    await Option.findOne({_id:req.params.id})
+        .then(Option=>{
+            return res.status(200).json(Option);
+        }).catch(err=>{
+            return res.json(err);
+        });
 }

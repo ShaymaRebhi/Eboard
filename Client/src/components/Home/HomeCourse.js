@@ -16,6 +16,8 @@ import DisplayTask from "../Task/DisplayTask";
 import CreateTask from "../Task/CreateTask";
 import TaskList from "../Task/TaskList";
 import { useHistory } from 'react-router-dom';
+import EditTask from "../Task/EditTask";
+import EditQuiz from "../Quiz/EditQuiz";
 
 function HomeCourse(){
     const history=useHistory();
@@ -54,6 +56,10 @@ function HomeCourse(){
                                     exact component={CreateQuiz}
                                 />
                                 <PrivateRoute
+                                    path="/updateQuiz/:id"
+                                    exact component ={EditQuiz}
+                                />
+                                <PrivateRoute
                                     path="/displayQuiz"
                                     exact component ={DisplayQuiz}
                                 />
@@ -64,6 +70,10 @@ function HomeCourse(){
                                 <PrivateRoute
                                     path="/formAddTask"
                                     exact component ={CreateTask}
+                                />
+                                <PrivateRoute
+                                    path="/updateTask/:id"
+                                    exact component ={EditTask}
                                 />
                                 <PrivateRoute
                                     path="/tasklist"
