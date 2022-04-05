@@ -52,13 +52,13 @@ function Reclamation() {
           toast.success('Reclamation saved successfuly', {
             position: "bottom-right" 
           });
-          
+          setLoading(false)
         }).catch(err => {
               
               toast.error('Error', {
                         position: "bottom-right" 
                 });
-           
+                setLoading(false)
             //addToast("test error", { appearance: 'error' });
         }).finally(res=>{
           setLoading(false)

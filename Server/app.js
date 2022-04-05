@@ -13,6 +13,8 @@ const taskRoute = require('./routes/Task')
 const ChatRoute = require('./routes/Chat') 
 const bodyparser = require("body-parser")
 const socket=require('socket.io')
+const ReclamationRoute = require('./routes/Reclamations') 
+
 require('dotenv/config');
 //------------la modéfication --------------------
 var multer  = require('multer')
@@ -48,7 +50,7 @@ app.use('/option', optionRoute);
 app.use('/question', questionRoute);
 app.use('/task', taskRoute);
 app.use('/forum',forumRouter);
-
+app.use('/reclamation',ReclamationRoute);
 
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));

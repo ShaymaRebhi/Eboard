@@ -18,10 +18,7 @@ function HeroSection() {
     <div className='hero-container'>
 
       <h1>E-BOARD LEARNING</h1><br />
-      <p>La formation en ligne, terme recommandé en France par la DGLFLF,
-         ou encore l'apprentissage en ligne, l'e-formation ou l'e-learning, désignent
-         l'ensemble des solutions et moyens permettant l'apprentissage par des moyens
-          électroniques.</p>
+      <p>Online training, a term recommended in Tunisia by the DGLFLF, or online learning, e-training or e-learning, refer to all the solutions and means allowing learning by electronic means.</p>
       
       <div className='hero-btns'>
         
