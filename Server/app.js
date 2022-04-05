@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cors = require('cors');
 const userRoute = require('./routes/User')
 var forumRouter = require('./routes/Forum');
+const CommentRoute = require('./routes/Comment')
 const quizRoute = require('./routes/Quiz')
 const optionRoute = require('./routes/Option')
 const questionRoute = require('./routes/QuestionQuiz')
@@ -51,6 +52,8 @@ app.use('/question', questionRoute);
 app.use('/task', taskRoute);
 app.use('/forum',forumRouter);
 app.use('/reclamation',ReclamationRoute);
+app.use('/comment',CommentRoute);
+
 
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));

@@ -73,7 +73,10 @@
     "styled-components": "^5.3.3",
     "swiper": "^6.8.4",
     "uuid": "^8.3.2",
-    "yup": "^0.29.3"
+    "yup": "^0.29.3",
+    "moment": "^2.29.1",
+    "react-paginate": "^8.1.2",
+    "react-share": "^4.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
