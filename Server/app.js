@@ -6,11 +6,12 @@ var logger = require('morgan');
 var cors = require('cors');
 const userRoute = require('./routes/User')
 var forumRouter = require('./routes/Forum');
+const CommentRoute = require('./routes/Comment')
 const quizRoute = require('./routes/Quiz')
 const optionRoute = require('./routes/Option')
 const questionRoute = require('./routes/QuestionQuiz')
 const taskRoute = require('./routes/Task')
-const ChatRoute = require('./routes/Chat') 
+const ChatRoute = require('./routes/Chat')
 const bodyparser = require("body-parser")
 const socket=require('socket.io')
 require('dotenv/config');
@@ -48,6 +49,7 @@ app.use('/option', optionRoute);
 app.use('/question', questionRoute);
 app.use('/task', taskRoute);
 app.use('/forum',forumRouter);
+app.use('/comment',CommentRoute);
 
 
 app.get("/",(req,res)=>{

@@ -9,5 +9,6 @@ router.get('/forum/:id',CommentController.findByForumId);
 router.delete('/delete/:id',CommentController.delete);
 router.post('/new',CommentController.add);
 router.put('/update',CommentController.update);
+router.post('/like',CommentController.like);
 
 module.exports = router;

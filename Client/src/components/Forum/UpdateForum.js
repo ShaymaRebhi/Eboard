@@ -1,26 +1,26 @@
 import React,{useState}  from 'react'
 import '../css/Admin.css'
 import { useDispatch } from 'react-redux'
-import {createForum} from "../../redux/slices/ForumSlice";
+import {update} from "../../redux/slices/ForumSlice";
 
 
-function CreateForum() {
-    const login=JSON.parse(localStorage.getItem('login'));
+function UpdateForum(props) {
 
-    const [forum,setForum]=useState({Title:"",Description:"",Tags:"",User:login.User._id});
+    const [forum,setForum]=useState(props.forum);
 
     const dispatch = useDispatch();
 
     const HandleSubmit = () => {
-        if((forum.Title==="") || (forum.Description==="")) {
+        if((forum.Title==="") || (forum.Description==="") || (forum.Tags==="")) {
             alert("invalid Form!");
         }
         else{
-            dispatch(createForum(forum));
-            setForum({Title:"",Description:"",Tags:"",User:"623113a28d227d001659e502"})
-            alert("Forum added")
+            dispatch(update(forum));
+
+            alert("Forum updated")
         }
     };
+
     return (
         <div >
             <div className="form">
@@ -51,10 +51,10 @@ function CreateForum() {
                            }
                     />
                 </div>
-                <button className="btn btn-primary" onClick={HandleSubmit}>Review</button>
+                <button className="btn btn-primary" onClick={HandleSubmit}>Update</button>
             </div>
         </div>
     )
 }
 
-export default CreateForum
+export default UpdateForum
