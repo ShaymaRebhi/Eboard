@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import { Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router,Redirect, Route, Switch } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/pages/Auth/Login';
 import Admin from './components/pages/Auth/Admin';
@@ -19,7 +19,6 @@ import HomeAdmin from './components/Home/HomeAdmin';
 import Forums from "./components/Forum/Forums";
 import Forum from "./components/Forum/Forum";
 import CreateForum from "./components/Forum/CreateForum";
-import ForgetPwdAdmin from './components/pages/Auth/ForetPwdAdmin';
 function App() {
 
 
@@ -69,7 +68,6 @@ function App() {
             />
             <Route exact path="/chat" component={ChatUser} />
             <Route exact path='/Eboard/auth/admin' component={Admin} />
-            <Route exact path='/Eboard/auth/forget' component={ForgetPwdAdmin} />
             <Route exact path='/login' component={Login} />
             <Route path="/forget" component={ForgetPwd} />
             <Route exact path='/reset/:id' component={ResetPwd} />
@@ -101,11 +99,6 @@ function App() {
                 render={(props) => <HomeClassroom {...props} />}
             />
             <Route
-                path="/Reclamation"
-                exact
-                render={(props) => <HomeClassroom {...props} />}
-            />
-            <Route
                 path="/class"
                 exact
                 render={(props) => <HomeCourse {...props} />}
@@ -117,6 +110,11 @@ function App() {
             />
             <Route
                 path="/createquiz"
+                exact
+                render={(props) => <HomeCourse {...props} />}
+            />
+            <Route
+                path="/updateQuiz/:id"
                 exact
                 render={(props) => <HomeCourse {...props} />}
             />
@@ -152,6 +150,11 @@ function App() {
             />
             <Route
                 path="/formAddTask"
+                exact
+                render={(props) => <HomeCourse {...props} />}
+            />
+            <Route
+                path="/updateTask/:id"
                 exact
                 render={(props) => <HomeCourse {...props} />}
             />
