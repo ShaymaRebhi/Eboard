@@ -1,6 +1,6 @@
 import React from 'react'
 import './CheckQuizAnswers.css'
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import { Modal, ModalBody, ModalFooter} from 'reactstrap';
 function CheckQuizAnswers(props) {
     let optioncorrect = "";
 

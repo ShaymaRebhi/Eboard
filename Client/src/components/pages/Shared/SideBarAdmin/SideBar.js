@@ -1,6 +1,5 @@
 import React from 'react'
 
-import styled from 'styled-components'
 import * as FAIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as IOIcons from "react-icons/io";
@@ -37,12 +36,6 @@ export const SidebarData=[
         title:' Reclamations',
         path:'/Eboard/Reclamations',
         icon:<MDIcons.MdFeedback />,
-        cName:'nav-text'
-    },
-    {
-        title:' Support',
-        path:'/Eboard/Supports',
-        icon:<IOIcons.IoIosHelpCircle />,
         cName:'nav-text'
     }
 ]

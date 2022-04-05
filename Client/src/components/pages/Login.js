@@ -1,10 +1,9 @@
 import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { faEnvelope} from '@fortawesome/free-solid-svg-icons'
+
 
 import Footer from '../Footer'
 import './../css/Login.css'
-import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import Inputs from '../Inputs'
 const Login = () => {
   const [values,setValues]=useState({

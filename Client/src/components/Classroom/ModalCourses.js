@@ -1,5 +1,5 @@
 import React from "react";
-import { Dropdown, Feed, Icon, Modal } from "semantic-ui-react";
+import { Dropdown, Modal } from "semantic-ui-react";
 import FormCourses from "./FormCourses";
 import '../css/CardClass.css';
 import styled from 'styled-components';
@@ -7,10 +7,7 @@ import styled from 'styled-components';
 
 
 function ModalCourses(props) {
-  const Cc = styled.div`
   
-   `
-  ;
   return (
     <>
       <Modal className="theme"

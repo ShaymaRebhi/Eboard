@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../../App.css';
 import Footer from '../Footer';
-import Inputs from '../Inputs';
 import '../css/SignUp.css';
 export default function SignUp() {
   const [values,setValues]=useState({

@@ -1,11 +1,9 @@
 import React, {useState} from 'react'
-import Accordion from "@material-ui/core/Accordion";
 import './DisplayTask.css'
 import "react-dropzone-uploader/dist/styles.css";
-import Dropzone from "react-dropzone-uploader";
 
 function DisplayTask() {
-    const [questionFile, setQuestionFile] = useState("")
+    const [questionFile] = useState("")
 
     const [task, setTask] = useState(
       [{

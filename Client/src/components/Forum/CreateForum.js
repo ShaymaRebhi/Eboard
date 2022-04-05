@@ -5,7 +5,9 @@ import {createForum} from "../../redux/slices/ForumSlice";
 
 
 function CreateForum() {
-    const [forum,setForum]=useState({Title:"",Description:"",Tags:"",User:"623113a28d227d001659e502"});
+    const login=JSON.parse(localStorage.getItem('login'));
+
+    const [forum,setForum]=useState({Title:"",Description:"",Tags:"",User:login.User._id});
 
     const dispatch = useDispatch();
 

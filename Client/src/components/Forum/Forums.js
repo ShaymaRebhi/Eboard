@@ -1,15 +1,18 @@
 import React,{useState,useEffect}  from 'react'
 import './Forum.css'
-import {affichage, selectForum,supprimer} from "../../redux/slices/ForumSlice";
+import {affichage, selectForum,supprimer,searchForum} from "../../redux/slices/ForumSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { NavLink} from 'react-router-dom'
 
 import CreateForum from "./CreateForum";
+import Navbar from "../pages/Shared/Navbar";
+import Footer from "../pages/Shared/Footer";
 
 function Forums() {
     const dispatch = useDispatch();
     const  forums = useSelector(selectForum );
+
     useEffect(() => {
         dispatch(affichage())
     }, [dispatch]);
@@ -18,23 +21,24 @@ function Forums() {
         dispatch(supprimer(id))
     };
 
+    const Search =(search) =>{
+        dispatch(searchForum(search))
+    };
+    const login=JSON.parse(localStorage.getItem('login'));
+
     return (
         <div>
-         
+            <Navbar />
             <div className="bodyy" style={{padding: '2% 0% 2%'}}>
                 <div className="container">
                     <div className="row">
 
-                        <div className="col-lg-12 mb-12">
+                        <div className="col-lg-12 mb-12" style={{padding: '13% 0% 0%'}}>
                             <div className="row text-left mb-5">
-                                <div className="col-lg-6 mb-3 mb-sm-0">
-                                    <input type="text" placeholder="Recherche" className="form-control"/>
-                                </div>
-                                <div className="col-lg-6 mb-3 mb-sm-0">
-                                    <select className="form-control">
-                                        <option>test</option>
-                                        <option>test2</option>
-                                    </select>
+                                <div className="col-lg-12 mb-3 mb-sm-0">
+                                    <input type="text" placeholder="Recherche" className="form-control"
+                                        onChange={(e)=>Search({search:e.target.value})}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -58,19 +62,30 @@ function Forums() {
                                     </div>
                                     <div className="col-md-4 op-7">
                                         <div className="row text-center op-7">
-                                            <div className="col px-1"><i className="ion-connection-bars icon-1x"></i> <span
-                                                className="d-block text-sm">141 Votes</span></div>
-                                            <div className="col px-1"><i className="ion-ios-chatboxes-outline icon-1x"></i>
-                                                <span className="d-block text-sm">122 Replys</span></div>
+                                            {/*<div className="col px-1">
+                                                <i className="ion-connection-bars icon-1x"></i>
+                                                <span className="d-block text-sm">141 Votes</span>
+                                            </div>*/}
                                             <div className="col px-1">
+                                                <i className="ion-ios-chatboxes-outline icon-1x"/>
+                                                <span className="d-block text-sm">{(f!==null)?f.Comments.length:''} Replys</span>
+                                            </div>
+                                            {/*<div className="col px-1">
                                                 <i className="ion-ios-eye-outline icon-1x"></i>
                                                 <span className="d-block text-sm">290 Views</span>
-                                            </div>
-                                            <div className="col px-1">
-                                                <a href="javascript:void(0)" onClick={()=>Delete(f._id)}>
-                                                    <i className="fa fa-trash"/>
-                                                </a>
-                                            </div>
+                                            </div>*/}
+                                            {(login.User._id===f.User)?
+                                                <div className="col px-1">
+                                                    <a href="javascript:void(0)" onClick={()=>Delete(f._id)}>
+                                                        <i className="fa fa-trash"/>
+                                                    </a>
+                                                </div>
+                                                :
+                                                <div className="col px-1">
+
+                                                </div>
+                                            }
+
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +121,7 @@ function Forums() {
                 </div>
 
             </div>
-            
+            <Footer />
         </div>
     )
 }
