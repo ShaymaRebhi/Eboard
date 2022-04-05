@@ -10,7 +10,7 @@ const quizRoute = require('./routes/Quiz')
 const optionRoute = require('./routes/Option')
 const questionRoute = require('./routes/QuestionQuiz')
 const taskRoute = require('./routes/Task')
-const ChatRoute = require('./routes/Chat') 
+const ChatRoute = require('./routes/Chat')
 const bodyparser = require("body-parser")
 const socket=require('socket.io')
 require('dotenv/config');
@@ -62,7 +62,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
 
 
-   // Pass to next layer of middleware
+  // Pass to next layer of middleware
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
