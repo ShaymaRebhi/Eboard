@@ -75,7 +75,7 @@ const aff = (id) => {
               teacher='amine'
               class={f.classSection}
               meet ='IN MEETING NOW'
-              path='/class'
+              path='/feed'
               src1=""
               
             />

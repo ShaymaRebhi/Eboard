@@ -15,6 +15,7 @@ const ChatRoute = require('./routes/Chat')
 const bodyparser = require("body-parser")
 const socket=require('socket.io')
 const ReclamationRoute = require('./routes/Reclamations') 
+const classRoute = require('./routes/Class.js')
 require('dotenv/config');
 
 //------------la modéfication --------------------
@@ -53,7 +54,7 @@ app.use('/task', taskRoute);
 app.use('/forum',forumRouter);
 app.use('/reclamation',ReclamationRoute);
 app.use('/comment',CommentRoute);
-
+app.use('/class',classRoute);
 
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));

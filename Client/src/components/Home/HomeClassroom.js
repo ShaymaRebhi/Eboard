@@ -9,6 +9,9 @@ import NavbarInside from '../NavbarInside/NavbarInside';
 import Calendar from '../Classroom/Calendar';
 import { useHistory } from 'react-router-dom';
 import Reclamation from '../Reclamations/Reclamation';
+import CreateForum from '../Forum/CreateForum';
+import Forums from '../Forum/Forums';
+import Forum from '../Forum/Forum';
 
 
 function HomeClassroom(){
@@ -42,6 +45,21 @@ function HomeClassroom(){
                                     path="/Reclamation"
                                     exact
                                     component={Reclamation}
+                                />
+                                <PrivateRoute
+                                    path="/forum/new"
+                                    exact
+                                    component={CreateForum}
+                                />
+                                <PrivateRoute
+                                    path="/forums"
+                                    exact
+                                    component={Forums}
+                                />
+                                <PrivateRoute
+                                    path="/forum/:id"
+                                    exact
+                                    component={Forum}
                                 />
 
                             </div>

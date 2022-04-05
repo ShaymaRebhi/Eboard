@@ -79,7 +79,7 @@ function Forum() {
 
     return (
         <div>
-            <Navbar />
+          
             <div className="bodyy" style={{padding: '2% 0% 2%'}}>
                 <div className="container">
                     <div className="container-fluid mt-100">
@@ -240,7 +240,7 @@ function Forum() {
                     </div>
                 </div>
             </div>
-            <Footer />
+           
         </div>
     )
 }

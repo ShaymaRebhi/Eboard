@@ -35,9 +35,6 @@ function App() {
 
           <Switch>
 
-            <Route path='/forum/new' component={CreateForum} />
-            <Route path='/forums' component={Forums} />
-            <Route path='/forum/:id' component={Forum} />
             <Route
                 path="/Eboard/home"
                 exact
@@ -80,6 +77,31 @@ function App() {
                 path="/"
                 exact
                 render={(props) => <HomeEboard {...props} />}
+            />
+            
+            
+            {/* <Route path='/forum/new' component={CreateForum} /> */}
+            {/* <Route path='/forums' component={Forums} />
+            <Route path='/forum/:id' component={Forum} /> */}
+            <Route
+                path="/Reclamation"
+                exact
+                render={(props) => <HomeClassroom {...props} />}
+            />
+            <Route
+                path="/forum/new"
+                exact
+                render={(props) => <HomeClassroom {...props} />}
+            />
+             <Route
+                path="/forums"
+                exact
+                render={(props) => <HomeClassroom {...props} />}
+            />
+             <Route
+                path="/forum/:id"
+                exact
+                render={(props) => <HomeClassroom {...props} />}
             />
             <Route
                 path="/Contactus"

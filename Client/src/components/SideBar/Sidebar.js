@@ -11,7 +11,9 @@ import {
 } from "semantic-ui-react";
 import React  from 'react';
 import '../css/Sidebar.css';
-import './Sidebar.css'
+import './Sidebar.css';
+
+
 
 
 function SideBar(){
@@ -26,7 +28,7 @@ function SideBar(){
                 <Icon  name='list alternate outline' size='large' />
                 </Menu.Item>
               </Link>
-              <Link to="/">
+              <Link to="/forums">
                 <Menu.Item>
                 <Icon  name='comment outline' size='large'  />
                 </Menu.Item>

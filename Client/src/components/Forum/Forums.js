@@ -28,7 +28,7 @@ function Forums() {
 
     return (
         <div>
-            <Navbar />
+          
             <div className="bodyy" style={{padding: '2% 0% 2%'}}>
                 <div className="container">
                     <div className="row">
@@ -121,7 +121,7 @@ function Forums() {
                 </div>
 
             </div>
-            <Footer />
+            
         </div>
     )
 }
