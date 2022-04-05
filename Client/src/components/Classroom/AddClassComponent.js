@@ -10,6 +10,11 @@ import {
 } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useDispatch } from 'react-redux'
+import {addClass} from "../../redux/slices/ClassSlice";
+import {affichage} from "../../redux/slices/ClassSlice";
+import { ToastContainer, toast } from 'react-toastify';
+import {getclassByYear} from '../../utils/Class'
 
 
 
@@ -39,72 +44,40 @@ const options = [
   { key: 13, text: "white", value: "white" },
 ];
 
+
 export default function AddClassComponent() {
  
-
+  const id=JSON.parse(localStorage.getItem("login")).User._id;
   let error = { visible: false, message: "" };
-  let [color , setClassColor] = useState();
-  const selectedClass = (data) => {
-    console.log(data.target.innerText);
-    setClassColor(data.target.innerText);
-  };
   
+  const [Class,setClass]=useState({ className: "",
+  classSection: "",
+  classDatePost: Date.now(),
+  classColor: "",
+  classStatus:"Active",
+  classOwner:id ,
+  picture:"",
+ });
 
-  const formik = useFormik({
-    initialValues: {
-      classUsers: [],
-      className: "",
-      classSection: "",
-      classLevel: "",
-      classDatePost: Date.now(),
-      classDescription: "",
-      classOwner: "",
-      classColor: "",
-      classStatus:"Active",
-    },
-    validationSchema: Yup.object({
-      className: Yup.string().required(),
-      classSection: Yup.string()
-        .required()
-        .matches(
-          /^[1-5]([A-Z])\w+$/,
-          "first letter of classSection must be in 1-5"
-        ),
-      classLevel: Yup.string(),
-      classDescription: Yup.string().required(),
-    }),
-    onSubmit: async (formData) => {
-      try {
-        const lvl = formData.classSection.substring(0, 1);
-        if(color===undefined)
-        color="red";
-         
-        const data = {
-          className: formData.className,
-          classSection: formData.classSection,
-          classLevel: lvl,
-          classDescription: formData.classDescription,
-          classOwner: "",
-          classColor: color,
-          classStatus:"Active"
-        };
+    const dispatch = useDispatch();
+    
+   const HandleSubmit = () => {
+      
+        if((Class.className==="") || (Class.classSection==="") || (Class.classColor==="")) {
+          toast.error("You have an error please try again");
+        }
+        else{
+            dispatch(addClass(Class));
+           
+            dis({ type: "CLOSE_MODAL" });
+            toast.success("Class added successfuly !");
+            
+        }
+    };
 
-        
-
-         
-       
-        dis({ type: "CLOSE_MODAL" });
-       
-       
-        
-      } catch (err) {
-        error = {
-          visible: true,
-          message: JSON.stringify(err.errors, null, 2),
-        };
-      }
-    },
-  });
+  
+   
+    
 
   const [state, dis] = React.useReducer(exampleReducer, {
     open: false,
@@ -114,6 +87,18 @@ export default function AddClassComponent() {
 
   return (
     <div>
+       <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme={'colored'}
+      />
       <Button 
         circular
         content="Create Class"
@@ -130,23 +115,26 @@ export default function AddClassComponent() {
       >
         <Modal.Header>Add Class</Modal.Header>
         <Modal.Content>
-          <Form onSubmit={formik.handleSubmit}>
+          <Form >
             <Form.Group widths="equal">
               <Form.Field
                 control={Input}
                 label="Class Name"
                 placeholder="Class Name"
                 name="className"
-                onChange={formik.handleChange}
-                error={formik.errors.className}
+                onChange={(e) =>
+                setClass({ ...Class, className: e.target.value }) }
+               
               />
               <Form.Field
                 control={Input}
                 label="Class Section"
                 placeholder="Class Section"
                 name="classSection"
-                onChange={formik.handleChange}
-                error={formik.errors.classSection}
+                onChange={(e) =>
+                  setClass({ ...Class, classSection: e.target.value })
+              }
+               
               />
               <Form.Field
                 control={Dropdown}
@@ -156,26 +144,13 @@ export default function AddClassComponent() {
                 clearable
                 selection
                 options={options}
-                onChange={selectedClass}
+                onChange={(e) =>
+                  setClass({ ...Class, classColor: e.target.value })
+              }
               />
-              <Form.Field
-                control={Input}
-                label="Class Level"
-                placeholder="Class Level"
-                name="classLevel"
-                onChange={formik.handleChange}
-                value={formik.values.classSection.substring(0, 1)}
-                error={formik.errors.classLevel}
-              />
+              
             </Form.Group>
-            <Form.Field
-              control={TextArea}
-              label="Class Description"
-              placeholder="Class Description"
-              name="classDescription"
-              onChange={formik.handleChange}
-              error={formik.errors.classDescription}
-            />
+            
 
             <Form.Group>
               {error.visible && <Form.Error>{error.message}</Form.Error>}
@@ -186,7 +161,7 @@ export default function AddClassComponent() {
                 Cancel
               </Button>
               <Button.Or />
-              <Button color="blue" type="submit" onClick={() => dis({ type: "CLOSE_MODAL" })}>
+              <Button color="blue" type="submit" onClick={HandleSubmit} >
                 Save
               </Button>
             </Button.Group>

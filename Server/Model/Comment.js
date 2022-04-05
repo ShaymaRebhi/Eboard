@@ -16,9 +16,14 @@ var Comment =new Schema({
     },
     User:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'user',
-    }
+        ref:'users',
+    },
+    likes:{
+        type:Number,
+        default:0
+    },
+    Likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'like'}]
 
 
-})
+});
 module.exports = mongoose.model('comment',Comment);

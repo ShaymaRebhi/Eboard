@@ -13,7 +13,7 @@ export default function ArchieveClassComponent(props) {
  
   return (
     <>
-      <Modal
+      <Modal className="add"
         trigger={
           <Dropdown.Item onClick={handleOpen} icon="archive" text="Archive" />
         }

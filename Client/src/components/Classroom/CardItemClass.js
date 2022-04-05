@@ -2,6 +2,10 @@ import React  from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegFolder , FaRegFile , FaRegComment ,FaRegGrinHearts,FaRegAngry,FaEllipsisV} from "react-icons/fa";
 import '../css/CardClass.css';
+import { Dropdown } from 'semantic-ui-react';
+import ArchieveClassComponent from './ArchieveClassComponent';
+import EditComponent from './EditComponent';
+import { DialogContent } from '@material-ui/core';
 
 
 function CardItemClass(props) {
@@ -10,10 +14,30 @@ function CardItemClass(props) {
     <>
        
       <li className='cards__Class__item' >
-        <Link className='cards__Class__item__link' to={props.path}>
+        <div className='cards__Class__item__link' >
           <div className='cards__Class__item__pic-wrap' >
-          <div className='dropdown'><FaEllipsisV></FaEllipsisV> 
-         
+          <div className='drpd'>
+            
+          <Dropdown
+                                      fluid
+                                     
+                                      direction="left"
+                                      className="icon"
+                                      icon="ellipsis vertical"
+                                    >
+                                      <Dropdown.Menu>
+                                        <EditComponent
+                                          headerTitle="Archive Class"
+                                          buttonTriggerTitle="Archive"
+                                          
+                                        />
+                                        <ArchieveClassComponent
+                                          headerTitle="Archive Class"
+                                          buttonTriggerTitle="Archive"
+                                          
+                                        />
+                                      </Dropdown.Menu>
+                                    </Dropdown>
         
           </div>
           
@@ -32,7 +56,9 @@ function CardItemClass(props) {
               />
               </div>
           <div className='cards__Class__item__info'>
+            <Link to={props.path} >
             <h1 className='cards__Class__item__course'>{props.course}</h1>
+            </Link>
             <h5 className='cards__Class__item__teacher'>{props.teacher}</h5>
             <h6 className='cards__Class__item__class'>{props.class}</h6>
             <ul className='icons'>
@@ -49,19 +75,19 @@ function CardItemClass(props) {
            </ul>
         {props.meet =='IN MEETING NOW' ? (
         <div className='meet-btns'>        
-        <h6><i className='fas fa-circle' /> {props.meet} 
-        </h6>
+        <h5><i className='fas fa-circle' /> {props.meet} 
+        </h5>
         </div> ) : (
           <div className='offline-btns'>        
-          <h6><i className='fas fa-circle' /> {props.meet} 
-          </h6>
+          <h5><i className='fas fa-circle' /> {props.meet} 
+          </h5>
           </div>
         )}
 
         </div>
         
           
-        </Link>
+        </div>
         
       </li>
       

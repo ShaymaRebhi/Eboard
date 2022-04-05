@@ -52,7 +52,7 @@ export const {
 } = CommentSlice.actions;
 
 
-export const affichage = (id) => async (dispatch) => {
+export const affichageComment = (id) => async (dispatch) => {
     try {
         const {data} = await api.getCommentById(id);
         dispatch(getComments(data));
@@ -63,8 +63,8 @@ export const affichage = (id) => async (dispatch) => {
 
 export const update = (comment) => async (dispatch) => {
     try {
-        await api.updateComment(comment);
-        dispatch(updateComment(comment));
+        let c=await api.updateComment(comment);
+        dispatch(updateComment(c.data));
     } catch (error) {
         console.log(error.message);
     }
@@ -74,6 +74,15 @@ export const supprimer = (id) => async (dispatch) => {
     try {
         await api.deleteComment(id);
         dispatch(deleteComment(id));
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+export const like = (like) => async (dispatch) => {
+    try {
+        let comment= await api.likeComment(like);
+        dispatch(updateComment(comment.data));
     } catch (error) {
         console.log(error.message);
     }

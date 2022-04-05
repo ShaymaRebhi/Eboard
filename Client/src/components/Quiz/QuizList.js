@@ -3,8 +3,11 @@ import "./QuizList.css"
 import {useHistory} from "react-router-dom";
 import {FaTrash} from 'react-icons/fa' ;
 import {GrUpdate} from 'react-icons/gr' ;
+import {MdAssignment} from 'react-icons/md'
 import {getAllQuizs,deleteQuiz} from "../../utils/Quiz";
 import {toast, ToastContainer} from "react-toastify";
+import {Header, Icon, Item, Segment} from "semantic-ui-react";
+
 
 
 function QuizList() {
@@ -16,6 +19,7 @@ function QuizList() {
             questions :[]
         }]
     )
+    const [searchTerm,setSearchTerm] = useState([]);
     const getQuizs=()=>{
         getAllQuizs((res)=> {
             setQuizs(res.data)
@@ -28,10 +32,14 @@ function QuizList() {
         getQuizs();
     })
     const assignHomeWork= () => {
-        history.push("/assignHomeWork");
+        history.push("/createquiz");
     }
     const handelformadd = () => {
         history.push("/createquiz");
+    }
+    const handelSearchTerm = (e) =>{
+        let value = e.target.value.toLowerCase();
+        setSearchTerm(value);
     }
   return (
     <>
@@ -46,43 +54,61 @@ function QuizList() {
             draggable
             pauseOnHover
         />
-        {/*<img src="../../../public/images/quiz.jpg" alt="quizpicture" name="imagequiz" width="50%" />*/}
-        <div className="headers text-center">
-            <h1>Quiz List</h1>
-            <button className="btn btn--primary"  onClick={handelformadd}>Add Quiz</button>
+        <div style={{display:"flex"}}>
+            <img src="images/quizlist2.jpg" alt="quizpicture" width="60%"  />
+            <div className="headers text-center">
+                <h1>Quiz List</h1>
+                <button className="btn btn--primary"  onClick={handelformadd}>Add Quiz</button>
+            </div>
+        </div>
+        <div className="wrap">
+            <div className="search">
+                <input type="text" className="searchTerm" placeholder="Search" onChange={handelSearchTerm}/>
+                <i className="fa fa-search"></i>
+            </div>
         </div>
         <div className="container pb-5 ">
-            <table className="table">
-                <thead>
-                <tr>
-                    <th scope="col">Quiz Name</th>
-                    <th scope="col">Theme</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
+            {quiz.length <= 0 ? (
+                <Segment placeholder>
+                    <Header icon>
+                        <Icon name='tasks' />
+                        No quizs Added .
+                    </Header>
 
-                <tbody>
-                {quiz.map((q,i)=>(
-                    <tr>
-                        <td>{q.Title}</td>
-                        <td>{q.Theme}</td>
-                        <td>{q.Description}</td>
-                        <td> <button className="btn btn-outline-primary"  onClick={()=>getQuizEditPage(q._id)}><GrUpdate/> </button>
-                            <button className="btn btn-outline-danger"  onClick={()=>deleteQuiz(q._id,()=>{
-                                    toast.success('Task deleted successfuly', {
-                                        position: "bottom-right"
-                                    })
-                                },
-                                getQuizs()
-                            )}> <FaTrash/> </button>
-                            <button className="btn btn-outline-success" onClick={assignHomeWork}>Assign</button>
-                        </td>
-                    </tr>
-                ))}
+                </Segment>
+            ):(
+                quiz.filter((q)=>{
+                    return q.Title.toLowerCase().includes(searchTerm)
+                }).map((q,i)=>(
+                    <Segment color='grey' raised >
+                        <Item.Group divided key={i}>
+                            <Item>
+                                <Item.Image size='tiny' avatar src='images/quizz.jpg' />
+                                <Item.Content>
+                                    <Item.Header>{q.Title}</Item.Header>
+                                    <Item.Meta>
+                                        <span className='cinema'>{q.Theme}</span>
+                                    </Item.Meta>
+                                    <Item.Description>{q.Description}</Item.Description>
+                                </Item.Content>
+                            </Item>
+                            <Item className="buttons">
+                                <button className="btn btn-outline-primary"  onClick={()=>getQuizEditPage(q._id)}><GrUpdate/> </button>
+                                <button className="btn btn-outline-danger"  onClick={()=>deleteQuiz(q._id,()=>{
+                                        toast.success('Task deleted successfuly', {
+                                            position: "bottom-right"
+                                        })
+                                    },
+                                    getQuizs()
+                                )}> <FaTrash/> </button>
+                                <button className="btn btn-outline-success" onClick={assignHomeWork}><MdAssignment/></button>
+                            </Item>
+                        </Item.Group>
 
-                </tbody>
-            </table>
+                    </Segment>
+
+                ))
+            )}
         </div>
         
     </>

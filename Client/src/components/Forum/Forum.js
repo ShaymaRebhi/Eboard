@@ -4,33 +4,41 @@ import { useParams } from "react-router"
 import  * as api from "../../utils/Forum";
 
 import {useDispatch, useSelector} from 'react-redux'
-import {createComment,affichage, selectComment,supprimer,update} from "../../redux/slices/CommentSlice";
+import {createComment,affichageComment, selectComment,supprimer,update,like} from "../../redux/slices/CommentSlice";
+import Navbar from "../pages/Shared/Navbar";
+import Footer from "../pages/Shared/Footer";
+import CreateForum from "./CreateForum";
+import UpdateForum from "./UpdateForum";
+import {selectForum, getForumById, selectF} from "../../redux/slices/ForumSlice";
+import FacebookShareButton from "react-share/es/FacebookShareButton";
+import FacebookIcon from "react-share/es/FacebookIcon";
 
 
 
 function Forum() {
-    const [forum,setForum] = useState(null);
+    const  forum = useSelector(selectF );
 
     const [form,setForm]=useState(false);
+    const [forumForm,setForumForm]=useState(false);
 
     const params = useParams();
-    const getForum = async () => {
-        const {data} = await api.getForumById(params.id);
-        setForum(data);
-    };
 
 
     const dispatch = useDispatch();
     const comments = useSelector(selectComment );
 
     useEffect(() => {
-        getForum();
-        dispatch(affichage(params.id));
+        dispatch(getForumById(params.id));
+        dispatch(affichageComment(params.id));
     }, [dispatch]);
 
-    const [comment,setComment]=useState({_id:"",Comment:"",User:"623113a28d227d001659e502"});
 
-    const [commentU,setCommentU]=useState({Comment:"",Forum:params.id,User:""});
+
+    const login=JSON.parse(localStorage.getItem('login'));
+
+    const [comment,setComment]=useState({_id:"",Comment:"",Forum:params.id,User:login.User._id});
+
+    const [commentU,setCommentU]=useState({Comment:"",Forum:params.id,User:login.User._id});
 
     const HandleSubmit = () => {
         if(comment.Comment==="") {
@@ -38,7 +46,7 @@ function Forum() {
         }
         else{
             dispatch(createComment(comment));
-            setComment({Comment:"",Forum:params.id,User:"623113a28d227d001659e502"})
+            setComment({Comment:"",Forum:params.id,User:login.User._id})
         }
     };
 
@@ -50,20 +58,28 @@ function Forum() {
         setCommentU(comment)
     };
 
+    const UpdateForumForm = ()=>{
+        setForumForm(!forumForm);
+    };
+
     const HandleUpdate = () => {
         if(commentU.Comment==="") {
             alert("The comment is empty!");
         }
         else{
             dispatch(update(commentU));
-            setCommentU({_id:"",Comment:"",User:"623113a28d227d001659e502"})
+            setCommentU({_id:"",Comment:"",User:login.User._id});
             setForm(false);
         }
     };
 
+    const Like = (l) => {
+        dispatch(like(l));
+    };
+
     return (
         <div>
-            
+            <Navbar />
             <div className="bodyy" style={{padding: '2% 0% 2%'}}>
                 <div className="container">
                     <div className="container-fluid mt-100">
@@ -98,6 +114,28 @@ function Forum() {
                                                  <span className="align-middle">{(forum!==null)?forum.Tags:''}</span>
                                              </span>
                                         </div>
+                                        <div className="row">
+                                            {(forum!==null)?
+                                                (forum.User !== login.User._id) ? '' :
+                                                    <a href="javascript:void(0)" onClick={() => UpdateForumForm()}
+                                                       data-toggle="modal" data-target="#exampleModal"><i className="fa fa-refresh"/></a>
+                                                :''
+                                            }
+                                            {(forum!==null)?
+                                                <FacebookShareButton
+                                                    url={"http://localhost:3001/forum/"+forum._id}
+                                                    quote={forum.Title}
+                                                    hashtag={forum.Tags}
+                                                    description={forum.Description}
+                                                    className="Demo__some-network__share-button"
+                                                >
+                                                    <FacebookIcon size={32} round />
+                                                </FacebookShareButton>
+                                                :
+                                                ''
+                                            }
+
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="cardd">
@@ -113,7 +151,7 @@ function Forum() {
                                                 <div className="w-100">
                                                     <div className="d-flex justify-content-between align-items-center">
                                                         <div className="d-flex flex-row align-items-center">
-                                                            <span className="mr-2">{c.User.email}</span>
+                                                            <span className="mr-2">{(c.User.email)}</span>
                                                         </div>
                                                         <small>12h ago</small>
                                                     </div>
@@ -132,13 +170,32 @@ function Forum() {
                                                     }
                                                     <div className="d-flex flex-row user-feed">
                                                         <span className="wish">
-                                                            <i className="fa fa-heart text-danger"/>0
+                                                            {(c.Likes.findIndex((item) => item.User === login.User._id) === -1) ?
+                                                                <a href="javascript:void(0)" onClick={() => Like({
+                                                                    User: '623113a28d227d001659e502',
+                                                                    Comment: c._id
+                                                                })}><i className="fa fa-heart text-hover-black"/></a>
+                                                            :
+                                                                <a href="javascript:void(0)" onClick={() => Like({
+                                                                    User: '623113a28d227d001659e502',
+                                                                    Comment: c._id
+                                                                })}><i className="fa fa-heart text-danger"/></a>
+                                                            }
+                                                            {c.Likes.length}
                                                         </span>
                                                     </div>
                                                 </div>
                                                 <div className="row">
-                                                    <a href="javascript:void(0)" onClick={()=>UpdateForm({_id:c._id, Comment:c.Comment, User:c.User})}  ><i className="fa fa-refresh"/></a>
-                                                    <a href="javascript:void(0)" onClick={()=>Delete(c._id)} ><i className="fa fa-trash"/></a>
+                                                    {(c.User._id !== login.User._id) ? '' :
+                                                        <a href="javascript:void(0)" onClick={() => UpdateForm({
+                                                            _id: c._id,
+                                                            Comment: c.Comment,
+                                                            User: c.User
+                                                        })}><i className="fa fa-refresh"/></a>
+                                                    }
+                                                    {(c.User._id !== login.User._id) ? '' :
+                                                        <a href="javascript:void(0)" onClick={()=>Delete(c._id)} ><i className="fa fa-trash"/></a>
+                                                    }
                                                 </div>
 
                                             </div>
@@ -159,7 +216,31 @@ function Forum() {
 
                 </div>
             </div>
-            
+            <div style={{margin:'10% 0% 0% 0%'}} className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog" role="document">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="exampleModalLabel" style={{color:'#000'}}>Update a forum</h5>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            {(forum!==null)?
+                                <UpdateForum forum={forum}/>
+                                :
+                                ''
+                            }
+
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <Footer />
         </div>
     )
 }
