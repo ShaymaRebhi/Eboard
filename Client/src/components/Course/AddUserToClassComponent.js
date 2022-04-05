@@ -4,14 +4,14 @@ import {MultiSelect} from "react-multi-select-component";
 
 export default function AddUserToClassComponent(props) {
   const selectedusers = [];
-  const documentData = JSON.parse(localStorage.getItem("user"));
+ 
   const [modalOpen, SetModalOpen] = useState(false);
 
   const handleOpen = (e) => SetModalOpen(true);
   const handleClose = (e) => SetModalOpen(false);
   
   const [selected, setSelected] = useState([]);
-  let error = { visible: false, message: "" };
+ 
 
   const Add = async () => {
     let data = [];

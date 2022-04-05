@@ -1,70 +1,63 @@
 import React, {useState} from 'react'
 import './CreateTask.css'
 import Accordion from "@material-ui/core/Accordion";
-import axios from "axios";
 import AsyncSelect from 'react-select/async';
-//import {useHistory} from "react-router-dom";
+import {addTask} from "../../utils/Task";
+import {useHistory} from "react-router-dom";
+import {toast, ToastContainer } from 'react-toastify';
 function CreateTask() {
-    const [task, setTask] = useState(
-        [{
-            Title: "React Hook",
-            Theme: "seance 1",
-            questionTitle: "question 1",
-            QuestionFile: '',
-            QuestionResponseFile:""
-        }]
+    const [task, setTask] = useState({
+            Title: "",
+            Theme: "",
+            questionTitle: "",
+            QuestionFile: undefined,
+            QuestionResponseFile: undefined
+        }
     )
-    //const history = useHistory();
-    const changeTaskTitle = (text, i) => {
-        var newTask = [...task];
-        newTask[i].Title = text;
-        setTask(newTask);
-        console.log(newTask)
+    const history = useHistory();
+    function componentDidMount(time) {
+        setTimeout(() => {history.push("/TaskList")}, time)
     }
-
-    const changeTaskTheme = (text, i) => {
-        var newTask = [...task];
-        newTask[i].Theme = text;
-        setTask(newTask);
-        console.log(newTask)
-    }
-    const changeTaskQuestionTitle = (text, i) => {
-        var newTask = [...task];
-        newTask[i].questionTitle = text;
-        setTask(newTask);
-        console.log(newTask)
-    }
-    const changeTaskFile = (text, i) => {
-        var newTask = [...task];
-        newTask[i].QuestionFile = text;
-        setTask(newTask);
-        console.log(newTask)
-    }
-    const saveTask = (e) => {
-        e.preventDefault();
+    const saveTask = () => {
         const newTask = {
             Title : task.Title,
             Theme : task.Theme,
-            questionTitle : task.questionTitle
+            questionTitle : task.questionTitle,
+            QuestionFile : task.QuestionFile
 
         }
-        axios.post('http://localhost:3000/task/add', newTask).then(res => console.log(res.data));
-        //history.push("/TaskList");
-
+        console.log(newTask);
+        addTask(newTask,() =>(
+            toast.success('Task added successfuly', {
+                position: "bottom-right"
+            }),
+         componentDidMount(3000)
+        ))
     }
   return (
       <div className="DisplayQuestionBox">
+          <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+          />
       <Accordion>
-          <form method="post" onSubmit={saveTask}>
-          {task.map((task,index)=>(
-        <div className="card-HomeWork" key={index}>
+        <div className="card-HomeWork" >
             <h1 className="addtasktitle">Add Task</h1>
             <br/>
             <div className="card-content-HomeWork">
                 <div style={{display:"flex"}} className="directioninput">
                     <div style={{display:"flex",flexDirection:"column"}}>
                         <label className="labelHomeWork" htmlFor="questionTitle">Title : </label>
-                        <input className="text_input_homeWork" placeholder="write title here" id="questionTitle" value={task.Title} onChange={(e) =>{changeTaskTitle(e.target.value,index)}}/>
+                        <input className="text_input_homeWork" placeholder="write title here" id="questionTitle"
+                               value={task.Title}
+                               onChange={(e) =>setTask({...task, Title: e.target.value})}/>
                     </div>
                     <div style={{display:"flex",flexDirection:"column"}} >
                         <label className="labelHomeWork" htmlFor="questionClass">Theme : </label>
@@ -78,22 +71,24 @@ function CreateTask() {
                 <div style={{display:"flex"}} className="directioninput">
                     <div style={{display:"flex",flexDirection:"column"}}>
                         <label className="labelHomeWork" htmlFor="questionClasstitle">Question :</label>
-                        <input className="text_input_homeWork_question" placeholder="write question here" id="questionClasstitle" value={task.questionTitle} onChange={(e) =>{changeTaskQuestionTitle(e.target.value,index)}} />
+                        <input className="text_input_homeWork_question" placeholder="write question here" id="questionClasstitle"
+                               value={task.questionTitle}
+                               onChange={(e) =>setTask({...task, questionTitle: e.target.value})} />
                     </div>
                     <div style={{display:"flex",flexDirection:"column"}} >
                             <label className="labelHomeWork" htmlFor="questionfile form-label">Choose a file</label>
-                            <input type="file" id="questionfile" name="fileupload" className="inputFileHomeWork form-control"  multiple HTMLInputElement={task.QuestionFile} onChange={(e)=>{changeTaskFile(e.target.files,index)}} />
+                            <input type="file" id="questionfile" name="fileupload" className="inputFileHomeWork form-control"  multiple
+                                   HTMLInputElement={task.QuestionFile}
+                                   onChange={(e)=>setTask({...task, QuestionFile: e.target.files})} />
                     </div>
                 </div>
 
             </div>
             <br/>
             <div className="saveadd">
-                <button className="btn btn-success" type="submit">Save</button>
+                <button className="btn btn-success" type="submit" onClick={()=>saveTask()}>Save</button>
             </div>
         </div>
-          ))}
-          </form>
       </Accordion>
       </div>
   )

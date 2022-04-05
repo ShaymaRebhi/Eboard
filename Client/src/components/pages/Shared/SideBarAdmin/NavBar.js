@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, {useState} from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
@@ -8,6 +9,7 @@ import {SidebarData} from "./SideBar";
 import {IconContext} from 'react-icons';
 import logo from "../../../../Assets/Images/logo.png"
 function NavBar() {
+    const [hideNav,setHideNav]=useState(false);
     const [sidebar,setSidebar]=useState(false);
 
     const showSidebar=()=>setSidebar(!sidebar)
@@ -20,30 +22,37 @@ const logout=()=>{
     setBool(false);
     history.push("/Eboard/auth/admin")
 }
+
+const hidenavbar=()=>{
+    if(hideNav){
+        setHideNav(false);
+    }else{
+        setHideNav(true);
+    }
+}
   return (
     <>  
         <IconContext.Provider value={{color:'#fff'}}>
         <Navbar>
-            <Link to="#" className='menu_nav_bar'>
+            <Link to="#" className={`menu_nav_bar`} >
                 <FAIcons.FaBars className="mobile-icon" onClick={showSidebar}/>
             
             </Link>
             <Link to="#"  className='navbar_brand '>
-                    <img src={logo} alr="logo"></img>
-            </Link>
+                    <img src={logo} alr="logo" /></Link>
             <Link onClick={logout} className='stretched-link'>
                 <IoIcons.IoLogOut ></IoIcons.IoLogOut>
             </Link>
         </Navbar>
         <SideBar>
-        <nav className={sidebar ?'nav_menu active':'nav_menu'}>
+        <nav className={sidebar  ?'nav_menu active':'nav_menu'}>
             
             <ul className='nav-menu-items' >
                 
                 {SidebarData.map((item,index)=>{
                     return(
                          <li key={index} className={item.cName}  >
-                             <Link to={item.path}>
+                             <Link to={item.path} onClick={showSidebar}>
                                  {item.icon}
                                  <span>{item.title}</span>
                              </Link>
@@ -103,13 +112,13 @@ const SideBar=styled.div`
 
 
 .active{
-        margin-left:-100% ;
+        left:0px !important;
        transition: all 1s;
 }
    
 
 .nav_menu{
-   
+    
    background-color:#8EB2CD;
    width:250px;
    height:100vh;
@@ -117,7 +126,7 @@ const SideBar=styled.div`
    justify-content:center;
    position:fixed;
    top:60px;
-    left:0;
+    left:-500px;
     transition: all 0.5s;
     overflow-x: hidden;
     z-index: 1;

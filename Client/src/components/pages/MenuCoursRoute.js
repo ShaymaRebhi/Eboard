@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import QuizList from '../Quiz/QuizList';
 import MenuCours from './MenuCours';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';

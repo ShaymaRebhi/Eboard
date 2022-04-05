@@ -15,17 +15,14 @@ var QuestionQuiz = new Schema ({
         type:Number,
         required:true
     },
-    owner:{
+    Quiz:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'Quiz'
     }
     ,
-    Options:[
-        {
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'Option'
+    Options: {
+        type:[],
     }
-    ]
 
 
 })

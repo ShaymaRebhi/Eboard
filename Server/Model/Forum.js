@@ -19,9 +19,10 @@ var Forum =new Schema({
         default:Date.now
     },
     User:{
-        type:mongoose.Schema.Types.ObjectId,ref:'user',
-    }
+        type:mongoose.Schema.Types.ObjectId,ref:'users',
+    },
+    Comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'comment'}]
 
 
-})
-module.exports = mongoose.model('Forum',Forum);
+});
+module.exports = mongoose.model('forum',Forum);

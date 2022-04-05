@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegFolder , FaRegFile , FaRegComment ,FaRegGrinHearts,FaRegAngry } from "react-icons/fa";
-import { Button } from '../Button';
+
 
 
 function CardItemClass(props) {

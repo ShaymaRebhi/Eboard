@@ -1,7 +1,6 @@
 import { useState } from "react";
-import React, { components }  from 'react';
+import React  from 'react';
 import { Button, Dropdown, Modal } from "semantic-ui-react";
-import { useDispatch } from "react-redux";
 
 
 export default function ArchieveClassComponent(props) {

@@ -5,8 +5,10 @@ const ForumController = require('../controllers/ForumController');
 
 router.get('/all',ForumController.getAll);
 router.get('/get/:id',ForumController.findById);
-router.get('/delete/:id',ForumController.delete);
+router.delete('/delete/:id',ForumController.delete);
 router.post('/new',ForumController.add);
+router.put('/update',ForumController.update);
+router.post('/search',ForumController.search);
 
 
 module.exports = router;

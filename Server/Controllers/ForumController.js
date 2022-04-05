@@ -1,4 +1,4 @@
-const User =require('../Model/User')
+const Comment =require('../Model/Comment')
 const Forum =require('../Model/Forum')
 const {loginValidation}=require('../Validation/Validation.js')
 
@@ -16,15 +16,29 @@ exports.add = async (req,res) => {
     try{
         console.log(req.body);
         await forum.save();
-        res.send("Forum added");
+        res.send(forum);
 
     }catch(err){
         res.send(err);
 
     }
 }
+
 exports.getAll = async(req,res) => {
-    await Forum.find({}).populate('User').then(Forum=>{
+    await Forum.find({}).then(Forum=>{
+        return res.status(200).json(Forum);
+    }).catch(err=>{
+        return res.json(err);
+    });
+}
+
+exports.search = async(req,res) => {
+    await Forum.find(
+    {$or: [
+            {Title: { $regex: '.*' + req.body.search + '.*' }},
+            {Description: { $regex: '.*' + req.body.search + '.*' }},
+            {Tags: { $regex: '.*' + req.body.search + '.*' }}]
+    }).then(Forum=>{
         return res.status(200).json(Forum);
     }).catch(err=>{
         return res.json(err);
@@ -32,8 +46,18 @@ exports.getAll = async(req,res) => {
 }
 
 exports.findById = async(req,res) => {
-    await Forum.findOne({_id:req.params.id}).populate('User').then(Forum=>{
+    await Forum.findOne({_id:req.params.id}).then(Forum=>{
         return res.status(200).json(Forum);
+    }).catch(err=>{
+        return res.json(err);
+    });
+}
+
+exports.update = async(req,res)=>{
+    const forum=await Forum.findOne({_id:req.body._id});
+    await Forum.findByIdAndUpdate(forum._id,req.body)
+    await Forum.findOne({_id:forum._id}).then((f)=>{
+        return res.status(200).json(f);
     }).catch(err=>{
         return res.json(err);
     });
