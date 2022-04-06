@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = 'https://eboardbackend2022.herokuapp.com' ;
+const url = 'http://localhost:3000' ;
 
 export const getAllQuizs  = (callback)=>{
     axios.get(url+'/quiz/').then( (res)=>{callback(res)})

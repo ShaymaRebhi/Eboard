@@ -1,4 +1,4 @@
-export const host="https://eboardbackend2022.herokuapp.com";
+export const host="http://localhost:3000";
 
 export const sendMessagesRoute=`${host}/chat/add`;
 export const getAllMessagesRoute=`${host}/chat/all`;

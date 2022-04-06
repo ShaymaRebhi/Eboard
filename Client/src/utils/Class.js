@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = 'https://eboardbackend2022.herokuapp.com/class' ;
+const url = 'http://localhost:3000/class' ;
 
 export const getClassById =  (id) =>   axios.get(url+'/'+id);
 
