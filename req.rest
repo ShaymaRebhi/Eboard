@@ -1,29 +1,4 @@
+GET 
 
-
-######
-POST http://localhost:3000/class/add
-Content-Type: application/json
-
-{
-    "className":".net",
-    "classSection":"4TWIN3",
-    "classColor":"red"
-    
-}
-
-#######
-GET http://localhost:3000/class/all
-
-########
-GET http://localhost:3000/class/6245bfa2af6a7306a475b74e
-
-########
-DELETE   http://localhost:3000/class/delete/6245bfa2af6a7306a475b74e
-
-######
-PUT http://localhost:3000/class/update/62483a52a6f13a23d0a6684e
-Content-Type: application/json
-
-{
-    "className":"CCCA"
-}
+###
+POST 
