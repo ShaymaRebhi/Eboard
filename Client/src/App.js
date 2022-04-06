@@ -78,7 +78,11 @@ function App() {
                 exact
                 render={(props) => <HomeEboard {...props} />}
             />
-            
+            <Route
+                path="/Map"
+                exact
+                render={(props) => <HomeEboard {...props} />}
+            />
             
             {/* <Route path='/forum/new' component={CreateForum} /> */}
             {/* <Route path='/forums' component={Forums} />
