@@ -1,6 +1,5 @@
 import React from 'react'
 
-import styled from 'styled-components'
 import * as FAIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as IOIcons from "react-icons/io";
@@ -13,12 +12,10 @@ export const SidebarData=[
         path:'/Eboard/home',
         icon:<AiIcons.AiFillHome />,
         cName:'nav-text'
-    }
-    ,
-    {
-        title:' Organizations',
-        path:'/Eboard/Organization',
-        icon:<FAIcons.FaUserSecret />,
+    },{
+        title:' Students',
+        path:'/Eboard/Students',
+        icon:<FAIcons.FaUsers />,
         cName:'nav-text'
     },
     {
@@ -27,22 +24,18 @@ export const SidebarData=[
         icon:<GIIcons.GiTeacher />,
         cName:'nav-text'
     },
+    
     {
-        title:' Students',
-        path:'/Eboard/Students',
-        icon:<FAIcons.FaUsers />,
+        title:' Organizations',
+        path:'/Eboard/Organization',
+        icon:<FAIcons.FaUserSecret />,
         cName:'nav-text'
     },
+    
     {
         title:' Reclamations',
-        path:'/Eboard/Claim',
+        path:'/Eboard/Reclamations',
         icon:<MDIcons.MdFeedback />,
-        cName:'nav-text'
-    },
-    {
-        title:' Support',
-        path:'/Eboard/Supports',
-        icon:<IOIcons.IoIosHelpCircle />,
         cName:'nav-text'
     }
 ]

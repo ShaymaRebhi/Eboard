@@ -52,13 +52,13 @@ function Reclamation() {
           toast.success('Reclamation saved successfuly', {
             position: "bottom-right" 
           });
-          
+          setLoading(false)
         }).catch(err => {
               
               toast.error('Error', {
                         position: "bottom-right" 
                 });
-           
+                setLoading(false)
             //addToast("test error", { appearance: 'error' });
         }).finally(res=>{
           setLoading(false)
@@ -99,9 +99,8 @@ function Reclamation() {
 }
 const Container =styled.div`
    
-background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 15%, rgba(206,220,223,1) 100%);
 height: 100%;
- padding: 90px 0;
+ 
 .form_container{
     border-radius: 0% 10% 10% 0% !important;
     display: table;
@@ -110,7 +109,6 @@ height: 100%;
     width: 100%;
     margin: 0 auto;
     box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
-
 }
 .image_holder{
     display: table-cell;

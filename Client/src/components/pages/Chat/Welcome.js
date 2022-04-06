@@ -1,9 +1,33 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import Robot from "../../../Assets/Images/bot.gif"
+import { getUserConnect } from '../../../utils/api';
 function Welcome() {
-    const Container = styled.div`
+    
+    const [currentUser,setCurrentUser]=useState(undefined);
+    useEffect(()=>{
+        axios.get(getUserConnect ,{
+            headers: {
+                'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+            }
+        }).then(res=>{
+            console.log(res.data);
+            setCurrentUser(res.data[0].FirstName+' '+res.data[0].LastName)
+        })
+        
+        
+    },[])
+  return (
+    <Container>
+        <br/><br/>
+        
+        <h1>Welcome, <span>{currentUser}</span>  </h1> 
+        <p>Please select a chat to Start messaging.</p>
+        
+    </Container> 
+  )
+}
+const Container = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
@@ -35,22 +59,4 @@ function Welcome() {
             }
         }
     `;
-    const [currentUser,setCurrentUser]=useState(undefined);
-    const history=useHistory();
-    useEffect(()=>{
-        
-          setCurrentUser(JSON.parse(localStorage.getItem('login')).User.email.split('@')[0])
-        
-    },[])
-  return (
-    <Container>
-        <br/><br/>
-        
-        <h1>Welcome, <span>{currentUser}</span>  </h1> 
-        <p>Please select a chat to Start messaging.</p>
-        
-    </Container> 
-  )
-}
-
 export default Welcome

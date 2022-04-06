@@ -1,64 +1,114 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import "./QuizList.css"
-
-import Footer from "../pages/Shared/Footer";
-import uuid from "react-uuid";
 import {useHistory} from "react-router-dom";
 import {FaTrash} from 'react-icons/fa' ;
 import {GrUpdate} from 'react-icons/gr' ;
+import {MdAssignment} from 'react-icons/md'
+import {getAllQuizs,deleteQuiz} from "../../utils/Quiz";
+import {toast, ToastContainer} from "react-toastify";
+import {Header, Icon, Item, Segment} from "semantic-ui-react";
+
 
 
 function QuizList() {
     const history = useHistory();
-    const handelformadd = () => {
-        const id_ = uuid();
-        history.push("/formAddquiz/"+id_);
-    }
-    const [quiz, setQuizs] = useState(
-        [{Title : "React Hook",
-            Class:"4TWIN3",
-            Description:"this is React Hooks quiz please answer all this question and good lock",
-            questions :[
-
-            ]
-
+    const [quiz, setQuizs] = useState([
+        {Title : "",
+            Theme:"",
+            Description:"",
+            questions :[]
         }]
     )
+    const [searchTerm,setSearchTerm] = useState([]);
+    const getQuizs=()=>{
+        getAllQuizs((res)=> {
+            setQuizs(res.data)
+        })
+    }
+    const getQuizEditPage = (id) => {
+        history.push(`/updateQuiz/${id}`);
+    }
+    useEffect(()=>{
+        getQuizs();
+    })
+    const assignHomeWork= () => {
+        history.push("/createquiz");
+    }
+    const handelformadd = () => {
+        history.push("/createquiz");
+    }
+    const handelSearchTerm = (e) =>{
+        let value = e.target.value.toLowerCase();
+        setSearchTerm(value);
+    }
   return (
     <>
-        <div className="headers text-center">
-            <h3>Quiz List</h3>
-            <button className="btn btn--primary"  onClick={handelformadd}>Add Quiz</button>
+        <ToastContainer
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+        />
+        <div style={{display:"flex"}}>
+            <img src="images/quizlist2.jpg" alt="quizpicture" width="60%"  />
+            <div className="headers text-center">
+                <h1>Quiz List</h1>
+                <button className="btn btn--primary"  onClick={handelformadd}>Add Quiz</button>
+            </div>
+        </div>
+        <div className="wrap">
+            <div className="search">
+                <input type="text" className="searchTerm" placeholder="Search" onChange={handelSearchTerm}/>
+                <i className="fa fa-search"></i>
+            </div>
         </div>
         <div className="container pb-5 ">
-            <table className="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Quiz Name</th>
-                    <th scope="col">Class</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
+            {quiz.length <= 0 ? (
+                <Segment placeholder>
+                    <Header icon>
+                        <Icon name='tasks' />
+                        No quizs Added .
+                    </Header>
 
-                <tbody>
-                {quiz.map((q,i)=>(
-                    <tr>
-                        <th scope="row">{i+1}</th>
-                        <td>{q.Title}</td>
-                        <td>{q.Class}</td>
-                        <td>{q.Description}</td>
-                        <td> <button className="btn btn-outline-primary"  onClick={handelformadd}><GrUpdate/> </button>
-                            &nbsp;
-                            &nbsp;
-                            <button className="btn btn-outline-danger"  onClick={handelformadd}> <FaTrash/> </button>
-                        </td>
-                    </tr>
-                ))}
+                </Segment>
+            ):(
+                quiz.filter((q)=>{
+                    return q.Title.toLowerCase().includes(searchTerm)
+                }).map((q,i)=>(
+                    <Segment color='grey' raised >
+                        <Item.Group divided key={i}>
+                            <Item>
+                                <Item.Image size='tiny' avatar src='images/quizz.jpg' />
+                                <Item.Content>
+                                    <Item.Header>{q.Title}</Item.Header>
+                                    <Item.Meta>
+                                        <span className='cinema'>{q.Theme}</span>
+                                    </Item.Meta>
+                                    <Item.Description>{q.Description}</Item.Description>
+                                </Item.Content>
+                            </Item>
+                            <Item className="buttons">
+                                <button className="btn btn-outline-primary"  onClick={()=>getQuizEditPage(q._id)}><GrUpdate/> </button>
+                                <button className="btn btn-outline-danger"  onClick={()=>deleteQuiz(q._id,()=>{
+                                        toast.success('Task deleted successfuly', {
+                                            position: "bottom-right"
+                                        })
+                                    },
+                                    getQuizs()
+                                )}> <FaTrash/> </button>
+                                <button className="btn btn-outline-success" onClick={assignHomeWork}><MdAssignment/></button>
+                            </Item>
+                        </Item.Group>
 
-                </tbody>
-            </table>
+                    </Segment>
+
+                ))
+            )}
         </div>
         
     </>

@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 import '../css/Navbar.css';
 
 import NavHead from '../pages/Shared/NavHead';
+import * as AIICons from "react-icons/ai";
+import * as MDICons from "react-icons/md";
 
 function NavbarInside() {
   const [click, setClick] = useState(false);
-  const [button, setButton] = useState(true);
+  const [ Button,setButton] = useState(true);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -42,11 +44,20 @@ function NavbarInside() {
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-            <li className='nav-item'>
-              <Link to='/' className='nav-links' title="Home" selected={selected === 'home'} onClick={() => setSelected('home') && closeMobileMenu}>
-                Home
+          <li>
+              <Link to='/Reclamation' className='nav-links' title="Home"  onClick={() => setSelected('Reclamation') && closeMobileMenu}>
+                <MDICons.MdFeedback />
               </Link>
             </li>
+            <li className='nav-item'>
+              <Link to='/' className='nav-links' title="Home" selected={selected === 'home'} onClick={() => setSelected('home') && closeMobileMenu}>
+                <AIICons.AiOutlineHome />
+              </Link>
+              
+
+            </li>
+            
+
            
           
       </ul>

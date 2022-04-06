@@ -105,7 +105,7 @@ const input1=[
             ))}
         
     
-            <div className="mb-3"><button className="btn btn-primary d-block w-100" type="submit">{loading ? <ClipLoader  color='#FFF' loading={loading}  size={20} /> : "Login"}</button></div><Link className="forgot" to="#">Forgot your email or password?</Link>
+            <div className="mb-3"><button className="btn btn-primary d-block w-100" type="submit">{loading ? <ClipLoader  color='#FFF' loading={loading}  size={20} /> : "Login"}</button></div><Link className="forgot" to="/Eboard/auth/forget">Forgot your email or password?</Link>
         </form>
     </section>
 

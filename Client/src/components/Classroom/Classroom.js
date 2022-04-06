@@ -1,14 +1,14 @@
 import React from 'react'
-
-//import CardItem from '../CardItem';
 import '../css/CardClass.css';
 import CardClass from './CardClass';
-
 import AddClassComponent from './AddClassComponent';
 import InvitationClassComonent from "./InvitationClassComonent";
 import RecentActivites from './RecentActivities';
 
+
+
 function Classroom() {
+
   return (
     <div>
   <div style={{display: 'flex'}}>

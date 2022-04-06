@@ -5,7 +5,7 @@ import {BiSmile} from 'react-icons/bi';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Accordion from '@material-ui/core/Accordion'
 
-function StartQuiz({onQuizStart}) {
+function StartQuiz(props) {
   return (
       <Accordion>
 
@@ -17,7 +17,7 @@ function StartQuiz({onQuizStart}) {
                           <p className="quizdescription">Description : {quiz.Description}</p>
                             <br/>
                           <h6 className="goodlock">Good lack <BiSmile/></h6>
-                          <button className="btn btn-primary Startquizbutton" onClick={onQuizStart}>Start</button>
+                          <button className="btn btn-primary Startquizbutton" onClick={props.onQuizStart}>Start</button>
                         </div>
                 </AccordionDetails>
              </div>

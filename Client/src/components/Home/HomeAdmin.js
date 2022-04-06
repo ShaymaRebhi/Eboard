@@ -4,18 +4,20 @@ import NavBar from '../pages/Shared/SideBarAdmin/NavBar';
 import TeachersList from '../pages/AdminPages/TeachersList';
 import Organizations from '../pages/AdminPages/Organizations';
 import Students from '../pages/AdminPages/Students';
-import Reclamations from '../pages/AdminPages/Claims';
+import Reclamations from '../pages/AdminPages/Reclamations';
 import Supports from '../pages/AdminPages/Supports';
 import Home from '../pages/AdminPages/Home';
 import { useHistory } from 'react-router-dom';
-import Claim from '../pages/AdminPages/Claims';
 export default function HomeAdmin() {
     const history=useHistory();
-
+    const data=  JSON.parse(localStorage.getItem('login'));
   if(localStorage.getItem('login')===null ){
-    
         history.push("/Eboard/auth/admin");
-    
+    }else{
+      if(data.User.role!=="ADMIN"){
+       
+        history.push("/404");
+      }
     }
   
   return (
@@ -45,9 +47,9 @@ export default function HomeAdmin() {
               component={Students}
             />
         <PrivateRoute
-              path="/Eboard/Claim"
+              path="/Eboard/Reclamations"
               exact
-              component={Claim}
+              component={Reclamations}
         />
         <PrivateRoute
               path="/Eboard/Supports"

@@ -20,6 +20,7 @@ function HomeEboard() {
               exact
               component={Home}
             />
+           
             <PrivateRoute
                 path="Reclamation"
                 exact

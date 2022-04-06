@@ -1,20 +1,19 @@
 import { Link } from "react-router-dom";
 import {
   Card,
-  Image, 
+
   Icon,
-  Message,
+
   Menu,  
-  Label,
+
   Grid, 
-  Divider,
-  Dropdown,
-  Segment,
-  Step,
+ 
 } from "semantic-ui-react";
 import React  from 'react';
 import '../css/Sidebar.css';
-import './Sidebar.css'
+import './Sidebar.css';
+
+
 
 
 function SideBar(){
@@ -29,13 +28,13 @@ function SideBar(){
                 <Icon  name='list alternate outline' size='large' />
                 </Menu.Item>
               </Link>
-              <Link to="/">
+              <Link to="/forums">
                 <Menu.Item>
                 <Icon  name='comment outline' size='large'  />
                 </Menu.Item>
               </Link>
 
-              <Link to="/">
+              <Link to="/calendar">
                 <Menu.Item>
                 <Icon  name='calendar outline' size='large'  />
                 </Menu.Item>
