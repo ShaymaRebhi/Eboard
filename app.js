@@ -4,24 +4,58 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-const userRoute = require('./routes/User') 
+const userRoute = require('./routes/User')
+var forumRouter = require('./routes/Forum');
+const CommentRoute = require('./routes/Comment')
+const quizRoute = require('./routes/Quiz')
+const optionRoute = require('./routes/Option')
+const questionRoute = require('./routes/QuestionQuiz')
+const taskRoute = require('./routes/Task')
+const ChatRoute = require('./routes/Chat')
 const bodyparser = require("body-parser")
-
+const socket=require('socket.io')
+const ReclamationRoute = require('./routes/Reclamations') 
+const classRoute = require('./routes/Class.js')
+const Grid = require("gridfs-stream");
 require('dotenv/config');
+let gfs;
 //------------la modéfication --------------------
-var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' })
 
 var mongoose=require('mongoose');
+
 var config=require('./Database/db.json')
 mongoose.connect(config.mongo.uri,{useNewUrlParser: true,useUnifiedTopology: true},()=>console.log("CONNETED DB"));
 
+const conn = mongoose.connection;
+conn.once("open", function () {
+    gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection("photos");
+});
 
 
 
 //-------------------------------------------
 var app = express();
+// media routes
+app.get("/file/:filename", async (req, res) => {
+  try {
+      const file = await gfs.files.findOne({ filename: req.params.filename });
+      const readStream = gfs.createReadStream(file.filename);
+      readStream.pipe(res);
+  } catch (error) {
+      res.send("not found");
+  }
+});
 
+app.delete("/file/:filename", async (req, res) => {
+  try {
+      await gfs.files.deleteOne({ filename: req.params.filename });
+      res.send("success");
+  } catch (error) {
+      console.log(error);
+      res.send("An error occured.");
+  }
+});
 // view engine setup
 app.use(cors());
 app.use(cors({origin: '*'}));
@@ -35,7 +69,16 @@ app.use(express.json({limit:'200mb'}));
 app.use(bodyparser.urlencoded({extended:true}));
 app.use('/uploadsFolder', express.static(path.join(__dirname, '/uploads')));
 
+app.use('/chat',ChatRoute);
 app.use('/user', userRoute);
+app.use('/quiz', quizRoute);
+app.use('/option', optionRoute);
+app.use('/question', questionRoute);
+app.use('/task', taskRoute);
+app.use('/forum',forumRouter);
+app.use('/reclamation',ReclamationRoute);
+app.use('/comment',CommentRoute);
+app.use('/class',classRoute);
 
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));
@@ -49,7 +92,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
 
 
-   // Pass to next layer of middleware
+  // Pass to next layer of middleware
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
