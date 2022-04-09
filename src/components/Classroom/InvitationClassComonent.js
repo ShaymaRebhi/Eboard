@@ -1,5 +1,5 @@
 import { Grid, Image, Label, Segment, Button, Card } from "semantic-ui-react";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 
 
@@ -15,8 +15,8 @@ export default function InvitationClassComonent() {
  
   return (
     <div >
-      <Grid columns={1}>
-        <Grid.Column>
+      <Grid columns={1} >
+        <Grid.Column >
           <Segment raised>
             <Label as="a" color="teal" ribbon>
               Class Invitation

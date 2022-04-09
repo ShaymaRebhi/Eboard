@@ -1,18 +1,18 @@
 import React from 'react'
 import './CheckQuizAnswers.css'
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
-function CheckQuizAnswers({onClose, results,modal,toggle}) {
+import { Modal, ModalBody, ModalFooter} from 'reactstrap';
+function CheckQuizAnswers(props) {
     let optioncorrect = "";
 
     return (
-        <Modal isOpen={modal} toggle={toggle}>
+        <Modal isOpen={props.modal} toggle={props.toggle}>
                 <div className="modal-head p-2">
                         <h2 className="modal-card-title">Your answers : </h2>
-                        <button className=" btn btn-outline-danger" onClick={onClose}>X</button>
+                        <button className=" btn btn-outline-danger" onClick={props.onClose}>X</button>
                 </div>
                 <ModalBody>
                     <ul>
-                        {results.map((result,i) => (
+                        {props.results.map((result,i) => (
                             result.b.map((op,i)=>(
                                 optioncorrect=op.optionText
                             )),
@@ -30,7 +30,7 @@ function CheckQuizAnswers({onClose, results,modal,toggle}) {
                     </ul>
                 </ModalBody>
                 <ModalFooter className="modal-card-end">
-                    <button className="closeCheck btn btn-outline-danger" onClick={onClose}>Close</button>
+                    <button className="closeCheck btn btn-outline-danger" onClick={props.onClose}>Close</button>
                 </ModalFooter>
                 </Modal>
     )

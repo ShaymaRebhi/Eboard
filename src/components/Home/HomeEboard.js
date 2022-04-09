@@ -5,16 +5,24 @@ import Home from '../pages/Home/Home';
 import SignUp from '../pages/Auth/SignUp';
 import ContactUs from '../pages/Home/ContactUs';
 import AboutUs from '../pages/Home/AboutUs';
+import Map from '../pages/GoogleMap/Map';
 import Footer from '../pages/Shared/Footer';
 function HomeEboard() {
+  
     return (
         <div>
             <Navbar />
+            
             <div className='spacing_3la_3ajla'>
             <PrivateRoute
               path="/"
               exact
               component={Home}
+            />
+           <PrivateRoute
+              path="/Map"
+              exact
+              component={Map}
             />
             <PrivateRoute
               path="/Contactus"

@@ -3,7 +3,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Accordion from "@material-ui/core/Accordion";
 import "./QuestionQuiz.css"
 
-function QuestionQuiz({data , onAnswerUpdate, numberOfQuestions, activeQuestion, onSetActiveQuestion, onSetStep}) {
+function QuestionQuiz(props) {
     const [selected, setSelected]= useState('');
     const [error, setError] = useState('');
     const radioWrapper = useRef();
@@ -13,7 +13,7 @@ function QuestionQuiz({data , onAnswerUpdate, numberOfQuestions, activeQuestion,
         if(findCheckedInput){
             findCheckedInput.checked = false;
         }
-    },[data])
+    },[props.data])
 
     const changeHandler = (e) => {
         setSelected(e.target.value);
@@ -22,17 +22,17 @@ function QuestionQuiz({data , onAnswerUpdate, numberOfQuestions, activeQuestion,
         }
     }
     const nextClickHandler = () => {
-        if(selected === '') {
-            return setError('Please select one option!');
+        if(props.data.required && selected === '') {
+            return setError('Question required select one option!');
         }
-        onAnswerUpdate(prevState => [...prevState, {q: data.questionTitle,s:data.score, a:selected ,b:data.options.filter(option => option.IsValid)
+        props.onAnswerUpdate(prevState => [...prevState, {q: props.data.questionTitle,s:props.data.score, a:selected ,b:props.data.options.filter(option => option.IsValid)
         }]);
         setSelected('');
-        if(activeQuestion < numberOfQuestions -1){
-            onSetActiveQuestion(activeQuestion + 1);
+        if(props.activeQuestion < props.numberOfQuestions -1){
+            props.onSetActiveQuestion(props.activeQuestion + 1);
         }
         else {
-            onSetStep(3);
+            props.onSetStep(3);
         }
   }
   return (
@@ -42,9 +42,9 @@ function QuestionQuiz({data , onAnswerUpdate, numberOfQuestions, activeQuestion,
           <AccordionDetails>
             <div className="card-content-Quiz">
                 <div className="content-Quiz">
-                  <h2 className="mb-5 Questionquiz">{data.questionTitle}</h2>
+                  <h2 className="mb-5 Questionquiz">{props.data.questionTitle}</h2>
                   <div className="control-Quiz" ref={radioWrapper}>
-                      {data.options.map((option, i ) =>(
+                      {props.data.options.map((option, i ) =>(
                           <label className="radio has-background-light labeloption" key={i}>
                               <input className="inputoption" type="radio" name="option" value={option.optionText} onChange={changeHandler}/>
                               {option.optionText}
@@ -53,7 +53,7 @@ function QuestionQuiz({data , onAnswerUpdate, numberOfQuestions, activeQuestion,
                       ))}
                   </div>
                   <div className="scorehandler">
-                        <h6 className="scorehandler2">Score: {data.score}</h6>
+                        <h6 className="scorehandler2">Score: {props.data.score}</h6>
                   </div>
                     {error && <div className="has-text-danger errorquiz">{error}</div>}
                   <button className="btn btn-primary mt-4" onClick={nextClickHandler}>Next</button>

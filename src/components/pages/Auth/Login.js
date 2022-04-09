@@ -15,10 +15,12 @@ import GoogleLogin from 'react-google-login';
 import { Facebook } from './Buttons/Facebook';
 import { SignUpBtn } from './Buttons/SignUpBtn';
 import { Gmail } from './Buttons/Gmail';
-
+import styled from 'styled-components';
+import { Captcha } from 'primereact/captcha';
 const Login = () => {
+const [caption,setCaption]=useState(false);
 let [loading, setLoading] = useState(false);
-
+let [Facebookloading, setFacebookLoading] = useState(false);
 const history=useHistory();
 const [values,setValues]=useState({
     email:"",
@@ -70,7 +72,8 @@ var getObject={
       localStorage.setItem('login',JSON.stringify({
         Logined:true,
         Role:Response.data.User.role,
-        AccessToken:Response.data.AccessToken
+        AccessToken:Response.data.AccessToken,
+        User:Response.data.User
       }))
       
       const token =Response.data.AccessToken;
@@ -119,18 +122,24 @@ var getObject={
           history.push("/ORG");
         }if(getObject.Role==="TEACHER"){
           history.push("/Teacher");
+        }else if(getObject.Role==="ADMIN"){
+          history.push("/Eboard/auth/admin");
         }
+         
       }
     }
+    
     const responseFacebook = (response) => {
       console.log(response);
-      
+      setFacebookLoading(true)
       axios.post(`${process.env.REACT_APP_API_URL}user/facebookLogin`,{AccessToken:response.accessToken ,userID:response.userID ,email:response.email,picture:response.picture.data.url}
       ).then(response=>{
+        setFacebookLoading(false);
         localStorage.setItem('login',JSON.stringify({
           Logined:true,
           Role:response.data.User.role,
-          AccessToken:response.data.AccessToken
+          AccessToken:response.data.AccessToken,
+          User:response.data.User
         }))
         
         const token =response.data.AccessToken;
@@ -149,24 +158,47 @@ var getObject={
 
         history.push("/Organization");
 
+      }else if(response.data.User.role==="ADMIN"){
+        history.push("/Eboard/auth/admin");
       }
         toast.success('Welcome', {
           position: "bottom-right" 
          });
-      }).catch(err=>{
-          toast.error('Erro :'+err, {
+      }).catch((reason: AxiosError)=>{
+        if(reason.response.status===408) {
+          toast.error('Please contact the admin to activate your account', {
             position: "bottom-right" 
           });
-      })
+        }else{
+          toast.error('Email or password inccorect', {
+            position: "bottom-right" 
+           });
+        }
+        setFacebookLoading(false);
+    
+            //addToast("test error", { appearance: 'error' });
+        }).finally(res=>{
+          setFacebookLoading(false);
+        })
+    
     }
     const responseGoogle = (response) => {
       console.log(response);
     }
+    const showResponse = (response) => {
+      //call to a backend to verify against recaptcha with private key
+      if(response){
+        setCaption(true);
+      }else{
+        setCaption(false);
+      }
+      
+      }
   return (
     
     <>
    
-    <div className='background_login'>
+  
     <ToastContainer
               position="top-right"
               autoClose={5000}
@@ -179,9 +211,9 @@ var getObject={
               pauseOnHover
               theme={'colored'}
       />
-      </div>
+  
       
-      <div className="register-photo">
+      <LoginWithPhoto>
         <div className="form-container">
           
             <div className="image-holder">
@@ -213,8 +245,8 @@ var getObject={
                 <ReactFacebookLogin
                     appId="544343623593746"
                     render={renderProps => (
-                      <Facebook text="Signin with Facebook" onClick={renderProps.onClick}></Facebook>
-                      
+                     // Facebookloading ? <div className='text-center'><ClipLoader  color='#FFF' loading={Facebookloading}  size={20} /></div>: <Facebook text="Signin with Facebook" type="button" onClick={renderProps.onClick}></Facebook> 
+                     <Facebook icon={!Facebookloading} text={Facebookloading ? <ClipLoader  color='#FFF' loading={Facebookloading}  size={20} /> : "Signin with Facebook"} type="button" onClick={renderProps.onClick}></Facebook>
                     )}
                     autoLoad={false}
                     cssClass="btnFacebook"
@@ -226,7 +258,7 @@ var getObject={
                     clientId="714307659254-amb3fmov1ncdjcfcf2qvogl93ev90gm3.apps.googleusercontent.com"
                     buttonText="Login with Google"
                     render={renderProps => (
-                      <Gmail text2="Signin with Gmail" onClick={renderProps.onClick} disabled={renderProps.disabled}></Gmail>
+                      <Gmail text2="Signin with Gmail" type="button" onClick={renderProps.onClick} disabled={renderProps.disabled}></Gmail>
                      
                     )}
                     onSuccess={responseGoogle}
@@ -235,7 +267,7 @@ var getObject={
                     
                     cookiePolicy={'single_host_origin'}
                   />
-                  <SignUpBtn text="Create account"></SignUpBtn>
+                  <SignUpBtn type="button" text="Create account"></SignUpBtn>
                 
                  <div className='text-white text-center'>
                     <hr />Or login with your email
@@ -252,17 +284,232 @@ var getObject={
                   </div>
                  
                 </div>
-         
-                <div className="mb-2"><button className="btn btn-primary d-block w-100" type="submit">{loading ? <ClipLoader  color='#FFF' loading={loading}  size={20} /> : "Login"}</button></div>
+                <div className="caption">
+                  <Captcha    size='normal' onExpire={showResponse}  className="captions" siteKey="6Le4rjEfAAAAAClt5SkfUSqQ-RCIUinyCPX0I75w" onResponse={showResponse}></Captcha>
+                </div>
+                {caption}
+                <div className="mb-2"><button disabled={!caption ? true:false} className="btn btn-primary d-block w-100" type="submit">{loading ? <ClipLoader  color='#FFF' loading={loading}  size={20} /> : "Login"}</button></div>
                 <Link to="/forget" className="already text-white"><p > Forget password ? </p></Link>
             </form>
            
         </div>
-    </div>
+    </LoginWithPhoto>
    
 
     </>
   )
 }
+const LoginWithPhoto=styled.div`
 
+.loading-spinner{
+  background-color: red;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+  z-index: 9999999999;
+  overflow: hidden;
+}
+.loading {
+  position: fixed;
+  left: 0px;
+  top: 0;
+  width: 99%;
+  height: 100%;
+  z-index: 9999999999;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.9);
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+     .svg_change_place{
+        margin-left: 30px !important;
+        margin-top: -20px !important;
+        text-align: right;
+    
+  }
+   background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 15%, rgba(206,220,223,1) 100%);
+    height: 20%;
+    min-height:110vh;
+    padding: 30px 0; 
+    form {
+      .caption{
+        
+        margin: 0 auto;
+        width: 100%;
+  
+        margin-bottom: 1rem;
+        margin-top:30px;
+        display:flex;
+        justify-content:center;
+        .captions{
+          background:red !important;
+        }
+      }
+      .row .btn:hover {
+        background-color: #4c7391;
+    }
+    .row .btn:focus {
+    background-color: #4c7391;
+    }
+  .row .btn:active {
+      background-color: #4c7391;
+  }
+.mobil_hom_icon{
+    display: none;
+  }
+h2 {
+    font-size: 24px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+  }
+  .btn-primary:active {
+    transform: translateY(1px);
+  }
+  .already {
+    display: block;
+    text-align: center;
+    
+    font-size: 13px;
+  }
+  .btn-primary:hover, .btn-primary:active {
+    background: #3273a5;
+  }
+  .form-control {
+    background: #f7f9fc;
+    border: none;
+    border-bottom: 1px solid #dfe7f1;
+    border-radius: 0;
+    box-shadow: none;
+    outline: none;
+    color: inherit;
+    text-indent: 6px;
+    height: 40px;
+  }
+  .form-check {
+    font-size: 13px;
+    line-height: 20px;
+  }
+  .btn-primary {
+    background: #65A2D1;
+    border: none;
+    border-radius: 4px;
+    padding: 11px;
+    box-shadow: none;
+    margin-top: 35px;
+    text-shadow: none;
+    outline: none !important;
+  }
+      .row .btn {
+      font-size: 14px;
+     color: #FFF;
+     border: 1px solid #FFF;
+     input[type='password']::placeholder{
+      color: #BDBDBD;
+    }
+    input[type='Number']::placeholder{
+    color: #BDBDBD;
+  }
+    }
+    h1,label{
+        color: #FFF;
+    }
+    border-radius: 0% 3% 3% 0% !important; 
+    display: table-cell;
+    height: 10% !important;
+    width: 420px;
+    background: #8EB2CD;
+    padding: 20px 30px;
+    color:#676767 ;
+    input[type="email"]{
+
+    border:10px solid #B6CDDC;
+    border-top: 0px;
+    border-bottom: 0px;
+    border-right: 0px;
+
+    input[type="text"]{
+    border:10px solid #B6CDDC !important;
+    border-top: 0px;
+    border-bottom: 0px;
+    border-right: 0px;
+
+  }
+}
+    
+  }
+  .image-holder {
+    
+    display: table-cell;
+    width: auto;
+    background: url('/images/login.png') center center no-repeat; 
+    background-size: cover;
+    .hr{
+      width: 50px;
+      background-color: #FFF;
+      border-radius: 30px;
+      margin-left: auto;
+      margin-right: auto;
+      height: 10px;
+  }
+  h1,h2,h3,h4,h5,h6,p{
+    color: #FFF;
+    margin: 10px;
+  
+  }
+  .content{
+      margin: 80px 30px 30px 30px;
+    text-align: center;
+  }
+  
+  }
+  .form-container {
+    border-radius: 0% 10% 10% 0% !important;
+    display: table;
+    max-width: 900px;
+    height: 70%;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+  }
+  @media (max-width:833px){
+        .image-holders{
+            display: none  !important;
+          }
+        .image-holders {
+            
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+        form{
+            height: 800px !important;
+          }
+      }
+      @media (max-width:600px) {
+          form {
+            padding: 40px ;
+          }
+          
+        }
+      @media (max-width:819px){
+        .mobil_hom_icon{
+          display: flex;
+          justify-content: end;
+          
+        }
+        .image-holder{
+          display: none  !important;
+        }
+        .image-holder {
+        margin-left: 50px;
+        margin-right: 50px;
+        }
+        
+          padding: 0px !important;
+          border-radius: 0px !important;
+          
+        
+      }
+`;
 export default Login;
