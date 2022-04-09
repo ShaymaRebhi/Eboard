@@ -16,22 +16,46 @@ const bodyparser = require("body-parser")
 const socket=require('socket.io')
 const ReclamationRoute = require('./routes/Reclamations') 
 const classRoute = require('./routes/Class.js')
+const Grid = require("gridfs-stream");
 require('dotenv/config');
-
+let gfs;
 //------------la modéfication --------------------
-var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' })
 
 var mongoose=require('mongoose');
+
 var config=require('./Database/db.json')
 mongoose.connect(config.mongo.uri,{useNewUrlParser: true,useUnifiedTopology: true},()=>console.log("CONNETED DB"));
 
+const conn = mongoose.connection;
+conn.once("open", function () {
+    gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection("photos");
+});
 
 
 
 //-------------------------------------------
 var app = express();
+// media routes
+app.get("/file/:filename", async (req, res) => {
+  try {
+      const file = await gfs.files.findOne({ filename: req.params.filename });
+      const readStream = gfs.createReadStream(file.filename);
+      readStream.pipe(res);
+  } catch (error) {
+      res.send("not found");
+  }
+});
 
+app.delete("/file/:filename", async (req, res) => {
+  try {
+      await gfs.files.deleteOne({ filename: req.params.filename });
+      res.send("success");
+  } catch (error) {
+      console.log(error);
+      res.send("An error occured.");
+  }
+});
 // view engine setup
 app.use(cors());
 app.use(cors({origin: '*'}));

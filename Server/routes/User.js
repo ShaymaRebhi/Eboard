@@ -2,10 +2,11 @@ var express = require('express');
 var router = express.Router();
 const UserController = require('../Controllers/UserController')
 const authenticateToken =require('./VerifyToken')
+const upload =require('../MiddelWare/Upload')
 require('dotenv').config()  
 
 var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' })
+
 
 /* GET users listing. */
 router.get('/connect',authenticateToken,UserController.getUserConnect);
