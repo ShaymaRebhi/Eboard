@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = 'http://localhost:3000/forum' ;
+const url = 'https://eboardbackend2022.herokuapp.com/forum' ;
 export const createForum =  (newForum) =>   axios.post(url+'/new' , newForum);
 export const getForumById =  (id) =>   axios.get(url+'/get/'+id);
 export const getForums =  () =>   axios.get(url+'/all');
