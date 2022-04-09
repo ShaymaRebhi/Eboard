@@ -31,7 +31,7 @@ server.on('listening', onListening);
 
 const io=socket(server,{
   cors:{
-    origin:"http://localhost:3001",
+    origin:"https://eboardbackend2022.herokuapp.com",
     Credentials:true,
 
   }

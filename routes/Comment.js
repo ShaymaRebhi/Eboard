@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const CommentController = require('../controllers/CommentController');
+const CommentController = require('../Controllers/CommentController');
 
 
 router.get('/all',CommentController.getAll);

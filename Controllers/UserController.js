@@ -18,7 +18,7 @@ exports.UploadFile= async(req,res)=>{
         if(err) return res.status(503).json({error:err});
         if (req.file === undefined) return res.status(500).send("you must select a file.");
         const objct={
-            file:`http://localhost:3000/file/${req.file.filename}`,
+            file:`https://eboardbackend2022.herokuapp.com/file/${req.file.filename}`,
             fileType:req.file.mimetype
         }
         user=_.extend(user,objct);
