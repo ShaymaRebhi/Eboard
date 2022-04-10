@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { getAllMessagesRoute, getUserConnect, sendMessagesRoute } from '../../../utils/api';
 import ChatInput from './ChatInput';
 import { v4 as uuidv4 } from "uuid";
+import { useHistory } from 'react-router-dom';
 
 
 export default function ChatContainer({currentUser,currenChat,socket}) {
@@ -11,6 +12,25 @@ export default function ChatContainer({currentUser,currenChat,socket}) {
     const scrollRef = useRef();
     const [userName,SetUserName]=useState(undefined);
     const [arrivalMessage, setArrivalMessage] = useState(null);
+    const data=  JSON.parse(localStorage.getItem('login'));
+    const history=useHistory();
+    const parseJwt = (token) => {
+        try {
+          return JSON.parse(atob(token.split(".")[1]));
+        } catch (e) {
+          return null;
+        }
+      };
+    useEffect(()=>{
+        
+        const  decodedToken = parseJwt(data.AccessToken);
+        if (decodedToken.exp * 1000 < Date.now()) {
+                localStorage.clear();
+                history.push("/login");
+          }else{
+            console.log("stay logedIn  "+decodedToken.exp);
+          }
+    },[])
     useEffect(()=>{
         
       axios.get(getUserConnect,{

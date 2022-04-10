@@ -27,7 +27,7 @@
     height: 100%;
 }
 .mcontainer {
-margin-left: 70px !important;
+margin: 0px auto auto 70px !important;
 }
 @media(max-width:615px){
     .mcontainer {

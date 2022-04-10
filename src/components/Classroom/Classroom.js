@@ -11,28 +11,29 @@ import styled from 'styled-components'
 function Classroom() {
 
   return (
-    <div>
-  <classRoomStyle className='d-flex justify-content-start'>
-  
- <div>
-  <AddClassComponent /> 
-  
-  <CardClass></CardClass> 
- 
-  <InvitationClassComonent></InvitationClassComonent>
-  </div>
-  <RecentActivites></RecentActivites>
-  </classRoomStyle>
+    <>
+      <classRoomStyle className='d-flex justify-content-start'>
+      
+      <div>
+            <AddClassComponent /> 
+            
+            <CardClass></CardClass> 
+          
+            <InvitationClassComonent></InvitationClassComonent>
+        </div>
+        <RecentActivites></RecentActivites>
+      </classRoomStyle>
 
 
-    </div>
+    </>
     
   )
 }
+
+export default Classroom;
 const classRoomStyle=styled.div`
 @media screen and (min-width:720px)and (max-width:1080px){{
   width:50px;
-  background:red;
+ 
 }
 `
-export default Classroom

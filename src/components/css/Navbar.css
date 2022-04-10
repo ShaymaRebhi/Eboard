@@ -70,7 +70,7 @@
   list-style: none;
   text-decoration: none;
   text-align: left;
-  width: 90vw;
+  width: 89vw;
   
   justify-content: end;
   
@@ -129,9 +129,8 @@
     width: 100%;
     min-height: 800px;
     position: absolute;
-    top: 70px;
+    top: 60px;
     left: -100%;
-    
     z-index: 333333333;
     transition: all 0.5s ease;
   }

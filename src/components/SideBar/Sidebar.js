@@ -57,10 +57,10 @@ useEffect(()=>{
                 {SidebarData.map((item,index)=>{
                     return(
                       
-                      <div className="flex align-items-center">
+                      <div className="flex align-items-center" key={index}>
                         
                         
-                         <li key={index} className={`${item.cName} hel-${index}`} tooltipOptions={{ position: 'left', mouseTrack: true, mouseTrackTop: 25, className: 'blue-tooltip' }}>
+                         <li  className={`${item.cName} hel-${index}`} >
                               <Tooltip target={`.hel-${index}`} content={`${item.tooltip}`} />
                              <Link tooltip="Blue" to={item.path} onClick={showSidebar}>
                                  {item.icon}
@@ -153,7 +153,7 @@ display:initial;
    display:flex;
    justify-content:center;
    position:fixed;
-   top:120px;
+   top:100px;
     left:0px;
     transition: all 0.5s;
     overflow-x: hidden;
