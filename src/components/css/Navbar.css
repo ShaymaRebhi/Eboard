@@ -48,6 +48,10 @@
   cursor: pointer;
   text-decoration: none;
   font-size: 2rem;
+    position: absolute;
+    width: 50%;
+    transform: translate(0%, 80%);
+    margin-right: 44%;
  
 }
 .navbar-logo:hover{
@@ -66,7 +70,8 @@
   list-style: none;
   text-decoration: none;
   text-align: left;
-  width: 60vw;
+  width: 90vw;
+  
   justify-content: end;
   
 }
@@ -107,7 +112,12 @@
 .menu-icon {
   display: none;
 }
-
+.nav-menu  .disp{
+  display: none;
+}
+.nav-menu .hide-icon{
+  display: initial;
+}
 @media screen and (max-width: 960px) {
   .NavbarItems {
     position: relative;
@@ -117,12 +127,12 @@
     display: initial;
     flex-direction: column;
     width: 100%;
-    height: 100vh;
+    min-height: 800px;
     position: absolute;
     top: 70px;
     left: -100%;
-    opacity: 0;
     
+    z-index: 333333333;
     transition: all 0.5s ease;
   }
 
@@ -131,19 +141,25 @@
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;
-    z-index: 1;
+    z-index: 333333333;
   }
-
+  .nav-menu .disp{
+    display: initial;
+  }
+  .nav-menu .hide-icon{
+    display: none;
+  }
   .nav-links {
     text-align: center;
     padding: 0.5rem;
     margin-top: 50px;
     width: 100%;
     display: table;
+    z-index: 333333333;
   }
 
   .nav-links:hover {
-    background-color: #fff;
+    
     color: #242424;
     border-radius: 0;
   }
@@ -151,7 +167,6 @@
   .navbar-logo {
     position: absolute;
     width: 100%;
-    
     transform: translate(20%, 80%);
     margin-right: 25%;
     
@@ -165,6 +180,7 @@
     transform: translate(-100%, 90%);
     font-size: 1.8rem;
     cursor: pointer;
+    z-index: 333333333;
   }
 
   .fa-times {

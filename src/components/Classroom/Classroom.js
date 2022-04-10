@@ -4,6 +4,7 @@ import CardClass from './CardClass';
 import AddClassComponent from './AddClassComponent';
 import InvitationClassComonent from "./InvitationClassComonent";
 import RecentActivites from './RecentActivities';
+import styled from 'styled-components'
 
 
 
@@ -11,7 +12,7 @@ function Classroom() {
 
   return (
     <div>
-  <div style={{display: 'flex'}}>
+  <classRoomStyle className='d-flex justify-content-start'>
   
  <div>
   <AddClassComponent /> 
@@ -21,12 +22,17 @@ function Classroom() {
   <InvitationClassComonent></InvitationClassComonent>
   </div>
   <RecentActivites></RecentActivites>
-  </div>
+  </classRoomStyle>
 
 
     </div>
     
   )
 }
-
+const classRoomStyle=styled.div`
+@media screen and (min-width:720px)and (max-width:1080px){{
+  width:50px;
+  background:red;
+}
+`
 export default Classroom

@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import ReactPaginate from 'react-paginate';
 import {getclassByYear} from '../../utils/Class'
-
+import styled from 'styled-components'
 
 
 
@@ -38,7 +38,7 @@ const aff = (id) => {
   const fetchClass = async () => {
   
       const response = await axios.get(
-          "http://localhost:3000/class/all"
+          "https://eboardbackend2022.herokuapp.com/class/all"
       ).then(res => {setCs(res.data);console.log(res.data)});
     
   };
@@ -56,11 +56,11 @@ const aff = (id) => {
   return (
       
         
-      <div className='cards__Class__wrapper'>
+  <CardClassStyledCompoenent className='cards__Class__wrapper'>
     {Cs?.map((cl, index) => (
       <Grid columns={1} rows={3} key ={index}>
     <Grid.Column>
-      <Segment raised>
+      <Segment raised className='mobile'>
         <Label as='a' color='red' ribbon>
         {aff(cl._id)}
 
@@ -102,10 +102,18 @@ const aff = (id) => {
       </Grid.Column>
       </Grid>
     ))}
-      </div>
+      </CardClassStyledCompoenent>
     
   );
 }
 
+const CardClassStyledCompoenent=styled.div`
 
+@media(max-width:615px){
+  .mobile{
+    width:75% !important;
+  }
+}
+  
+`;
 

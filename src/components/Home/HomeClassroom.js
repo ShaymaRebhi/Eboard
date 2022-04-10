@@ -26,9 +26,9 @@ function HomeClassroom(){
                 <NavbarInside />
                 <Grid stackable celled="internally">
                     <Grid.Row>
-                        <Grid.Column className="sideb" >
+                       
                             <SideBar />
-                        </Grid.Column>
+                       
                         <Grid.Column width={13} >
                             <div className='mcontainer'>
                                 <PrivateRoute

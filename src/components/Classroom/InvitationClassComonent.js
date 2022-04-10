@@ -1,23 +1,15 @@
 import { Grid, Image, Label, Segment, Button, Card } from "semantic-ui-react";
 import React from "react";
-
+import styled from 'styled-components'
 
 
 
 export default function InvitationClassComonent() {
-  
- 
- 
- 
-  
-  
-  
- 
   return (
-    <div >
+    <InvitationStyledCompoenent >
       <Grid columns={1} >
         <Grid.Column >
-          <Segment raised>
+          <Segment raised className="mobile">
             <Label as="a" color="teal" ribbon>
               Class Invitation
             </Label>
@@ -80,7 +72,15 @@ export default function InvitationClassComonent() {
           </Segment>
         </Grid.Column>
       </Grid>
-    </div>
+    </InvitationStyledCompoenent>
   );
 }
 
+const InvitationStyledCompoenent=styled.div`
+@media(max-width:667px){
+  .mobile{
+    width:75% !important;
+  }
+}
+  
+`;
