@@ -157,9 +157,17 @@ h1 {
 
 
 @media(max-width:667px){
+  .cards__item__link {
+    width: 75%;
+  }
+
+  .cards ul{
+    margin-left: -150px;
+  }
   .cards__container {
+   
    width: 400px !important;
-   padding-left: -650px !important;
+    right:-650px;
    text-align: left;
    text-justify: auto;
     
