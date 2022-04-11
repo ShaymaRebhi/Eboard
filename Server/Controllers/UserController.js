@@ -10,14 +10,15 @@ const _=require("lodash")
 const fetch=require('node-fetch')
 require('dotenv').config()  
 const bcrypt = require('bcrypt');
+var async = require('async');
 
 //#######################  AUthentification && signUp  ####################
 exports.UploadFile= async(req,res)=>{
     await User.findOne({_id:req.params.id},function(err,user){
         if(err) return res.status(503).json({error:err});
-        
+        if (req.file === undefined) return res.status(500).send("you must select a file.");
         const objct={
-            file:req.file.filename,
+            file:`http://localhost:3000/file/${req.file.filename}`,
             fileType:req.file.mimetype
         }
         user=_.extend(user,objct);
@@ -166,8 +167,17 @@ exports.facebookSignin=async(req,res)=>{
 
 }
 exports.signup = async(req,res) => {
-
-    await User.findOne({
+  
+    await Admin.findOne({Cin:req.body.Cin},function(err,CinCHeck){
+    if(CinCHeck && req.body.Cin!=null) return res.status(407).json({message : 'User already registred cin'})
+    
+    Student.findOne({Cin:req.body.Cin},function(errs,CinStudent){
+    if(CinStudent && req.body.Cin!=null) return res.status(407).json({message : 'User already registred cin'})
+    
+    Teacher.findOne({Cin:req.body.Cin},function(errs,CinTeacher){
+        if(CinTeacher && req.body.Cin!=null) return res.status(407).json({message : 'User already registred cin'})
+    
+    User.findOne({
         email : req.body.email            
     }).exec( (error,user) => {
         if (user ) return res.status(407).json({message : 'User already registred'})
@@ -178,6 +188,7 @@ exports.signup = async(req,res) => {
         req.body.User=User._id;
     
     if(req.body.role=="ADMIN"){
+        if(req.body.Cin==null) return res.status(502).send("Cin invalid");
         const _Admin=new Admin(req.body);
         _Admin.save((error,Admin)=>{
             if(error) return res.status(402).json({Error:"Admin error"+error});
@@ -192,15 +203,16 @@ exports.signup = async(req,res) => {
             res.status(200).json(Organization);
         })
     }else if(req.body.role=="TEACHER"){
-        
+        if(req.body.Cin==null) return res.status(502).send("Cin invalid");
         const _Teacher=new Teacher(req.body);
+        
         _Teacher.save((error,Teacher)=>{
             if(error) return res.status(402).json({Error:"Teacher error"+error});
             res.status(200).json(Teacher);
         })
 
     }else if(req.body.role=="STUDENT"){
-        
+        if(req.body.Cin==null) return res.status(502).send("Cin invalid");
         const _Student=new Student(req.body);
 
         _Student.save((error,Student)=>{
@@ -211,6 +223,9 @@ exports.signup = async(req,res) => {
     }
      });
     });
+});
+});
+});
 }
 //#########################################################################
 

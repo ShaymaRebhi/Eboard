@@ -246,7 +246,7 @@ var getObject={
                     appId="544343623593746"
                     render={renderProps => (
                      // Facebookloading ? <div className='text-center'><ClipLoader  color='#FFF' loading={Facebookloading}  size={20} /></div>: <Facebook text="Signin with Facebook" type="button" onClick={renderProps.onClick}></Facebook> 
-                     <Facebook icon={!Facebookloading} text={Facebookloading ? <ClipLoader  color='#FFF' loading={Facebookloading}  size={20} /> : "Signin with Facebook"} type="button" onClick={renderProps.onClick}></Facebook>
+                     <Facebook active={!caption ? true:false} icon={!Facebookloading} text={Facebookloading ? <ClipLoader  color='#FFF' loading={Facebookloading}  size={20} /> : "Signin with Facebook"} type="button" onClick={renderProps.onClick}></Facebook>
                     )}
                     autoLoad={false}
                     cssClass="btnFacebook"
@@ -258,7 +258,7 @@ var getObject={
                     clientId="714307659254-amb3fmov1ncdjcfcf2qvogl93ev90gm3.apps.googleusercontent.com"
                     buttonText="Login with Google"
                     render={renderProps => (
-                      <Gmail text2="Signin with Gmail" type="button" onClick={renderProps.onClick} disabled={renderProps.disabled}></Gmail>
+                      <Gmail active={!caption ? true:false} text2="Signin with Gmail" type="button" onClick={renderProps.onClick} disabled={renderProps.disabled}></Gmail>
                      
                     )}
                     onSuccess={responseGoogle}
@@ -285,7 +285,7 @@ var getObject={
                  
                 </div>
                 <div className="caption">
-                  <Captcha    size='normal' onExpire={showResponse}  className="captions" siteKey="6Le4rjEfAAAAAClt5SkfUSqQ-RCIUinyCPX0I75w" onResponse={showResponse}></Captcha>
+                  <Captcha    size='normal'   className="captions" siteKey="6Le4rjEfAAAAAClt5SkfUSqQ-RCIUinyCPX0I75w" onResponse={showResponse} onloadCallback={() => console.log('loaded')}></Captcha>
                 </div>
                 {caption}
                 <div className="mb-2"><button disabled={!caption ? true:false} className="btn btn-primary d-block w-100" type="submit">{loading ? <ClipLoader  color='#FFF' loading={loading}  size={20} /> : "Login"}</button></div>

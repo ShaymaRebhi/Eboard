@@ -52,7 +52,11 @@
     background  :linear-gradient(3deg, rgba(37,57,78,-8) 1%, rgba(139,177,192,1) 90%, rgba(196,215,229,1) 106%);
   }
 
-  
+  @media(max-width:615px){
+    .cards__Class__item { 
+      width: 220px;
+    }
+  }
   .cards__Class__item__link {
     display: flex;
     flex-flow: column;

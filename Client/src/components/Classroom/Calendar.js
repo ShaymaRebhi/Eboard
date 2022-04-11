@@ -9,7 +9,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Button, Input } from "semantic-ui-react";
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-
+import styled from 'styled-components'
 const locales = {
     "en-US": require("date-fns/locale/en-US"),
 };
@@ -41,21 +41,45 @@ function CalendarCourse () {
     }
   
     return (
-        <div  >
-        <h1>Calendar</h1>
-        <h2 >Add New Event</h2>
-        <div  >
-            <Input focus placeholder='Add Title' value={newEvent.title} onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}/>
+        <Containers >
+       
+        
+        <div className="container row" >
+        <h1 className="text-secondary">Calendar</h1>
+        <div className="col-sm-1">&ensp;</div>
+            <div className="col-sm-3">
+             <Input focus placeholder='Add Title' value={newEvent.title} onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}/>
+
+            </div>
+            <div className="col-sm-3">
+            <DatePicker className="form-control" placeholderText="Start Date" selected={newEvent.start} onChange={(start) => setNewEvent({ ...newEvent, start })} timeInputLabel="Time:" showTimeInput dateFormat="dd/MM/yyyy h:mm aa" />
+
+            </div>
+            <div className="col-sm-3">
+            <DatePicker className="form-control" placeholderText="End Date"  selected={newEvent.end} onChange={(end) => setNewEvent({ ...newEvent, end })} timeInputLabel="Time:" showTimeInput dateFormat="dd/MM/yyyy h:mm aa" />
+
+            </div>
+            <div className="col-sm-2">
+                <Button primary onClick={handleAddEvent}>
+                    Add Event
+                </Button>
+            </div>
             
-            <DatePicker placeholderText="Start Date" selected={newEvent.start} onChange={(start) => setNewEvent({ ...newEvent, start })} timeInputLabel="Time:" showTimeInput dateFormat="dd/MM/yyyy h:mm aa" />
-            <DatePicker placeholderText="End Date"  selected={newEvent.end} onChange={(end) => setNewEvent({ ...newEvent, end })} timeInputLabel="Time:" showTimeInput dateFormat="dd/MM/yyyy h:mm aa" />
-            <Button primary onClick={handleAddEvent}>
-                Add Event
-            </Button>
+            
+           
             
         </div>
         <Calendar localizer={localizer} events={allEvents} startAccessor="start" endAccessor="end" style={{ height: 500, margin: "50px" }} />
-    </div>
+    </Containers>
     )
   }
+  const Containers=styled.div`
+    margin-left:150px;
+    margin-right:auto;
+    @media(max-width:615px){
+        width:100%;
+        margin-left:0px;
+        margin-right:auto;
+    }
+  `;
 export default CalendarCourse

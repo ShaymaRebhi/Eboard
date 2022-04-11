@@ -27,7 +27,12 @@
     height: 100%;
 }
 .mcontainer {
-margin-left: 130px !important;
+margin: 0px auto auto 70px !important;
+}
+@media(max-width:615px){
+    .mcontainer {
+        margin-left: 30px !important;
+        }
 }
 .insideCour {
     margin-left: 40px;
