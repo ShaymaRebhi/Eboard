@@ -62,7 +62,7 @@ useEffect(()=>{
                         
                          <li  className={`${item.cName} hel-${index}`} >
                               <Tooltip target={`.hel-${index}`} content={`${item.tooltip}`} />
-                             <Link tooltip="Blue" to={item.path} onClick={showSidebar}>
+                             <Link  to={item.path} onClick={showSidebar}>
                                  {item.icon}
                                  
                              </Link>

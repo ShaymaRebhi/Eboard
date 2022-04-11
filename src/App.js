@@ -16,10 +16,9 @@ import SignUp from './components/pages/Auth/SignUp';
 import Chat from './components/ChatBot/Chat';
 import ChatUser from './components/pages/Chat/ChatUser';
 import HomeAdmin from './components/Home/HomeAdmin';
-import Forums from "./components/Forum/Forums";
-import Forum from "./components/Forum/Forum";
-import CreateForum from "./components/Forum/CreateForum";
+
 import ForgetPwdAdmin from './components/pages/Auth/ForetPwdAdmin';
+import Profile from './components/pages/Profile/Profile';
 
 function App() {
 
@@ -70,6 +69,7 @@ function App() {
             <Route exact path='/Eboard/auth/forget' component={ForgetPwdAdmin} />
 
             <Route exact path='/login' component={Login} />
+            <Route exact path='/profile' component={Profile} />
             <Route path="/forget" component={ForgetPwd} />
             <Route exact path='/reset/:id' component={ResetPwd} />
             <Route  exact path='/sign-up' component={SignUp} />
