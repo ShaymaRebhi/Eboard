@@ -42,7 +42,7 @@
     "react-bootstrap": "^2.1.2",
     "react-chartjs-2": "^4.0.1",
     "react-datepicker": "^4.7.0",
-    "react-dom": "^16.13.1",
+    "react-dom": "^18.0.0",
     "react-dropzone-uploader": "^2.11.0",
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.2.2",
