@@ -153,7 +153,7 @@ display:initial;
    display:flex;
    justify-content:center;
    position:fixed;
-   top:100px;
+   top:120px;
     left:0px;
     transition: all 0.5s;
     overflow-x: hidden;

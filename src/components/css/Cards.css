@@ -160,7 +160,9 @@ h1 {
   .cards__item__link {
     width: 75%;
   }
-
+  .ui[class*="one column"].grid>.column:not(.row), .ui[class*="one column"].grid>.row>.column {
+    width: 87% !important;
+  }
   .cards ul{
     margin-left: -150px;
   }

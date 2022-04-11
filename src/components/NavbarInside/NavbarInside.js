@@ -87,7 +87,10 @@ function NavbarInside() {
 export default NavbarInside;
 
 const Navbar =styled.div`
-
+.nav-links-mobile{
+  margin-bottom:20px !important;
+  color:red !important;
+}
   .hs{
       width:86vh !important; 
       margin-top:10px !important;
@@ -142,13 +145,13 @@ const Navbar =styled.div`
 }
 @media(max-width:615px){
   .navbar_brand{
-    margin-left:-5rem;
+    margin-left:1rem !important;
   }
 }
 
     background:linear-gradient(90deg, rgb(2,0,36) 0%, rgb(140,177,192) 0%, rgb(140,177,192) 100%);
-    top:40px ;
-    height:60px;
+    top:50px ;
+    height: 70px;
     width:99%;
     display:flex;
     justify-content:start;

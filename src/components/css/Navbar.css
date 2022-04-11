@@ -129,7 +129,7 @@
     width: 100%;
     min-height: 800px;
     position: absolute;
-    top: 60px;
+    top: 70px;
     left: -100%;
     z-index: 333333333;
     transition: all 0.5s ease;
@@ -150,23 +150,17 @@
   }
   .nav-links {
     text-align: center;
-    padding: 0.5rem;
-    margin-top: 50px;
+    margin-top: 30px;
     width: 100%;
     display: table;
     z-index: 333333333;
   }
 
-  .nav-links:hover {
-    
-    color: #242424;
-    border-radius: 0;
-  }
-
+  
   .navbar-logo {
     position: absolute;
     width: 100%;
-    transform: translate(20%, 80%);
+    transform: translate(18%, 80%);
     margin-right: 25%;
     
   }
@@ -187,20 +181,6 @@
     font-size: 2rem;
   }
 
-  .nav-links-mobile {
-    display: block;
-    text-align: center;
-    margin: 2rem auto;
-    border-radius: 4px;
-    width: 80%;
-    text-decoration: none;
-    font-size: 1.5rem;
-    background-color: transparent;
-    color: #fff;
-    padding: 14px 20px;
-    border: 1px solid #fff;
-    transition: all 0.3s ease-out;
-  }
 
   .nav-links-mobile:hover {
     background: #fff;
