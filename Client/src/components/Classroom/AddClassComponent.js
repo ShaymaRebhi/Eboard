@@ -1,4 +1,4 @@
-import React,{  useState } from "react";
+import React,{  useState , useEffect } from "react";
 import '../css/CardClass.css';
 import {
   Button,
@@ -11,10 +11,11 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from 'react-redux'
-import {addClass} from "../../redux/slices/ClassSlice";
-import {affichage} from "../../redux/slices/ClassSlice";
+import {addClass} from "../../redux/slices/classline";
+import {fetchclass} from "../../redux/slices/classline";
 import { ToastContainer, toast } from 'react-toastify';
-import {getclassByYear} from '../../utils/Class'
+import axios from "axios";
+import { getUserConnect } from '../../utils/api';
 
 
 
@@ -47,36 +48,61 @@ const options = [
 
 export default function AddClassComponent() {
  
-  const id=JSON.parse(localStorage.getItem("login")).User._id;
+  const [currentUser,setCurrentUser]=useState(undefined);
+
+  
+  let [color, setClassColor] = useState();
   let error = { visible: false, message: "" };
-  
-  const [Class,setClass]=useState({ className: "",
-  classSection: "",
-  classDatePost: Date.now(),
-  classColor: "",
-  classStatus:"Active",
-  classOwner:id ,
-  picture:"",
- });
-
+  const selectedClass = (data) => {
+    setClassColor(data.target.innerText);
+  };
     const dispatch = useDispatch();
-    
-   const HandleSubmit = () => {
-      
-        if((Class.className==="") || (Class.classSection==="") || (Class.classColor==="")) {
-          toast.error("You have an error please try again");
-        }
-        else{
-            dispatch(addClass(Class));
-           
-            dis({ type: "CLOSE_MODAL" });
-            toast.success("Class added successfuly !");
-            
-        }
-    };
-
-  
+     
+      const formik = useFormik({
+    initialValues: {
+      classUsers: [],
+      className: "",
+      classSection: "",
+      classDatePost: Date.now(),
+      classOwner: "",
+      classColor: "",
+      classStatus:"Active",
+    },
+    validationSchema: Yup.object({
+      className: Yup.string().required(),
+      classSection: Yup.string()
+        .required()
+        .matches(
+          /^[1-5]([A-Z])\w+$/,
+          "first letter of classSection must be in 1-5"
+        ),
    
+    }),
+    onSubmit: async (formData) => {
+      try {
+        
+
+        const data = {
+          className: formData.className,
+          classSection: formData.classSection,
+          classOwner: currentUser,
+          classColor: color,
+          classStatus:"Active"
+        };
+
+        dispatch(addClass(data));
+        dis({ type: "CLOSE_MODAL" });
+        dispatch(fetchclass(currentUser,"Active"));
+        
+      } catch (err) {
+        error = {
+          visible: true,
+          message: JSON.stringify(err.errors, null, 2),
+        };
+      }
+    },
+  });
+  
     
 
   const [state, dis] = React.useReducer(exampleReducer, {
@@ -84,6 +110,17 @@ export default function AddClassComponent() {
     dimmer: undefined,
   });
   const { open, dimmer } = state;
+  useEffect(() => {
+    axios.get(getUserConnect,{
+      headers: {
+          'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+      }
+  }).then(res=>{
+      console.log(res.data);
+      setCurrentUser(res.data[0]._id)
+  })
+
+  }, [currentUser]);
 
   return (
     <div>
@@ -115,15 +152,15 @@ export default function AddClassComponent() {
       >
         <Modal.Header>Add Class</Modal.Header>
         <Modal.Content>
-          <Form >
+          <Form onSubmit={formik.handleSubmit}>
             <Form.Group widths="equal">
               <Form.Field
                 control={Input}
                 label="Class Name"
                 placeholder="Class Name"
                 name="className"
-                onChange={(e) =>
-                setClass({ ...Class, className: e.target.value }) }
+                onChange={formik.handleChange}
+                error={formik.errors.className}
                
               />
               <Form.Field
@@ -131,9 +168,9 @@ export default function AddClassComponent() {
                 label="Class Section"
                 placeholder="Class Section"
                 name="classSection"
-                onChange={(e) =>
-                  setClass({ ...Class, classSection: e.target.value })
-              }
+                onChange={formik.handleChange}
+                error={formik.errors.classSection}
+              
                
               />
               <Form.Field
@@ -143,10 +180,9 @@ export default function AddClassComponent() {
                 name="classColor"
                 clearable
                 selection
+               
                 options={options}
-                onChange={(e) =>
-                  setClass({ ...Class, classColor: e.target.value })
-              }
+                onChange={selectedClass}
               />
               
             </Form.Group>
@@ -161,7 +197,7 @@ export default function AddClassComponent() {
                 Cancel
               </Button>
               <Button.Or />
-              <Button color="blue" type="submit" onClick={HandleSubmit} >
+              <Button color="blue" type="submit" >
                 Save
               </Button>
             </Button.Group>

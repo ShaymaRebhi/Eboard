@@ -1,7 +1,7 @@
 import {combineReducers} from "redux";
 import forumSlice from "./slices/ForumSlice";
 import commentSlice from "./slices/CommentSlice";
-
-const reducers =combineReducers({forumSlice,commentSlice});
+import classs from "./slices/classline";
+const reducers =combineReducers({forumSlice,commentSlice,classs});
 
 export default reducers;

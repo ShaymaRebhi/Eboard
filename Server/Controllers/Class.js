@@ -1,4 +1,5 @@
 const Class = require("../Model/Class.js");
+const Student = require("../Model/Student.js");
 const mongoose = require("mongoose");
 
 module.exports = {
@@ -154,7 +155,53 @@ module.exports = {
           },
         },
         {
-          $unwind: "$className",
+          $lookup: {
+            from: "students",
+            localField: "classOwner",
+            foreignField : "_id",
+            as: "classOwner",
+          },
+        },
+        {
+          $unwind: "$classOwner" ,
+        
+        },
+        {
+          $lookup: {
+            from: "users",
+            let: {
+              id: "$classOwner.User"
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $eq: [
+                      "$_id",
+                      "$$id"
+                    ]
+                  }
+                }
+              },
+              
+            ],
+            as: "classOwner.User"
+          }
+        },
+        {
+          $addFields: {
+            "classOwner.User": {
+              $ifNull: [
+                {
+                  $arrayElemAt: [
+                    "$classOwner.User",
+                    0
+                  ]
+                },
+                {}
+              ]
+            }
+          }
         },
         {
           $group: {
@@ -173,10 +220,13 @@ module.exports = {
               },
             },
           },
+          
         },
+       
       ])
-      const Final= newLevel.sort(function(a, b){return a._id - b._id});
-      res.status(200).json(Final);
+      const Final= newLevel.sort(function(a, b){return a._id - b._id})
+      res.status(200).json(Final)
+        
     } catch (error) {
       res.status(404).json({ statue: false, message: error.message });
     }
@@ -204,6 +254,7 @@ module.exports = {
         {
           $unwind: "$classLevel",
         },
+       
         {
           $group: {
             _id: "$classLevel",
@@ -221,10 +272,13 @@ module.exports = {
               },
             },
           },
-        },
-      ]);
-      const Final= newLevel.sort(function(a, b){return a._id - b._id});
+        }
+      ]) 
+         
+      const Final= newLevel.sort(function(a, b){return a._id - b._id})
+      
       res.status(200).json(Final);
+     
     } catch (error) {
       res.status(404).json({ statue: false, message: error.message });
     }

@@ -29,7 +29,7 @@ function CardItemClass(props) {
                                         <EditComponent
                                           headerTitle="Archive Class"
                                           buttonTriggerTitle="Archive"
-                                          
+                                          classs={props.classs}
                                         />
                                         <ArchieveClassComponent
                                           headerTitle="Archive Class"
