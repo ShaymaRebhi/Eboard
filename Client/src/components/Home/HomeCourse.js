@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SideBar from '../SideBar/Sidebar';
 import { Grid } from "semantic-ui-react";
 import Navbar from '../pages/Shared/Navbar';
@@ -20,8 +20,25 @@ import EditTask from "../Task/EditTask";
 import EditQuiz from "../Quiz/EditQuiz";
 
 function HomeCourse(){
-    const history=useHistory();
 
+    const history=useHistory();
+    const data=  JSON.parse(localStorage.getItem('login'));
+    const parseJwt = (token) => {
+        try {
+          return JSON.parse(atob(token.split(".")[1]));
+        } catch (e) {
+          return null;
+        }
+      };
+    useEffect(()=>{
+        const  decodedToken = parseJwt(data.AccessToken);
+        if (decodedToken.exp * 1000 < Date.now()) {
+                localStorage.clear();
+                history.push("/login");
+          }else{
+            console.log("stay logedIn  "+decodedToken.exp);
+          }
+    },[])
     if(localStorage.getItem('login')===null ){
         history.push("/login");
     }

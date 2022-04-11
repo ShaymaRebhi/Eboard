@@ -80,9 +80,10 @@ function Forum() {
     return (
         <div>
           
-            <div className="bodyy" style={{padding: '2% 0% 2%'}}>
+            <div className="bodyy" >
                 <div className="container">
-                    <div className="container-fluid mt-100">
+                    <div >
+                        
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="card mb-4">
@@ -123,11 +124,11 @@ function Forum() {
                                             }
                                             {(forum!==null)?
                                                 <FacebookShareButton
-                                                    url={"http://localhost:3001/forum/"+forum._id}
+                                                    url={"https://eboardbackend2022.herokuapp.com/forum/"+forum._id}
                                                     quote={forum.Title}
                                                     hashtag={forum.Tags}
                                                     description={forum.Description}
-                                                    className="Demo__some-network__share-button"
+                                                    className="Demo__some-network__share-button pr-4"
                                                 >
                                                     <FacebookIcon size={32} round />
                                                 </FacebookShareButton>
@@ -147,13 +148,13 @@ function Forum() {
                                         {comments.map((c,i) => (
                                             <div className="d-flex flex-row p-3">
 
-                                                <img src="https://i.imgur.com/zQZSWrt.jpg" className="rounded-circle mr-3" style={{width:'45px',height:'45px'}}/>
+                                                <img src="https://i.imgur.com/zQZSWrt.jpg" className="rounded-circle mr-3" style={{width:'45px',height:'45px'}} alt="ph"/>
                                                 <div className="w-100">
                                                     <div className="d-flex justify-content-between align-items-center">
                                                         <div className="d-flex flex-row align-items-center">
                                                             <span className="mr-2">{(c.User.email)}</span>
-                                                        </div>
-                                                        <small>12h ago</small>
+                                                            
+                                                        </div><small className='text-dark pr-4'>12h ago</small>
                                                     </div>
                                                     {(form &&(c._id===commentU._id))?
                                                         <div>
