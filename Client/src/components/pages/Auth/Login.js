@@ -16,7 +16,7 @@ import { Facebook } from './Buttons/Facebook';
 import { SignUpBtn } from './Buttons/SignUpBtn';
 import { Gmail } from './Buttons/Gmail';
 import styled from 'styled-components';
-import { Captcha } from 'primereact/captcha';
+import { AiFillHome } from "react-icons/ai";
 const Login = () => {
 const [caption,setCaption]=useState(false);
 let [loading, setLoading] = useState(false);
@@ -237,16 +237,14 @@ var getObject={
             
             <form method="post" onSubmit={handleSubmit}>
                 <div className='mobil_hom_icon'>
-                    <Link to="/"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" className="bi bi-house-door-fill text-white svg_change_place" viewBox="0 0 16 16">
-                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
-                     </svg></Link>
+                    <Link className="text-white" to="/"><AiFillHome /></Link>
                 </div>
                 <h1 className="text-center mb-4 mt-5">LOGIN ACCOUNT</h1>
                 <ReactFacebookLogin
                     appId="544343623593746"
                     render={renderProps => (
                      // Facebookloading ? <div className='text-center'><ClipLoader  color='#FFF' loading={Facebookloading}  size={20} /></div>: <Facebook text="Signin with Facebook" type="button" onClick={renderProps.onClick}></Facebook> 
-                     <Facebook active={!caption ? true:false} icon={!Facebookloading} text={Facebookloading ? <ClipLoader  color='#FFF' loading={Facebookloading}  size={20} /> : "Signin with Facebook"} type="button" onClick={renderProps.onClick}></Facebook>
+                     <Facebook active={false} icon={!Facebookloading} text={Facebookloading ? <ClipLoader  color='#FFF' loading={Facebookloading}  size={20} /> : "Signin with Facebook"} type="button" onClick={renderProps.onClick}></Facebook>
                     )}
                     autoLoad={false}
                     cssClass="btnFacebook"
@@ -258,7 +256,7 @@ var getObject={
                     clientId="714307659254-amb3fmov1ncdjcfcf2qvogl93ev90gm3.apps.googleusercontent.com"
                     buttonText="Login with Google"
                     render={renderProps => (
-                      <Gmail active={!caption ? true:false} text2="Signin with Gmail" type="button" onClick={renderProps.onClick} disabled={renderProps.disabled}></Gmail>
+                      <Gmail active={false} text2="Signin with Gmail" type="button" onClick={renderProps.onClick} disabled={renderProps.disabled}></Gmail>
                      
                     )}
                     onSuccess={responseGoogle}
@@ -284,11 +282,9 @@ var getObject={
                   </div>
                  
                 </div>
-                <div className="caption">
-                  <Captcha    size='normal'   className="captions" siteKey="6Le4rjEfAAAAAClt5SkfUSqQ-RCIUinyCPX0I75w" onResponse={showResponse} onloadCallback={() => console.log('loaded')}></Captcha>
-                </div>
+               
                 {caption}
-                <div className="mb-2"><button disabled={!caption ? true:false} className="btn btn-primary d-block w-100" type="submit">{loading ? <ClipLoader  color='#FFF' loading={loading}  size={20} /> : "Login"}</button></div>
+                <div className="mb-2"><button disabled={false} className="btn btn-primary d-block w-100" type="submit">{loading ? <ClipLoader  color='#FFF' loading={loading}  size={20} /> : "Login"}</button></div>
                 <Link to="/forget" className="already text-white"><p > Forget password ? </p></Link>
             </form>
            
@@ -330,9 +326,9 @@ const LoginWithPhoto=styled.div`
     
   }
    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 15%, rgba(206,220,223,1) 100%);
-    height: 20%;
+    height: 50%;
     min-height:110vh;
-    padding: 30px 0; 
+    padding: 50px 0; 
     form {
       .caption{
         
@@ -358,6 +354,8 @@ const LoginWithPhoto=styled.div`
   }
 .mobil_hom_icon{
     display: none;
+    color:#FFF !important;
+    font-size:20pt !important;
   }
 h2 {
     font-size: 24px;
@@ -492,12 +490,12 @@ h2 {
           }
           
         }
-      @media (max-width:819px){
-        .mobil_hom_icon{
+      @media (max-width:615px){
+        form{.mobil_hom_icon{
           display: flex;
-          justify-content: end;
+          justify-content: start;
           
-        }
+        }}
         .image-holder{
           display: none  !important;
         }

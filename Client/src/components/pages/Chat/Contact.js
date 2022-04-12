@@ -2,7 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../../Assets/Images/logo.png'
-import * as AIICons from "react-icons/ai"
+import * as AIICons from "react-icons/io5"
 import axios from 'axios';
 import { getUserConnect } from '../../../utils/api';
 import { Avatar } from 'primereact/avatar';
@@ -40,7 +40,7 @@ function Contact({contacts,currentUser,changeChat}) {
                 <div className='brand'>
                     <img src={logo} alt="logo"></img>
                     
-                    <Link to="/login" className='icon'><AIICons.AiFillHome/></Link>
+                    <Link to="/login" className='icon'><AIICons.IoArrowBackCircleOutline/></Link>
                
                 </div>  
                 <div className='contacts'>
@@ -67,7 +67,7 @@ function Contact({contacts,currentUser,changeChat}) {
                         
                         
                             
-                                {connect && connect.User.file!=null ?  <Avatar image={connect.User.file}  shape="circle" size="large" /> :<Avatar image={`https://ui-avatars.com/api/?name=mouheb+mhamdi`} shape="circle" size="large"  />}
+                                {connect && connect.User.file!=null ?  <Avatar className='currentAvatar' image={connect.User.file}  shape="circle" size="large"  /> :<Avatar image={`https://ui-avatars.com/api/?name=mouheb+mhamdi`} className='currentAvatar' shape="circle" size="large"  />}
                          
                                 <div className='username'>
                                     <h3>{currentUserName}</h3>
@@ -85,6 +85,22 @@ const Container=styled.div`
         grid-template-rows:10% 75% 15%;
         overflow:hidden;
         background-color:#4c7391;
+        @media(max-width: 615px) {
+            .currentAvatar{
+                margin-left:-40px;
+            }
+            h3{
+                display:none;
+            }
+        max-width: 34%;
+        .brand{
+           
+            img{
+                display:none;
+            }
+        }
+        
+      }
         .brand{
             display:flex;
             align-items:center;
@@ -176,7 +192,7 @@ const Container=styled.div`
                     }
             }
             @media screen and (min-width:720px)and (max-width:1080px){
-                gap:0.5rem;
+                
                 .username{
                     h3{
                         font-size:1rem;
