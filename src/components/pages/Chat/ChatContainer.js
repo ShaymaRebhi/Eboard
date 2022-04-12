@@ -5,12 +5,13 @@ import { getAllMessagesRoute, getUserConnect, sendMessagesRoute } from '../../..
 import ChatInput from './ChatInput';
 import { v4 as uuidv4 } from "uuid";
 import { useHistory } from 'react-router-dom';
-
+import { Avatar } from 'primereact/avatar';
 
 export default function ChatContainer({currentUser,currenChat,socket}) {
     const [messages, setMessages] = useState([]);
     const scrollRef = useRef();
     const [userName,SetUserName]=useState(undefined);
+    const [UserConnect,SetUserConnect]=useState(undefined);
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const data=  JSON.parse(localStorage.getItem('login'));
     const history=useHistory();
@@ -30,6 +31,7 @@ export default function ChatContainer({currentUser,currenChat,socket}) {
           }else{
             console.log("stay logedIn  "+decodedToken.exp);
           }
+          console.log(currenChat.FirstName)
     },[])
     useEffect(()=>{
         
@@ -39,13 +41,14 @@ export default function ChatContainer({currentUser,currenChat,socket}) {
            }
        }).then(res=>{
            console.log(res.data);
-           SetUserName(res.data[0].FirstName+' '+res.data[0].LastName)
+           SetUserName(res.data[0].FirstName+' '+res.data[0].LastName);
+           SetUserConnect(res.data[0]);
        })
     
    },[userName])
 
     useEffect(()=>{
-      if(currenChat){
+      if(currenChat && currentUser){
          axios.post(getAllMessagesRoute,{
           from:currentUser._id,
           to:currenChat.User._id,
@@ -102,12 +105,12 @@ export default function ChatContainer({currentUser,currenChat,socket}) {
             <div className="user-details">
                 <div className="avatar">
                
-                <img src={`https://ui-avatars.com/api/?name=${currentUser.email}`} alt='avatar'></img>
+                {currenChat.User && currenChat.User.file!==null ?  <Avatar onError={(e) => e.target.src=`https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg`} image={currenChat.User.file}  shape="circle" size="large"  /> :<Avatar image={`https://ui-avatars.com/api/?name=${currenChat.FirstName+' '+currenChat.LastName}`} shape="circle" size="large"  />}
                     
                 </div>
                 
                 <div className='username'>
-                    <h3>{userName} </h3>
+                    <h3>{currenChat.FirstName +' '+currenChat.LastName} </h3>
                 </div>
             </div>
         </div>
@@ -123,6 +126,7 @@ export default function ChatContainer({currentUser,currenChat,socket}) {
                 <div className="content ">
                   <p>{message.message}</p>
                 </div>
+                
               </div>
             </div>
           );
@@ -134,10 +138,10 @@ export default function ChatContainer({currentUser,currenChat,socket}) {
 }
 const Container = styled.div`
 display: grid;
-grid-template-rows: 10% 80% 10%;
-gap: 0.1rem;
+grid-template-rows: 10% 10% 10%;
+
 overflow: hidden;
-@media screen and (min-width: 610px) and (max-width: 1080px) {
+@media screen  {
   grid-template-rows: 15% 70% 15%;
  
 }
@@ -148,15 +152,19 @@ overflow: hidden;
   
   .user-details {
     background-color:#0d4b7a;
-    width:122vh;
-    border-radius:5px;
-    padding:11px;
-    display: flex;
-    align-items: center;
-    z-index:1;
-    position:fixed;
-    top:0;
-    gap: 1rem;
+      width:99%;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      padding: 1rem;
+      margin-top:-30px;
+      font-size: 1.1rem;
+      border-radius: 1rem;
+      color: #d1d1d1;
+      @media (max-width: 720px)  {
+        max-width: 70%;
+      }
+   
+    gap: 0.5rem;
     .avatar {
       img {
         border-radius:50%;
@@ -173,6 +181,7 @@ overflow: hidden;
   }
 }
 .chat-messages {
+ 
   padding: 1rem 2rem;
   display: flex;
   flex-direction: column;
@@ -187,6 +196,7 @@ overflow: hidden;
     }
   }
   .message {
+   
     display: flex;
     align-items: center;
     .content {
@@ -196,7 +206,7 @@ overflow: hidden;
       font-size: 1.1rem;
       border-radius: 1rem;
       color: #d1d1d1;
-      @media screen and (min-width: 720px) and (max-width: 1080px) {
+      @media(max-width: 615px) {
         max-width: 70%;
       }
     }
