@@ -11,12 +11,15 @@ import {useHistory} from "react-router-dom";
 import Select from "react-select";
 import {addQuiz} from "../../utils/Quiz";
 import {toast, ToastContainer} from "react-toastify";
+import {MultiSelect} from "react-multi-select-component";
 
 function CreateQuiz() {
+    const id=JSON.parse(localStorage.getItem("login")).User._id;
     const [quiz, setQuizs] = useState(
         {Title : "",
             Theme:"",
-            Description:""
+            Description:"",
+            Creator:id
         }
     )
     const [Questions,setQuestions] = useState([
@@ -28,7 +31,11 @@ function CreateQuiz() {
             score:null
         }]
     )
+    const [selected, setSelected] = useState([]);
     const listTheme = [
+        { label: "hassen1", value: "hassen1" },
+        { label: "hassen2", value: "hassen2" },
+        { label: "hassen3", value: "hassen3" }
     ]
     const history = useHistory();
     const changeQuizTitle = (text) => {
@@ -120,7 +127,8 @@ function CreateQuiz() {
             Title : quiz.Title,
             Theme : quiz.Theme,
             Description : quiz.Description,
-            Questions:Questions
+            Questions:Questions,
+            Creator : quiz.Creator
         }
         console.log(newQuiz);
         addQuiz(newQuiz,() =>(
@@ -170,6 +178,13 @@ function CreateQuiz() {
                                       options={listTheme}
                                       placeholder="Select Theme"
                                    />
+                                  <MultiSelect
+                                      className="selectmany"
+                                      options ={listTheme}
+                                      value={selected}
+                                      onChange={setSelected}
+                                      labelledBy="Select Students"
+                                  />
                                   <input type="text" id="Description" className="Quiz_form_top_desc" placeholder="Write Description here"
                                          value={quiz.Description} onChange={(e)=>{changeQuizDescription(e.target.value)}} />
                               </>

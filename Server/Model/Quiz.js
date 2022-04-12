@@ -17,9 +17,21 @@ var Quiz = new Schema ({
     Questions:{
         type:[],
     },
-    User:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'user',
+    CreationDate:{
+        type:Date,
+        default:Date.now,
+    },
+    listStudents : {
+        type : [Object],
+    },
+    Class :{
+        type: mongoose.Schema.Types.ObjectId,
+        ref : 'Class'
+    },
+    Creator :{
+        type: mongoose.Schema.Types.ObjectId,
+        ref : 'users'
+
     }
 
 })

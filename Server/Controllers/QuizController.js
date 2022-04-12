@@ -25,6 +25,7 @@ exports.AddQuiz = async(req,res) => {
             id: quiz._id,
             message: 'Quiz Created'
         });
+            req.body.User=User._id;
     })
 }
 exports.updateQuiz = async(req,res)=> {

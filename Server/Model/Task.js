@@ -25,7 +25,22 @@ var Task = new Schema ({
     QuestionResponseFile:{
         type:String,
         //required:true
+    },
+    listStudents : {
+        type : [Object],
+
+    },
+    class :{
+        type: mongoose.Schema.Types.ObjectId,
+        ref : 'Class'
+    },
+    creator :{
+        type: mongoose.Schema.Types.ObjectId,
+        ref : 'users'
+
     }
+
+
 
 
 })
