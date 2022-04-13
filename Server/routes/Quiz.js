@@ -9,4 +9,6 @@ router.get('/:id',QuizController.GetOneQuiz);
 router.delete('/:id',QuizController.deleteQuiz);
 router.post('/update/:id',QuizController.updateQuiz);
 
+router.post('/assign',QuizController.assignQuiz);
+router.post('/assignQuizAfterSave',QuizController.assignQuizAfterSave);
 module.exports = router;

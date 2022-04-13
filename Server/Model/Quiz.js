@@ -17,6 +17,10 @@ var Quiz = new Schema ({
     Questions:{
         type:[],
     },
+    status : {
+        type: String,
+        required : true
+    },
     CreationDate:{
         type:Date,
         default:Date.now,

@@ -1,4 +1,5 @@
 const Quiz = require('../Model/Quiz')
+const Evaluation = require('../Model/Evaluation')
 const Option = require('../Model/Option')
 const Question = require('../Model/QuestionQuiz')
 
@@ -53,4 +54,48 @@ exports.GetOneQuiz = async(req,res) => {
         }).catch(err=>{
             return res.json(err);
         });
+exports.assignQuiz= async (req, res) => {
+    const quiz = req.body;
+    quiz.status = "assign";
+    const newQuiz = new Quiz(quiz);
+
+    try {
+        newQuiz.save();
+        quiz.listStudents
+            .forEach((element) => {
+                const newEvaluation = new Evaluation({
+                    Quiz: newQuiz._id,
+                    Student: element._id,
+                });
+                newEvaluation.save();
+            })
+            .then((quiz) => res.json(quiz));
+
+        res.status(201).json(newQuiz);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+exports.assignQuizAfterSave= async (req, res) => {
+    const quiz = req.body;
+    quiz.status = "assign";
+    const newQuiz = new Quiz(quiz);
+
+    try {
+        quiz.listStudents.forEach((element) => {
+            const newEvaluation = new Evaluation({
+                Quiz: newQuiz._id,
+                Student: element._id,
+            });
+            newEvaluation.save();
+        });
+
+        quiz.findByIdAndUpdate(quiz._id, newQuiz, {
+            useFindAndModify: false,
+        }).then((quiz) =>
+            Quiz.findOne({ _id: quiz._id }).then((quiz) => res.json(quiz))
+        );
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
 }
