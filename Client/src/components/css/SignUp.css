@@ -110,7 +110,7 @@
 .signup-photo  form input[type='Number']::placeholder{
   color: #BDBDBD;
 }
-  .signup-photo  form h1,label{
+  .signup-photo  form h1{
       color: #FFF;
   }
   

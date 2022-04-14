@@ -11,11 +11,11 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from 'react-redux'
-import {addClass} from "../../redux/slices/classline";
-import {fetchclass} from "../../redux/slices/classline";
+import {addClass , fetchclass} from "../../redux/slices/classline";
 import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
 import { getUserConnect } from '../../utils/api';
+import Upload from "./upload";
 
 
 
@@ -60,6 +60,7 @@ export default function AddClassComponent() {
      
       const formik = useFormik({
     initialValues: {
+      _id:"",
       classUsers: [],
       className: "",
       classSection: "",
@@ -67,6 +68,7 @@ export default function AddClassComponent() {
       classOwner: "",
       classColor: "",
       classStatus:"Active",
+     
     },
     validationSchema: Yup.object({
       className: Yup.string().required(),
@@ -87,7 +89,8 @@ export default function AddClassComponent() {
           classSection: formData.classSection,
           classOwner: currentUser,
           classColor: color,
-          classStatus:"Active"
+          classStatus:"Active",
+         
         };
 
         dispatch(addClass(data));
@@ -115,9 +118,9 @@ export default function AddClassComponent() {
       headers: {
           'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
       }
-  }).then(res=>{
-      console.log(res.data);
-      setCurrentUser(res.data[0]._id)
+  }).then(rs=>{
+     
+      setCurrentUser(rs.data[0]._id)
   })
 
   }, [currentUser]);
@@ -186,8 +189,10 @@ export default function AddClassComponent() {
               />
               
             </Form.Group>
-            
+            <Form.Group>
 
+            
+            </Form.Group>
             <Form.Group>
               {error.visible && <Form.Error>{error.message}</Form.Error>}
             </Form.Group>

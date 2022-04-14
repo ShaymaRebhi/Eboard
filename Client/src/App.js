@@ -98,6 +98,11 @@ function App() {
                 render={(props) => <HomeClassroom {...props} />}
             />
              <Route
+                path="/archived"
+                exact
+                render={(props) => <HomeClassroom {...props} />}
+            />
+             <Route
                 path="/forums"
                 exact
                 render={(props) => <HomeClassroom {...props} />}

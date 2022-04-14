@@ -28,7 +28,7 @@ export const SidebarData=[
     
     {
        
-        path:'#',
+        path:'/archived',
         icon:<BiArchive />,
         cName:'nav-text',
         tooltip:"Archive",

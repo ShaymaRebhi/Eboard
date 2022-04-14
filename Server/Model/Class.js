@@ -19,6 +19,14 @@ const ClassSchema = new Schema({
     classColor : {
         type : String 
     },
+    file:{
+        type:String,
+        default:
+        "https://i.ibb.co/KryG66q/classroom.jpg",
+    },
+    fileType:{
+        type:String
+    },
     picture: {
         type: String,  
       },

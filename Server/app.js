@@ -16,6 +16,7 @@ const bodyparser = require("body-parser")
 const socket=require('socket.io')
 const ReclamationRoute = require('./routes/Reclamations') 
 const classRoute = require('./routes/Class.js')
+const InvitationClassRouter = require("./routes/InvitationClass.js")
 const Grid = require("gridfs-stream");
 require('dotenv/config');
 let gfs;
@@ -79,6 +80,7 @@ app.use('/forum',forumRouter);
 app.use('/reclamation',ReclamationRoute);
 app.use('/comment',CommentRoute);
 app.use('/class',classRoute);
+app.use('/invitationclass',InvitationClassRouter);
 
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));

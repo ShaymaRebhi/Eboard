@@ -4,22 +4,21 @@ import { FaRegFolder , FaRegFile , FaRegComment ,FaRegGrinHearts,FaRegAngry,FaEl
 import '../css/CardClass.css';
 import { Dropdown } from 'semantic-ui-react';
 import ArchieveClassComponent from './ArchieveClassComponent';
-import EditComponent from './EditComponent';
-import { DialogContent } from '@material-ui/core';
-import Upload from './upload';
+
+import ActivedClassComponent from './ActivedClassComponent';
 
 
-function CardItemClass(props) {
+function CardItemClassArchived(props) {
   return (
     
     <>
        
-      <li className='cards__Class__item' >
+      <li className='cards__Class__item_Archived' >
         <div className='cards__Class__item__link' >
           <div className='cards__Class__item__pic-wrap' >
           <div className='drpd'>
             
-          <Dropdown
+                                  <Dropdown
                                       fluid
                                      
                                       direction="left"
@@ -27,12 +26,7 @@ function CardItemClass(props) {
                                       icon="ellipsis vertical"
                                     >
                                       <Dropdown.Menu>
-                                        <EditComponent
-                                          headerTitle="Archive Class"
-                                          buttonTriggerTitle="Archive"
-                                          classes={props.classes}
-                                        />
-                                        <ArchieveClassComponent
+                                        <ActivedClassComponent
                                           headerTitle="Archive Class"
                                           buttonTriggerTitle="Archive"
                                           classes={props.classes}
@@ -56,9 +50,9 @@ function CardItemClass(props) {
               />
               </div>
           <div className='cards__Class__item__info'>
-            
+            <Link to={props.path} >
             <h1 className='cards__Class__item__course'>{props.course}</h1>
-            
+            </Link>
             <h5 className='cards__Class__item__teacher'>{props.teacher}</h5>
             <h6 className='cards__Class__item__class'>{props.class}</h6>
             <ul className='icons'>
@@ -98,4 +92,4 @@ function CardItemClass(props) {
 
 
 
-export default CardItemClass;
+export default CardItemClassArchived;
