@@ -10,7 +10,7 @@ const InvitationClassSchema = new Schema({
     },
     userOb :{
         type: Schema.Types.ObjectId,
-        ref : 'User'
+        ref : 'Student'
     },
 })
 module.exports = mongoose.model('InvitationClass', InvitationClassSchema);

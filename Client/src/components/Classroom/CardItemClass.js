@@ -6,6 +6,7 @@ import { Dropdown } from 'semantic-ui-react';
 import ArchieveClassComponent from './ArchieveClassComponent';
 import EditComponent from './EditComponent';
 import { DialogContent } from '@material-ui/core';
+import Upload from './upload';
 
 
 function CardItemClass(props) {
@@ -29,21 +30,20 @@ function CardItemClass(props) {
                                         <EditComponent
                                           headerTitle="Archive Class"
                                           buttonTriggerTitle="Archive"
-                                          
+                                          classes={props.classes}
                                         />
                                         <ArchieveClassComponent
                                           headerTitle="Archive Class"
                                           buttonTriggerTitle="Archive"
-                                          
+                                          classes={props.classes}
                                         />
                                       </Dropdown.Menu>
                                     </Dropdown>
         
           </div>
-          
             <img
               className='cards__Class__item__img'
-              alt='Travel Image'
+              alt='backround image'
               src={props.src}
             />
             
@@ -56,9 +56,9 @@ function CardItemClass(props) {
               />
               </div>
           <div className='cards__Class__item__info'>
-            <Link to={props.path} >
+            
             <h1 className='cards__Class__item__course'>{props.course}</h1>
-            </Link>
+            
             <h5 className='cards__Class__item__teacher'>{props.teacher}</h5>
             <h6 className='cards__Class__item__class'>{props.class}</h6>
             <ul className='icons'>

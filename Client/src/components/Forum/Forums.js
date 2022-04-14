@@ -11,7 +11,7 @@ import Footer from "../pages/Shared/Footer";
 
 function Forums() {
     const dispatch = useDispatch();
-    const  forums = useSelector(selectForum );
+    const  forums = useSelector(selectForum);
 
     useEffect(() => {
         dispatch(affichage())
@@ -96,7 +96,7 @@ function Forums() {
 
                     </div>
                     <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                        Create a Forum
+                        Create Post
                     </button>
 
                     <div style={{margin:'10% 0% 0% 0%'}} className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

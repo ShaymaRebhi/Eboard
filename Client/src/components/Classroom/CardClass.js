@@ -2,62 +2,72 @@ import React , {useState,useEffect} from 'react';
 import '../css/CardClass.css';
 import CardItemClass from './CardItemClass';
 import { Grid, Label, Segment ,  } from 'semantic-ui-react';
-import {affichage, selectClass} from "../../redux/slices/ClassSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { getUserConnect } from '../../utils/api';
+import { useHistory } from "react-router";
+import {
+  selectclass,
+  fetchclass,
+} from "../../redux/slices/classline";
 import ReactPaginate from 'react-paginate';
-import {getclassByYear} from '../../utils/Class'
+import { getclassApi } from '../../utils/Class';
 
 
 
 
 
-export default function CardClass (props) {
-  const idUser=JSON.parse(localStorage.getItem("login")).User._id;
-  console.log(idUser);
+export default function CardClass () {
+  const [currentUser,setCurrentUser]=useState(undefined);
   const dispatch = useDispatch();
-  const  classs = useSelector(selectClass );
-
-  const [Cs,setCs] = useState([])
-
+  const [classs] = useSelector(selectclass);
   const [pageNumber, setPageNumber] = useState(0);
   const [CsPerPage] = useState(3);
   const pagesVisited = pageNumber * CsPerPage ;
+  const history = useHistory();
 
-  const getClass=()=>{
-    getclassByYear(idUser,"Active",(res)=> {
-      setCs(res.data)
-      console.log(res.data.classObjet)
-    })
-}
 const aff = (id) => {
    return "Level " + id + "th";
   
 };
-  const fetchClass = async () => {
-  
-      const response = await axios.get(
-          "http://localhost:3000/class/all"
-      ).then(res => {setCs(res.data);console.log(res.data)});
-    
-  };
-  useEffect(() => {
-    getClass()
+const getObj = (obj) => {
+  return  Math.ceil(obj.length / CsPerPage) ;
  
-  }, [dispatch]);
+};
+const selectClass = async (classSelected) => {
+  const res = await getclassApi.getclassById(classSelected);
+  console.log(res.classOwner);
+  localStorage.setItem("idClass", JSON.stringify(res));
+  history.push("/feed");
+};
+useEffect(() => {
 
-  const pageCount = Math.ceil(Cs.length / CsPerPage);
+  dispatch(fetchclass(currentUser,"Active"));
+
+  
+    
+    axios.get(getUserConnect,{
+      headers: {
+          'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+      }
+  }).then(rslt=>{
+      setCurrentUser(rslt.data[0]._id);
+  })
+ 
+
+  }, [currentUser]);
+  
+  
+ 
 
   const changePage = ({ selected }) => {
   setPageNumber(selected);
   };
    
   return (
-      
-        
       <div className='cards__Class__wrapper'>
-    {Cs?.map((cl, index) => (
+    {classs?.map((cl, index) => (
       <Grid columns={1} rows={3} key ={index}>
     <Grid.Column>
       <Segment raised>
@@ -68,15 +78,16 @@ const aff = (id) => {
           <ul className='cards__Class__items' >
           
           {cl.classObjet?.slice(pagesVisited, pagesVisited + CsPerPage).map((f , i) => (
-        <div  key={i}>
+        <div  key={i} onClick={() => selectClass(f._id)}>
             <CardItemClass  
-              src='images/react.jpeg'
+              src={f.file}
               course={f.className}
-              teacher='amine'
+              teacher={f.classOwner.FirstName+' '+f.classOwner.LastName}
               class={f.classSection}
-              meet ='IN MEETING NOW'
-              path='/feed'
-              src1=""
+              meet ='OFFLINE'
+              src1={f.classOwner.User.file}
+              classes={f}
+              
               
             />
                  
@@ -89,7 +100,7 @@ const aff = (id) => {
           <ReactPaginate
         previousLabel={"Previous"}
         nextLabel={"Next"}
-        pageCount={pageCount}
+        pageCount={getObj(cl.classObjet)}
         onPageChange={changePage}
         containerClassName={"paginationBttns"}
         previousLinkClassName={"previousBttn"}

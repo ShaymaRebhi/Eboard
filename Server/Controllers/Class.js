@@ -1,7 +1,27 @@
 const Class = require("../Model/Class.js");
+const Student = require("../Model/Student.js");
+const User = require("../Model/User.js");
 const mongoose = require("mongoose");
+const _=require("lodash")
 
 module.exports = {
+
+  UploadFile: async(req,res)=>{
+    await Class.findOne({_id:req.params.id},function(err,Class){
+        if(err) return res.status(503).json({error:err});
+        if (req.file === undefined) return res.status(500).send("you must select a file.");
+        const objct={
+            file:`http://localhost:3000/file/${req.file.filename}`,
+            fileType:req.file.mimetype
+        }
+        Class=_.extend(Class,objct);
+        Class.save((err,Class)=>{
+            if(err) return res.status(500).json({error:err})
+            if(Class)return res.status(200).json(Class);
+        })
+
+    })
+},
   getClass: async (req, res) => {
     try {
       res
@@ -22,7 +42,11 @@ module.exports = {
       res
         .status(200)
         .json(
-          await Class.findOne({ _id: req.params._id })
+          await Class.findOne({ _id: req.params._id }) .populate('classOwner')
+          .populate({
+            path: "classUsers",
+            populate: "User" ,
+          })
            
         );
     } catch (error) {
@@ -41,6 +65,17 @@ module.exports = {
       });
          req.body.User=User._id;
   })
+  },
+  getUsers: async (req, res) => {
+    try {
+      res
+        .status(200)
+        .json(
+          await Student.find({}).populate("User")
+        );
+    } catch (error) {
+      res.status(404).json({ statue: false, message: error.message });
+    }
   },
   updateClass: async (req, res) => {
     try {
@@ -84,7 +119,7 @@ module.exports = {
   },
   addUserToClass: async (req, res) => {
     try {
-      const dataFind = await Student.findOne({ email: req.params.email });
+      const dataFind = await Student.findOne({ _id: req.params.idUser });
       const dataUpdate = await Class.updateOne(
         { _id: req.params.id },
         { $push: { classUsers: [dataFind] } }
@@ -100,9 +135,9 @@ module.exports = {
   },
   removeUserFromClass: async (req, res) => {
     try {
-      const dataFind = await StudentModel.findOne({ email: req.params.email });
-      console.log(req.params.email);
-      const dataUpdate = await ClassModel.update(
+      const dataFind = await Student.findOne({ _id: req.params.idUser });
+      console.log(req.params.idUser);
+      const dataUpdate = await Class.update(
         { _id: req.params.id },
         { $pullAll: { classUsers: [dataFind] } },
         { safe: true }
@@ -118,7 +153,7 @@ module.exports = {
   },
   getUserByEmail: async (req, res) => {
     try {
-      const dataFind = await StudentModel.findOne({ email: req.params.email });
+      const dataFind = await Student.findOne({ email: req.params.email });
       res.status(201).json(dataFind);
     } catch (error) {
       res.status(400).json({ statue: false, message: error.message });
@@ -154,7 +189,53 @@ module.exports = {
           },
         },
         {
-          $unwind: "$className",
+          $lookup: {
+            from: "students",
+            localField: "classOwner",
+            foreignField : "_id",
+            as: "classOwner",
+          },
+        },
+        {
+          $unwind: "$classOwner" ,
+        
+        },
+        {
+          $lookup: {
+            from: "users",
+            let: {
+              id: "$classOwner.User"
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $eq: [
+                      "$_id",
+                      "$$id"
+                    ]
+                  }
+                }
+              },
+              
+            ],
+            as: "classOwner.User"
+          }
+        },
+        {
+          $addFields: {
+            "classOwner.User": {
+              $ifNull: [
+                {
+                  $arrayElemAt: [
+                    "$classOwner.User",
+                    0
+                  ]
+                },
+                {}
+              ]
+            }
+          }
         },
         {
           $group: {
@@ -168,15 +249,19 @@ module.exports = {
                 classUsers: "$classUsers",
                 classLevel: "$classLevel",
                 classColor: "$classColor",
+                file: "$file",
                 classStatus: "$classStatus",
                 _id: "$_id",
               },
             },
           },
+          
         },
+       
       ])
-      const Final= newLevel.sort(function(a, b){return a._id - b._id});
-      res.status(200).json(Final);
+      const Final= newLevel.sort(function(a, b){return a._id - b._id})
+      res.status(200).json(Final)
+        
     } catch (error) {
       res.status(404).json({ statue: false, message: error.message });
     }
@@ -204,6 +289,7 @@ module.exports = {
         {
           $unwind: "$classLevel",
         },
+       
         {
           $group: {
             _id: "$classLevel",
@@ -221,13 +307,75 @@ module.exports = {
               },
             },
           },
-        },
-      ]);
-      const Final= newLevel.sort(function(a, b){return a._id - b._id});
+        }
+      ]) 
+         
+      const Final= newLevel.sort(function(a, b){return a._id - b._id})
+      
       res.status(200).json(Final);
+     
     } catch (error) {
       res.status(404).json({ statue: false, message: error.message });
     }
   },
-  
+  CountActiveClass: async (req, res) => {
+    try {
+      const dataFind = await Class.aggregate([
+        {
+          $match: {
+            classStatus: "Active",   $or: [
+              {
+                classUsers: {
+                  $in: [mongoose.Types.ObjectId(req.params.id)],
+                },
+              },
+              {
+                classOwner: {
+                  $in: [mongoose.Types.ObjectId(req.params.id)],
+                },
+              },
+            ],
+          },
+        },
+        {
+          $count: "active_class",
+        },
+      ]);
+      res.status(201).json(dataFind);
+    } catch (error) {
+      res.status(400).json({ statue: false, message: error.message });
+    }
+  },
+  updateClassActive: async (req, res) => {
+    try {
+      // const updateClass = new ClassModel(req.body);
+      const data = await Class.update(
+        { _id: req.params.id },
+        { classStatus: "Archive" }
+      );
+      res.status(201).json({
+        statue: true,
+        message: " Class Archived Succefully",
+        result: data,
+      });
+    } catch (error) {
+      res.status(400).json({ statue: false, message: error.message });
+    }
+  },
+  updateClassArchive: async (req, res) => {
+    try {
+      // const updateClass = new ClassModel(req.body);
+      const data = await Class.update(
+        { _id: req.params.id },
+        { classStatus: "Active" }
+      );
+      res.status(201).json({
+        statue: true,
+        message: " Class Actived Succefully",
+        result: data,
+      });
+    } catch (error) {
+      res.status(400).json({ statue: false, message: error.message });
+    }
+  },
 };
