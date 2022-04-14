@@ -4,27 +4,32 @@ import {useHistory} from "react-router-dom";
 import {FaTrash} from 'react-icons/fa' ;
 import {GrUpdate} from 'react-icons/gr' ;
 import {MdAssignment} from 'react-icons/md'
-import {getAllQuizs,deleteQuiz} from "../../utils/Quiz";
+import {getAllQuizs, deleteQuiz, getOneQuiz} from "../../utils/Quiz";
 import {toast, ToastContainer} from "react-toastify";
 import {Header, Icon, Item, Segment} from "semantic-ui-react";
-
+import ModalAssignQuiz from "./ModalAssignQuiz";
+import {forEach} from "react-bootstrap/ElementChildren";
 
 
 function QuizList() {
+    const idUser=JSON.parse(localStorage.getItem("login")).User._id;
     const history = useHistory();
     const [quiz, setQuizs] = useState([
         {Title : "",
             Theme:"",
             Description:"",
-            questions :[]
+            questions :[],
+            creator:idUser
         }]
     )
+    const [openModal, setOpenModal] = useState(false)
     const [searchTerm,setSearchTerm] = useState([]);
     const getQuizs=()=>{
         getAllQuizs((res)=> {
             setQuizs(res.data)
         })
     }
+
     const getQuizEditPage = (id) => {
         history.push(`/updateQuiz/${id}`);
     }
@@ -41,6 +46,7 @@ function QuizList() {
         let value = e.target.value.toLowerCase();
         setSearchTerm(value);
     }
+
   return (
     <>
         <ToastContainer
@@ -80,6 +86,7 @@ function QuizList() {
                 quiz.filter((q)=>{
                     return q.Title.toLowerCase().includes(searchTerm)
                 }).map((q,i)=>(
+                    <>
                     <Segment color='grey' raised >
                         <Item.Group divided key={i}>
                             <Item>
@@ -101,15 +108,24 @@ function QuizList() {
                                     },
                                     getQuizs()
                                 )}> <FaTrash/> </button>
-                                <button className="btn btn-outline-success" onClick={assignHomeWork}><MdAssignment/></button>
+                                <button className="btn btn-outline-success" onClick={()=>setOpenModal(true)}><MdAssignment/></button>
+
                             </Item>
                         </Item.Group>
-
                     </Segment>
+                        <ModalAssignQuiz
+                            q = {q}
+                            openModal = {openModal}
+                            onClose={() => setOpenModal(false)}
+                        />
+
+                    </>
 
                 ))
             )}
+
         </div>
+
         
     </>
   )

@@ -32,6 +32,11 @@
     border-bottom: 1px solid #FAF4F9;
     color: black;
     height: 35px;
+
+}
+.Quiz_form_top_Name:focus {
+    border-bottom: 1px solid rgba(140,177,192,1);
+    background-color: #F4FAF9;
 }
 .Quiz_form_top_desc {
     box-sizing: border-box;

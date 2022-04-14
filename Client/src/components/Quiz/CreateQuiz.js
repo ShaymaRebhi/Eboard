@@ -15,11 +15,15 @@ import {MultiSelect} from "react-multi-select-component";
 
 function CreateQuiz() {
     const id=JSON.parse(localStorage.getItem("login")).User._id;
+    const currentClass = JSON.parse(localStorage.getItem("idClass"));
+    const idClass = currentClass._id ;
     const [quiz, setQuizs] = useState(
         {Title : "",
             Theme:"",
             Description:"",
-            Creator:id
+            Creator:id,
+            status:"not assign",
+            Class:idClass
         }
     )
     const [Questions,setQuestions] = useState([
@@ -31,12 +35,19 @@ function CreateQuiz() {
             score:null
         }]
     )
+    const StudentList = [];
+    currentClass.classUsers.forEach((element) => {
+        StudentList.push({ label: element.FirstName +" "+element.LastName, value: element._id });
+    });
+
     const [selected, setSelected] = useState([]);
+
     const listTheme = [
         { label: "hassen1", value: "hassen1" },
         { label: "hassen2", value: "hassen2" },
         { label: "hassen3", value: "hassen3" }
     ]
+
     const history = useHistory();
     const changeQuizTitle = (text) => {
         var newQuiz = {...quiz};
@@ -122,15 +133,21 @@ function CreateQuiz() {
         setTimeout(() => {history.push("/QuizList")}, time)
     }
     const SaveQuiz = () => {
+        const listStudents = []
+        selected.forEach((itemselect) => {
+                listStudents.push(itemselect.value);
 
+        })
         const newQuiz ={
             Title : quiz.Title,
             Theme : quiz.Theme,
             Description : quiz.Description,
             Questions:Questions,
-            Creator : quiz.Creator
+            Creator : quiz.Creator,
+            status : quiz.status,
+            Class:quiz.Class,
+            listStudents :listStudents
         }
-        console.log(newQuiz);
         addQuiz(newQuiz,() =>(
             toast.success('Task added successfuly', {
                 position: "bottom-right"
@@ -138,6 +155,9 @@ function CreateQuiz() {
                 componentDidMount(3000)
         ))
 
+    }
+    const BackToListQuiz =() =>{
+        history.push("/QuizList")
     }
 
 
@@ -180,7 +200,7 @@ function CreateQuiz() {
                                    />
                                   <MultiSelect
                                       className="selectmany"
-                                      options ={listTheme}
+                                      options ={StudentList}
                                       value={selected}
                                       onChange={setSelected}
                                       labelledBy="Select Students"
@@ -267,10 +287,24 @@ function CreateQuiz() {
                               }
                   </>
 
-
-
-                  <div className="SaveQuiz">
-                        <button className="btn btn-success " onClick={SaveQuiz}>Save</button>
+                  <div style={{display:"flex",justifyContent:"flex-end"}}>
+                      <div className="SaveQuiz">
+                            <button className="btn btn-success " onClick={SaveQuiz} disabled={
+                                quiz.Title === "" ||
+                                quiz.Description === ""
+                            }>Save</button>
+                      </div>
+                      &nbsp;
+                      <div className="SaveQuiz">
+                          <button style={{backgroundColor:"red"}} className="btn btn-primary " onClick={SaveQuiz} disabled={
+                              quiz.Title === "" ||
+                              quiz.Description === ""
+                          }>Assign</button>
+                      </div>
+                      &nbsp;
+                      <div className="SaveQuiz">
+                          <button className="btn btn-secondary " onClick={BackToListQuiz}>Back</button>
+                      </div>
                   </div>
 
               </div>
