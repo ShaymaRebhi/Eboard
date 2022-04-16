@@ -18,7 +18,9 @@ exports.deleteQuiz = async (req,res) =>{
 }
 
 exports.AddQuiz = async(req,res) => {
-    const newQuiz = new Quiz(req.body)
+    const quizBody = req.body ;
+    quizBody.status = "not assign"
+    const newQuiz = new Quiz(quizBody)
     await newQuiz.save((err, quiz) => {
         if (err) return res.status(503).json({error: err});
         if (quiz) return res.status(200).json({
@@ -54,6 +56,21 @@ exports.GetOneQuiz = async(req,res) => {
         }).catch(err=>{
             return res.json(err);
         });
+}
+
+exports.getQuizByUserAndClass = async (req, res, next) => {
+    const idUser = req.params.idUserr;
+    const idClass = req.params.idClasse;
+    try {
+        Quiz.find({
+            Creator: idUser,
+            Class: idClass
+        }).then((quiz) => res.json(quiz));
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
 exports.assignQuiz= async (req, res) => {
     const quiz = req.body;
     quiz.status = "assign";
@@ -65,7 +82,7 @@ exports.assignQuiz= async (req, res) => {
             .forEach((element) => {
                 const newEvaluation = new Evaluation({
                     Quiz: newQuiz._id,
-                    Student: element._id,
+                    Student: element,
                 });
                 newEvaluation.save();
             })
@@ -85,7 +102,7 @@ exports.assignQuizAfterSave= async (req, res) => {
         quiz.listStudents.forEach((element) => {
             const newEvaluation = new Evaluation({
                 Quiz: newQuiz._id,
-                Student: element._id,
+                Student: element,
             });
             newEvaluation.save();
         });
@@ -98,4 +115,17 @@ exports.assignQuizAfterSave= async (req, res) => {
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
+}
+
+exports.getQuizByStudent = async (req, res, next) => {
+    const idUser = req.params.idUserr;
+    try {
+        Evaluation.find({
+            Student: idUser
+        }).then((evaluation) => res.json(evaluation));
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
 }
