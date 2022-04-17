@@ -44,7 +44,7 @@ export default class MenuCours extends Component {
           <Icon name='file alternate' /> Task
         </Menu.Item>
 </Link>
-<Link to ="/displayQuiz">
+<Link to ="/quizStudentList">
         <Menu.Item
           name='exam'
           active={activeItem === 'exam'}

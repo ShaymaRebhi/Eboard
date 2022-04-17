@@ -194,6 +194,11 @@ function App() {
                 render={(props) => <HomeCourse {...props} />}
             />
             <Route
+                path="/quizStudentlist"
+                exact
+                render={(props) => <HomeCourse {...props} />}
+            />
+            <Route
                 path="/404"
                 exact
                 render={(props) => <Page_404 {...props} />}
