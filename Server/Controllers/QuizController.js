@@ -2,6 +2,7 @@ const Quiz = require('../Model/Quiz')
 const Evaluation = require('../Model/Evaluation')
 const Option = require('../Model/Option')
 const Question = require('../Model/QuestionQuiz')
+const mongoose = require("mongoose");
 
 exports.GetQuiz = async (req,res,next) =>{
     try {
@@ -125,8 +126,6 @@ exports.getQuizByStudent = async (req, res, next) => {
 
     try {
         Evaluation.find({
-            Student: idUser
-        }).then((evaluation) => res.json(evaluation));
             Student: idUser,
             Class: idClass
         }).populate("Quiz").then((evaluation) => res.json(evaluation));
@@ -134,6 +133,15 @@ exports.getQuizByStudent = async (req, res, next) => {
         res.status(404).json({ message: error.message });
     }
 }
+
+exports.getDetailQuizByStudent = async (req, res, next) => {
+    const idUser = mongoose.Types.ObjectId(req.params.idUserr);
+    const idQuiz = mongoose.Types.ObjectId(req.params.idQuiz);
+    try {
+        Evaluation.findOne({
+            Student: idUser,
+            Quiz:idQuiz
+        }).populate("Quiz").then((evaluation) => res.json(evaluation));
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
