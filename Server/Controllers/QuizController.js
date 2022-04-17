@@ -72,6 +72,7 @@ exports.getQuizByUserAndClass = async (req, res, next) => {
 }
 
 exports.assignQuiz= async (req, res) => {
+    const idClass = req.params.idClass
     const quiz = req.body;
     quiz.status = "assign";
     const newQuiz = new Quiz(quiz);
@@ -83,6 +84,7 @@ exports.assignQuiz= async (req, res) => {
                 const newEvaluation = new Evaluation({
                     Quiz: newQuiz._id,
                     Student: element,
+                    Class : idClass
                 });
                 newEvaluation.save();
             })

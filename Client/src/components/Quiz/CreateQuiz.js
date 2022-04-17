@@ -9,7 +9,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Button from '@material-ui/core/Button';
 import {useHistory} from "react-router-dom";
 import Select from "react-select";
-import {addQuiz} from "../../utils/Quiz";
+import {addQuiz, assignQuiz} from "../../utils/Quiz";
 import {toast, ToastContainer} from "react-toastify";
 import {MultiSelect} from "react-multi-select-component";
 
@@ -22,7 +22,6 @@ function CreateQuiz() {
             Theme:"",
             Description:"",
             Creator:id,
-            status:"not assign",
             Class:idClass
         }
     )
@@ -39,7 +38,6 @@ function CreateQuiz() {
     currentClass.classUsers.forEach((element) => {
         StudentList.push({ label: element.FirstName +" "+element.LastName, value: element._id });
     });
-
     const [selected, setSelected] = useState([]);
 
     const listTheme = [
@@ -150,6 +148,29 @@ function CreateQuiz() {
         }
         addQuiz(newQuiz,() =>(
             toast.success('Task added successfuly', {
+                position: "bottom-right"
+            }),
+                componentDidMount(3000)
+        ))
+
+    }
+    const AssignQuiz = () => {
+        const listStudents = []
+        selected.forEach((itemselect) => {
+            listStudents.push(itemselect.value);
+
+        })
+        const newQuiz ={
+            Title : quiz.Title,
+            Theme : quiz.Theme,
+            Description : quiz.Description,
+            Questions:Questions,
+            Creator : quiz.Creator,
+            Class:quiz.Class,
+            listStudents:listStudents
+        }
+        assignQuiz(idClass,newQuiz,() =>(
+            toast.success('Quiz assigned', {
                 position: "bottom-right"
             }),
                 componentDidMount(3000)
@@ -296,7 +317,7 @@ function CreateQuiz() {
                       </div>
                       &nbsp;
                       <div className="SaveQuiz">
-                          <button style={{backgroundColor:"red"}} className="btn btn-primary " onClick={SaveQuiz} disabled={
+                          <button style={{backgroundColor:"red"}} className="btn btn-primary " onClick={AssignQuiz} disabled={
                               quiz.Title === "" ||
                               quiz.Description === ""
                           }>Assign</button>

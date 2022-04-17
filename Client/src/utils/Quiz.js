@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = 'https://eboardbackend2022.herokuapp.com' ;
+    const url = 'http://localhost:3000' ;
 
 export const getAllQuizs  = (callback)=>{
     axios.get(url+'/quiz/').then( (res)=>{callback(res)})
@@ -23,3 +23,14 @@ export const updateQuiz  = (id,quiz, callback)=>{
     axios.post(url+`/quiz/update/${id}`,quiz).then((message)  => callback(message))
         .catch((err)=> callback(err));
 }
+
+export const assignQuiz  = (idClass,quiz, callback)=>{
+    axios.post(url+`/quiz/assign/${idClass}`,quiz).then((message)  => callback(message))
+        .catch((err)=> callback(err));
+}
+
+export const assignQuizAfterSave  = (quiz, callback)=>{
+    axios.post(url+'/quiz/assignQuizAfterSave',quiz).then((message)  => callback(message))
+        .catch((err)=> callback(err));
+}
+

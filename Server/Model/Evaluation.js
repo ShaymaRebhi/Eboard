@@ -19,6 +19,10 @@ var Evaluation = new Schema ({
         type:Number,
         default : 0
     },
+    Class :{
+        type: mongoose.Schema.Types.ObjectId,
+        ref : 'Class'
+    },
     Student :{
         type: mongoose.Schema.Types.ObjectId,
         ref : 'users'
