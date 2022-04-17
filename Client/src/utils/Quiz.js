@@ -34,3 +34,6 @@ export const assignQuizAfterSave  = (quiz, callback)=>{
         .catch((err)=> callback(err));
 }
 
+export const getQuizByTeacher  = (idUserr,idClasse,callback)=>{
+    axios.get(url+`/quiz/getQuizByTeacher/${idUserr}/${idClasse}`).then( (res)=>{callback(res)})
+}

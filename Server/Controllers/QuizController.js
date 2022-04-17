@@ -58,7 +58,7 @@ exports.GetOneQuiz = async(req,res) => {
         });
 }
 
-exports.getQuizByUserAndClass = async (req, res, next) => {
+exports.getQuizByTeacher = async (req, res, next) => {
     const idUser = req.params.idUserr;
     const idClass = req.params.idClasse;
     try {

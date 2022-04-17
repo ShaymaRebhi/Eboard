@@ -4,15 +4,15 @@ import {useHistory} from "react-router-dom";
 import {FaTrash} from 'react-icons/fa' ;
 import {GrUpdate} from 'react-icons/gr' ;
 import {MdAssignment} from 'react-icons/md'
-import {getAllQuizs, deleteQuiz, getOneQuiz} from "../../utils/Quiz";
+import {deleteQuiz, getQuizByTeacher} from "../../utils/Quiz";
 import {toast, ToastContainer} from "react-toastify";
 import {Header, Icon, Item, Segment} from "semantic-ui-react";
 import ModalAssignQuiz from "./ModalAssignQuiz";
-import {forEach} from "react-bootstrap/ElementChildren";
 
 
 function QuizList() {
     const idUser=JSON.parse(localStorage.getItem("login")).User._id;
+    const idClass = JSON.parse(localStorage.getItem("idClass"))._id;
     const history = useHistory();
     const [quiz, setQuizs] = useState([
         {Title : "",
@@ -25,7 +25,7 @@ function QuizList() {
     const [openModal, setOpenModal] = useState(false)
     const [searchTerm,setSearchTerm] = useState([]);
     const getQuizs=()=>{
-        getAllQuizs((res)=> {
+        getQuizByTeacher(idUser,idClass,(res)=> {
             setQuizs(res.data)
         })
     }
