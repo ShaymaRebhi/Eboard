@@ -180,6 +180,53 @@ exports.updateEvaluationScoreAndStatus = async (req, res, next) => {
         });
     })
 }
+
+exports.GetOneQuizEvaluation = async (req, res, next) => {
+    await Evaluation.findOne({_id:req.params.id})
+        .then(Evaluation=>{
+            return res.status(200).json(Evaluation);
+        }).catch(err=>{
+            return res.json(err);
+        });
+}
+
+exports.GetNumberStudentByQuizEvaluation = async (req, res, next) => {
+    const idQuiz = req.params.id;
+    try {
+        Evaluation.find({
+            Quiz:idQuiz
+        }).count().then((number)=>res.json(number))
+    }
+    catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+exports.GetNumberStudentWorkedQuiz = async (req, res, next) => {
+    const idQuiz = req.params.id;
+    try {
+        Evaluation.find({
+            Quiz:idQuiz,
+            TaskStatus : "Worked"
+        }).count().then((number)=>res.json(number))
+    }
+    catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+exports.GetNumberStudentAssignedQuiz = async (req, res, next) => {
+    const idQuiz = req.params.id;
+    try {
+        Evaluation.find({
+            Quiz:idQuiz,
+            TaskStatus : "Assigned"
+        }).count().then((number)=>res.json(number))
+    }
+    catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+exports.UpdateQuizStatus =async (req, res, next) => {
+
     Quiz.findById(req.params.id, function (err,quiz){
         if(!quiz)
             res.status(404).send('data is not found');

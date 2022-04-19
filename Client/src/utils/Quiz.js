@@ -42,8 +42,6 @@ export const getQuizByStudentAssigned  = (idClasse,idUserr,callback)=>{
     axios.get(url+`/quiz/getQuizByStudentAssigned/${idClasse}/${idUserr}`).then( (res)=>{callback(res)})
 }
 
-export const getDetailQuizStudent  = (idUserr,idQuiz,callback)=>{
-    axios.get(url+`/quiz/getDetailQuizStudent/${idUserr}/${idQuiz}`).then( (res)=>{callback(res)})
 export const DisplayQuizStudent  = (idUserr,idQuiz,callback)=>{
     axios.get(url+`/quiz/displayQuiz/${idUserr}/${idQuiz}`).then( (res)=>{callback(res)})
 }
@@ -57,6 +55,20 @@ export const updateStudentScore = (idEvaluation,evaluation,callback)=> {
         .catch((err)=> callback(err));
 }
 
+export const DetailQuiz  = (id, callback)=>{
+    axios.get(url+`/quiz/quizEvaluation/${id}`).then((res)=> {callback(res)})
+}
+
+export const GetNumberStudentByQuizEvaluation  = (id, callback)=>{
+    axios.get(url+`/quiz/GetNumberStudentByQuizEvaluation/${id}`).then((res)=> {callback(res)})
+}
+
+export const GetNumberStudentWorkedQuiz  = (id, callback)=>{
+    axios.get(url+`/quiz/GetNumberStudentWorkedQuiz/${id}`).then((res)=> {callback(res)})
+}
+
+export const GetNumberStudentAssignedQuiz  = (id, callback)=>{
+    axios.get(url+`/quiz/GetNumberStudentAssignedQuiz/${id}`).then((res)=> {callback(res)})
 }
 
 export const updateQuizStatus  = (id,quiz, callback)=>{
