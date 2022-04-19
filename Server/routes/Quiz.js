@@ -13,5 +13,6 @@ router.post('/assign/:idClass',QuizController.assignQuiz);
 router.get('/getDetailQuizStudent/:idUserr/:idQuiz',QuizController.getDetailQuizByStudent);
 router.post('/assignQuizAfterSave/:idClass',QuizController.assignQuizAfterSave);
 router.get('/getQuizByStudentAssigned/:idClass/:idUserr',QuizController.getQuizByStudentAssigned);
+router.get('/getQuizByStudentWorked/:idClass/:idUserr',QuizController.getQuizByStudentWorked);
 router.post('/updateStatus/:id',QuizController.UpdateQuizStatus);
 module.exports = router;

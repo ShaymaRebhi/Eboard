@@ -105,6 +105,10 @@ function HomeCourse(){
                                     path="/assignedQuizStudentList"
                                     exact component={AssignedQuizStudentList}
                                 />
+                                <PrivateRoute
+                                    path="/workedQuizStudentList"
+                                    exact component={WorkedQuizStudentList}
+                                />
                                 />
                             </div>
                         </Grid.Column>

@@ -44,6 +44,10 @@ export const getQuizByStudentAssigned  = (idClasse,idUserr,callback)=>{
 
 export const getDetailQuizStudent  = (idUserr,idQuiz,callback)=>{
     axios.get(url+`/quiz/getDetailQuizStudent/${idUserr}/${idQuiz}`).then( (res)=>{callback(res)})
+
+export const getQuizByStudentWorked  = (idClasse,idUserr,callback)=>{
+    axios.get(url+`/quiz/getQuizByStudentWorked/${idClasse}/${idUserr}`).then( (res)=>{callback(res)})
+}
 }
 
 export const updateQuizStatus  = (id,quiz, callback)=>{

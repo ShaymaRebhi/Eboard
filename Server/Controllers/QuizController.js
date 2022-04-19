@@ -134,8 +134,22 @@ exports.getQuizByStudentAssigned = async (req, res, next) => {
         res.status(404).json({ message: error.message });
     }
 }
+exports.getQuizByStudentWorked = async (req, res, next) => {
+    const idUser = req.params.idUserr;
+    const idClass = req.params.idClass
 
 exports.getDetailQuizByStudent = async (req, res, next) => {
+    try {
+        Evaluation.find({
+            Student: idUser,
+            Class: idClass,
+            TaskStatus : "Worked"
+        }).populate("Quiz").then((evaluation) => res.json(evaluation));
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
     const idUser = mongoose.Types.ObjectId(req.params.idUserr);
     const idQuiz = mongoose.Types.ObjectId(req.params.idQuiz);
     try {
