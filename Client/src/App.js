@@ -169,7 +169,7 @@ function App() {
                 render={(props) => <HomeCourse {...props} />}
             />
             <Route
-                path="/displayQuiz"
+                path="/displayQuiz/:id"
                 exact
                 render={(props) => <HomeCourse {...props} />}
             />

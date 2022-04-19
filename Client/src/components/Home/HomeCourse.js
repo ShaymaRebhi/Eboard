@@ -19,6 +19,7 @@ import { useHistory } from 'react-router-dom';
 import EditTask from "../Task/EditTask";
 import EditQuiz from "../Quiz/EditQuiz";
 import AssignedQuizStudentList from "../Quiz/AssignedQuizStudentList";
+import WorkedQuizStudentList from "../Quiz/WorkedQuizStudentList";
 
 function HomeCourse(){
 
@@ -78,7 +79,7 @@ function HomeCourse(){
                                     exact component ={EditQuiz}
                                 />
                                 <PrivateRoute
-                                    path="/displayQuiz"
+                                    path="/displayQuiz/:id"
                                     exact component ={DisplayQuiz}
                                 />
                                 <PrivateRoute

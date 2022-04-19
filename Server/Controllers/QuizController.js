@@ -138,7 +138,6 @@ exports.getQuizByStudentWorked = async (req, res, next) => {
     const idUser = req.params.idUserr;
     const idClass = req.params.idClass
 
-exports.getDetailQuizByStudent = async (req, res, next) => {
     try {
         Evaluation.find({
             Student: idUser,
@@ -150,6 +149,7 @@ exports.getDetailQuizByStudent = async (req, res, next) => {
     }
 }
 
+exports.DisplayQuizByStudent = async (req, res, next) => {
     const idUser = mongoose.Types.ObjectId(req.params.idUserr);
     const idQuiz = mongoose.Types.ObjectId(req.params.idQuiz);
     try {
@@ -162,6 +162,23 @@ exports.getDetailQuizByStudent = async (req, res, next) => {
     }
 }
 
+}
+exports.updateEvaluationScoreAndStatus = async (req, res, next) => {
+    Evaluation.findById(req.params.id,function (err,evaluation){
+        if(!evaluation)
+            res.status(404).send('data is not found');
+        else
+            evaluation.Score = req.body.Score;
+            evaluation.Comment = req.body.Comment;
+            evaluation.TaskStatus = "Worked";
+
+        evaluation.save().then(evaluation=> {
+            res.json('evaluation updated');
+        })
+        .catch(err => {
+                res.status(400).send("Update not possible");
+        });
+    })
 }
     Quiz.findById(req.params.id, function (err,quiz){
         if(!quiz)

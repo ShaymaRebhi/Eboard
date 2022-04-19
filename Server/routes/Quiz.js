@@ -14,5 +14,7 @@ router.get('/getDetailQuizStudent/:idUserr/:idQuiz',QuizController.getDetailQuiz
 router.post('/assignQuizAfterSave/:idClass',QuizController.assignQuizAfterSave);
 router.get('/getQuizByStudentAssigned/:idClass/:idUserr',QuizController.getQuizByStudentAssigned);
 router.get('/getQuizByStudentWorked/:idClass/:idUserr',QuizController.getQuizByStudentWorked);
+router.get('/displayQuiz/:idUserr/:idQuiz',QuizController.DisplayQuizByStudent);
+router.post('/updateEvaluation/:id',QuizController.updateEvaluationScoreAndStatus);
 router.post('/updateStatus/:id',QuizController.UpdateQuizStatus);
 module.exports = router;
