@@ -28,6 +28,9 @@ var Quiz = new Schema ({
     listStudents : {
         type : [Object],
     },
+    Time :{
+
+    },
     Class :{
         type: mongoose.Schema.Types.ObjectId,
         ref : 'Class'

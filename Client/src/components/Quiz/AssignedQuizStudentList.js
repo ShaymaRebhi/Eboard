@@ -1,17 +1,16 @@
 import React, {useEffect, useState} from 'react'
-import "./QuizStudentList.css"
-import {getQuizByStudent} from "../../utils/Quiz";
+import {getQuizByStudentAssigned} from "../../utils/Quiz";
 import {Header, Icon, Item, Segment} from "semantic-ui-react";
 import {useHistory} from "react-router-dom";
 
-function QuizStudentList() {
+function AssignedQuizStudentList() {
     const idClass = JSON.parse(localStorage.getItem("idClass"))._id;
     const history = useHistory();
     const [evaluation, setEvaluation] = useState([]);
     const idUser = JSON.parse(localStorage.getItem("idStudent"))._id;
     const [searchTerm,setSearchTerm] = useState([]);
     const getQuizs=()=>{
-        getQuizByStudent(idClass,idUser,(res)=> {
+        getQuizByStudentAssigned(idClass,idUser,(res)=> {
             setEvaluation(res.data)
         })
     }
@@ -19,9 +18,13 @@ function QuizStudentList() {
             history.push(`/displayQuiz/${id}`);
     }
 
+    const DisplayQuizListWorked = () => {
+        history.push('/WorkedQuizStudentList')
+    }
 
     useEffect(()=>{
         getQuizs();
+        console.log(evaluation);
     })
     const handelSearchTerm = (e) =>{
         let value = e.target.value.toLowerCase();
@@ -41,6 +44,12 @@ function QuizStudentList() {
                     <i className="fa fa-search"></i>
                 </div>
             </div>
+            <div>
+                <div className="buttons">
+                    <button className="btn btn-secondary" onClick={DisplayQuizListWorked}>Quiz List Worked</button>
+                </div>
+            </div>
+            <br/>
             <div className="container pb-5 ">
                 {evaluation.length <= 0 ? (
                     <Segment placeholder>
@@ -84,4 +93,4 @@ function QuizStudentList() {
     )
 }
 
-export default QuizStudentList
+export default AssignedQuizStudentList

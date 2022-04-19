@@ -18,6 +18,7 @@ import TaskList from "../Task/TaskList";
 import { useHistory } from 'react-router-dom';
 import EditTask from "../Task/EditTask";
 import EditQuiz from "../Quiz/EditQuiz";
+import AssignedQuizStudentList from "../Quiz/AssignedQuizStudentList";
 
 function HomeCourse(){
 
@@ -101,8 +102,9 @@ function HomeCourse(){
                                     exact component ={Members}
                                 />
                                 <PrivateRoute
-                                    path="/quizStudentlist"
-                                    exact component={QuizStudentList}
+                                    path="/assignedQuizStudentList"
+                                    exact component={AssignedQuizStudentList}
+                                />
                                 />
                             </div>
                         </Grid.Column>

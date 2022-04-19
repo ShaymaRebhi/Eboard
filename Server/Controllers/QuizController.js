@@ -120,14 +120,15 @@ exports.assignQuizAfterSave= async (req, res) => {
     }
 }
 
-exports.getQuizByStudent = async (req, res, next) => {
+exports.getQuizByStudentAssigned = async (req, res, next) => {
     const idUser = req.params.idUserr;
     const idClass = req.params.idClass
 
     try {
         Evaluation.find({
             Student: idUser,
-            Class: idClass
+            Class: idClass,
+            TaskStatus : "Assigned"
         }).populate("Quiz").then((evaluation) => res.json(evaluation));
     } catch (error) {
         res.status(404).json({ message: error.message });

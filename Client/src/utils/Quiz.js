@@ -38,8 +38,8 @@ export const getQuizByTeacher  = (idUserr,idClasse,callback)=>{
     axios.get(url+`/quiz/getQuizByTeacher/${idUserr}/${idClasse}`).then( (res)=>{callback(res)})
 }
 
-export const getQuizByStudent  = (idClasse,idUserr,callback)=>{
-    axios.get(url+`/quiz/getQuizByStudent/${idClasse}/${idUserr}`).then( (res)=>{callback(res)})
+export const getQuizByStudentAssigned  = (idClasse,idUserr,callback)=>{
+    axios.get(url+`/quiz/getQuizByStudentAssigned/${idClasse}/${idUserr}`).then( (res)=>{callback(res)})
 }
 
 export const getDetailQuizStudent  = (idUserr,idQuiz,callback)=>{
