@@ -12,7 +12,7 @@ import Select from "react-select";
 import {addQuiz, assignQuiz} from "../../utils/Quiz";
 import {toast, ToastContainer} from "react-toastify";
 import {MultiSelect} from "react-multi-select-component";
-
+import TimeField from 'react-simple-timefield';
 function CreateQuiz() {
     const id=JSON.parse(localStorage.getItem("login")).User._id;
     const currentClass = JSON.parse(localStorage.getItem("idClass"));
@@ -21,6 +21,7 @@ function CreateQuiz() {
         {Title : "",
             Theme:"",
             Description:"",
+            Time:'12:34',
             Creator:id,
             Class:idClass
         }
@@ -32,6 +33,7 @@ function CreateQuiz() {
             ],
             required : false,
             score:null
+
         }]
     )
     const StudentList = [];
@@ -65,6 +67,13 @@ function CreateQuiz() {
         setQuizs(newQuiz);
         console.log(newQuiz)
     }
+    const changeQuizTime = (text) => {
+        var newQuiz = {...quiz};
+        newQuiz.Time = text ;
+        setQuizs(newQuiz);
+        console.log(newQuiz)
+    }
+
     const changeQuestionScore = (text,j) => {
         var newQuestion = [...Questions];
         newQuestion[j].score = text ;
@@ -144,7 +153,8 @@ function CreateQuiz() {
             Creator : quiz.Creator,
             status : quiz.status,
             Class:quiz.Class,
-            listStudents :listStudents
+            listStudents :listStudents,
+            Time : quiz.Time
         }
         addQuiz(newQuiz,() =>(
             toast.success('Task added successfuly', {
@@ -167,7 +177,8 @@ function CreateQuiz() {
             Questions:Questions,
             Creator : quiz.Creator,
             Class:quiz.Class,
-            listStudents:listStudents
+            listStudents:listStudents,
+            Time : quiz.Time
         }
         assignQuiz(idClass,newQuiz,() =>(
             toast.success('Quiz assigned', {
@@ -180,6 +191,7 @@ function CreateQuiz() {
     const BackToListQuiz =() =>{
         history.push("/QuizList")
     }
+
 
 
   return (
@@ -228,6 +240,15 @@ function CreateQuiz() {
                                   />
                                   <input type="text" id="Description" className="Quiz_form_top_desc" placeholder="Write Description here"
                                          value={quiz.Description} onChange={(e)=>{changeQuizDescription(e.target.value)}} />
+                                <div>
+                                    Time :
+                                  <TimeField
+                                      value={quiz.Time}
+                                      onChange={(e)=>{changeQuizTime(e.target.value)}}
+                                      colon=":"
+                                      showSeconds ={true}
+                                  />
+                                </div>
                               </>
 
                                 </div>
@@ -240,8 +261,8 @@ function CreateQuiz() {
                                               <div className="question_boxes">
                                                   <AccordionDetails className="add_question">
                                                       <div className="add_question_top">
-                                                          <input type="text" className="question" placeholder="Question" value={ques.questionText} onChange={(e)=>{changeQuestion(e.target.value,j)}}/>
-                                                          {/*<CropOriginalIcon style={{color:"#5f6368"}} />*/}
+                                                          <input type="text" className="question" placeholder="Question" value={ques.questionText}
+                                                                 onChange={(e)=>{changeQuestion(e.target.value,j)}}/>
                                                       </div>
                                                       <ol type="A">
                                                       {ques.options.map( (op, k)=>(

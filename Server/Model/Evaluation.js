@@ -5,7 +5,7 @@ var Evaluation = new Schema ({
 
     TaskStatus : {
         type : String,
-        default : 'Attribué'
+        default : 'Assigned'
     },
     Quiz :{
         type: mongoose.Schema.Types.ObjectId,
@@ -18,6 +18,9 @@ var Evaluation = new Schema ({
     Score :{
         type:Number,
         default : 0
+    },
+    Comment :{
+        type:String
     },
     Class :{
         type: mongoose.Schema.Types.ObjectId,

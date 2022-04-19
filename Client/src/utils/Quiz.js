@@ -29,8 +29,8 @@ export const assignQuiz  = (idClass,quiz, callback)=>{
         .catch((err)=> callback(err));
 }
 
-export const assignQuizAfterSave  = (quiz, callback)=>{
-    axios.post(url+'/quiz/assignQuizAfterSave',quiz).then((message)  => callback(message))
+export const assignQuizAfterSave  = (idClass,quiz, callback)=>{
+    axios.post(url+`/quiz/assignQuizAfterSave/${idClass}`,quiz).then((message)  => callback(message))
         .catch((err)=> callback(err));
 }
 
@@ -46,4 +46,8 @@ export const getDetailQuizStudent  = (idUserr,idQuiz,callback)=>{
     axios.get(url+`/quiz/getDetailQuizStudent/${idUserr}/${idQuiz}`).then( (res)=>{callback(res)})
 }
 
+export const updateQuizStatus  = (id,quiz, callback)=>{
+    axios.post(url+`/quiz/updateStatus/${id}`,quiz).then((message)  => callback(message))
+        .catch((err)=> callback(err));
+}
 

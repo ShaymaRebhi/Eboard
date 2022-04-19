@@ -1,7 +1,5 @@
 const Quiz = require('../Model/Quiz')
 const Evaluation = require('../Model/Evaluation')
-const Option = require('../Model/Option')
-const Question = require('../Model/QuestionQuiz')
 const mongoose = require("mongoose");
 
 exports.GetQuiz = async (req,res,next) =>{
@@ -20,7 +18,7 @@ exports.deleteQuiz = async (req,res) =>{
 
 exports.AddQuiz = async(req,res) => {
     const quizBody = req.body ;
-    quizBody.status = "not assign"
+    quizBody.status = "Not Assigned"
     const newQuiz = new Quiz(quizBody)
     await newQuiz.save((err, quiz) => {
         if (err) return res.status(503).json({error: err});
@@ -75,7 +73,7 @@ exports.getQuizByTeacher = async (req, res, next) => {
 exports.assignQuiz= async (req, res) => {
     const idClass = req.params.idClass
     const quiz = req.body;
-    quiz.status = "assign";
+    quiz.status = "Assigned";
     const newQuiz = new Quiz(quiz);
 
     try {
@@ -97,8 +95,9 @@ exports.assignQuiz= async (req, res) => {
     }
 }
 exports.assignQuizAfterSave= async (req, res) => {
+    const idClass = req.params.idClass
     const quiz = req.body;
-    quiz.status = "assign";
+    quiz.status = "Assigned";
     const newQuiz = new Quiz(quiz);
 
     try {
@@ -106,6 +105,7 @@ exports.assignQuizAfterSave= async (req, res) => {
             const newEvaluation = new Evaluation({
                 Quiz: newQuiz._id,
                 Student: element,
+                Class : idClass
             });
             newEvaluation.save();
         });
@@ -148,3 +148,17 @@ exports.getDetailQuizByStudent = async (req, res, next) => {
 }
 
 }
+    Quiz.findById(req.params.id, function (err,quiz){
+        if(!quiz)
+            res.status(404).send('data is not found');
+        else
+            quiz.status = "Assigned";
+        quiz.save().then(quiz => {
+            res.json('Quiz status is succussffully Updated');
+        })
+            .catch(err => {
+                res.status(400).send("Update not possible");
+            });
+    });
+}
+

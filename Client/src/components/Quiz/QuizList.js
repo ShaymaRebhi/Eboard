@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import "./QuizList.css"
-import {useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {FaTrash} from 'react-icons/fa' ;
 import {GrUpdate} from 'react-icons/gr' ;
 import {MdAssignment} from 'react-icons/md'
-import {deleteQuiz, getQuizByTeacher} from "../../utils/Quiz";
+import {assignQuizAfterSave, deleteQuiz, getQuizByTeacher, updateQuizStatus} from "../../utils/Quiz";
 import {toast, ToastContainer} from "react-toastify";
 import {Header, Icon, Item, Segment} from "semantic-ui-react";
-import ModalAssignQuiz from "./ModalAssignQuiz";
 
 
 function QuizList() {
@@ -22,7 +21,6 @@ function QuizList() {
             creator:idUser
         }]
     )
-    const [openModal, setOpenModal] = useState(false)
     const [searchTerm,setSearchTerm] = useState([]);
     const getQuizs=()=>{
         getQuizByTeacher(idUser,idClass,(res)=> {
@@ -36,9 +34,6 @@ function QuizList() {
     useEffect(()=>{
         getQuizs();
     })
-    const assignHomeWork= () => {
-        history.push("/createquiz");
-    }
     const handelformadd = () => {
         history.push("/createquiz");
     }
@@ -46,7 +41,19 @@ function QuizList() {
         let value = e.target.value.toLowerCase();
         setSearchTerm(value);
     }
-
+    const assignQuiz = (quiz,id) => {
+        assignQuizAfterSave(idClass,quiz, () => (
+            toast.success('Quiz assigned successfuly', {
+                position: "bottom-right"
+            })
+        ))
+        const newQuiz ={
+            status : "Assigned"
+        }
+        updateQuizStatus(id,newQuiz,()=>(
+            getQuizs()
+        ))
+    }
   return (
     <>
         <ToastContainer
@@ -92,7 +99,9 @@ function QuizList() {
                             <Item>
                                 <Item.Image size='tiny' avatar src='images/quizz.jpg' />
                                 <Item.Content>
-                                    <Item.Header>{q.Title}</Item.Header>
+                                    <Link to={"/DetailQuiz/"+q._id}>
+                                    <Item.Header >{q.Title}</Item.Header>
+                                    </Link>
                                     <Item.Meta>
                                         <span className='cinema'>{q.Theme}</span>
                                     </Item.Meta>
@@ -108,20 +117,17 @@ function QuizList() {
                                     },
                                     getQuizs()
                                 )}> <FaTrash/> </button>
-                                <button className="btn btn-outline-success" onClick={()=>setOpenModal(true)}><MdAssignment/></button>
-
+                                {q.status === "Not Assigned" ? (
+                                <button className="btn btn-outline-success" onClick={()=>{assignQuiz(q,q._id)}}><MdAssignment/></button>
+                                ):("")
+                                }
                             </Item>
                         </Item.Group>
                     </Segment>
-                        <ModalAssignQuiz
-                            q = {q}
-                            openModal = {openModal}
-                            onClose={() => setOpenModal(false)}
-                        />
-
                     </>
 
                 ))
+
             )}
 
         </div>
