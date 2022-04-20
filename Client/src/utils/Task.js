@@ -41,3 +41,6 @@ export const getTaskByTeacher  = (idUserr,idClasse,callback)=>{
 export const getTaskByStudentAssigned  = (idClasse,idUserr,callback)=>{
     axios.get(url+`/task/getTaskByStudentAssigned/${idClasse}/${idUserr}`).then( (res)=>{callback(res)})
 }
+export const getTaskByStudentWorked  = (idClasse,idUserr,callback)=>{
+    axios.get(url+`/task/getTaskByStudentWorked/${idClasse}/${idUserr}`).then( (res)=>{callback(res)})
+}

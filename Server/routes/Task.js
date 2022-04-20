@@ -12,4 +12,5 @@ router.get('/getTaskByTeacher/:idUserr/:idClasse',TaskController.getTaskByTeache
 router.post('/assign/:idClass',TaskController.assignTask);
 router.post('/assignTaskAfterSave/:idClass',TaskController.assignTaskAfterSave);
 router.get('/getTaskByStudentAssigned/:idClass/:idUserr',TaskController.getTaskByStudentAssigned);
+router.get('/getTaskByStudentWorked/:idClass/:idUserr',TaskController.getTaskByStudentWorked);
 module.exports = router;

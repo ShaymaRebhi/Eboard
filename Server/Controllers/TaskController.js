@@ -156,4 +156,20 @@ exports.getTaskByStudentAssigned = async (req, res, next) => {
         res.status(404).json({ message: error.message });
     }
 }
+exports.getTaskByStudentWorked = async (req, res, next) => {
+    const idUser = req.params.idUserr;
+    const idClass = req.params.idClass
+
+    try {
+        Evaluation.find({
+            Student: idUser,
+            Class: idClass,
+            TaskStatus : "Worked",
+            Type : "Task"
+        }).populate("Task").then((evaluation) => res.json(evaluation));
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+
+}
 }
