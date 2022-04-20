@@ -86,7 +86,7 @@ function HomeCourse(){
                                     exact component ={DisplayQuiz}
                                 />
                                 <PrivateRoute
-                                    path="/displayTask"
+                                    path="/displayTask/:id"
                                     exact component ={DisplayTask}
                                 />
                                 <PrivateRoute

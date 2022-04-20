@@ -174,7 +174,7 @@ function App() {
                 render={(props) => <HomeCourse {...props} />}
             />
             <Route
-                path="/displayTask"
+                path="/displayTask/:id"
                 exact
                 render={(props) => <HomeCourse {...props} />}
             />

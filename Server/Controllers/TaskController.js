@@ -172,4 +172,17 @@ exports.getTaskByStudentWorked = async (req, res, next) => {
     }
 
 }
+
+exports.DisplayTaskByStudent = async (req, res, next) => {
+    const idUser = mongoose.Types.ObjectId(req.params.idUserr);
+    const idTask = mongoose.Types.ObjectId(req.params.idTask);
+    try {
+        Evaluation.findOne({
+            Student: idUser,
+            Task:idTask
+        }).populate("Task").then((evaluation) => res.json(evaluation));
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
 }

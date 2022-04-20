@@ -41,6 +41,16 @@ export const getTaskByTeacher  = (idUserr,idClasse,callback)=>{
 export const getTaskByStudentAssigned  = (idClasse,idUserr,callback)=>{
     axios.get(url+`/task/getTaskByStudentAssigned/${idClasse}/${idUserr}`).then( (res)=>{callback(res)})
 }
+
+export const DisplayTaskStudent  = (idUserr,idTask,callback)=>{
+    axios.get(url+`/task/displayTask/${idUserr}/${idTask}`).then( (res)=>{callback(res)})
+}
+
 export const getTaskByStudentWorked  = (idClasse,idUserr,callback)=>{
     axios.get(url+`/task/getTaskByStudentWorked/${idClasse}/${idUserr}`).then( (res)=>{callback(res)})
+}
+
+export const updateTaskStudentStatus = (idEvaluation,evaluation,callback)=> {
+    axios.post(url+`/task/updateEvaluationStatus/${idEvaluation}`,evaluation).then((message)  => callback(message))
+        .catch((err)=> callback(err));
 }

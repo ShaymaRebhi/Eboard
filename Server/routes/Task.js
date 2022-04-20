@@ -13,4 +13,6 @@ router.post('/assign/:idClass',TaskController.assignTask);
 router.post('/assignTaskAfterSave/:idClass',TaskController.assignTaskAfterSave);
 router.get('/getTaskByStudentAssigned/:idClass/:idUserr',TaskController.getTaskByStudentAssigned);
 router.get('/getTaskByStudentWorked/:idClass/:idUserr',TaskController.getTaskByStudentWorked);
+router.get('/displayTask/:idUserr/:idTask',TaskController.DisplayTaskByStudent);
+router.post('/updateEvaluationStatus/:id',TaskController.updateTaskEvaluationStatus);
 module.exports = router;

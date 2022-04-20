@@ -1,29 +1,41 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './DisplayTask.css'
 import "react-dropzone-uploader/dist/styles.css";
+import {useRouteMatch} from "react-router-dom";
+import {DisplayTaskStudent} from "../../utils/Task";
 
 function DisplayTask() {
+    const match = useRouteMatch();
+    const idUser = JSON.parse(localStorage.getItem("idStudent"))._id;
     const [questionFile] = useState("")
-
+    const [evaluation, setEvaluation] = useState(0)
     const [task, setTask] = useState(
       [{
-        Title: "React Hook",
-        Theme: "seance 1",
-        questionTitle: "what is React ?",
-        QuestionFile: 'https://www.practiceportuguese.com/wp-content/uploads/2020/06/asking-questions-800x534.jpg',
+        Title: "",
+        Theme: "",
+        Description: "",
+        QuestionFile: '',
         QuestionResponseFile:questionFile
       }]
   )
+    const getTask = () => {
+        DisplayTaskStudent(idUser,match.params.id,(res)=> {
+            setTask(res.data.Task);
+            setEvaluation(res.data);
+        })
+    }
     const changeTaskFile = (text, i) => {
         var newTask = [...task];
         newTask[i].QuestionResponseFile = text;
         setTask(newTask);
         console.log(newTask)
     }
+    useEffect(()=>{
+        getTask()
+    },[])
     return (
       <div className="DisplayTaskkBox">
-            {task.map((task,index)=>(
-                <div className="card-display-task" key={index}>
+                <div className="card-display-task" >
                     <div className="task-data">
                       <div>
                         <h1 className="tasktitle"><strong>Task : </strong>{task.Title}</h1>
@@ -34,10 +46,12 @@ function DisplayTask() {
                       </div>
                             <br/>
                       <div>
-                        <p className="taskquestion">{task.questionTitle}</p>
+                        <p className="taskquestion"><strong>Description : </strong>{task.Description}</p>
                       </div>
                         <br/>
+                      <div>
                         <img src={task.QuestionFile} alt="image" />
+                      </div>
                     </div>
                     <div className="task-response">
 
@@ -51,7 +65,7 @@ function DisplayTask() {
                         <div>
                             <div className="wrapper">
                                 <div className="file-upload">
-                                    <input type="file" name="fileresponse" multiple HTMLInputElement={task.QuestionResponseFile} onChange={(e)=>{changeTaskFile(e.target.files,index)}}/>
+                                    <input type="file" name="fileresponse" multiple HTMLInputElement={task.QuestionResponseFile} onChange={(e)=>{changeTaskFile(e.target.files)}}/>
                                     <i className="fa fa-arrow-up"/>
                                 </div>
                             </div>
@@ -64,7 +78,6 @@ function DisplayTask() {
                     </div>
 
                 </div>
-            ))}
       </div>
   )
 }
