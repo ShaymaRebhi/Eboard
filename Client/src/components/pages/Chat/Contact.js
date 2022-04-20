@@ -49,7 +49,7 @@ function Contact({contacts,currentUser,changeChat}) {
                             return(
                             <div onClick={()=>changeCurrentChat(index,contact)} className={`contact ${index === Currentselected ? "selected" :""}`} key={index} >
                                 <div className='avatar'>
-                                        {contact.User.file!=null ?<img  src={contact.User.file} alt='avatar' onError={(e) => e.target.src=`https://ui-avatars.com/api/?name=${contact.FirstName}+${contact.LastName}`}></img>
+                                        { contact.User.file!=null ?<img  src={contact.User.file} alt='avatar' onError={(e) => e.target.src=`https://ui-avatars.com/api/?name=${contact.FirstName}+${contact.LastName}`}></img>
                                         :<img src={`https://ui-avatars.com/api/?name=${contact.FirstName}+${contact.LastName}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}  alt='avatar'></img>}
                                 </div>
                                 <div className='username'>

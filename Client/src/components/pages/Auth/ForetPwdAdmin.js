@@ -6,6 +6,7 @@ import '../../css/Admin.css'
 import Inputs from '../../Inputs'
 import { ToastContainer, toast } from 'react-toastify';
 import ClipLoader from "react-spinners/ClipLoader";
+import { adminforgetPwd } from '../../../utils/api';
 function ForgetPwdAdmin() {
   let [loading, setLoading] = useState(false);
   const history=useHistory();
@@ -37,13 +38,21 @@ const input1=[
     }
     setLoading(true);
    
-    console.log(Object.fromEntries(Data.entries()))
+    axios.post(adminforgetPwd,{email:values.email}).then(response=>{
+      toast.success("Please check your email to reset your password !");
+    }).catch(err=>{
+      setLoading(false);
+      toast.error("Error please try again !");
+    }).finally(res=>{
+      setLoading(false);
+    })
+    
   }
 
   const onChange=(e)=>{
     setValues({...values,[e.target.name]:e.target.value});
   }
-  console.log(values)
+  
   var getObject = JSON.parse(localStorage.getItem('login'));
     if(localStorage.getItem('login')!==null ){
       if(getObject.Logined){

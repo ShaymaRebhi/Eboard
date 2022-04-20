@@ -8,6 +8,8 @@ const {loginValidation}=require('../Validation/Validation.js')
 var nodemailer = require('nodemailer');
 const _=require("lodash")
 const fetch=require('node-fetch')
+const {OAuth2Client} =require('google-auth-library');
+const client=new OAuth2Client('429109744769-u70gtp3oelkd79pphuh4gblmm5ajaa2u.apps.googleusercontent.com');
 require('dotenv').config()  
 const bcrypt = require('bcrypt');
 var async = require('async');
@@ -39,7 +41,8 @@ exports.signin = async(req,res) => {
     }).exec((error,user)=>{
     if(error) return res.status(400).json({ error })
     if(user){
-        if(!user.Etat && user.role=="ORGANIZATION" || user.role=="TEACHER" && !user.Etat ) return res.status(408).send("User not active");
+        if(!user.emailVerification || user.emailVerification==null) return res.status(553).json({error:"account not active"});
+        if((!user.Etat ) && user.role=="ORGANIZATION" || user.role=="TEACHER" && !user.Etat ) return res.status(408).send("User not active");
         if(user.role=="ADMIN")return res.status(409).send("Error");
         user.authenticate(req.body.Password).then(data=>{
             if(data){
@@ -84,6 +87,29 @@ exports.signinForAdmin = async(req,res) => {
         
     })
 }
+exports.gmailSignin=async(req,res)=>{
+    const {tokenId}=req.body;
+    client.verifyIdToken({idToken:tokenId,audience:"429109744769-u70gtp3oelkd79pphuh4gblmm5ajaa2u.apps.googleusercontent.com"}).then(response=>{
+        const {email_verified,given_name,family_name,email,picture}=response.payload;
+            if(email_verified){
+                User.findOne({email:email},function(err,user){
+                    if(!user.emailVerification || user.emailVerification==null) return res.status(553).json({error:"account not active"});
+                    if(err)res.status(500).json({error:err});
+                    if(user){
+                        if(!user.Etat && user.role=="ORGANIZATION" || user.role=="TEACHER" && !user.Etat ) return res.status(408).send("User not active");
+                        if(user.role=="ADMIN")return res.status(409).send("Error");
+                        const user1={name:user.email,role:user.role}
+                        const token =jwt.sign(user1,process.env.JWT_SECRET,{expiresIn: "1h"});
+                        res.json({User:user,AccessToken: token})
+                    }else{
+                        res.status(523).send("compte n'existe pas !!");
+                    }
+                })
+            }
+            
+    })
+    
+}
 exports.facebookSignin=async(req,res)=>{
     const {userID,AccessToken}=req.body;
     const url = `https://graph.facebook.com/v13.0/${userID}/?fields=name,email,picture,first_name,last_name,gender,birthday,location&locale=en_FR&access_token=${AccessToken}`;
@@ -102,17 +128,18 @@ exports.facebookSignin=async(req,res)=>{
       
        
      User.findOne({email:email},function(err,user){
+            
             if(err){
                return res.status(400).json({ Error:err+email })
             }else{
                 if(user){
+                    if(!user.emailVerification)return  res.status(553).json({error:"account not active"});
                     if(!user.Etat && user.role=="ORGANIZATION" || user.role=="TEACHER" && !user.Etat ) return res.status(408).send("User not active");
                     if(user.role=="ADMIN")return res.status(409).send("Error");
                     const user1={name:user.email,role:user.role}
                     const token =jwt.sign(user1,process.env.JWT_SECRET,{expiresIn: "1h"});
                     res.json({User:user,AccessToken: token})
                 }else{
-                    console.log(name+" "+email+" "+" "+picture.data.url+" "+first_name+" "+last_name+" "+Sexe+" "+birthday+" "+location.name)
                     let password =bcrypt.hashSync(email + process.env.JWT_SECRET,10);
                     let datas={
                         email:email,
@@ -124,12 +151,44 @@ exports.facebookSignin=async(req,res)=>{
                     user = new User(datas);
                     
                     user.save((err, data) => {
-                        if (err) {
-                          console.log("ERROR FACEBOOK LOGIN ON USER SAVE", err);
-                          return res.status(400).json({
-                            error: "User signup failed with facebook",
+                        if (err) return res.status(400).json({error: "User signup failed with facebook"});
+                        
+
+                        //email here 
+                        var transporter = nodemailer.createTransport({
+                            service: 'gmail',
+                            auth: {
+                              user: 'eboardlearn@gmail.com',
+                              pass: 'umhfeidsyelslwut'
+                            }
                           });
-                        }
+
+                          const token1 =jwt.sign({email:datas.email,Password:data.password},process.env.VERIFEMAIL,{expiresIn:'7d'})
+                            var mailOptions = {
+                                to: datas.email,
+                                subject: 'Activate account !',
+                                html: `
+                                        <h1><b>E-BOARD</b></h1><br/><br/>
+                                        <h2>Activate your account</h2>
+                                        <p>Hi, you've created a new customer account at E-BOARD. All you have to do is activate it. </p><br/><br/>
+                                        <a href='${process.env.CLIENT_URL}/verif/${token1}' >Activate your account</a> or <a href='${process.env.CLIENT_URL}' >Visit our plateforme</a>
+                                        
+                                `
+                                };
+                                User.updateOne({activateLink:token1},(err,success)=>{
+                                    if(err){
+                                        return res.status(401).json({error:"Reset password link error !"})
+                                    }else{
+                                        transporter.sendMail(mailOptions, function(error, info){
+                                            if (error) {
+                                            return res.status(500).send("Error sending email");
+                                            } else {
+                                            return res.status(200).send('Email sent: ' + info.response);
+                                            }
+                                        });
+                                    }
+                                  })
+
                         let StudentDataSet={
                             FirstName:first_name,
                             LastName:last_name,
@@ -152,7 +211,12 @@ exports.facebookSignin=async(req,res)=>{
                         
                         const user1={name:user.email,role:user.role}
                         const token =jwt.sign(user1,process.env.JWT_SECRET,{expiresIn: "1h"});
-                        res.json({User:user,AccessToken: token})
+                        if(user.emailVerification){
+                            res.status(200).json({User:user,AccessToken: token})
+                        }else{
+                            res.status(553).json({error:"account not active"})
+                        }
+                        
                      })
                   })
                       
@@ -167,7 +231,13 @@ exports.facebookSignin=async(req,res)=>{
 
 }
 exports.signup = async(req,res) => {
-  
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'eboardlearn@gmail.com',
+          pass: 'umhfeidsyelslwut'
+        }
+      });
     await Admin.findOne({Cin:req.body.Cin},function(err,CinCHeck){
     if(CinCHeck && req.body.Cin!=null) return res.status(407).json({message : 'User already registred cin'})
     
@@ -186,7 +256,31 @@ exports.signup = async(req,res) => {
     _user.save((error,User)=>{
         if(error) return res.status(402).json({Error:"Account error"});
         req.body.User=User._id;
-    
+        const token =jwt.sign({email:req.body.email,Password:req.body.Password},process.env.VERIFEMAIL,{expiresIn:'7d'})
+        var mailOptions = {
+            to: req.body.email,
+            subject: 'Activate account !',
+            html: `
+                    <h1><b>E-BOARD</b></h1><br/><br/>
+                    <h2>Activate your account</h2>
+                    <p>Hi, you've created a new customer account at E-BOARD. All you have to do is activate it. </p><br/><br/>
+                    <a href='${process.env.CLIENT_URL}/verif/${token}' >Activate your account</a> or <a href='${process.env.CLIENT_URL}' >Visit our plateforme</a>
+                    
+            `
+            };
+            User.updateOne({activateLink:token},(err,success)=>{
+                if(err){
+                    return res.status(401).json({error:"Reset password link error !"})
+                }else{
+                    transporter.sendMail(mailOptions, function(error, info){
+                        if (error) {
+                        return res.status(500).send("Error sending email");
+                        } else {
+                        return res.status(200).send('Email sent: ' + info.response);
+                        }
+                    });
+                }
+              })
     if(req.body.role=="ADMIN"){
         if(req.body.Cin==null) return res.status(502).send("Cin invalid");
         const _Admin=new Admin(req.body);
@@ -227,12 +321,63 @@ exports.signup = async(req,res) => {
 });
 });
 }
+exports.activateAccount=async(req,res)=>{
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'eboardlearn@gmail.com',
+          pass: 'umhfeidsyelslwut'
+        }
+      });
+    const {activateLink} =req.body;
+      if(activateLink){
+        jwt.verify(activateLink,process.env.VERIFEMAIL,function(err,decodedData){
+            if(err){
+                return res.status(402).json({error:"Invalid token or it is expired"})
+            }
+            User.findOne({activateLink},(err,user)=>{
+                if(err || !user){
+                    return res.status(400).json({error:"User widh this token does not exist !"})
+                }
+                const obj={
+                    emailVerification:true
+                }
+                var transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                      user: 'eboardlearn@gmail.com',
+                      pass: 'umhfeidsyelslwut'
+                    }
+                  });  
+                  
+                  var mailOptions = {
+                    to: user.email,
+                    subject: 'Account actived !',
+                    html: `
+                            <h2>Thank you, your account has been activated successfuly.  </h2>
+                    `
+                    };
+                    user=_.extend(user,obj);
+                    user.save((err,result)=>{
+                        transporter.sendMail(mailOptions, function(error, info){
+                            if (error) {
+                            return res.status(500).send("Error sending email");
+                            } else {
+                            return res.status(200).json(user);
+                            }
+                        });
+                    })
+            })
+        })
+      }
+
+}
 //#########################################################################
 
 
 
 //######################## FORGET AND RESET PASSWORD#######################
-exports.resetPasswordEmailSend=async(req,res)=>{
+exports.AdminresetPasswordEmailSend=async(req,res)=>{
     const {resetLink,newPassword} =req.body;
     if(resetLink){
             jwt.verify(resetLink,process.env.JWT_RESET_PASSWORD,function(err,decodedData){
@@ -243,6 +388,7 @@ exports.resetPasswordEmailSend=async(req,res)=>{
                     if(err || !user){
                         return res.status(400).json({error:"User widh this token does not exist !"})
                     }
+                    if(user.role!="ADMIN")return res.status(545).json({error:"error"});
                     const obj={
                         password:bcrypt.hashSync(newPassword,10)
                     }
@@ -251,7 +397,7 @@ exports.resetPasswordEmailSend=async(req,res)=>{
                         service: 'gmail',
                         auth: {
                           user: 'eboardlearn@gmail.com',
-                          pass: 'zdkkawrucaurhbnd'
+                          pass: 'umhfeidsyelslwut'
                         }
                       });  
                       
@@ -280,19 +426,112 @@ exports.resetPasswordEmailSend=async(req,res)=>{
         
     }
 }
+exports.resetPasswordEmailSend=async(req,res)=>{
+    const {resetLink,newPassword} =req.body;
+    if(resetLink){
+            jwt.verify(resetLink,process.env.JWT_RESET_PASSWORD,function(err,decodedData){
+                if(err){
+                        return res.status(402).json({error:"Invalid token or it is expired"})
+                }
+                User.findOne({resetLink},(err,user)=>{
+                    if(err || !user){
+                        return res.status(400).json({error:"User widh this token does not exist !"})
+                    }
+                    const obj={
+                        password:bcrypt.hashSync(newPassword,10)
+                    }
+
+                    var transporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                          user: 'eboardlearn@gmail.com',
+                          pass: 'umhfeidsyelslwut'
+                        }
+                      });  
+                      
+                      var mailOptions = {
+                        to: user.email,
+                        subject: 'Email reseted successfuly !',
+                        html: `
+                                <h2>Thank you, your password has been reseted successfuly.  </h2>
+                        `
+                        };
+                    user=_.extend(user,obj);
+                    user.save((err,result)=>{
+                        transporter.sendMail(mailOptions, function(error, info){
+                            if (error) {
+                            return res.status(500).send("Error sending email");
+                            } else {
+                            return res.status(200).send('Email sent: ' + info.response);
+                            }
+                        });
+                    })
+                })
+            })
+    }else{
+     
+            return res.status(401).json({error:"Authentication error !"})
+        
+    }
+}
+exports.AdminforgetPasswordEmailSend = async(req,res) => {
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'eboardlearn@gmail.com',
+          pass: 'umhfeidsyelslwut'
+        }
+      });
+      console.log(req.body.email)
+      User.findOne({email:req.body.email},(err,user)=>{
+
+          if(err || !user){
+              console.log(req.body.email)
+              return res.status(402).json({error:"User widh this email does not exist !"})
+          }
+          if(user.role!="ADMIN")return res.status(545).json({error:"error"});
+          const token =jwt.sign({email:user.email,Password:user.password},process.env.JWT_RESET_PASSWORD,{expiresIn:'20m'})
+
+          var mailOptions = {
+            to: user.email,
+            subject: 'Reset password !',
+            html: `
+                    <h2>Please click on given link to change your password </h2>
+                    <p>${process.env.CLIENT_URL}/Adminreset/${token}</p>
+            `
+            };
+        return user.updateOne({resetLink:token},(err,success)=>{
+        if(err){
+            return res.status(401).json({error:"Reset password link error !"});
+        }else{
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                return res.status(500).send("Error sending email");
+                } else {
+                return res.status(200).send('Email sent: ' + info.response);
+                }
+            });
+        }
+      })
+
+    })
+}
 exports.forgetPasswordEmailSend = async(req,res) => {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
           user: 'eboardlearn@gmail.com',
-          pass: 'zdkkawrucaurhbnd'
+          pass: 'umhfeidsyelslwut'
         }
       });
 
       User.findOne({email:req.body.email},(err,user)=>{
+
           if(err || !user){
-              return res.status(400).json({error:"User widh this email does not exist !"})
+              console.log(req.body.email)
+              return res.status(402).json({error:"User widh this email does not exist !"})
           }
+          if(user.role=="ADMIN")return res.status(545).json({error:"error"});
           const token =jwt.sign({email:user.email,Password:user.password},process.env.JWT_RESET_PASSWORD,{expiresIn:'20m'})
 
           var mailOptions = {
@@ -305,7 +544,7 @@ exports.forgetPasswordEmailSend = async(req,res) => {
             };
       return user.updateOne({resetLink:token},(err,success)=>{
         if(err){
-            return res.status(400).json({error:"Reset password link error !"})
+            return res.status(401).json({error:"Reset password link error !"})
         }else{
             transporter.sendMail(mailOptions, function(error, info){
                 if (error) {
@@ -431,14 +670,27 @@ exports.getAll = async(req,res) => {
 
 exports.AllUsersExceptMe = async(req,res,next) => {
     try{
-        const students=await Student.find({User:{$ne:req.params.id}}).populate({
-            path:"User",
-            select:["email","file"]
-            
-        }).select([
-            "FirstName","LastName","email","file","_id"
-        ]);
-        return res.json(students);
+      
+        if(req.params.role=="STUDENT"){
+            const students=await Student.find({User:{$ne:req.params.id}}).populate({
+                path:"User",
+                select:["email","file"]
+                
+            }).select([
+                "FirstName","LastName","email","file","_id"
+            ]);
+            return res.status(200).json(students);
+        }else if(req.params.role=="TEACHER"){
+            const teachers=await Teacher.find({User:{$ne:req.params.id}}).populate({
+                path:"User",
+                select:["email","file"]
+                
+            }).select([
+                "FirstName","LastName","email","file","_id"
+            ]);
+            return res.status(200).json(teachers);
+        }
+        return res.status(200).json(null);
     }catch(ex){
         next(ex);
     }

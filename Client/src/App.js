@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter as Router,Redirect, Route, Switch } from "react-router-dom";
@@ -16,24 +16,37 @@ import SignUp from './components/pages/Auth/SignUp';
 import Chat from './components/ChatBot/Chat';
 import ChatUser from './components/pages/Chat/ChatUser';
 import HomeAdmin from './components/Home/HomeAdmin';
-
+import { LinkedInCallback } from 'react-linkedin-login-oauth2';
 import ForgetPwdAdmin from './components/pages/Auth/ForetPwdAdmin';
 import Profile from './components/pages/Profile/Profile';
-
+import DeleteStudent from './components/pages/AdminPages/Action/DeleteStudent';
+import ActivateAccount from './components/pages/Auth/ActivateAccount';
+import ResetPwdAdmin from './components/pages/Auth/ResetPwdAdmin';
+import styled,{ThemeProvider} from 'styled-components';
+import {lightTheme,darkTheme,Global} from './Themes'
 function App() {
+    
+    const [theme,setTheme]=useState("light");
+    
+    const  themeToggler=()=>{
+        theme==="light" ?setTheme("dark") :setTheme("light");
+    };
 
 
 
   return (
-      <>
+      <ThemeProvider theme={theme==="light" ?lightTheme:darkTheme}>
+          <Global/>
+          <StyledApp>
         <div className='chatbot'>
           <Chat></Chat>
         </div>
 
         <BrowserRouter>
 
-          <Switch>
-
+          <Switch>  
+            <Route exact path="/linkedin" component={LinkedInCallback} />
+            <Route exact path="/verif/:id" component={ActivateAccount} />
             <Route
                 path="/Eboard/home"
                 exact
@@ -65,6 +78,8 @@ function App() {
                 render={(props) => <HomeAdmin {...props} />}
             />
             <Route exact path="/chat" component={ChatUser} />
+            
+            <Route exact path="/Eboard/Students/delete/:id" component={DeleteStudent} />
             <Route exact path='/Eboard/auth/admin' component={Admin} />
             <Route exact path='/Eboard/auth/forget' component={ForgetPwdAdmin} />
 
@@ -72,6 +87,7 @@ function App() {
             <Route exact path='/profile' component={Profile} />
             <Route path="/forget" component={ForgetPwd} />
             <Route exact path='/reset/:id' component={ResetPwd} />
+            <Route exact path='/Adminreset/:id' component={ResetPwdAdmin} />
             <Route  exact path='/sign-up' component={SignUp} />
             <Route
                 path="/"
@@ -200,9 +216,14 @@ function App() {
 
 
         </BrowserRouter>
-
-      </>
+        </StyledApp>
+      </ThemeProvider>
   );
 }
 
 export default App;
+
+const StyledApp=styled.div`
+color:${props=>props.theme.fontColor}
+
+`

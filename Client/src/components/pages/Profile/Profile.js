@@ -5,13 +5,11 @@ import {IoChevronBackCircleSharp} from "react-icons/io5";
 import { getUserConnect } from '../../../utils/api';
 import axios from 'axios';
 import Images from '../../Images'
-import { Tooltip } from 'primereact/tooltip';
 import {updateUser} from '../../../utils/api';
 import Inputs from '../../Inputs';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/inject-style';
 import 'react-toastify/dist/ReactToastify.css';
-import IconButton from 'material-ui/IconButton';
 import { Button } from 'primereact/button';
 function Profile() {
     const [values,setValues]=useState({
@@ -29,7 +27,7 @@ function Profile() {
     const handleSubmit= (e)=>{
         e.preventDefault();
         const Data= new FormData(e.target)
-
+        
         let data={
             FirstName:Data.get('FirstName'),
             LastName:Data.get('LastName'),
@@ -39,12 +37,8 @@ function Profile() {
         }
 
 
-        updateUser(data,"6254ac89a8f29e0016b3913f",(res)=> {
-            toast.success('Profile updated !!')
-            
-          }).catch(err=>{
-            toast.error('Error !!'+err)
-          })
+        updateUser(data,currentUser.User._id)
+        
     }
     const [currentUser,setCurrentUser]=useState(undefined);
     const history=useHistory();
@@ -82,6 +76,7 @@ function Profile() {
                 setCurrentUser(res.data[0]);
             })
         }
+        
         
     },[])
     if(currentUser!=null){
@@ -137,6 +132,7 @@ function Profile() {
       ]
   return (
     <Container>
+ 
        <ToastContainer
               position="top-right"
               autoClose={5000}

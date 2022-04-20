@@ -87,9 +87,9 @@ function Reclamation() {
             <form method='POST' onSubmit={handleSubmit}>
                 <h1>Reclamation</h1>
               
-                <Select options={options} className="mb-3" name="type" onChange={handleChange } value={options.find(obj => obj.value === selectedValue)}  placeholder="Type"/>
-                <input type="text" name="subject" onChange={onChange} className="form-control mb-3" placeholder='Subject'></input>
-                <textarea name="message" onChange={onChange} placeholder='Message'  rows="5" className="form-control " cols="33"></textarea>
+                <Select options={options} className="mb-3" name="type" onChange={handleChange } value={options.find(obj => obj.value === selectedValue)}  placeholder="Type" required/>
+                <input type="text" name="subject" onChange={onChange} className="form-control mb-3" placeholder='Subject' required></input>
+                <textarea name="message" onChange={onChange} placeholder='Message'  rows="5" className="form-control " cols="33" required></textarea>
                 <Button className='btn' type="submit">{loading ? <ClipLoader  color='#FFF' loading={loading}  size={20} /> : "Send"}</Button>
             </form>
 
@@ -98,7 +98,7 @@ function Reclamation() {
   )
 }
 const Container =styled.div`
-   
+margin-left:200px;
 height: 100%;
  
 .form_container{
@@ -123,8 +123,8 @@ form{
     display: table-cell;
     height: 100% !important;
     width: 420px;
-    background: #8EB2CD;
-    padding: 20px 30px;
+    background:linear-gradient(90deg, rgb(2,0,36) 0%, rgb(140,177,192) 0%, rgb(140,177,192) 100%);
+    padding: 50px 30px;
     color:#676767 ;
     h1{
         margin-top:50px;

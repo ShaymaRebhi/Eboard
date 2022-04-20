@@ -23,14 +23,22 @@ router.post('/signup',upload.single('file'),UserController.signup);
 
 router.post('/login',UserController.signin);
 
+router.post('/activate',UserController.activateAccount);
+
 router.post('/admin/login',UserController.signinForAdmin);
 
 router.post('/forgetpassword',UserController.forgetPasswordEmailSend);
+
+router.post('/Adminforgetpassword',UserController.AdminforgetPasswordEmailSend);
+
+router.post('/Adminresetpassword',UserController.AdminresetPasswordEmailSend);
 
 router.post('/resetpassword',UserController.resetPasswordEmailSend);
 
 router.post('/facebookLogin',UserController.facebookSignin)
 
-router.get('/chat/all/:id',UserController.AllUsersExceptMe);
+router.post('/gmailLogin',UserController.gmailSignin)
+
+router.get('/chat/all/:id/:role',UserController.AllUsersExceptMe);
 
 module.exports = router;

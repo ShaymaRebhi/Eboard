@@ -21,6 +21,7 @@ var User= new Schema({
     file:{
         type:String
     },
+
     fileType:{
         type:String
     },
@@ -39,6 +40,14 @@ var User= new Schema({
        
     },
     resetLink:{
+        data:String,
+        default:''
+    },
+    emailVerification:{
+        type:Boolean,
+        default:false
+    },
+    activateLink:{
         data:String,
         default:''
     }

@@ -1,5 +1,11 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { useLinkedIn } from 'react-linkedin-login-oauth2';
+import linkedin from 'react-linkedin-login-oauth2';
 import { Link } from 'react-router-dom';
+import 'primeicons/primeicons.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.css';
+import 'primeflex/primeflex.css';
 import './../../css/Login.css';
 import Inputs from '../../Inputs';
 import axios from 'axios';
@@ -17,11 +23,19 @@ import { SignUpBtn } from './Buttons/SignUpBtn';
 import { Gmail } from './Buttons/Gmail';
 import styled from 'styled-components';
 import { AiFillHome } from "react-icons/ai";
+import { Captcha } from 'primereact/captcha';
+import { LinkedIn } from './Buttons/LinkedIn';
+import { login, loginFacebool, loginGmail } from '../../../utils/api';
 const Login = () => {
+  const toasts = useRef(null);
 const [caption,setCaption]=useState(false);
 let [loading, setLoading] = useState(false);
 let [Facebookloading, setFacebookLoading] = useState(false);
+let [Gmailloading, setGmailLoading] = useState(false);
+let [LinkedInloading, setLinkedInLoading] = useState(false);
 const history=useHistory();
+
+
 const [values,setValues]=useState({
     email:"",
     password:""
@@ -51,7 +65,22 @@ const input1=[
 const onChange=(e)=>{
     setValues({...values,[e.target.name]:e.target.value});
 }
+
+const { linkedInLogin } = useLinkedIn({
   
+  clientId: '86vhj2q7ukf83q',
+  redirectUri: `${window.location.origin}/linkedin`, // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
+  onSuccess: (code) => {
+    setLinkedInLoading(true);
+
+    
+    console.log(code);
+  },
+  onError: (error) => {
+    setLinkedInLoading(false);
+    console.log(error);
+  },
+});
   
 var getObject={
     Logined:false
@@ -66,7 +95,7 @@ var getObject={
       "Password":values.password
     }
     setLoading(true)
-    axios.post(`${process.env.REACT_APP_API_URL}user/login`,DataSet).then(Response=>{
+    axios.post(login,DataSet).then(Response=>{
       
       
       localStorage.setItem('login',JSON.stringify({
@@ -86,7 +115,7 @@ var getObject={
 
       }else if(Response.data.User.role==="TEACHER"){
 
-        history.push("/Teacher");
+        history.push("/classroom");
 
       }else if(Response.data.User.role==="ORGANIZATION"){
 
@@ -97,13 +126,11 @@ var getObject={
       
     }).catch((reason: AxiosError)=>{
           if(reason.response.status===408) {
-            toast.error('Please contact the admin to activate your account', {
-              position: "bottom-right" 
-            });
+            toast.error('Please contact the admin to activate your account');
+          }else if(reason.response.status===553) {
+            toast.error('Please check your email to activate your account');
           }else{
-            toast.error('Email or password inccorect', {
-              position: "bottom-right" 
-             });
+            toast.error('Email or password inccorect');
           }
           setLoading(false)
       
@@ -121,7 +148,7 @@ var getObject={
         }else if(getObject.Role==="ORGANIZATION"){
           history.push("/ORG");
         }if(getObject.Role==="TEACHER"){
-          history.push("/Teacher");
+          history.push("/classroom");
         }else if(getObject.Role==="ADMIN"){
           history.push("/Eboard/auth/admin");
         }
@@ -130,9 +157,9 @@ var getObject={
     }
     
     const responseFacebook = (response) => {
-      console.log(response);
+      
       setFacebookLoading(true)
-      axios.post(`${process.env.REACT_APP_API_URL}user/facebookLogin`,{AccessToken:response.accessToken ,userID:response.userID ,email:response.email,picture:response.picture.data.url}
+      axios.post(loginFacebool,{AccessToken:response.accessToken ,userID:response.userID ,email:response.email,picture:response.picture.data.url}
       ).then(response=>{
         setFacebookLoading(false);
         localStorage.setItem('login',JSON.stringify({
@@ -161,18 +188,14 @@ var getObject={
       }else if(response.data.User.role==="ADMIN"){
         history.push("/Eboard/auth/admin");
       }
-        toast.success('Welcome', {
-          position: "bottom-right" 
-         });
+        toast.success('Welcome');
       }).catch((reason: AxiosError)=>{
         if(reason.response.status===408) {
-          toast.error('Please contact the admin to activate your account', {
-            position: "bottom-right" 
-          });
+          toast.error('Please contact the admin to activate your account');
+        }else if(reason.response.status===553) {
+          toast.error('Please check your email to activate your account');
         }else{
-          toast.error('Email or password inccorect', {
-            position: "bottom-right" 
-           });
+          toast.error('Email or password inccorect');
         }
         setFacebookLoading(false);
     
@@ -183,12 +206,64 @@ var getObject={
     
     }
     const responseGoogle = (response) => {
-      console.log(response);
+      setGmailLoading(true);
+      axios({
+        method:"POST",
+        url:loginGmail,
+        data:{tokenId:response.tokenId}
+      }).then(response=>{
+        setGmailLoading(false);
+        localStorage.setItem('login',JSON.stringify({
+          Logined:true,
+          Role:response.data.User.role,
+          AccessToken:response.data.AccessToken,
+          User:response.data.User
+        }))
+        
+        const token =response.data.AccessToken;
+        
+        setCookie("token",token);
+
+        if(response.data.User.role==="STUDENT"){
+
+          history.push("/classroom");
+
+      }else if(response.data.User.role==="TEACHER"){
+
+        history.push("/Teacher");
+
+      }else if(response.data.User.role==="ORGANIZATION"){
+
+        history.push("/Organization");
+
+      }else if(response.data.User.role==="ADMIN"){
+        history.push("/Eboard/auth/admin");
+      }
+        toast.success('Welcome');
+        
+      }).catch((reason: AxiosError)=>{
+        setGmailLoading(false);
+        if(reason.response.status===408) {
+          toast.error('Please contact the admin to activate your account');
+        }else if(reason.response.status===553) {
+          toast.error('Please check your email to activate your account');
+        }else if(reason.response.status===523) {
+          toast.error('Non-existent account please signup or make the login widh the facebook fonctionality!!');
+        }else {
+          toast.error('Email or password inccorect');
+        }
+      }).finally(rslt=>{
+        setGmailLoading(false);
+      })
+      
     }
     const showResponse = (response) => {
       //call to a backend to verify against recaptcha with private key
       if(response){
         setCaption(true);
+        toasts.current.show({ severity: 'info', summary: 'Success', detail: 'User Responded' });
+
+
       }else{
         setCaption(false);
       }
@@ -240,11 +315,12 @@ var getObject={
                     <Link className="text-white" to="/"><AiFillHome /></Link>
                 </div>
                 <h1 className="text-center mb-4 mt-5">LOGIN ACCOUNT</h1>
+
                 <ReactFacebookLogin
                     appId="544343623593746"
                     render={renderProps => (
                      // Facebookloading ? <div className='text-center'><ClipLoader  color='#FFF' loading={Facebookloading}  size={20} /></div>: <Facebook text="Signin with Facebook" type="button" onClick={renderProps.onClick}></Facebook> 
-                     <Facebook active={false} icon={!Facebookloading} text={Facebookloading ? <ClipLoader  color='#FFF' loading={Facebookloading}  size={20} /> : "Signin with Facebook"} type="button" onClick={renderProps.onClick}></Facebook>
+                     <Facebook active={!caption ? true:false}  icon={!Facebookloading} text={Facebookloading ? <ClipLoader  color='#FFF' loading={Facebookloading}  size={20} /> : "Signin with Facebook"} type="button" onClick={renderProps.onClick}></Facebook>
                     )}
                     autoLoad={false}
                     cssClass="btnFacebook"
@@ -253,10 +329,10 @@ var getObject={
                   
                      />
                  <GoogleLogin
-                    clientId="714307659254-amb3fmov1ncdjcfcf2qvogl93ev90gm3.apps.googleusercontent.com"
-                    buttonText="Login with Google"
+                    clientId="429109744769-u70gtp3oelkd79pphuh4gblmm5ajaa2u.apps.googleusercontent.com"
+                    
                     render={renderProps => (
-                      <Gmail active={false} text2="Signin with Gmail" type="button" onClick={renderProps.onClick} disabled={renderProps.disabled}></Gmail>
+                      <Gmail active={!caption ? true:false} icon={!Gmailloading} text2={Gmailloading ? <ClipLoader  color='#FFF' loading={Gmailloading}  size={20} /> : "Signin with Gmail"} type="button" onClick={renderProps.onClick} disabled={renderProps.disabled}></Gmail>
                      
                     )}
                     onSuccess={responseGoogle}
@@ -264,6 +340,12 @@ var getObject={
                     className="btnGoogle"
                     
                     cookiePolicy={'single_host_origin'}
+                  />
+                  <LinkedIn type="button"
+                      onClick={linkedInLogin}
+                      text2="Signin with LinkedIn"
+                      icon={!LinkedInloading}
+                      active={!caption ? true:false}
                   />
                   <SignUpBtn type="button" text="Create account"></SignUpBtn>
                 
@@ -283,8 +365,11 @@ var getObject={
                  
                 </div>
                
-                {caption}
-                <div className="mb-2"><button disabled={false} className="btn btn-primary d-block w-100" type="submit">{loading ? <ClipLoader  color='#FFF' loading={loading}  size={20} /> : "Login"}</button></div>
+                <div className="caption">
+                  <Captcha    size='normal'   className="captions" siteKey="6Le4rjEfAAAAAClt5SkfUSqQ-RCIUinyCPX0I75w" onResponse={showResponse} onloadCallback={() => console.log('loaded')}></Captcha>
+                </div>
+      
+                <div className="mb-2"><button disabled={!caption ? true:false} className="btn btn-primary d-block w-100" type="submit">{loading ? <ClipLoader  color='#FFF' loading={loading}  size={20} /> : "Login"}</button></div>
                 <Link to="/forget" className="already text-white"><p > Forget password ? </p></Link>
             </form>
            
@@ -328,7 +413,7 @@ const LoginWithPhoto=styled.div`
    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 15%, rgba(206,220,223,1) 100%);
     height: 50%;
     min-height:110vh;
-    padding: 50px 0; 
+    padding: 15px 0; 
     form {
       .caption{
         
