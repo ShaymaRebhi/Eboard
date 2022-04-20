@@ -7,6 +7,7 @@ import CheckQuizAnswers from "./CheckQuizAnswers";
 import {DisplayQuizStudent} from "../../utils/Quiz";
 import {useRouteMatch} from "react-router-dom";
 let interval;
+let interval2;
 function DisplayQuiz() {
     const match = useRouteMatch();
     const [step, setStep] = useState(1);
@@ -26,14 +27,16 @@ function DisplayQuiz() {
             })
     }
     const quizTime = typeof quizdata.Time ==='string' ?  (Number(quizdata.Time.substr(0,2)) *3600+ Number(quizdata.Time.substr(3,1))*600 + Number(quizdata.Time.substr(4,1))*60  + Number(quizdata.Time.substr(6,2)) )  : ''
+    const [quizTimeDecrement, setQuizTimeDecrement] = useState(0);
+
     useEffect(()=>{
         if(time === quizTime){
             setStep(3);
         }
-        console.log(time);
     })
     useEffect(() => {
         getQuiz();
+        setQuizTimeDecrement(quizTime);
         if(step ===3){
             clearInterval(interval);
         }
@@ -45,6 +48,9 @@ function DisplayQuiz() {
         interval = setInterval(() => {
            setTime(prevTime => prevTime + 1);
         }, 1000);
+        interval2 = setInterval(() => {
+            setQuizTimeDecrement(prevTime => prevTime - 1);
+        }, 1000);
 
     }
 
@@ -55,7 +61,9 @@ function DisplayQuiz() {
     <div className="DisplayQuiz">
         { step === 1 && <StartQuiz
             onQuizStart={quizStartHandler}
-            quiz={quizdata}/>}
+            quiz={quizdata}
+            quizTime={quizTime}
+        />}
         { step === 2 && <QuestionQuiz
             data={quizdata.Questions[activeQuestion]}
             onAnswerUpdate={setAnswers}
@@ -65,6 +73,7 @@ function DisplayQuiz() {
             onSetStep={setStep}
             time={time}
             quizTime={quizTime}
+            quizTimeDecrement={quizTimeDecrement}
         />}
         { step === 3 && <EndQuiz
         results={answers}

@@ -8,6 +8,15 @@ function QuestionQuiz(props) {
     const [error, setError] = useState('');
     const radioWrapper = useRef();
     const [buttonTitle ,setButtonTitle] = useState("Next");
+
+    const formatTime = time =>{
+        if (time < 60){
+            return time < 10 ? `0${time}s` : `${time}s`;
+        }
+        else {
+            return Math.floor(time/60) + 'm' + (time % 60) + 's' ;
+        }
+    }
     useEffect(() => {
         const findCheckedInput = radioWrapper.current.querySelector('input:checked');
         if(findCheckedInput){
@@ -46,7 +55,13 @@ function QuestionQuiz(props) {
           <AccordionDetails>
             <div className="card-content-Quiz">
                 <div className="content-Quiz">
-                  <h2 className="mb-5 Questionquiz">{props.data.questionText}</h2>
+                    <div style={{display:"flex"}}>
+                        <h3 style={{color:"red"}}><strong>Time : </strong>{formatTime(props.quizTimeDecrement)}</h3>
+                    </div>
+                    <br/>
+                    <div>
+                        <h2 className="mb-5 Questionquiz">{props.data.questionText}</h2>
+                    </div>
                   <div ref={radioWrapper}>
                       {props.data.options.map((option, i ) =>(
                           <label className="labeloption" key={i}>

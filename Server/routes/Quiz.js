@@ -20,4 +20,6 @@ router.get('/quizEvaluation/:id',QuizController.GetOneQuizEvaluation);
 router.get('/GetNumberStudentByQuizEvaluation/:id',QuizController.GetNumberStudentByQuizEvaluation);
 router.get('/GetNumberStudentWorkedQuiz/:id',QuizController.GetNumberStudentWorkedQuiz);
 router.get('/GetNumberStudentAssignedQuiz/:id',QuizController.GetNumberStudentAssignedQuiz);
+router.get('/AverageScore/:id',QuizController.getAverageQuizScore);
+router.get('/getStudentListByQuizWorked/:idClass/:idQuiz',QuizController.getStudentListByQuizWorked);
 module.exports = router;

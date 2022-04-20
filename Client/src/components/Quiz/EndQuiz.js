@@ -11,6 +11,7 @@ function EndQuiz(props) {
   const [scoreTotal, setScoreTotal] = useState(0);
   const history = useHistory();
   const [message, setMessage] = useState("");
+  const [messageColor, setMessageColor] = useState('');
 
   const formatTime = time =>{
     if (time < 60){
@@ -72,18 +73,23 @@ function EndQuiz(props) {
   const ScoreMessage = () => {
     if(ScoreFinal < 10 ){
       setMessage("Low")
+      setMessageColor('#fc0414')
     }
     if(ScoreFinal > 10 && ScoreFinal <= 13 ){
       setMessage("You can do better")
+      setMessageColor('#2212ff')
     }
     if(ScoreFinal > 13 && ScoreFinal <= 16 ){
       setMessage("Good")
+      setMessageColor('#2fc406')
     }
     if(ScoreFinal > 16 && ScoreFinal <= 18 ){
       setMessage("Very Good")
+      setMessageColor('#04e122')
     }
     if(ScoreFinal > 18){
       setMessage("Excellent")
+      setMessageColor('#04e122')
     }
   }
 
@@ -94,14 +100,24 @@ function EndQuiz(props) {
         <div className="card-Quiz">
           <AccordionDetails>
             <div className="card-content-Quiz">
-              <div className="content-Quiz">
+              <div>
                 <h1 className="resultsQuiz">Your Results</h1>
-                <p className="scoreQuiz">{nbCorrectAnswers} of {props.data.length}</p>
-                <p className="scoreQuiz">{ScoreFinal} / 20</p>
-                <p className="scoreQuiz2"><strong>{Math.floor((correctAnswers / scoreTotal) * 100)} %</strong></p>
-                <p className="timeQuiz"><strong>Your time :</strong> {formatTime(props.time)}</p>
-                <h3 className="resultsQuiz">{message}</h3>
+              </div>
+              <br/>
+              <br/>
+              <div className="content-Quiz-End">
+                <p className="scoreQuiz"><strong>Number Correct Answers :  </strong>{nbCorrectAnswers} of {props.data.length}</p>
+                <p className="scoreQuiz"><strong>Score :  </strong>{ScoreFinal} / 20</p>
+                <p className="timeQuiz"><strong>Your time :  </strong>{formatTime(props.time)}</p>
+                <p><strong style={{color:"black"}}>Feedback :  </strong>
+                  <strong style={{color:messageColor,textAlign:"right"}}>{message}</strong>
+                </p>
+              </div>
+              <br/>
+              <br/>
+              <div>
                 <button className="btn btn-info mr-2 " onClick={props.onAnswersCheck}>Check your answers</button>
+                &nbsp;
                 <button className="btn btn-secondary mr-2 " onClick={BackToListQuiz}>Back To List Quiz</button>
               </div>
             </div>

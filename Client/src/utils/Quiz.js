@@ -76,3 +76,10 @@ export const updateQuizStatus  = (id,quiz, callback)=>{
         .catch((err)=> callback(err));
 }
 
+export const GetAverageScore = (id,callback) =>{
+    axios.get(url+`/quiz/AverageScore/${id}`).then((res)=> {callback(res)})
+}
+
+export const getStudentListByQuizWorked  = (idClasse,idQuiz,callback)=>{
+    axios.get(url+`/quiz/getStudentListByQuizWorked/${idClasse}/${idQuiz}`).then( (res)=>{callback(res)})
+}

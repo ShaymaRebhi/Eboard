@@ -83,7 +83,8 @@ exports.assignQuiz= async (req, res) => {
                 const newEvaluation = new Evaluation({
                     Quiz: newQuiz._id,
                     Student: element,
-                    Class : idClass
+                    Class : idClass,
+                    Type : "Quiz"
                 });
                 newEvaluation.save();
             })
@@ -105,7 +106,8 @@ exports.assignQuizAfterSave= async (req, res) => {
             const newEvaluation = new Evaluation({
                 Quiz: newQuiz._id,
                 Student: element,
-                Class : idClass
+                Class : idClass,
+                Type : "Quiz"
             });
             newEvaluation.save();
         });
@@ -128,7 +130,8 @@ exports.getQuizByStudentAssigned = async (req, res, next) => {
         Evaluation.find({
             Student: idUser,
             Class: idClass,
-            TaskStatus : "Assigned"
+            TaskStatus : "Assigned",
+            Type : "Quiz"
         }).populate("Quiz").then((evaluation) => res.json(evaluation));
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -142,8 +145,9 @@ exports.getQuizByStudentWorked = async (req, res, next) => {
         Evaluation.find({
             Student: idUser,
             Class: idClass,
-            TaskStatus : "Worked"
-        }).populate("Quiz").then((evaluation) => res.json(evaluation));
+            TaskStatus : "Worked",
+            Type : "Quiz"
+        }).populate("Student").populate("Quiz").then((evaluation) => res.json(evaluation));
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
@@ -163,6 +167,38 @@ exports.DisplayQuizByStudent = async (req, res, next) => {
 }
 
 }
+exports.getAverageQuizScore = async (req, res, next) => {
+    let id = mongoose.Types.ObjectId(req.params.id);
+    let averageScore = 0;
+    try {
+        Evaluation.aggregate(
+            [
+                {
+                    $match : {
+                        Quiz:id,
+                        TaskStatus : 'Worked',
+                        Type : "Quiz"
+                    }
+                },
+                {
+                    $group:
+                        {
+                            _id : "$Quiz",
+                            avgScore: { $avg: "$Score" }
+                        }
+                },
+
+            ]
+        ).then((data)=>{
+            data.forEach((item,i)=>{
+                averageScore = averageScore + item.avgScore
+                })
+            res.json(averageScore)})
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
 exports.updateEvaluationScoreAndStatus = async (req, res, next) => {
     Evaluation.findById(req.params.id,function (err,evaluation){
         if(!evaluation)
@@ -194,7 +230,8 @@ exports.GetNumberStudentByQuizEvaluation = async (req, res, next) => {
     const idQuiz = req.params.id;
     try {
         Evaluation.find({
-            Quiz:idQuiz
+            Quiz:idQuiz,
+            Type : "Quiz"
         }).count().then((number)=>res.json(number))
     }
     catch (error) {
@@ -206,7 +243,8 @@ exports.GetNumberStudentWorkedQuiz = async (req, res, next) => {
     try {
         Evaluation.find({
             Quiz:idQuiz,
-            TaskStatus : "Worked"
+            TaskStatus : "Worked",
+            Type : "Quiz"
         }).count().then((number)=>res.json(number))
     }
     catch (error) {
@@ -218,7 +256,8 @@ exports.GetNumberStudentAssignedQuiz = async (req, res, next) => {
     try {
         Evaluation.find({
             Quiz:idQuiz,
-            TaskStatus : "Assigned"
+            TaskStatus : "Assigned",
+            Type : "Quiz"
         }).count().then((number)=>res.json(number))
     }
     catch (error) {
@@ -239,5 +278,21 @@ exports.UpdateQuizStatus =async (req, res, next) => {
                 res.status(400).send("Update not possible");
             });
     });
+}
+
+exports.getStudentListByQuizWorked = async (req, res, next) => {
+    const idQuiz = req.params.idQuiz;
+    const idClass = req.params.idClass
+
+    try {
+        Evaluation.find({
+            Quiz: idQuiz,
+            Class: idClass,
+            TaskStatus : "Worked",
+            Type : "Quiz"
+        }).populate("Student").then((evaluation) => res.json(evaluation));
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
 }
 
