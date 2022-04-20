@@ -7,6 +7,9 @@ var Evaluation = new Schema ({
         type : String,
         default : 'Assigned'
     },
+    Type :{
+        type : String
+    },
     Quiz :{
         type: mongoose.Schema.Types.ObjectId,
         ref : 'Quiz'
@@ -17,10 +20,15 @@ var Evaluation = new Schema ({
     },
     Score :{
         type:Number,
-        default : 0
     },
     Comment :{
         type:String
+    },
+    TaskResponseFile :{
+        type:[]
+    },
+    TaskCorrected :{
+        type:String,
     },
     Class :{
         type: mongoose.Schema.Types.ObjectId,
@@ -28,7 +36,7 @@ var Evaluation = new Schema ({
     },
     Student :{
         type: mongoose.Schema.Types.ObjectId,
-        ref : 'users'
+        ref : 'Student'
     }
 
 })

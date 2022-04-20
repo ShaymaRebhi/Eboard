@@ -1,4 +1,6 @@
 const Task = require('../Model/Task');
+const Evaluation = require("../Model/Evaluation");
+const mongoose = require("mongoose");
 
 
 exports.GetTask = async (req,res,next) =>{
@@ -16,7 +18,9 @@ exports.deleteTask = async (req,res) =>{
         .catch(err => res.status(400).json(err));
 }
 exports.addTask = async(req,res) => {
-    const newTask = new Task(req.body)
+    const taskBody = req.body ;
+    taskBody.status = "Not Assigned"
+    const newTask = new Task(taskBody)
     await newTask.save((err, task) => {
         if (err) return res.status(503).json({error: err});
         if (task) return res.status(200).json({
@@ -24,6 +28,7 @@ exports.addTask = async(req,res) => {
             id: task._id,
             message: 'Task Created'
         });
+        req.body.User=User._id;
     })
 }
 
@@ -34,7 +39,7 @@ exports.updateTask = async(req,res)=> {
         else
             task.Title = req.body.Title;
             task.Theme = req.body.Theme;
-            task.questionTitle = req.body.questionTitle;
+            task.Description = req.body.Description;
             task.QuestionFile = req.body.QuestionFile
 
             task.save().then(task => {
@@ -66,4 +71,71 @@ exports.getTaskByTeacher = async (req, res, next) => {
     }
 }
 
+exports.assignTask= async (req, res) => {
+    const idClass = req.params.idClass
+    const task = req.body;
+    task.status = "Assigned";
+    const newTask = new Task(task);
+
+    try {
+        newTask.save();
+        task.listStudents
+            .forEach((element) => {
+                const newEvaluation = new Evaluation({
+                    Task: newTask._id,
+                    Student: element,
+                    Class : idClass,
+                    Type : "Task"
+                });
+                newEvaluation.save();
+            })
+            .then((task) => res.json(task));
+
+        res.status(201).json(newTask);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+exports.assignTaskAfterSave= async (req, res) => {
+    const idClass = req.params.idClass
+    const task = req.body;
+    task.status = "Assigned";
+    const newTask = new Task(task);
+
+    try {
+        task.listStudents.forEach((element) => {
+            const newEvaluation = new Evaluation({
+                Task: newTask._id,
+                Student: element,
+                Class : idClass,
+                Type : "Task"
+            });
+            newEvaluation.save();
+        });
+
+        task.findByIdAndUpdate(task._id, newTask, {
+            useFindAndModify: false,
+        }).then((task) =>
+            Task.findOne({ _id: task._id }).then((task) => res.json(task))
+        );
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
+exports.UpdateTaskStatus =async (req, res, next) => {
+
+    Task.findById(req.params.id, function (err,task){
+        if(!task)
+            res.status(404).send('data is not found');
+        else
+            task.status = "Assigned";
+        task.save().then(task => {
+            res.json('Task status is succussffully Updated');
+        })
+            .catch(err => {
+                res.status(400).send("Update not possible");
+            });
+    });
+}
 }

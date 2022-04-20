@@ -31,8 +31,18 @@ function TaskList() {
   const handelformadd = () => {
       history.push("/formAddTask/");
   }
-  const assignHomeWork= () => {
-        history.push("/formAddTask/");
+  const assignTask= (task,id) => {
+        assignTaskAfterSave(idClass,task,()=>(
+            toast.success('Task assigned successfuly', {
+                position: "bottom-right"
+            })
+        ))
+      const newTask ={
+          status : "Assigned"
+      }
+      updateTaskStatus(id,newTask,()=>(
+          getTasks()
+      ))
   }
   const handelSearchTerm = (e) =>{
      let value = e.target.value.toLowerCase();
@@ -100,7 +110,10 @@ function TaskList() {
                                 },
                                 getTasks()
                             )}><FaTrash/></button>
-                            <button className="btn btn-outline-success" onClick={assignHomeWork}><MdAssignment/></button>
+                            {t.status === "Not Assigned" ? (
+                            <button className="btn btn-outline-success" onClick={()=>{assignTask(t,t._id)}}><MdAssignment/></button>
+                            ):("")
+                            }
                         </Item>
                     </Item.Group>
 

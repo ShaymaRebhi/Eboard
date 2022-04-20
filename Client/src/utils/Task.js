@@ -23,6 +23,17 @@ export const updateTask  = (id,task, callback)=>{
     axios.post(url+`/task/update/${id}`,task).then((message)  => callback(message))
         .catch((err)=> callback(err));
 }
+
+export const assignTask  = (idClass,Task, callback)=>{
+    axios.post(url+`/task/assign/${idClass}`,Task).then((message)  => callback(message))
+        .catch((err)=> callback(err));
+}
+
+export const assignTaskAfterSave  = (idClass,Task, callback)=>{
+    axios.post(url+`/task/assignTaskAfterSave/${idClass}`,Task).then((message)  => callback(message))
+        .catch((err)=> callback(err));
+}
+
 export const getTaskByTeacher  = (idUserr,idClasse,callback)=>{
     axios.get(url+`/task/getTaskByTeacher/${idUserr}/${idClasse}`).then( (res)=>{callback(res)})
 }
