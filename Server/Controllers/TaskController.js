@@ -58,6 +58,8 @@ exports.GetOneTask = async(req,res) => {
         }).catch(err=>{
             return res.json(err);
         });
+}
+
 exports.getTaskByTeacher = async (req, res, next) => {
     const idUser = req.params.idUserr;
     const idClass = req.params.idClasse;
@@ -137,5 +139,21 @@ exports.UpdateTaskStatus =async (req, res, next) => {
                 res.status(400).send("Update not possible");
             });
     });
+}
+
+exports.getTaskByStudentAssigned = async (req, res, next) => {
+    const idUser = req.params.idUserr;
+    const idClass = req.params.idClass
+
+    try {
+        Evaluation.find({
+            Student: idUser,
+            Class: idClass,
+            TaskStatus : "Assigned",
+            Type : "Task"
+        }).populate("Task").then((evaluation) => res.json(evaluation));
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
 }
 }

@@ -43,8 +43,18 @@ export default class MenuCours extends Component {
           <Label>51</Label>
           <Icon name='file alternate' /> Task
         </Menu.Item>
-</Link>
-<Link to ="/assignedQuizStudentList">
+        </Link>
+          <Link to="/assignedTaskStudentList">
+              <Menu.Item
+                  name='task Student'
+                  active={activeItem === 'task student'}
+                  onClick={this.handleItemClick}
+              >
+                  <Label>52</Label>
+                  <Icon name='compose 2' /> Task Student
+              </Menu.Item>
+          </Link>
+        <Link to ="/assignedQuizStudentList">
         <Menu.Item
           name='exam'
           active={activeItem === 'exam'}
