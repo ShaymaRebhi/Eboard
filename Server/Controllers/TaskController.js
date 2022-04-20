@@ -185,4 +185,103 @@ exports.DisplayTaskByStudent = async (req, res, next) => {
         res.status(404).json({ message: error.message });
     }
 }
+
+
+exports.GetOneTaskEvaluation = async (req, res, next) => {
+    await Evaluation.findOne({_id:req.params.id})
+        .then(Evaluation=>{
+            return res.status(200).json(Evaluation);
+        }).catch(err=>{
+            return res.json(err);
+        });
+}
+
+exports.GetNumberStudentByTaskEvaluation = async (req, res, next) => {
+    const idTask = req.params.id;
+    try {
+        Evaluation.find({
+            Task : idTask,
+            Type : "Task"
+        }).count().then((number)=>res.json(number))
+    }
+    catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+exports.GetNumberStudentWorkedTask = async (req, res, next) => {
+    const idTask = req.params.id;
+    try {
+        Evaluation.find({
+            Task : idTask,
+            TaskStatus : "Worked",
+            Type : "Task"
+        }).count().then((number)=>res.json(number))
+    }
+    catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+exports.GetNumberStudentAssignedTask = async (req, res, next) => {
+    const idTask = req.params.id;
+    try {
+        Evaluation.find({
+            Task:idTask,
+            TaskStatus : "Assigned",
+            Type : "Task"
+        }).count().then((number)=>res.json(number))
+    }
+    catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
+exports.getAverageTaskScore = async (req, res, next) => {
+    let id = mongoose.Types.ObjectId(req.params.id);
+    let averageScore = 0;
+    try {
+        Evaluation.aggregate(
+            [
+                {
+                    $match : {
+                        Task:id,
+                        TaskStatus : 'Worked',
+                        Type : "Task"
+                    }
+                },
+                {
+                    $group:
+                        {
+                            _id : "$Task",
+                            avgScore: { $avg: "$Score" }
+                        }
+                },
+
+            ]
+        ).then((data)=>{
+            data.forEach((item,i)=>{
+                averageScore = averageScore + item.avgScore
+            })
+            res.json(averageScore)})
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
+exports.updateTaskEvaluationStatus = async (req, res, next) => {
+    Evaluation.findById(req.params.id,function (err,evaluation){
+        if(!evaluation)
+            res.status(404).send('data is not found');
+        else
+            evaluation.TaskStatus = "Worked";
+            evaluation.TaskCorrected = "Not Corrected"
+
+        evaluation.save().then(evaluation=> {
+            res.json('evaluation updated');
+        })
+            .catch(err => {
+                res.status(400).send("Update not possible");
+            });
+    })
+}
+
 }

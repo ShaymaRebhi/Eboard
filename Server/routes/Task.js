@@ -15,4 +15,10 @@ router.get('/getTaskByStudentAssigned/:idClass/:idUserr',TaskController.getTaskB
 router.get('/getTaskByStudentWorked/:idClass/:idUserr',TaskController.getTaskByStudentWorked);
 router.get('/displayTask/:idUserr/:idTask',TaskController.DisplayTaskByStudent);
 router.post('/updateEvaluationStatus/:id',TaskController.updateTaskEvaluationStatus);
+router.post('/updateStatus/:id',TaskController.UpdateTaskStatus);
+router.get('/TaskEvaluation/:id',TaskController.GetOneTaskEvaluation);
+router.get('/GetNumberStudentByTaskEvaluation/:id',TaskController.GetNumberStudentByTaskEvaluation);
+router.get('/GetNumberStudentWorkedTask/:id',TaskController.GetNumberStudentWorkedTask);
+router.get('/GetNumberStudentAssignedTask/:id',TaskController.GetNumberStudentAssignedTask);
+router.get('/AverageScore/:id',TaskController.getAverageTaskScore);
 module.exports = router;

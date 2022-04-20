@@ -219,6 +219,11 @@ function App() {
                 render={(props) => <HomeCourse {...props} />}
             />
             <Route
+                path="/detailTask/:id"
+                exact
+                render={(props) => <HomeCourse {...props} />}
+            />
+            <Route
                 path="/404"
                 exact
                 render={(props) => <Page_404 {...props} />}

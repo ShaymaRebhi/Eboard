@@ -23,6 +23,7 @@ import WorkedQuizStudentList from "../Quiz/WorkedQuizStudentList";
 import DetailQuiz from "../Quiz/DetailQuiz";
 import AssignedTaskStudentList from "../Task/AssignedTaskStudentList";
 import WorkedTaskStudentList from "../Task/WorkedTaskStudentList";
+import DetailTask from "../Task/DetailTask";
 
 function HomeCourse(){
 
@@ -124,6 +125,10 @@ function HomeCourse(){
                                 <PrivateRoute
                                     path="/detailQuiz/:id"
                                     exact component ={DetailQuiz}
+                                />
+                                <PrivateRoute
+                                    path="/detailTask/:id"
+                                    exact component ={DetailTask}
                                 />
                             </div>
                         </Grid.Column>
