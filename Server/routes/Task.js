@@ -8,5 +8,5 @@ router.get('/',TaskController.GetTask);
 router.get('/:id',TaskController.GetOneTask);
 router.delete('/:id',TaskController.deleteTask);
 router.post('/update/:id',TaskController.updateTask);
-
+router.get('/getTaskByTeacher/:idUserr/:idClasse',TaskController.getTaskByTeacher);
 module.exports = router;

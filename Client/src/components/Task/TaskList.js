@@ -1,24 +1,26 @@
 import React, {useEffect, useState} from 'react'
 import './TaskList.css'
-import {useHistory} from "react-router-dom";
+import {Link,useHistory} from "react-router-dom";
 import {FaTrash} from 'react-icons/fa' ;
 import {GrUpdate} from 'react-icons/gr' ;
-import {getAllTasks, deleteTask} from "../../utils/Task";
+import {getAllTasks, deleteTask, getTaskByTeacher, assignTaskAfterSave, updateTaskStatus} from "../../utils/Task";
 import {toast, ToastContainer} from "react-toastify";
 import { Header, Icon, Item, Segment, } from 'semantic-ui-react'
 import moment from 'moment';
 import {MdAssignment} from "react-icons/md";
 
 function TaskList() {
+    const idUser=JSON.parse(localStorage.getItem("login")).User._id;
+    const idClass = JSON.parse(localStorage.getItem("idClass"))._id;
     const [task, setTask] = useState([])
     const [searchTerm,setSearchTerm] = useState([]);
 
     const getTasks=()=>{
-        getAllTasks((res)=> {
+        getTaskByTeacher(idUser,idClass,(res)=> {
             setTask(res.data)
         })
     }
-    const getTaskpage = (id) => {
+    const getEditTaskPage = (id) => {
             history.push(`/updateTask/${id}`);
     }
 
@@ -80,15 +82,17 @@ function TaskList() {
                         <Item>
                             <Item.Image size='tiny' avatar src='images/task.jpg' />
                             <Item.Content>
+                                <Link to={"/DetailTask/"+t._id}>
                                 <Item.Header>{t.Title}</Item.Header>
+                                </Link>
                                 <Item.Meta>
                                     <span className='cinema'>Created At {moment(t.CreationDate).format("MMMM Do YYYY")}</span>
                                 </Item.Meta>
-                                <Item.Description>{t.Theme}</Item.Description>
+                                <Item.Description>{t.Description}</Item.Description>
                             </Item.Content>
                         </Item>
                         <Item className="buttons">
-                            <button className="btn btn-outline-primary"  onClick={()=>getTaskpage(t._id)}><GrUpdate/></button>
+                            <button className="btn btn-outline-primary"  onClick={()=>getEditTaskPage(t._id)}><GrUpdate/></button>
                             <button className="btn btn-outline-danger"  onClick={()=>deleteTask(t._id, ()=>{
                                     toast.success('Task deleted successfuly', {
                                         position: "bottom-right"

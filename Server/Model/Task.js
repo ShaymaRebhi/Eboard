@@ -14,7 +14,7 @@ var Task = new Schema ({
         type:Date,
         default:Date.now,
     },
-    questionTitle:{
+    Description:{
         type:String,
         required:true
     },
@@ -22,19 +22,19 @@ var Task = new Schema ({
         type:String,
         //required:true
     },
-    QuestionResponseFile:{
-        type:String,
-        //required:true
+    status : {
+        type: String,
+        required : true
     },
     listStudents : {
         type : [Object],
 
     },
-    class :{
+    Class :{
         type: mongoose.Schema.Types.ObjectId,
         ref : 'Class'
     },
-    creator :{
+    Creator :{
         type: mongoose.Schema.Types.ObjectId,
         ref : 'users'
 

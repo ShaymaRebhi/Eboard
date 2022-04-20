@@ -53,4 +53,17 @@ exports.GetOneTask = async(req,res) => {
         }).catch(err=>{
             return res.json(err);
         });
+exports.getTaskByTeacher = async (req, res, next) => {
+    const idUser = req.params.idUserr;
+    const idClass = req.params.idClasse;
+    try {
+        Task.find({
+            Creator: idUser,
+            Class: idClass
+        }).then((task) => res.json(task));
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
 }

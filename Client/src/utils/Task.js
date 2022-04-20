@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = 'https://eboardbackend2022.herokuapp.com' ;
+const url = 'http://localhost:3000' ;
 
 export const getAllTasks  = (callback)=>{
     axios.get(url+'/task/').then( (res)=>{callback(res)})
@@ -22,4 +22,7 @@ export const getOneTask  = (id, callback)=>{
 export const updateTask  = (id,task, callback)=>{
     axios.post(url+`/task/update/${id}`,task).then((message)  => callback(message))
         .catch((err)=> callback(err));
+}
+export const getTaskByTeacher  = (idUserr,idClasse,callback)=>{
+    axios.get(url+`/task/getTaskByTeacher/${idUserr}/${idClasse}`).then( (res)=>{callback(res)})
 }
