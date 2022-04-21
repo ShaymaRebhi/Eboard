@@ -235,6 +235,19 @@ exports.GetNumberStudentAssignedTask = async (req, res, next) => {
     }
 }
 
+exports.getNumberTaskAssigned = async (req, res, next) => {
+    const idUser = req.params.idUserr;
+    try {
+        Evaluation.find({
+            Student: idUser,
+            TaskStatus : 'Assigned',
+            Type : "Task"
+        }).count().then((number) => res.json(number))
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
 exports.getAverageTaskScore = async (req, res, next) => {
     let id = mongoose.Types.ObjectId(req.params.id);
     let averageScore = 0;
