@@ -75,7 +75,7 @@ function EndQuiz(props) {
       setMessage("Low")
       setMessageColor('#fc0414')
     }
-    if(ScoreFinal > 10 && ScoreFinal <= 13 ){
+    if(ScoreFinal => 10 && ScoreFinal <= 13 ){
       setMessage("You can do better")
       setMessageColor('#2212ff')
     }

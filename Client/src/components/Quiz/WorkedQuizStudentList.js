@@ -33,63 +33,72 @@ function WorkedQuizStudentList() {
                     <h1>Student Quiz List Worked</h1>
                 </div>
             </div>
-            <div className="wrap">
-                <div className="search">
-                    <input type="text" className="searchTerm" placeholder="Search" onChange={handelSearchTerm}/>
-                    <i className="fa fa-search"></i>
+            <div style={{display:"flex" ,justifyContent:"space-between"}} >
+                <div className="wrap">
+                    <div className="search">
+                        <input type="text" className="searchTerm" placeholder="Search" onChange={handelSearchTerm}/>
+                    </div>
+                </div>
+                <div className="buttons">
+                    <button className="btn btn-secondary" onClick={BackToAssignedQuizStudentList}>Back</button>
                 </div>
             </div>
-            <div className="buttons">
-                <button className="btn btn-secondary" onClick={BackToAssignedQuizStudentList}>Back</button>
-            </div>
-            <br/>
-            <div className="container pb-5 ">
-                {evaluation.length <= 0 ? (
-                    <Segment placeholder>
-                        <Header icon>
-                            <Icon name='tasks' />
-                            No quizs Worked .
-                        </Header>
 
-                    </Segment>
-                ):(
-                    evaluation.filter((e)=>{
-                        return e.Quiz.Title.toLowerCase().includes(searchTerm)
-                    }).map((e,i)=>(
+                    <br/>
+                    <div className="container pb-5 ">
+                        {evaluation.length <= 0 ? (
+                            <Segment placeholder>
+                                <Header icon>
+                                    <Icon name='tasks' />
+                                    No quizs Worked .
+                                </Header>
 
-                        <Segment color='grey' raised key={i}>
-                            <Item.Group divided >
-                                <Item>
-                                    <Item.Image size='tiny' avatar src='images/quizz.jpg' />
-                                    <Item.Content>
-                                        <Item.Header>{e.Quiz.Title}</Item.Header>
-                                        <Item.Meta>
-                                            <span className='cinema'>{e.TaskStatus}</span>
-                                        </Item.Meta>
-                                        <Item.Meta>
-                                            <span className='cinema'>Score : {e.Score} / 20</span>
-                                        </Item.Meta>
-                                    </Item.Content>
-                                </Item>
-                                <Item className="buttons">
-                                    {e.Score < 10 ? (
-                                        <h3 style={{color:"red"}}>{e.Comment}</h3>
-                                    )
-                                    : (
-                                        <h3 style={{color:"green"}}>{e.Comment}</h3>
-                                        )
-                                    }
+                            </Segment>
+                        ):(
+                            evaluation.filter((e)=>{
+                                return e.Quiz.Title.toLowerCase().includes(searchTerm)
+                            }).map((e,i)=>(
 
-                                </Item>
-                            </Item.Group>
-                        </Segment>
+                                <Segment color='grey' raised key={i}>
+                                    <Item.Group divided >
+                                        <Item>
+                                            <Item.Image size='tiny' avatar src='images/quizz.jpg' />
+                                            <Item.Content>
+                                                <Item.Header>{e.Quiz.Title}</Item.Header>
+                                                <Item.Meta>
+                                                    <span className='cinema'>{e.TaskStatus}</span>
+                                                </Item.Meta>
+                                                <Item.Meta>
+                                                    <span className='cinema'>Score : {e.Score} / 20</span>
+                                                </Item.Meta>
+                                            </Item.Content>
+                                        </Item>
+                                        <Item className="buttons">
+                                            {e.Score < 10 ? (
+                                                    <h3 style={{color:"red"}}>{e.Comment}</h3>
+                                                ) :("")
+                                            }
+                                            {e.Score === 10 ? (
+                                                <h3 style={{color:"blue"}}>{e.Comment}</h3>
+                                            ): ("")
+                                            }
+                                            {e.Score > 10 && e.Score <=13 ? (
+                                            <h3 style={{color:"blue"}}>{e.Comment}</h3>
+                                                ): ("")
+                                            }
+                                            {e.Score > 13 ? (
+                                                <h3 style={{color:"green"}}>{e.Comment}</h3>
+                                                ): ("")
+                                            }
 
-                    ))
+                                        </Item>
+                                    </Item.Group>
+                                </Segment>
 
-                )}
+                            ))
+                        )}
 
-            </div>
-
+                    </div>
 
         </>
     )

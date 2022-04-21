@@ -42,14 +42,15 @@ function AssignedTaskStudentList() {
                     <h1>Assigned Task Student List</h1>
                 </div>
             </div>
-            <div className="wrap">
-                <div className="search">
-                    <input type="text" className="searchTerm" placeholder="Search" onChange={handelSearchTerm}/>
-                    <i className="fa fa-search"></i>
+            <div style={{display:"flex" ,justifyContent:"space-between"}}>
+                <div className="wrap">
+                    <div className="search">
+                        <input type="text" className="searchTerm" placeholder="Search" onChange={handelSearchTerm}/>
+                    </div>
                 </div>
-            </div>
-            <div className="buttons">
+                <div className="buttons">
                     <button className="btn btn-secondary" onClick={DisplayTaskListWorked}>Task List Worked</button>
+                </div>
             </div>
             <br/>
             <div className="container pb-5 ">

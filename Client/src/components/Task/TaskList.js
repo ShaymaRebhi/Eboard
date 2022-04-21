@@ -65,15 +65,19 @@ function TaskList() {
             <img src="images/tasks.jpg" alt="task" width="100%"/>
             <div className="headers text-center">
                 <h1>Task List</h1>
-                <button className="btn btn--primary"  onClick={handelformadd}>Add Quiz</button>
             </div>
         </div>
-        <div className="wrap">
+          <div style={{display:"flex" ,justifyContent:"space-between"}}>
+              <div className="wrap">
                   <div className="search">
                       <input type="text" className="searchTerm" placeholder="Search" onChange={handelSearchTerm}/>
-                              <i className="fa fa-search"></i>
                   </div>
-        </div>
+              </div>
+              <div className="buttons">
+                  <button className="btn btn--primary"  onClick={handelformadd}>Add Quiz</button>
+              </div>
+          </div>
+          <br/>
         <div className="container pb-5 ">
             {task.length <= 0 ? (
                 <Segment placeholder>
@@ -102,14 +106,20 @@ function TaskList() {
                             </Item.Content>
                         </Item>
                         <Item className="buttons">
-                            <button className="btn btn-outline-primary"  onClick={()=>getEditTaskPage(t._id)}><GrUpdate/></button>
-                            <button className="btn btn-outline-danger"  onClick={()=>deleteTask(t._id, ()=>{
-                                    toast.success('Task deleted successfuly', {
-                                        position: "bottom-right"
-                                    })
-                                },
-                                getTasks()
-                            )}><FaTrash/></button>
+                            {t.status === "Not Assigned" ? (
+                                <>
+                                    <button className="btn btn-outline-primary"  onClick={()=>getEditTaskPage(t._id)}><GrUpdate/></button>
+                                    <button className="btn btn-outline-danger"  onClick={()=>deleteTask(t._id, ()=>{
+                                        toast.success('Task deleted successfuly', {
+                                            position: "bottom-right"
+                                        })
+                                            },
+                                                getTasks()
+                                         )}><FaTrash/>
+                                    </button>
+                                </>
+                            ):("")
+                            }
                             {t.status === "Not Assigned" ? (
                             <button className="btn btn-outline-success" onClick={()=>{assignTask(t,t._id)}}><MdAssignment/></button>
                             ):("")

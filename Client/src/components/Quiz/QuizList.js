@@ -71,15 +71,19 @@ function QuizList() {
             <img src="images/quizlist2.jpg" alt="quizpicture" width="60%"  />
             <div className="headers text-center">
                 <h1>Quiz List</h1>
+            </div>
+        </div>
+        <div style={{display:"flex" ,justifyContent:"space-between"}}>
+            <div className="wrap">
+                <div className="search">
+                    <input type="text" className="searchTerm" placeholder="Search" onChange={handelSearchTerm}/>
+                </div>
+            </div>
+            <div className="buttons">
                 <button className="btn btn--primary"  onClick={handelformadd}>Add Quiz</button>
             </div>
         </div>
-        <div className="wrap">
-            <div className="search">
-                <input type="text" className="searchTerm" placeholder="Search" onChange={handelSearchTerm}/>
-                <i className="fa fa-search"></i>
-            </div>
-        </div>
+        <br/>
         <div className="container pb-5 ">
             {quiz.length <= 0 ? (
                 <Segment placeholder>
@@ -110,6 +114,7 @@ function QuizList() {
                             </Item>
                             <Item className="buttons">
                                 <button className="btn btn-outline-primary"  onClick={()=>getQuizEditPage(q._id)}><GrUpdate/> </button>
+                                {q.status === "Not Assigned" ? (
                                 <button className="btn btn-outline-danger"  onClick={()=>deleteQuiz(q._id,()=>{
                                         toast.success('Task deleted successfuly', {
                                             position: "bottom-right"
@@ -117,6 +122,8 @@ function QuizList() {
                                     },
                                     getQuizs()
                                 )}> <FaTrash/> </button>
+                                ):("")
+                                }
                                 {q.status === "Not Assigned" ? (
                                 <button className="btn btn-outline-success" onClick={()=>{assignQuiz(q,q._id)}}><MdAssignment/></button>
                                 ):("")

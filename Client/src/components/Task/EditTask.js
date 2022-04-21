@@ -10,7 +10,7 @@ function EditTask() {
     const [task, setTask] = useState({
             Title: "",
             Theme: "",
-            questionTitle: "",
+            Description: "",
             QuestionFile: undefined,
             QuestionResponseFile: undefined
         }
@@ -31,7 +31,7 @@ function EditTask() {
         const newTask = {
             Title : task.Title,
             Theme : task.Theme,
-            questionTitle : task.questionTitle,
+            Description : task.Description,
             QuestionFile : task.QuestionFile
 
         }
@@ -79,10 +79,10 @@ function EditTask() {
                         <br/>
                         <div style={{display:"flex"}} className="directioninput">
                             <div style={{display:"flex",flexDirection:"column"}}>
-                                <label className="labelHomeWork" htmlFor="questionClasstitle">Question :</label>
+                                <label className="labelHomeWork" htmlFor="questionClasstitle">Description :</label>
                                 <input className="text_input_homeWork_question" placeholder="write question here" id="questionClasstitle"
-                                       value={task.questionTitle}
-                                       onChange={(e) =>setTask({...task, questionTitle: e.target.value})} />
+                                       value={task.Description}
+                                       onChange={(e) =>setTask({...task, Description: e.target.value})} />
                             </div>
                             <div style={{display:"flex",flexDirection:"column"}} >
                                 <label className="labelHomeWork" htmlFor="questionfile form-label">Choose a file</label>
