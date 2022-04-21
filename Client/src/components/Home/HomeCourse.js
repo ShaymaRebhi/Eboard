@@ -15,15 +15,10 @@ import Members from '../Course/Members';
 import DisplayTask from "../Task/DisplayTask";
 import CreateTask from "../Task/CreateTask";
 import TaskList from "../Task/TaskList";
-import { useHistory } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 import EditTask from "../Task/EditTask";
 import EditQuiz from "../Quiz/EditQuiz";
-import AssignedQuizStudentList from "../Quiz/AssignedQuizStudentList";
-import WorkedQuizStudentList from "../Quiz/WorkedQuizStudentList";
-import DetailQuiz from "../Quiz/DetailQuiz";
-import AssignedTaskStudentList from "../Task/AssignedTaskStudentList";
-import WorkedTaskStudentList from "../Task/WorkedTaskStudentList";
-import DetailTask from "../Task/DetailTask";
+import ListCoursesBySeance from '../Course/ListCoursesBySeance';
 
 function HomeCourse(){
 
@@ -83,11 +78,11 @@ function HomeCourse(){
                                     exact component ={EditQuiz}
                                 />
                                 <PrivateRoute
-                                    path="/displayQuiz/:id"
+                                    path="/displayQuiz"
                                     exact component ={DisplayQuiz}
                                 />
                                 <PrivateRoute
-                                    path="/displayTask/:id"
+                                    path="/displayTask"
                                     exact component ={DisplayTask}
                                 />
                                 <PrivateRoute
@@ -106,30 +101,11 @@ function HomeCourse(){
                                     path="/members"
                                     exact component ={Members}
                                 />
-                                <PrivateRoute
-                                    path="/assignedQuizStudentList"
-                                    exact component={AssignedQuizStudentList}
-                                />
-                                <PrivateRoute
-                                    path="/workedQuizStudentList"
-                                    exact component={WorkedQuizStudentList}
-                                />
-                                <PrivateRoute
-                                    path="/assignedTaskStudentList"
-                                    exact component={AssignedTaskStudentList}
-                                />
-                                <PrivateRoute
-                                    path="/workedTaskStudentList"
-                                    exact component={WorkedTaskStudentList}
-                                />
-                                <PrivateRoute
-                                    path="/detailQuiz/:id"
-                                    exact component ={DetailQuiz}
-                                />
-                                <PrivateRoute
-                                    path="/detailTask/:id"
-                                    exact component ={DetailTask}
-                                />
+                                <Route
+                                path="/theme/:titre/:id"
+                                exact
+                               render={(props) => <ListCoursesBySeance {...props} />}
+                                 />
                             </div>
                         </Grid.Column>
 

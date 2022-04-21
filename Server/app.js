@@ -17,6 +17,8 @@ const socket=require('socket.io')
 const ReclamationRoute = require('./routes/Reclamations') 
 const classRoute = require('./routes/Class.js')
 const InvitationClassRouter = require("./routes/InvitationClass.js")
+const courses_route = require("./routes/Courses.route")
+const ThemeController = require("./routes/ThemeController");
 const Grid = require("gridfs-stream");
 require('dotenv/config');
 let gfs;
@@ -81,6 +83,8 @@ app.use('/reclamation',ReclamationRoute);
 app.use('/comment',CommentRoute);
 app.use('/class',classRoute);
 app.use('/invitationclass',InvitationClassRouter);
+app.use("/courses", courses_route);
+app.use("/theme", ThemeController);
 
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));

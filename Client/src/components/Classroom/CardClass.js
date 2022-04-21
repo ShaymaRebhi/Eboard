@@ -19,7 +19,7 @@ import { getclassApi } from '../../utils/Class';
 
 
 export default function CardClass () {
-  const [currentUser,setCurrentUser]=useState(undefined);
+  const [currentUser,setCurrentUser]=useState();
   const dispatch = useDispatch();
   const [classs] = useSelector(selectclass);
   const [pageNumber, setPageNumber] = useState(0);
@@ -45,8 +45,6 @@ useEffect(() => {
 
   dispatch(fetchclass(currentUser,"Active"));
 
-  
-    
     axios.get(getUserConnect,{
       headers: {
           'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
