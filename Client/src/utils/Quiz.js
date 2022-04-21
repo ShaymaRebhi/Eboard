@@ -83,3 +83,9 @@ export const GetAverageScore = (id,callback) =>{
 export const getStudentListByQuizWorked  = (idClasse,idQuiz,callback)=>{
     axios.get(url+`/quiz/getStudentListByQuizWorked/${idClasse}/${idQuiz}`).then( (res)=>{callback(res)})
 }
+
+export const getAverageScoreQuizByStudentAndClass  = (idUser,id,callback)=>{
+    axios.get(url+`/quiz/getAverageScoreQuizByStudentAndClass/${idUser}/${id}`).then( (res)=>{callback(res)})
+}
+
+

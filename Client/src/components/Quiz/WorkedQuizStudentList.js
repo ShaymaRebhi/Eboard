@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {getQuizByStudentWorked} from "../../utils/Quiz";
+import {getAverageScoreQuizByStudentAndClass, getQuizByStudentWorked} from "../../utils/Quiz";
 import {Header, Icon, Item, Segment} from "semantic-ui-react";
 import {useHistory} from "react-router-dom";
 
@@ -9,9 +9,15 @@ function WorkedQuizStudentList() {
     const [evaluation, setEvaluation] = useState([]);
     const idUser = JSON.parse(localStorage.getItem("idStudent"))._id;
     const [searchTerm,setSearchTerm] = useState([]);
+    const [avgScore,setAvgScore] = useState([]);
     const getQuizs=()=>{
         getQuizByStudentWorked(idClass,idUser,(res)=> {
             setEvaluation(res.data)
+        })
+    }
+    const getAVGQuizScore=()=>{
+        getAverageScoreQuizByStudentAndClass(idUser,idClass,(res)=> {
+            setAvgScore(res.data)
         })
     }
     const BackToAssignedQuizStudentList = (id) => {
@@ -20,6 +26,7 @@ function WorkedQuizStudentList() {
 
     useEffect(()=>{
         getQuizs();
+        getAVGQuizScore();
     })
     const handelSearchTerm = (e) =>{
         let value = e.target.value.toLowerCase();
@@ -33,6 +40,31 @@ function WorkedQuizStudentList() {
                     <h1>Student Quiz List Worked</h1>
                 </div>
             </div>
+            {evaluation.length <=0 ? ("") :(
+                <div style={{display:"flex" ,flexDirection:"column-reverse"}}>
+                    {avgScore < 10 ? (
+                        <h3 style={{color:"red",textAlign:"center"}}>Low</h3>
+                    ) :("")
+                    }
+                    {avgScore > 10 && avgScore <=13 ? (
+                        <h3 style={{color:"blue", textAlign:"center"}}>You can do better</h3>
+                    ): ("")
+                    }
+                    {avgScore > 13 && avgScore <=16 ? (
+                        <h3 style={{color:"green", textAlign:"center"}}>Good</h3>
+                    ): ("")
+                    }
+                    {avgScore > 16 && avgScore <=18 ? (
+                        <h3 style={{color:"green", textAlign:"center"}}>Very Good</h3>
+                    ): ("")
+                    }
+                    {avgScore > 18  ? (
+                        <h3 style={{color:"green", textAlign:"center"}}>Excellent</h3>
+                    ): ("")
+                    }
+                    <h3 style={{color:"black", textAlign:"center"}}>Average Quiz Score Module  : {avgScore.toFixed(2)}</h3>
+                </div>
+            )}
             <div style={{display:"flex" ,justifyContent:"space-between"}} >
                 <div className="wrap">
                     <div className="search">
