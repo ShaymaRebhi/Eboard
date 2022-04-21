@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import './DisplayTask.css'
 import "react-dropzone-uploader/dist/styles.css";
-import {useRouteMatch} from "react-router-dom";
-import {DisplayTaskStudent} from "../../utils/Task";
+import {useHistory, useRouteMatch} from "react-router-dom";
+import {DisplayTaskStudent, updateTaskStudentStatus} from "../../utils/Task";
+import {toast, ToastContainer} from "react-toastify";
 
 function DisplayTask() {
     const match = useRouteMatch();
     const idUser = JSON.parse(localStorage.getItem("idStudent"))._id;
+    const history = useHistory();
     const [questionFile] = useState("")
     const [evaluation, setEvaluation] = useState(0)
     const [task, setTask] = useState(
@@ -33,8 +35,36 @@ function DisplayTask() {
     useEffect(()=>{
         getTask()
     },[])
+    function componentDidMount(time) {
+        setTimeout(() => {history.push("/assignedTaskStudentList")}, time)
+    }
+    const send = () => {
+        const newEvaluation ={
+            TaskStatus : "Worked",
+            TaskCorrected : "Not Corrected",
+            Score : 0
+        }
+        updateTaskStudentStatus(evaluation._id,newEvaluation,()=> {
+            toast.success('Task Sent Successfully', {
+                position: "bottom-right"
+            })
+            componentDidMount(3000)
+        })
+    }
     return (
-      <div className="DisplayTaskkBox">
+        <>
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+            <div className="DisplayTaskkBox">
                 <div className="card-display-task" >
                     <div className="task-data">
                       <div>
@@ -72,13 +102,14 @@ function DisplayTask() {
                         </div>
 
                         <div className="saveadd p-5">
-                            <button className="btn btn-success" type="submit" onClick={()=>{}}>Send</button>
+                            <button className="btn btn-success" type="submit" onClick={send}>Send</button>
                         </div>
 
                     </div>
 
                 </div>
-      </div>
+            </div>
+        </>
   )
 }
 

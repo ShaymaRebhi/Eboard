@@ -70,6 +70,9 @@ function WorkedTaskStudentList() {
                                         <Item.Meta>
                                             <span className='cinema'>{e.TaskStatus}</span>
                                         </Item.Meta>
+                                        <Item.Meta>
+                                            <span className='cinema'>{e.TaskCorrected}</span>
+                                        </Item.Meta>
                                         {!e.Score === null ? (
                                             <Item.Meta>
                                                 <span className='cinema'>Score : {e.Score} / 20</span>

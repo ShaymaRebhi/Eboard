@@ -274,6 +274,7 @@ exports.updateTaskEvaluationStatus = async (req, res, next) => {
         else
             evaluation.TaskStatus = "Worked";
             evaluation.TaskCorrected = "Not Corrected"
+            evaluation.Score = 0;
 
         evaluation.save().then(evaluation=> {
             res.json('evaluation updated');
@@ -284,4 +285,22 @@ exports.updateTaskEvaluationStatus = async (req, res, next) => {
     })
 }
 
+exports.updateTaskEvaluationScore = async (req, res, next) => {
+    Evaluation.findById(req.params.id,function (err,evaluation){
+        if(!evaluation)
+            res.status(404).send('data is not found');
+        else
+            evaluation.Score = req.body.Score;
+            evaluation.Comment = req.body.Comment;
+            evaluation.TaskCorrected = "Corrected"
+
+        evaluation.save().then(evaluation=> {
+            res.json('evaluation updated');
+        })
+            .catch(err => {
+                res.status(400).send("Update not possible");
+            });
+    })
 }
+
+exports.getAverageScoreTaskByStudentAndClass = async (req, res, next) => {
