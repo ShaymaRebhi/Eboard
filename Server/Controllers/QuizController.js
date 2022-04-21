@@ -178,6 +178,20 @@ exports.getNumberQuizAssigned = async (req, res, next) => {
         res.status(404).json({message: error.message});
     }
 }
+
+exports.getNumberQuizWorked = async (req, res, next) => {
+    const idUser = req.params.idUserr;
+    try {
+        Evaluation.find({
+            Student: idUser,
+            TaskStatus : 'Worked',
+            Type : "Quiz"
+        }).count().then((number) => res.json(number))
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
 exports.getAverageQuizScore = async (req, res, next) => {
     let id = mongoose.Types.ObjectId(req.params.id);
     let averageScore = 0;
@@ -218,6 +232,7 @@ exports.updateEvaluationScoreAndStatus = async (req, res, next) => {
             evaluation.Score = req.body.Score;
             evaluation.Comment = req.body.Comment;
             evaluation.TaskStatus = "Worked";
+            evaluation.TaskCorrected = "Corrected"
 
         evaluation.save().then(evaluation=> {
             res.json('evaluation updated');

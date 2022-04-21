@@ -21,6 +21,7 @@ router.get('/GetNumberStudentByQuizEvaluation/:id',QuizController.GetNumberStude
 router.get('/GetNumberStudentWorkedQuiz/:id',QuizController.GetNumberStudentWorkedQuiz);
 router.get('/GetNumberStudentAssignedQuiz/:id',QuizController.GetNumberStudentAssignedQuiz);
 router.get('/getNumberQuizAssigned/:idUserr',QuizController.getNumberQuizAssigned);
+router.get('/getNumberQuizWorked/:idUserr',QuizController.getNumberQuizWorked);
 router.get('/AverageScore/:id',QuizController.getAverageQuizScore);
 router.get('/getStudentListByQuizWorked/:idClass/:idQuiz',QuizController.getStudentListByQuizWorked);
 router.get('/getAverageScoreQuizByStudentAndClass/:idUser/:id',QuizController.getAverageScoreQuizByStudentAndClass);
