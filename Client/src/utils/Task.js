@@ -80,3 +80,7 @@ export const updateTaskStatus  = (id,Task, callback)=>{
     axios.post(url+`/task/updateStatus/${id}`,Task).then((message)  => callback(message))
         .catch((err)=> callback(err));
 }
+
+export const GetAverageTaskScore = (id,callback) =>{
+    axios.get(url+`/task/AverageScore/${id}`).then((res)=> {callback(res)})
+}

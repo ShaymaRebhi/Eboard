@@ -6,10 +6,10 @@ import {useHistory, useRouteMatch} from "react-router-dom";
 
 import {PieChart,Pie,Cell} from "recharts";
 import {
-    GetAverageTaskScore,
     GetNumberStudentAssignedTask,
     GetNumberStudentByTaskEvaluation,
-    GetNumberStudentWorkedTask
+    GetNumberStudentWorkedTask,
+    GetAverageTaskScore,
 } from "../../utils/Task";
 
 function DetailTask() {
@@ -18,8 +18,14 @@ function DetailTask() {
     const [nbStudent,setNbStudent] = useState();
     const [nbAssigned,setNbAssigned] = useState();
     const [nbWorked,setNbWorked] = useState();
+
     const [averageScore,setAverageScore] = useState();
 
+    const avgScore = (id) => {
+        GetAverageTaskScore(id,(res)=>{
+            setAverageScore(res.data);
+        })
+    }
     const numberStudent = (id) => {
         GetNumberStudentByTaskEvaluation(id,(res)=>{
             setNbStudent(res.data);
@@ -35,17 +41,13 @@ function DetailTask() {
             setNbAssigned(res.data);
         })
     }
-    const avgScore = (id) => {
-        GetAverageTaskScore(id,(res)=>{
-            setAverageScore(res.data);
-        })
-    }
+
 
     useEffect(()=>{
+        avgScore(match.params.id);
         numberStudent(match.params.id);
         numberAssigned(match.params.id);
         numberWorked(match.params.id);
-        avgScore(match.params.id);
 
     })
 
@@ -82,7 +84,7 @@ function DetailTask() {
                                 <p className="scoreQuiz2"><strong>Student :</strong>{nbStudent} </p>
                                 <p className="scoreQuiz2" style={{color:"#3f12ff"}}><strong>Assigned : </strong>{nbAssigned} </p>
                                 <p className="scoreQuiz2" style={{color:"#04e122"}}><strong>Worked : </strong>{nbWorked} </p>
-                                <p className="scoreQuiz2" style={{color:"black"}}><strong>Average Score : </strong>{averageScore} </p>
+                                <p style={{color:"black"}}><strong>Average Score : </strong>{averageScore} </p>
 
                             </div>
                         </div>
