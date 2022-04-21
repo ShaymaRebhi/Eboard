@@ -19,6 +19,12 @@ import HomeAdmin from './components/Home/HomeAdmin';
 
 import ForgetPwdAdmin from './components/pages/Auth/ForetPwdAdmin';
 import Profile from './components/pages/Profile/Profile';
+import en from "javascript-time-ago/locale/en";
+import ru from "javascript-time-ago/locale/ru";
+import TimeAgo from "javascript-time-ago";
+
+TimeAgo.addDefaultLocale(en);
+TimeAgo.addLocale(ru);
 
 function App() {
 
@@ -193,6 +199,16 @@ function App() {
                 exact
                 render={(props) => <HomeCourse {...props} />}
             />
+              <Route
+            path="/theme/:titre/:id"
+            exact
+            render={(props) => <HomeCourse {...props} />}
+          />
+          <Route
+            path="/detailCourses/:id"
+            exact
+            render={(props) => <HomeCourse {...props} />}
+          />
             <Route
                 path="/404"
                 exact

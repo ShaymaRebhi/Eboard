@@ -15,9 +15,10 @@ import Members from '../Course/Members';
 import DisplayTask from "../Task/DisplayTask";
 import CreateTask from "../Task/CreateTask";
 import TaskList from "../Task/TaskList";
-import { useHistory } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 import EditTask from "../Task/EditTask";
 import EditQuiz from "../Quiz/EditQuiz";
+import ListCoursesBySeance from '../Course/ListCoursesBySeance';
 
 function HomeCourse(){
 
@@ -100,6 +101,11 @@ function HomeCourse(){
                                     path="/members"
                                     exact component ={Members}
                                 />
+                                <Route
+                                path="/theme/:titre/:id"
+                                exact
+                               render={(props) => <ListCoursesBySeance {...props} />}
+                                 />
                             </div>
                         </Grid.Column>
 

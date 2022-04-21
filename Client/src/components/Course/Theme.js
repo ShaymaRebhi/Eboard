@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Dropdown, Menu } from "semantic-ui-react";
 import ModalTheme from './ModalTheme';
-import ModalCourses from '../Classroom/ModalCourses';
+import ModalCourses from './ModalCourses';
 import TableTheme from '../Course/TableTheme'
 
 
