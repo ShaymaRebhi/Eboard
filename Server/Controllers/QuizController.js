@@ -322,6 +322,38 @@ exports.getStudentListByQuizWorked = async (req, res, next) => {
     }
 }
 
+exports.getMaxQuizScore = async (req, res, next) => {
+    let id = mongoose.Types.ObjectId(req.params.id);
+    let MaxScore = 0;
+    try {
+        Evaluation.aggregate(
+            [
+                {
+                    $match : {
+                        Quiz:id,
+                        TaskStatus : 'Worked',
+                        Type : "Quiz"
+                    }
+                },
+                {
+                    $group:
+                        {
+                            _id : "$Quiz",
+                            MaxScore: { $max: "$Score" }
+                        }
+                },
+
+            ]
+        ).then((data)=>{
+            data.forEach((item,i)=>{
+                MaxScore = MaxScore + item.avgScore
+            })
+            res.json(MaxScore)})
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
 exports.getAverageScoreQuizByStudentAndClass = async (req, res, next) => {
     let id = mongoose.Types.ObjectId(req.params.id);
     let idUser = mongoose.Types.ObjectId(req.params.idUser);
