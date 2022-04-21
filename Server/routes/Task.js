@@ -22,5 +22,6 @@ router.get('/GetNumberStudentByTaskEvaluation/:id',TaskController.GetNumberStude
 router.get('/GetNumberStudentWorkedTask/:id',TaskController.GetNumberStudentWorkedTask);
 router.get('/GetNumberStudentAssignedTask/:id',TaskController.GetNumberStudentAssignedTask);
 router.get('/getNumberTaskAssigned/:idUserr',TaskController.getNumberTaskAssigned);
+router.get('/getNumberTaskWorked/:idUserr',TaskController.getNumberTaskWorked);
 router.get('/AverageScore/:id',TaskController.getAverageTaskScore);
 module.exports = router;
