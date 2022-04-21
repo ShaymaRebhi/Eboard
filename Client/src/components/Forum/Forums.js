@@ -1,5 +1,7 @@
 import React,{useState,useEffect}  from 'react'
 import './Forum.css'
+import './Forums.css'
+
 import {affichage, selectForum,supprimer,searchForum} from "../../redux/slices/ForumSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -30,10 +32,15 @@ function Forums() {
         <div>
           
             <div className="bodyy" style={{padding: '2% 0% 2%'}}>
+              
+
                 <div className="container">
                     <div className="row">
+                    <div className='forum-img'>
+                <img src="images/fo4.png" alt="forumpicture" className='immmg'/>
+                </div>
 
-                        <div className="col-lg-12 mb-12" style={{padding: '13% 0% 0%'}}>
+                        <div className="col-lg-12 mb-12"  style={{padding: '5% 0% 0%'}}>
                             <div className="row text-left mb-5">
                                 <div className="col-lg-12 mb-3 mb-sm-0">
                                     <input type="text" placeholder="Recherche" className="form-control"

@@ -6,3 +6,5 @@ export const getComments =  () =>   axios.get(url+'/all');
 export const updateComment =  (comment) =>   axios.put(url+'/update',comment);
 export const deleteComment =  (id) =>   axios.delete(url+'/delete/'+id);
 export const likeComment =  (like) =>   axios.post(url+'/like' , like);
+export const dislikeComment =  (like) =>   axios.post(url+'/dislike' , like);
+

@@ -4,12 +4,15 @@ import { useParams } from "react-router"
 import  * as api from "../../utils/Forum";
 
 import {useDispatch, useSelector} from 'react-redux'
-import {createComment,affichageComment, selectComment,supprimer,update,like} from "../../redux/slices/CommentSlice";
+import {createComment,affichageComment, selectComment,supprimer,update,like,dislike} from "../../redux/slices/CommentSlice";
 import Navbar from "../pages/Shared/Navbar";
 import Footer from "../pages/Shared/Footer";
 import CreateForum from "./CreateForum";
 import UpdateForum from "./UpdateForum";
 import {selectForum, getForumById, selectF} from "../../redux/slices/ForumSlice";
+import {WhatsappShareButton,EmailShareButton,LinkedinShareButton} from "react-share";
+import  {EmailIcon,WhatsappIcon, LinkedinIcon}from "react-share";
+
 import FacebookShareButton from "react-share/es/FacebookShareButton";
 import FacebookIcon from "react-share/es/FacebookIcon";
 
@@ -77,6 +80,10 @@ function Forum() {
         dispatch(like(l));
     };
 
+    const Dislike = (l) => {
+        dispatch(dislike(l));
+    };
+
     return (
         <div>
           
@@ -122,17 +129,45 @@ function Forum() {
                                                 :''
                                             }
                                             {(forum!==null)?
+                                            <div>
                                                 <FacebookShareButton
-                                                    url={"http://localhost:3001/forum/"+forum._id}
+                                                    url={"https://www.youtube.com/watch?v=IYCa1F-OWmk&ab_channel=TraversyMedia"+forum._id}
                                                     quote={forum.Title}
-                                                    hashtag={forum.Tags}
+                                                    hashtag={'#EBOARD'}
                                                     description={forum.Description}
                                                     className="Demo__some-network__share-button"
                                                 >
                                                     <FacebookIcon size={32} round />
                                                 </FacebookShareButton>
+
+                                                 <WhatsappShareButton
+                                                 url={"http://localhost:3001/forum/"+forum._id}
+                                                 title={forum.Title}
+                                                 >
+                                                     <WhatsappIcon size={32} round />
+                                                 </WhatsappShareButton>
+                                                 <EmailShareButton
+                                                 url={"http://localhost:3001/forum/"+forum._id}
+                                                 subject={forum.Title}
+                                                 body={forum.Description}
+
+                                                 >
+                                                     <EmailIcon size={32} round />
+                                                 </EmailShareButton>
+                                                 <LinkedinShareButton
+                                                 url={"http://localhost:3002/forum/"+forum._id}
+                                                 title={forum.Title}
+                                                 summary={forum.Description}
+                                                 
+
+                                                 >
+                                                     <LinkedinIcon size={32} round />
+                                                 </LinkedinShareButton>
+                                                 </div>
+                                             
                                                 :
                                                 ''
+                                                
                                             }
 
                                         </div>
@@ -169,15 +204,15 @@ function Forum() {
                                                         </p>
                                                     }
                                                     <div className="d-flex flex-row user-feed">
-                                                        <span className="wish">
+                                                    <span className="wish">
                                                             {(c.Likes.findIndex((item) => item.User === login.User._id) === -1) ?
                                                                 <a href="javascript:void(0)" onClick={() => Like({
-                                                                    User: '623113a28d227d001659e502',
+                                                                    User: login.User._id,
                                                                     Comment: c._id
                                                                 })}><i className="fa fa-heart text-hover-black"/></a>
                                                             :
-                                                                <a href="javascript:void(0)" onClick={() => Like({
-                                                                    User: '623113a28d227d001659e502',
+                                                                <a href="javascript:void(0)" onClick={() => Dislike({
+                                                                    User: login.User._id,
                                                                     Comment: c._id
                                                                 })}><i className="fa fa-heart text-danger"/></a>
                                                             }
