@@ -166,6 +166,17 @@ exports.DisplayQuizByStudent = async (req, res, next) => {
     }
 }
 
+exports.getNumberQuizAssigned = async (req, res, next) => {
+    const idUser = req.params.idUserr;
+    try {
+        Evaluation.find({
+            Student: idUser,
+            TaskStatus : 'Assigned',
+            Type : "Quiz"
+        }).count().then((number) => res.json(number))
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
 }
 exports.getAverageQuizScore = async (req, res, next) => {
     let id = mongoose.Types.ObjectId(req.params.id);
