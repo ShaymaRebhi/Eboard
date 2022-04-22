@@ -10,7 +10,8 @@ import AddUserToClassComponent from './AddUserToClassComponent';
 
 export default function Members() {
   const history = useHistory();
-  const [currentUser,setCurrentUser]=useState(undefined);
+  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
+
   const classinvit = JSON.parse(localStorage.getItem("idClass"));
   console.log(classinvit);
   const [members] = useSelector(selectmembers);
@@ -25,7 +26,7 @@ export default function Members() {
       const res2 = await getclassApi.getclassById(classinvit._id);
 
       localStorage.setItem("idClass", JSON.stringify(res2));
-      dispatch(fetchclass(currentUser,"Active"));
+      dispatch(fetchclass(idUserConnect,"Active"));
       history.push("/members");
     } catch (error) {
      console.log(error);
@@ -43,17 +44,11 @@ export default function Members() {
   useEffect(() => {
     dispatch(fetchInvitationclassId(classinvit._id));
     dispatch(fetchUsers());
-    axios.get(getUserConnect,{
-      headers: {
-          'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
-      }
-  }).then(rslt=>{
-      setCurrentUser(rslt.data[0]._id);
-  })
-  }, [currentUser]);
+    
+  }, [dispatch]);
     return (
       <div>
-      {classinvit.classOwner._id === currentUser && (
+      {classinvit.classOwner._id === idUserConnect && (
         <AddUserToClassComponent floated="right" users={usersList} members={members} />
       )}
       <Header as="h2" icon textAlign="center">
@@ -76,7 +71,7 @@ export default function Members() {
                     </Grid.Column>
                     <Grid.Column width={14}>{co.FirstName+" "+co.LastName}</Grid.Column>
                     <Grid.Column width={1}>
-                      {classinvit.classOwner._id === currentUser ? (
+                      {classinvit.classOwner._id === idUserConnect ? (
                         <Icon
                           name="delete"
                           size="tiny"
@@ -114,7 +109,7 @@ export default function Members() {
                     </Grid.Column>
                     <Grid.Column width={14}>{co.userOb.FirstName+" "+co.userOb.LastName}</Grid.Column>
                     <Grid.Column width={1}>
-                    {classinvit.classOwner._id === currentUser ? (
+                    {classinvit.classOwner._id === idUserConnect ? (
                         <Icon
                           name="delete"
                           size="tiny"

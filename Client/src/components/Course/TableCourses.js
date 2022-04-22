@@ -22,7 +22,6 @@ import ReactPlayer from "react-player/lazy";
 
 import { RetrieveCoursesByIdClass } from "../../redux/slices/Courses";
 
-import ModalCourses from "./ModalCourses";
 import { Link } from "react-router-dom";
 
 //import { Image } from "semantic-ui-react";

@@ -29,7 +29,6 @@ import axios from "axios";
 
 function FormCoursesEdit(props) {
   const themes = useSelector((state) => state.theme.theme);
-  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
   const [titre, SetTitre] = useState("");
   const [description, SetDescription] = useState("");
   const [multiple_resources, SetMultiple_resources] = useState([]);

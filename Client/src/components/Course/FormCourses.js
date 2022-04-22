@@ -31,7 +31,7 @@ function FormCourses(props) {
   const socket = io(ENDPOINT);
   const themes = useSelector((state) => state.theme.theme);
   const { id } = useParams();
-  const [currentUser,setCurrentUser]=useState(undefined);
+  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
   const [titre, SetTitre] = useState("");
   const [description, SetDescription] = useState("");
   const [multiple_resources, SetMultiple_resources] = useState([]);
@@ -79,7 +79,7 @@ function FormCourses(props) {
   const AddCourse = (e) => {
     console.log(members);
     e.preventDefault();
-    const idOwner = currentUser;
+    const idOwner = idUserConnect;
     console.log(idOwner);
 
     SetLoader(true);
@@ -137,18 +137,7 @@ function FormCourses(props) {
       SetMultiple_resources(multiple_resource);
     }
   };
-  useEffect(() => {
   
-      axios.get(getUserConnect,{
-        headers: {
-            'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
-        }
-    }).then(rslt=>{
-        setCurrentUser(rslt.data[0]._id);
-    })
-   
-  
-    }, [currentUser]);
   return (
     <div>
       <Form className={formClassName} onSubmit={AddCourse} >

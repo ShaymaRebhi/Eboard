@@ -19,6 +19,7 @@ const classRoute = require('./routes/Class.js')
 const InvitationClassRouter = require("./routes/InvitationClass.js")
 const courses_route = require("./routes/Courses.route")
 const ThemeController = require("./routes/ThemeController");
+const CommentCourse = require("./routes/CommentCourse");
 const Grid = require("gridfs-stream");
 require('dotenv/config');
 let gfs;
@@ -85,6 +86,8 @@ app.use('/class',classRoute);
 app.use('/invitationclass',InvitationClassRouter);
 app.use("/courses", courses_route);
 app.use("/theme", ThemeController);
+app.use("/coursesComment", CommentCourse);
+
 
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));
@@ -107,5 +110,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 module.exports = app;

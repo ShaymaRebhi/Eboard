@@ -2,11 +2,8 @@ import React, { useEffect } from 'react';
 import { Button, Form,  TextArea, Segment , Image } from "semantic-ui-react";
 import { useState } from "react";
 import "./Feed.css";
-import Courses from './Courses';
-import { RetrieveCourses } from '../../redux/slices/Courses';
 import { useDispatch , useSelector } from 'react-redux';
 import TableCourses from './TableCourses';
-import { Route } from 'react-router-dom';
 
 function FeedClass () {
     const Date1 = new Date(Date.now())

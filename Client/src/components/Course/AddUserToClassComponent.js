@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Modal, Form, Icon } from "semantic-ui-react";
 import {MultiSelect} from "react-multi-select-component";
 import { useDispatch } from "react-redux";
 import { ClassInvitationApi } from "../../utils/Class";
 import { fetchInvitationclass , fetchInvitationclassId } from "../../redux/slices/classline";
-import { getUserConnect } from "../../utils/api";
-import axios from "axios";
 
 export default function AddUserToClassComponent(props) {
   const dispatch = useDispatch();
   const classinvit = JSON.parse(localStorage.getItem("idClass"));
   const selectedusers = [];
-  const [currentUser,setCurrentUser]=useState(undefined);
-
+  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
   const [modalOpen, SetModalOpen] = useState(false);
 
   const handleOpen = (e) => SetModalOpen(true);
@@ -61,7 +58,7 @@ export default function AddUserToClassComponent(props) {
         try {
           await ClassInvitationApi.AddClassInvitation(dataField);
           handleClose()
-          dispatch(fetchInvitationclass(currentUser));
+          dispatch(fetchInvitationclass(idUserConnect));
           dispatch(fetchInvitationclassId(classinvit._id));
         } catch (err) {
           error = {
@@ -75,18 +72,7 @@ export default function AddUserToClassComponent(props) {
     console.log("error");
     }
   };
-  useEffect(() => {
-
-      axios.get(getUserConnect,{
-        headers: {
-            'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
-        }
-    }).then(rslt=>{
-        setCurrentUser(rslt.data[0]._id);
-    })
-   
   
-    }, [currentUser]);
      
   
       

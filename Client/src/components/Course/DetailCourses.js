@@ -17,6 +17,7 @@ import {
   Label,
 } from "semantic-ui-react";
 import { GetCoursesById } from "../../redux/slices/Courses";
+import CommentComponent from "../Comment/CommentComponent";
 
 function DetailCourses() {
   const { id } = useParams();
@@ -307,6 +308,7 @@ function DetailCourses() {
             </Grid>
             <br />
             <br />
+            <CommentComponent courseID={id} />
             <br />
           </Grid.Column>
           <Grid.Column width={1}></Grid.Column>
