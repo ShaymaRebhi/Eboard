@@ -17,6 +17,7 @@ import { SignUpBtn } from './Buttons/SignUpBtn';
 import { Gmail } from './Buttons/Gmail';
 import styled from 'styled-components';
 import { Captcha } from 'primereact/captcha';
+import { getUserConnect } from '../../../utils/api';
 const Login = () => {
 const [caption,setCaption]=useState(false);
 let [loading, setLoading] = useState(false);
@@ -75,7 +76,16 @@ var getObject={
         AccessToken:Response.data.AccessToken,
         User:Response.data.User
       }))
-      
+      axios.get(getUserConnect,{
+        headers: {
+            'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+        }
+    }).then(res=>{
+        localStorage.setItem('idStudent',JSON.stringify({
+           _id: res.data[0]._id
+        }))
+
+    })
       const token =Response.data.AccessToken;
       
       setCookie("token",token);

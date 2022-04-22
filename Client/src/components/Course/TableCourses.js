@@ -1,44 +1,48 @@
-import React, { useState, useEffect } from "react";
-import ReactPlayer from "react-player";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
 import ReactTimeAgo from "react-time-ago/commonjs/ReactTimeAgo";
 import {
   Accordion,
+  Button,
+  Dimmer,
+  Dropdown,
   Feed,
   Grid,
   Header,
   Icon,
   Image,
-  Label,
   Segment,
 } from "semantic-ui-react";
-import { RetrieveCoursesByIdTheme } from "../../redux/slices/Courses";
 import ModalCoursesEdit from "./ModalCoursesEdit";
-import QierPlayer from "qier-player";
 import ModalConfirmDeleteCourses from "./ModalConfirmDeleteCour";
 
+//import { Player, ControlBar } from "video-react";
+import QierPlayer from "qier-player";
+import ReactPlayer from "react-player/lazy";
+
+import { RetrieveCoursesByIdClass } from "../../redux/slices/Courses";
+
+import ModalCourses from "./ModalCourses";
 import { Link } from "react-router-dom";
 
-function ListCoursesBySeance() {
-  const { id, titre } = useParams();
-  const courses = useSelector((state) => state.courses.coursesByTheme);
+//import { Image } from "semantic-ui-react";
+function TableCourses(props) {
+  const courses = useSelector((state) => state.courses.courses);
+  const CurrentClass = JSON.parse(localStorage.getItem("idClass"));
   const dispatch = useDispatch();
+  
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleClick = (e, titleProps) => {
     const { index } = titleProps;
-    const shayma = activeIndex;
+    const louay = activeIndex;
 
     const newIndex = activeIndex === index ? -1 : index;
     setActiveIndex(newIndex);
   };
-
   useEffect(() => {
-    console.log(courses);
-
-    dispatch(RetrieveCoursesByIdTheme(id));
-  }, [id]);
+    dispatch(RetrieveCoursesByIdClass(CurrentClass._id));
+  }, [CurrentClass._id]);
 
   return (
     <div>
@@ -54,19 +58,7 @@ function ListCoursesBySeance() {
           </Header>
         </>
       ) : (
-        <Header as="h2" color="black" icon textAlign="center">
-          
-          <Header.Content >
-            {"Courses Available for "}{" "}
-            <Label color="black" horizontal>
-              {titre}
-            </Label>
-          </Header.Content>
-        </Header>
-      )}
-
-      <div>
-        {courses.map((c, index) => (
+        courses.map((c, index) => (
           <div>
             <Accordion>
               <Segment raised color="grey">
@@ -83,7 +75,7 @@ function ListCoursesBySeance() {
                         <Grid stackable>
                           <Grid.Column width={11}>
                             <Feed.Summary>
-                              <a>{c.idOwner.name}</a> posted a new course
+                              <a>{c.idOwner.FirstName}</a> posted a new course
                               <Feed.Date>
                                 <ReactTimeAgo
                                   date={c.dateCreation}
@@ -94,11 +86,10 @@ function ListCoursesBySeance() {
                           </Grid.Column>
                           <Grid.Column width={5}>
                             <>
-                             
                                 <>
                                   <Feed.Meta>
                                     <Feed.Like>
-                                      <ModalCoursesEdit
+                                      <ModalCoursesEdit 
                                         headerTitle="Edit Courses"
                                         buttonTriggerTitle="Edit"
                                         buttonSubmitTitle="Save"
@@ -110,7 +101,7 @@ function ListCoursesBySeance() {
                                   </Feed.Meta>
                                   <Feed.Meta>
                                     <Feed.Like>
-                                      <ModalConfirmDeleteCourses
+                                      <ModalConfirmDeleteCourses 
                                         headerTitle="Delete Courses"
                                         buttonTriggerTitle="Delete"
                                         buttonColor="red"
@@ -120,9 +111,7 @@ function ListCoursesBySeance() {
                                     </Feed.Like>
                                   </Feed.Meta>
                                 </>
-                              
                                 <></>
-                              
                             </>
                           </Grid.Column>
                         </Grid>
@@ -169,7 +158,7 @@ function ListCoursesBySeance() {
                                         <Grid.Column width={3}>
                                           <Grid.Row>
                                             <Header as="h4" color="red">
-                                              {files.originalname}
+                                              {files.originalname.slice(0, 7)}
                                             </Header>
                                           </Grid.Row>
                                           <Grid.Row>
@@ -209,7 +198,7 @@ function ListCoursesBySeance() {
                                         <Grid.Column width={3}>
                                           <Grid.Row>
                                             <Header as="h4" color="red">
-                                              {files.originalname}
+                                              {files.originalname.slice(0, 7)}
                                             </Header>
                                           </Grid.Row>
                                           <Grid.Row>
@@ -249,7 +238,7 @@ function ListCoursesBySeance() {
                                         <Grid.Column width={3}>
                                           <Grid.Row>
                                             <Header as="h4" color="red">
-                                              {files.originalname}
+                                              {files.originalname.slice(0, 7)}
                                             </Header>
                                           </Grid.Row>
                                           <Grid.Row>
@@ -336,7 +325,7 @@ function ListCoursesBySeance() {
                                     <Grid.Column width={3}>
                                       <Grid.Row>
                                         <Header as="h4" color="red">
-                                          {files.originalname}
+                                          {files.originalname.slice(0, 7)}
                                         </Header>
                                       </Grid.Row>
                                       <Grid.Row>
@@ -347,7 +336,14 @@ function ListCoursesBySeance() {
                                     </Grid.Column>
                                   </div>
                                 ) : (
-                                 
+                                  // <a href={files} target="_blank" rel="noopener noreferrer">
+                                  //   <img
+                                  //     src={files}
+                                  //     width="300px"
+                                  //     style={{ margin: "2px" }}
+                                  //     alt=""
+                                  //   />
+                                  // </a>
                                   <a
                                     href={files.url}
                                     target="_blank"
@@ -372,7 +368,7 @@ function ListCoursesBySeance() {
                                       <Grid.Column width={3}>
                                         <Grid.Row>
                                           <Header as="h4" color="red">
-                                            {files.originalname}
+                                            {files.originalname.slice(0, 7)}
                                           </Header>
                                         </Grid.Row>
                                         <Grid.Row>
@@ -396,10 +392,10 @@ function ListCoursesBySeance() {
             </Accordion>
             <br />
           </div>
-        ))}
-      </div>
+        ))
+      )}
     </div>
   );
 }
 
-export default ListCoursesBySeance;
+export default TableCourses;

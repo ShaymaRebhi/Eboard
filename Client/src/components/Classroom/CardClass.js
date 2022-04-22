@@ -19,13 +19,13 @@ import { getclassApi } from '../../utils/Class';
 
 
 export default function CardClass () {
-  const [currentUser,setCurrentUser]=useState();
   const dispatch = useDispatch();
   const [classs] = useSelector(selectclass);
   const [pageNumber, setPageNumber] = useState(0);
   const [CsPerPage] = useState(3);
   const pagesVisited = pageNumber * CsPerPage ;
   const history = useHistory();
+  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
 
 const aff = (id) => {
    return "Level " + id + "th";
@@ -43,18 +43,10 @@ const selectClass = async (classSelected) => {
 };
 useEffect(() => {
 
-  dispatch(fetchclass(currentUser,"Active"));
+  dispatch(fetchclass(idUserConnect,"Active"));
 
-    axios.get(getUserConnect,{
-      headers: {
-          'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
-      }
-  }).then(rslt=>{
-      setCurrentUser(rslt.data[0]._id);
-  })
- 
-
-  }, [currentUser]);
+  
+  }, [dispatch]);
   
   
  

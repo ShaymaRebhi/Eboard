@@ -5,8 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Dropdown, Feed, Icon, Modal } from "semantic-ui-react";
 import { fetchclass} from "../../redux/slices/classline";
 import { Form, Input, TextArea } from "semantic-ui-react";
-import axios from "axios";
-import { getUserConnect } from '../../utils/api';
 import React  from 'react';
 import { AddclassApi } from "../../utils/Class";
 import Upload from "./upload";
@@ -29,10 +27,11 @@ const options = [
 export default function ArchieveClassComponent(props) {
   const [modalOpen, SetModalOpen] = useState(false);
   const dispatch = useDispatch();
-  const [currentUser,setCurrentUser]=useState(undefined);
   const handleOpen = (e) => SetModalOpen(true);
   const handleClose = (e) => SetModalOpen(false);
   let [color, setClassColor] = useState();
+  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
+
   const selectedClass = (data) => {
     console.log(data.target.innerText);
     setClassColor(data.target.innerText);
@@ -56,13 +55,12 @@ export default function ArchieveClassComponent(props) {
         const data = {
           className: formData.className,
           classSection: formData.classSection,
-          classOwner: currentUser,
           classColor: color,
           classStatus: "Active",
         };
         const res = await AddclassApi.updateClass(props.classes._id, data);
         console.log(res);
-        dispatch(fetchclass(currentUser,"Active"));
+        dispatch(fetchclass(idUserConnect,"Active"));
         handleClose();
       } catch (err) {
         error = {
@@ -72,16 +70,7 @@ export default function ArchieveClassComponent(props) {
       }
     },
   });
-  useEffect(() => {
-    axios.get(getUserConnect,{
-      headers: {
-          'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
-      }
-  }).then(rslt=>{
-      setCurrentUser(rslt.data[0]._id)
-  })
-
-  }, [currentUser]);
+ 
  
   
   
@@ -130,6 +119,7 @@ export default function ArchieveClassComponent(props) {
               />
              
             </Form.Group>
+
             <Upload id={props.classes ? props.classes._id  :null} src={props.classes ? props.classes.file  :null} onChange={formik.handleChange} />
 
 

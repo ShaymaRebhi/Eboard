@@ -28,16 +28,15 @@ import TextareaAutosize from "react-textarea-autosize";
 import axios from "axios";
 
 function FormCoursesEdit(props) {
-  const seances = useSelector((state) => state.seance.seance);
+  const themes = useSelector((state) => state.theme.theme);
+  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
   const [titre, SetTitre] = useState("");
   const [description, SetDescription] = useState("");
-  const [idSance, SetIdSeance] = useState(2);
-  const [dateCreation, SetDateCreation] = useState(Date.now());
   const [multiple_resources, SetMultiple_resources] = useState([]);
   const [formClassName, SetFormClassName] = useState("");
   const [formSuccessMessage, SetFormSuccessMessage] = useState("");
   const [formErrorMessage, SetFormErrorMessage] = useState("");
-  const [selectedItem, SetSelectedItem] = useState(seances[0]._id);
+  const [selectedItem, SetSelectedItem] = useState(themes[0]._id);
   const [loader, SetLoader] = useState(false);
 
   const SeanceOptions = [{ key: Number, text: "", value: "" }];
@@ -46,27 +45,17 @@ function FormCoursesEdit(props) {
   const dispatch = useDispatch();
   const Resources = useSelector((state) => state.courses.Resources);
 
-  for (let i = 0; i < seances.length; i++) {
+  for (let i = 0; i < themes.length; i++) {
     const option = {
-      key: seances[i]._id,
-      text: seances[i].titre,
-      value: seances[i].titre,
+      key: themes[i]._id,
+      text: themes[i].titre,
+      value: themes[i].titre,
     };
 
     SeanceOptions.push(option);
   }
 
-  useEffect(() => {
-    const test = dispatch(GetCoursesById(coursesId)).then((response) => {
-      console.log(response);
-      SetTitre(response.payload.titre);
-      SetDescription(response.payload.description);
-      SetSelectedItem(response.payload.idSeance);
-
-      console.log(multiple_resources);
-    });
-    console.log(test);
-  }, [dispatch]);
+ 
 
   const handleTitreChanges = (e) => {
     e.preventDefault();
@@ -122,7 +111,7 @@ function FormCoursesEdit(props) {
       formData.append("multiple_resources", file);
       await axios
         .post(
-          "https://closer-server.herokuapp.com/courses/api/upload",
+          "http://localhost:3000/courses/api/upload",
           formData
         )
         .then((response) => {
@@ -152,10 +141,20 @@ function FormCoursesEdit(props) {
     const { name, percent, status } = meta;
     return <span></span>;
   };
+  useEffect(() => {
+    const test = dispatch(GetCoursesById(coursesId)).then((response) => {
+      console.log(response);
+      SetTitre(response.payload.titre);
+      SetDescription(response.payload.description);
+      SetSelectedItem(response.payload.idTheme);
 
+      console.log(multiple_resources);
+    });
+    console.log(test);
+  }, [dispatch]);
   return (
-    <div>
-      <Form className={formClassName}>
+    <div  >
+      <Form className={formClassName} >
         <Form.Input
           label="Titre"
           type="text"

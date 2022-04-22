@@ -48,7 +48,7 @@ const options = [
 
 export default function AddClassComponent() {
  
-  const [currentUser,setCurrentUser]=useState(undefined);
+  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
 
   
   let [color, setClassColor] = useState();
@@ -87,7 +87,7 @@ export default function AddClassComponent() {
         const data = {
           className: formData.className,
           classSection: formData.classSection,
-          classOwner: currentUser,
+          classOwner: idUserConnect,
           classColor: color,
           classStatus:"Active",
          
@@ -95,7 +95,7 @@ export default function AddClassComponent() {
 
         dispatch(addClass(data));
         dis({ type: "CLOSE_MODAL" });
-        dispatch(fetchclass(currentUser,"Active"));
+        dispatch(fetchclass(idUserConnect,"Active"));
         
       } catch (err) {
         error = {
@@ -113,17 +113,7 @@ export default function AddClassComponent() {
     dimmer: undefined,
   });
   const { open, dimmer } = state;
-  useEffect(() => {
-    axios.get(getUserConnect,{
-      headers: {
-          'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
-      }
-  }).then(rs=>{
-     
-      setCurrentUser(rs.data[0]._id)
-  })
-
-  }, [currentUser]);
+  
 
   return (
     <div>

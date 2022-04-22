@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Form,  TextArea, Segment , Image } from "semantic-ui-react";
 import { useState } from "react";
 import "./Feed.css";
 import Courses from './Courses';
+import { RetrieveCourses } from '../../redux/slices/Courses';
+import { useDispatch , useSelector } from 'react-redux';
+import TableCourses from './TableCourses';
+import { Route } from 'react-router-dom';
 
 function FeedClass () {
     const Date1 = new Date(Date.now())
+    const courses = useSelector((state) => state.courses.seance);
+    const [listCourses, setListCourses] = useState(courses);
+
     const [post, setPost] = useState(
          [{Title : "React Hook",
           Class:"seance 1",
@@ -17,7 +24,8 @@ function FeedClass () {
         ]
     )
       
-     
+    const dispatch = useDispatch();
+
    
     const changePostFile = (text, i) => {
         var newPost = [...post];
@@ -25,7 +33,8 @@ function FeedClass () {
         setPost(newPost);
         console.log(newPost)
     }
-    
+  
+  
    
     return (
         <div>
@@ -69,7 +78,9 @@ function FeedClass () {
       </div>
        ))}
        <br/>
-       <Courses />
+               
+       <TableCourses courses={listCourses} />
+
       </div>
     );
   

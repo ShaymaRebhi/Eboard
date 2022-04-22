@@ -19,6 +19,8 @@ import { Route, useHistory } from 'react-router-dom';
 import EditTask from "../Task/EditTask";
 import EditQuiz from "../Quiz/EditQuiz";
 import ListCoursesBySeance from '../Course/ListCoursesBySeance';
+import TableCourses from '../Course/TableCourses';
+import DetailCourses from '../Course/DetailCourses';
 
 function HomeCourse(){
 
@@ -106,6 +108,13 @@ function HomeCourse(){
                                 exact
                                render={(props) => <ListCoursesBySeance {...props} />}
                                  />
+                                
+                                  <Route
+                           path="/detailCourses/:id"
+                             exact
+                             render={(props) => <DetailCourses {...props} />}
+                              />
+                              
                             </div>
                         </Grid.Column>
 
