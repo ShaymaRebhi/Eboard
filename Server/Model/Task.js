@@ -19,8 +19,7 @@ var Task = new Schema ({
         required:true
     },
     QuestionFile:{
-        type:String,
-        //required:true
+        type:[]
     },
     status : {
         type: String,
