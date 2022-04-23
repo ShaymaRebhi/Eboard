@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import './CreateTask.css'
 import Accordion from "@material-ui/core/Accordion";
 import AsyncSelect from 'react-select/async';
@@ -6,6 +6,12 @@ import {addTask, assignTask} from "../../utils/Task";
 import {useHistory} from "react-router-dom";
 import {toast, ToastContainer } from 'react-toastify';
 import {MultiSelect} from "react-multi-select-component";
+import Dropzone from "react-dropzone-uploader";
+import {useDispatch, useSelector} from "react-redux";
+import {Dimmer, Loader, Message} from "semantic-ui-react";
+import {
+    AddTask
+} from "../../redux/slices/Task";
 function CreateTask() {
     const id=JSON.parse(localStorage.getItem("login")).User._id;
     const currentClass = JSON.parse(localStorage.getItem("idClass"));
@@ -14,11 +20,30 @@ function CreateTask() {
             Title: "",
             Theme: "",
             Description: "",
-            QuestionFile: undefined,
+            status:"",
             Creator:id,
             Class:idClass
         }
     )
+    const [selectedItem, SetSelectedItem] = useState();
+    const [questionFile, setQuestionFile] =useState([])
+    /////////////////////////////////////////
+    const [formSuccessMessage, SetFormSuccessMessage] = useState("");
+    const [formErrorMessage, SetFormErrorMessage] = useState("");
+    const [loader, SetLoader] = useState(false);
+    const themes = useSelector((state) => state.theme.theme);
+    const SeanceOptions = [{ key: Number, text: "", value: "" }];
+    const dispatch = useDispatch();
+    for (let i = 0; i < themes.length; i++) {
+        const option = {
+            key: themes[i]._id,
+            text: themes[i].titre,
+            value: themes[i].titre,
+        };
+
+        SeanceOptions.push(option);
+    }
+    //////////////////////////////////////////
     const StudentList = [];
     currentClass.classUsers.forEach((element) => {
         StudentList.push({ label: element.FirstName +" "+element.LastName, value: element._id });
@@ -33,7 +58,27 @@ function CreateTask() {
     const BackToListTask = () => {
         history.push("/TaskList")
     }
-    const saveTask = () => {
+    const handleChangeSelect = async (e) => {
+        console.log(e.target.value);
+        await SetSelectedItem(e.target.value);
+        await console.log(selectedItem);
+    };
+    const handleChangeStatus = ({ meta, file }, status) => {
+        console.log(status, meta, file);
+
+        if (status === "done") {
+            setQuestionFile(questionFile.concat(file));
+        }
+        if (status === "removed") {
+            let resources = questionFile.slice();
+            resources = questionFile.filter((u) => {
+                return u !== file;
+            });
+            setQuestionFile(resources);
+        }
+    };
+
+    /*const  saveTask = () => {
         const listStudents = []
         selected.forEach((itemselect) => {
             listStudents.push(itemselect.value);
@@ -41,22 +86,53 @@ function CreateTask() {
         })
         const newTask = {
             Title : task.Title,
-            Theme : task.Theme,
+            Theme : selectedItem,
             Description : task.Description,
-            QuestionFile : task.QuestionFile,
+            QuestionFile : questionFile,
             Creator : task.Creator,
             Class:task.Class,
             listStudents :listStudents
 
         }
         console.log(newTask);
-        addTask(newTask,() =>(
+        SetLoader(true);
+         addTask(newTask,(response) =>(
+            SetLoader(false),
             toast.success('Task added successfuly', {
                 position: "bottom-right"
             }),
-         componentDidMount(3000)
+         componentDidMount(3000),
+        SetFormSuccessMessage(response.msg)
         ))
-    }
+    };*/
+    const  saveTask = () => {
+        const listStudents = []
+        selected.forEach((itemselect) => {
+            listStudents.push(itemselect.value);
+
+        })
+        SetLoader(true);
+        const rep = dispatch(
+        AddTask(
+            task.Title,
+            task.Theme,
+            task.Description,
+            questionFile,
+            task.status,
+            listStudents,
+            task.Class,
+            task.Creator
+        )
+        ).then((response) => (
+            SetLoader(false),
+            toast.success('Task assigned ', {
+                position: "bottom-right"
+            }),
+                componentDidMount(3000)
+
+    ))
+
+    };
 
     const AssignTask = () => {
         const listStudents = []
@@ -66,22 +142,26 @@ function CreateTask() {
         })
         const newTask = {
             Title : task.Title,
-            Theme : task.Theme,
+            Theme : selectedItem,
             Description : task.Description,
-            QuestionFile : task.QuestionFile,
+            QuestionFile : questionFile,
             Creator : task.Creator,
             Class:task.Class,
             listStudents :listStudents
 
         }
+        SetLoader(true);
         assignTask(idClass,newTask,() =>(
+            SetLoader(false),
             toast.success('Task assigned ', {
                 position: "bottom-right"
             }),
                 componentDidMount(3000)
         ))
     }
-
+    useEffect(()=>{
+        console.log(themes);
+    })
 
   return (
       <div className="DisplayQuestionBox">
@@ -110,10 +190,19 @@ function CreateTask() {
                     </div>
                     <div style={{display:"flex",flexDirection:"column"}} >
                         <label className="labelHomeWork" htmlFor="questionClass">Theme : </label>
-{/*
-                        <input className="text_input_homeWork" id="questionClass" value={task.Theme} onChange={(e) =>{changeTaskTheme(e.target.value,index)}} />
-*/}
-                        <AsyncSelect/>
+                        <select value={selectedItem} onChange={handleChangeSelect}>
+
+                            {SeanceOptions.map((c, index) => (
+                                <option key={index} value={c.key}>
+                                    {c.text}
+                                </option>
+                            ))}
+
+                        </select>
+                        {/*<input className="text_input_homeWork" id="questionClass" value={task.Theme} onChange={(e) =>{changeTaskTheme(e.target.value,index)}} />
+
+                        <AsyncSelect/>*/}
+
                     </div>
                 </div>
                 <br/>
@@ -136,11 +225,18 @@ function CreateTask() {
                     </div>
                 </div>
                 <div style={{display:"flex",flexDirection:"column"}} >
-                    <label className="labelHomeWork" htmlFor="questionfile form-label">Choose a file</label>
-                    <input type="file" id="questionfile" name="fileupload" className="inputFileHomeWork form-control"  multiple
-                           HTMLInputElement={task.QuestionFile}
-                           onChange={(e)=>setTask({...task, QuestionFile: e.target.files})} />
+                    <label className="labelHomeWork" htmlFor="questionfile form-label">Choose a files</label>
+                    <Dropzone
+                        styles={{ dropzone: { minHeight: 120, maxHeight: 250 } }}
+                        onChangeStatus={handleChangeStatus}
+                    />
                 </div>
+                {loader ? (
+                    <Dimmer active inverted>
+                        <Loader inline="centered">Preparing Files ... please wait !</Loader>
+                    </Dimmer>
+                ) : ("")
+                }
             </div>
             <br/>
             <div style={{display:"flex" , justifyContent:"end"}}>

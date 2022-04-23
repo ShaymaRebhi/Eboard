@@ -74,7 +74,7 @@ function TaskList() {
                   </div>
               </div>
               <div className="buttons">
-                  <button className="btn btn--primary"  onClick={handelformadd}>Add Quiz</button>
+                  <button className="btn btn--primary"  onClick={handelformadd}>Add Task</button>
               </div>
           </div>
           <br/>
