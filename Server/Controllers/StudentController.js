@@ -11,7 +11,14 @@ exports.getAll= async (req,res) =>{
     }) 
 }
 
-
+exports.getUserById=async(req,res)=>{
+    Student.find({_id:req.params.id}).populate('User').then(student=>{
+       if(!student) return res.status(520).send("error");
+       return res.status(200).json(student);
+   }).catch(err=>{
+        return res.status(500).send("error");
+   })
+}
 
 exports.affecterToOrganization=async (req,res)=>{
     Organization.findOne({_id:req.params.idOrg},(err,organization)=>{

@@ -18,6 +18,7 @@ const ReclamationRoute = require('./routes/Reclamations')
 const classRoute = require('./routes/Class.js')
 const StudentRoute = require('./routes/Student')
 const TeacherRoute = require('./routes/Teacher')
+const OrganizationRoute = require('./routes/Organization')
 const Grid = require("gridfs-stream");
 require('dotenv/config');
 let gfs;
@@ -83,6 +84,7 @@ app.use('/comment',CommentRoute);
 app.use('/class',classRoute);
 app.use('/student',StudentRoute);
 app.use('/teacher',TeacherRoute);
+app.use('/organization',OrganizationRoute);
 
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));

@@ -12,7 +12,7 @@ function Classroom() {
 
   return (
     <>
-      <classRoomStyle className='d-flex justify-content-start'>
+      <ClassRoomStyle className='d-flex justify-content-start'>
       
       <div>
             <AddClassComponent /> 
@@ -22,7 +22,7 @@ function Classroom() {
             <InvitationClassComonent></InvitationClassComonent>
         </div>
         <RecentActivites></RecentActivites>
-      </classRoomStyle>
+      </ClassRoomStyle>
 
 
     </>
@@ -31,7 +31,7 @@ function Classroom() {
 }
 
 export default Classroom;
-const classRoomStyle=styled.div`
+const ClassRoomStyle=styled.div`
 @media screen and (min-width:720px)and (max-width:1080px){{
   width:50px;
  

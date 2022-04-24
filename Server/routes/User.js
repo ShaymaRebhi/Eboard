@@ -31,6 +31,8 @@ router.post('/forgetpassword',UserController.forgetPasswordEmailSend);
 
 router.post('/Adminforgetpassword',UserController.AdminforgetPasswordEmailSend);
 
+router.post('/linkedinAuth/:code',UserController.loginLinkedin);
+
 router.post('/Adminresetpassword',UserController.AdminresetPasswordEmailSend);
 
 router.post('/resetpassword',UserController.resetPasswordEmailSend);

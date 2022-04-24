@@ -13,8 +13,125 @@ const client=new OAuth2Client('429109744769-u70gtp3oelkd79pphuh4gblmm5ajaa2u.app
 require('dotenv').config()  
 const bcrypt = require('bcrypt');
 var async = require('async');
-
+const axios = require('axios');
+const urlToGetLinkedInAccessToken = 'https://www.linkedin.com/oauth/v2/accessToken';
+const urlToGetUserProfile ='https://api.linkedin.com/v2/me?projection=(id,localizedFirstName,localizedLastName,profilePicture(displayImage~digitalmediaAsset:playableStreams))'
+const urlToGetUserEmail = 'https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))';
+const qs = require('query-string');
 //#######################  AUthentification && signUp  ####################
+exports.loginLinkedin=async(req,res)=>{
+        const user = {};
+        const code = req.body.code;
+        
+    console.log(getAccessToken(code))
+    let accessToken = null;
+    const config = {
+      headers: { "Content-Type": 'application/x-www-form-urlencoded' }
+    };
+    
+    const parameters = {
+      "grant_type": "authorization_code",
+      "code": code,
+      "redirect_uri": "http://localhost:3001/linkedin",
+      "client_id": "78k73vnm4gj65z",
+      "client_secret": "HDxcomZwd1Lv2vDI",
+    };
+    axios.post(
+        urlToGetLinkedInAccessToken,
+        qs.stringify(parameters),
+        config)
+      .then(response => {
+         
+        accessToken = response.data.access_token;
+      
+       
+          axios.get("https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))", {
+                headers: {
+                  "Authorization": `Bearer ${accessToken}`
+                }
+              })
+            .then((responsess) => {
+              
+              console.log(responsess.elements[0]['handle~'].emailAddress)
+            })
+            .catch((error) => console.log("Error getting user email"))
+       
+        if(accessToken === null) {
+          return res.status(502).send("error");
+        }
+        // Here, you can implement your own login logic 
+        // to authenticate new user or register him
+        res.status(200).json("hhhhh");
+    }).catch((err)=>{
+        return res.status(503).send("error"+err);
+    })
+}
+function getAccessToken(code) {
+    let accessToken = null;
+    const config = {
+      headers: { "Content-Type": 'application/x-www-form-urlencoded' }
+    };
+    
+    const parameters = {
+      "grant_type": "authorization_code",
+      "code": code,
+      "redirect_uri": "http://localhost:3001/linkedin",
+      "client_id": "78k73vnm4gj65z",
+      "client_secret": "HDxcomZwd1Lv2vDI",
+    };
+    axios.post(
+        urlToGetLinkedInAccessToken,
+        qs.stringify(parameters),
+        config)
+      .then(response => {
+         
+        accessToken = response.data.access_token;
+      })
+      .catch(err => {
+        console.log("Error getting LinkedIn access token"+err);
+      })
+      return accessToken;
+  }
+function userBuilder(userProfile, userEmail) {
+    return {
+      firstName: userProfile.firstName,
+      lastName: userProfile.lastName,
+      profileImageURL: userProfile.profileImageURL,
+      email: userEmail
+    }
+  }
+function getUserProfile(accessToken) {
+    let userProfile = null;
+    const config = {
+      headers: {
+        "Authorization": `Bearer ${accessToken}`
+      }
+    }
+    axios
+      .get("https://api.linkedin.com/v2/me", config)
+      .then(response => {
+        console.log(response)
+        // I mean, couldn't they have burried it any deeper?
+      })
+      .catch(error => console.log("Error grabbing user profile"+error))
+    return userProfile;
+  }
+  function getUserEmail(accessToken) {
+    const email = null;
+    const config = {
+      headers: {
+        "Authorization": `Bearer ${accessToken}`
+      }
+    };
+    axios
+      .get(urlToGetUserEmail, config)
+      .then(response => {
+        email = response.data.elements[0]["handle~"];
+      })
+      .catch(error => console.log("Error getting user email"))
+  
+    return email;
+  }
 exports.UploadFile= async(req,res)=>{
     await User.findOne({_id:req.params.id},function(err,user){
         if(err) return res.status(503).json({error:err});
@@ -93,7 +210,7 @@ exports.gmailSignin=async(req,res)=>{
         const {email_verified,given_name,family_name,email,picture}=response.payload;
             if(email_verified){
                 User.findOne({email:email},function(err,user){
-                    if(!user.emailVerification || user.emailVerification==null) return res.status(553).json({error:"account not active"});
+                    if(!user.emailVerification) return res.status(553).json({error:"account not active"});
                     if(err)res.status(500).json({error:err});
                     if(user){
                         if(!user.Etat && user.role=="ORGANIZATION" || user.role=="TEACHER" && !user.Etat ) return res.status(408).send("User not active");
@@ -187,6 +304,8 @@ exports.facebookSignin=async(req,res)=>{
                                             }
                                         });
                                     }
+                                  }).catch(err=>{
+                                    return res.status(508).send(err);
                                   })
 
                         let StudentDataSet={
@@ -554,8 +673,12 @@ exports.forgetPasswordEmailSend = async(req,res) => {
                 }
             });
         }
-      })
+      }).catch(err=>{
+        console.log(err);
+    })
 
+    }).catch(err=>{
+        console.log(err);
     })
 }
 //#########################################################################
@@ -597,16 +720,18 @@ exports.DeleteProfile = async(req,res) => {
 exports.UpdateProfile = async(req,res) => {
     await User.findOne({_id:req.params.id}).exec( (error,Userr) => {
        
-        if(req.user.role=="STUDENT" && Userr.role!="STUDENT") return res.status(500).send("Sorry you don't have the rights to update this.");
-        if(req.user.role="ORGANIZATION" && Userr.role=="ADMIN")return res.status(500).send("Sorry you don't have the rights to update this.");
-        if(req.user.role="TEACHER" && (Userr.role=="ADMIN" || Userr.role=="ORGANIZATION"))return res.status(500).send("Sorry you don't have the rights to update this.");
+        if(req.body.role=="STUDENT" && Userr.role!="STUDENT") return res.status(500).send("Sorry you don't have the rights to update this.");
+        if(req.body.role=="ORGANIZATION" && Userr.role!="ORGANIZATION")return res.status(500).send("Sorry you don't have the rights to update this.");
+        if(req.body.role=="TEACHER" && Userr.role!="TEACHER")return res.status(500).send("Sorry you don't have the rights to update this.");
 
      User.findOneAndUpdate({_id:req.params.id},req.body).then(User=>{
     if(!User)return res.status(400).send("User not found");
     if(User.role=="STUDENT"){
         Student.findOneAndUpdate({'User':req.params.id},req.body).populate('User').then(Student=>{
             return res.status(200).json(Student);
-        })
+        }).catch(err=>{
+            return res.status(508).send(err);
+          })
     }else if(User.role=="ORGANIZATION"){
        
         

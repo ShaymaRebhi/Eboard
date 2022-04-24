@@ -8,7 +8,18 @@ exports.getAll= async (req,res) =>{
     Teacher.find({}).populate('User').populate('Organization').then(teacher=>{
         if(!teacher) return res.status(500).json({error:'error'});
         return res.status(200).json(teacher);
+    }).catch(err=>{
+        console.log(err);
     }) 
+}
+
+exports.getUserById=async(req,res)=>{
+    Teacher.find({_id:req.params.id}).populate('User').then(teacher=>{
+       if(!teacher) return res.status(520).send("error");
+       return res.status(200).json(teacher);
+   }).catch(err=>{
+        return res.status(500).send("error");
+   })
 }
 
 exports.affecterToOrganization=async (req,res)=>{
@@ -25,6 +36,8 @@ exports.affecterToOrganization=async (req,res)=>{
                 if(err) return res.status(500).json({error:err})
                 if(teach)return res.status(200).json(teach);
             })
+        }).catch(err=>{
+            console.log(err);
         })
     })
 }
@@ -40,6 +53,8 @@ exports.deleteOrganizationFromStudent=async (req,res)=>{
             if(err) return res.status(500).json({error:err})
             if(teach)return res.status(200).json(teach);
         })
+    }).catch(err=>{
+        console.log(err);
     })
 
 }

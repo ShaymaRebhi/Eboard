@@ -49,6 +49,11 @@ io.on("connection ",(socket)=>{
       
     }
   })
+  socket.on("notification-msg",(data)=>{
+      socket.emit("msg-notification",data.msg); 
+  })
+  
+ 
 })
 /**
  * Normalize a port into a number, string, or false.

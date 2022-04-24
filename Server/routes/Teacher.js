@@ -5,6 +5,8 @@ const authenticateToken =require('./VerifyToken');
 require('dotenv').config() ;
 
 router.get('/all',authenticateToken,TeacherController.getAll);
+router.get('/getStudentById/:id',authenticateToken,TeacherController.getUserById);
+
 router.put('/AffectOrganization/:idOrg/:idTeach',authenticateToken,TeacherController.affecterToOrganization);
 router.put('/DeleteOrganization/:idTeach',authenticateToken,TeacherController.deleteOrganizationFromStudent);
 

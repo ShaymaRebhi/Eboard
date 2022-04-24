@@ -6,6 +6,8 @@ require('dotenv').config() ;
 
 
 router.get('/all',authenticateToken,StudentController.getAll);
+router.get('/getStudentById/:id',authenticateToken,StudentController.getUserById);
+
 router.put('/AffectOrganization/:idOrg/:idStudent',authenticateToken,StudentController.affecterToOrganization);
 router.put('/DeleteOrganization/:idStudent',authenticateToken,StudentController.deleteOrganizationFromStudent);
 module.exports = router;

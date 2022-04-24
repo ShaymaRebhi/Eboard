@@ -43,7 +43,7 @@ exports.add=async(req,res)=>{
 
 exports.all=async(req,res)=>{
 
-await Reclamation.find({}).populate('User').exec( (error,Reclamation) => {
+await Reclamation.find({}).populate({path:'User',match:{_id:{$exists: true}}}).exec( (error,Reclamation) => {
     if(error) return res.status(504).send("Error");
     return res.status(200).json(Reclamation);
 })

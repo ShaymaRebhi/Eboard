@@ -17,6 +17,8 @@ import {  AxiosError } from 'axios'
 import { setCookie } from '../../../Helpers/Auth';
 import ClipLoader from "react-spinners/ClipLoader";
 import ReactFacebookLogin from  'react-facebook-login/dist/facebook-login-render-props';
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+
 import GoogleLogin from 'react-google-login';
 import { Facebook } from './Buttons/Facebook';
 import { SignUpBtn } from './Buttons/SignUpBtn';
@@ -68,7 +70,7 @@ const onChange=(e)=>{
 
 const { linkedInLogin } = useLinkedIn({
   
-  clientId: '86vhj2q7ukf83q',
+  clientId: '78k73vnm4gj65z',
   redirectUri: `${window.location.origin}/linkedin`, // for Next.js, you can use `${typeof window === 'object' && window.location.origin}/linkedin`
   onSuccess: (code) => {
     setLinkedInLoading(true);
@@ -157,7 +159,12 @@ var getObject={
     }
     
     const responseFacebook = (response) => {
-      
+      console.log(response)
+      if(!response.email || !response.picture.data.url){
+        setFacebookLoading(false);
+        toast.error('Facebook service temporarily unavailable ');
+        return;
+      }
       setFacebookLoading(true)
       axios.post(loginFacebool,{AccessToken:response.accessToken ,userID:response.userID ,email:response.email,picture:response.picture.data.url}
       ).then(response=>{
@@ -192,10 +199,13 @@ var getObject={
       }).catch((reason: AxiosError)=>{
         if(reason.response.status===408) {
           toast.error('Please contact the admin to activate your account');
+          setFacebookLoading(false);
         }else if(reason.response.status===553) {
           toast.error('Please check your email to activate your account');
+          setFacebookLoading(false);
         }else{
           toast.error('Email or password inccorect');
+          setFacebookLoading(false);
         }
         setFacebookLoading(false);
     
@@ -218,7 +228,9 @@ var getObject={
           Role:response.data.User.role,
           AccessToken:response.data.AccessToken,
           User:response.data.User
-        }))
+        })).finally(rs=>{
+          setGmailLoading(false);
+        })
         
         const token =response.data.AccessToken;
         
@@ -317,7 +329,7 @@ var getObject={
                 <h1 className="text-center mb-4 mt-5">LOGIN ACCOUNT</h1>
 
                 <ReactFacebookLogin
-                    appId="544343623593746"
+                    appId="338690704994852"
                     render={renderProps => (
                      // Facebookloading ? <div className='text-center'><ClipLoader  color='#FFF' loading={Facebookloading}  size={20} /></div>: <Facebook text="Signin with Facebook" type="button" onClick={renderProps.onClick}></Facebook> 
                      <Facebook active={!caption ? true:false}  icon={!Facebookloading} text={Facebookloading ? <ClipLoader  color='#FFF' loading={Facebookloading}  size={20} /> : "Signin with Facebook"} type="button" onClick={renderProps.onClick}></Facebook>
@@ -328,7 +340,8 @@ var getObject={
                     callback={responseFacebook}
                   
                      />
-                 <GoogleLogin
+                    
+                  <GoogleLogin
                     clientId="429109744769-u70gtp3oelkd79pphuh4gblmm5ajaa2u.apps.googleusercontent.com"
                     
                     render={renderProps => (

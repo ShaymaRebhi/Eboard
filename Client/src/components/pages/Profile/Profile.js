@@ -74,6 +74,7 @@ function Profile() {
                 }
             }).then(res=>{
                 setCurrentUser(res.data[0]);
+                console.log(res.data[0])
             })
         }
         
