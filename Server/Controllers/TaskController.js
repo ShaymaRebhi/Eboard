@@ -180,7 +180,7 @@ exports.DisplayTaskByStudent = async (req, res, next) => {
         Evaluation.findOne({
             Student: idUser,
             Task:idTask
-        }).populate("Task").then((evaluation) => res.json(evaluation));
+        }).populate("Task").populate("Student").then((evaluation) => res.json(evaluation));
     } catch (error) {
         res.status(404).json({ message: error.message });
     }
@@ -299,8 +299,8 @@ exports.updateTaskEvaluationStatus = async (req, res, next) => {
             res.status(404).send('data is not found');
         else
             evaluation.TaskStatus = "Worked";
-            evaluation.TaskCorrected = "Not Corrected"
-            evaluation.Score = 0;
+            evaluation.TaskCorrected = "Not Corrected";
+            evaluation.TaskResponseFile = req.body.TaskResponseFile;
 
         evaluation.save().then(evaluation=> {
             res.json('evaluation updated');
@@ -351,7 +351,7 @@ exports.getAverageScoreTaskByStudentAndClass = async (req, res, next) =>  {
                 {
                     $group:
                         {
-                            _id : "$Quiz",
+                            _id : "$Task",
                             avgScore: { $avg: "$Score" }
                         }
                 },
@@ -367,4 +367,39 @@ exports.getAverageScoreTaskByStudentAndClass = async (req, res, next) =>  {
         res.status(404).json({message: error.message});
     }
 }
+
+exports.getListTaskWorkedNotCorrected = async (req,res,next) => {
+    const idClass = req.params.idClass
+    const idTask = req.params.idTask
+    try {
+        Evaluation.find({
+            Task: idTask,
+            Class: idClass,
+            TaskStatus : "Worked",
+            Type : "Task",
+            TaskCorrected:"Not Corrected"
+
+        }).populate("Task").populate("Student").then((evaluation) => res.json(evaluation));
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
+exports.getListTaskWorkedCorrected = async (req,res,next) => {
+    const idTask = req.params.idTask
+    const idClass = req.params.idClass
+    try {
+        Evaluation.find({
+            Class: idClass,
+            Task: idTask,
+            TaskStatus : "Worked",
+            Type : "Task",
+            TaskCorrected:"Corrected"
+
+        }).populate("Task").populate("Student").then((evaluation) => res.json(evaluation));
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
 

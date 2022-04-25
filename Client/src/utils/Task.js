@@ -84,3 +84,14 @@ export const updateTaskStatus  = (id,Task, callback)=>{
 export const GetAverageTaskScore = (id,callback) =>{
     axios.get(url+`/task/AverageScore/${id}`).then((res)=> {callback(res)})
 }
+
+export const getListTaskWorkedNotCorrected  = (idClasse,idTask,callback)=>{
+    axios.get(url+`/task/getListTaskWorkedNotCorrected/${idClasse}/${idTask}`).then( (res)=>{callback(res)})
+}
+
+export const getListTaskWorkedCorrected  = (idClasse,idTask,callback)=>{
+    axios.get(url+`/task/getListTaskWorkedCorrected/${idClasse}/${idTask}`).then( (res)=>{callback(res)})
+}
+export const getAverageScoreTaskByStudentAndClass  = (idUser,id,callback)=>{
+    axios.get(url+`/task/getAverageScoreTaskByStudentAndClass/${idUser}/${id}`).then( (res)=>{callback(res)})
+}

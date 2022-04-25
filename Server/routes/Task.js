@@ -374,3 +374,9 @@ router.get('/getNumberTaskWorked/:idUserr',TaskController.getNumberTaskWorked);
 router.get('/AverageScore/:id',TaskController.getAverageTaskScore);
 router.get('/getAverageScoreTaskByStudentAndClass/:idUser/:id',TaskController.getAverageScoreTaskByStudentAndClass);
 
+router.get('/getListTaskWorkedNotCorrected/:idClass/:idTask',TaskController.getListTaskWorkedNotCorrected);
+router.get('/getListTaskWorkedCorrected/:idClass/:idTask',TaskController.getListTaskWorkedCorrected);
+
+module.exports = router;
+
+
