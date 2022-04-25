@@ -34,7 +34,7 @@
     "node-fetch": "^2.6.1",
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15",
-    "socket.io": "^4.4.1",
+    "socket.io": "^2.3.0",
     "string-capitalize-name": "^1.0.3",
     "tslib": "^2.3.1",
     "uuid": "^8.3.2"

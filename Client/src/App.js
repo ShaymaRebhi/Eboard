@@ -22,6 +22,8 @@ import Profile from './components/pages/Profile/Profile';
 import en from "javascript-time-ago/locale/en";
 import ru from "javascript-time-ago/locale/ru";
 import TimeAgo from "javascript-time-ago";
+import Main from './components/Main/Main';
+import Room from './components/Room/Room';
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
@@ -40,6 +42,8 @@ function App() {
 
           <Switch>
 
+          <Route exact path="/meet" component={Main} />
+            <Route exact path="/room/:roomId" component={Room} />
             <Route
                 path="/Eboard/home"
                 exact
@@ -215,7 +219,6 @@ function App() {
                 render={(props) => <Page_404 {...props} />}
             />
             <Redirect to="/404" />
-
 
           </Switch>
 

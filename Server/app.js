@@ -3,6 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const http = require("http");
+const socketIo = require("socket.io");
+
 var cors = require('cors');
 const userRoute = require('./routes/User')
 var forumRouter = require('./routes/Forum');
@@ -13,7 +16,6 @@ const questionRoute = require('./routes/QuestionQuiz')
 const taskRoute = require('./routes/Task')
 const ChatRoute = require('./routes/Chat')
 const bodyparser = require("body-parser")
-const socket=require('socket.io')
 const ReclamationRoute = require('./routes/Reclamations') 
 const classRoute = require('./routes/Class.js')
 const InvitationClassRouter = require("./routes/InvitationClass.js")
@@ -111,6 +113,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+//////////////////////////
 
 
-module.exports = app;
+module.exports = app ;

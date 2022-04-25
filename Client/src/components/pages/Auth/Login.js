@@ -84,7 +84,16 @@ var getObject={
         localStorage.setItem('idStudent',JSON.stringify({
            _id: res.data[0]._id
         }))
-
+        
+    })
+    axios.get(getUserConnect,{
+      headers: {
+          'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+      }
+  }).then(res=>{
+      localStorage.setItem('Student',JSON.stringify({
+         Student: res.data[0]
+      }))
     })
       const token =Response.data.AccessToken;
       
