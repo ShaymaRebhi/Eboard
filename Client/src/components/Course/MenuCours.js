@@ -34,36 +34,26 @@ export default class MenuCours extends Component {
           <Icon name='server' />Theme
         </Menu.Item>
         </Link>
-        <Link to="/TaskList">
+        <Link to ="/evaluation">
         <Menu.Item
-          name='task'
-          active={activeItem === 'task'}
-          onClick={this.handleItemClick}
-        >
-          <Label>51</Label>
-          <Icon name='file alternate' /> Task
-        </Menu.Item>
-        </Link>
-          <Link to="/assignedTaskStudentList">
-              <Menu.Item
-                  name='task Student'
-                  active={activeItem === 'task student'}
-                  onClick={this.handleItemClick}
-              >
-                  <Label>52</Label>
-                  <Icon name='compose 2' /> Task Student
-              </Menu.Item>
-          </Link>
-        <Link to ="/assignedQuizStudentList">
-        <Menu.Item
-          name='exam'
-          active={activeItem === 'exam'}
+          name='evaluation'
+          active={activeItem === 'evaluation'}
           onClick={this.handleItemClick}
         >
           <Label>1</Label>
-          <Icon name='compose' /> Exam
+          <Icon name='time' /> Evaluation
           
         </Menu.Item>
+        </Link>
+        <Link to="/TaskList">
+              <Menu.Item
+                  name='task'
+                  active={activeItem === 'task'}
+                  onClick={this.handleItemClick}
+              >
+                  <Label>51</Label>
+                  <Icon name='file alternate' /> Task
+              </Menu.Item>
         </Link>
         <Link to ="/quizlist">
         <Menu.Item
@@ -75,6 +65,16 @@ export default class MenuCours extends Component {
           <Icon name='time' /> Quiz
         </Menu.Item>
         </Link>
+          <Link to ="/RecommendedCourses">
+              <Menu.Item
+                  name='RecommendedCourses'
+                  active={activeItem === 'RecommendedCourses'}
+                  onClick={this.handleItemClick}
+              >
+                  <Label>1</Label>
+                  <Icon name='file alternate' /> Recommendation
+              </Menu.Item>
+          </Link>
         <Menu.Item
           name='disc'
           active={activeItem === 'disc'}

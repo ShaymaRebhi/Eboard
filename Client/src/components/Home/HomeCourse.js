@@ -26,6 +26,8 @@ import WorkedTaskStudentList from "../Task/WorkedTaskStudentList";
 import DetailQuiz from "../Quiz/DetailQuiz";
 import DetailTask from "../Task/DetailTask";
 import CorrectionTask from "../Task/CorrectionTask";
+import Recommendation from "../RecommendedCourses/Recommendation";
+import Evaluation from "../Evaluation/Evaluation";
 
 function HomeCourse(){
 
@@ -141,6 +143,15 @@ function HomeCourse(){
                                     path="/correctTask/:idStudent/:id"
                                     exact component ={CorrectionTask}
                                 />
+                                <PrivateRoute
+                                    path="/RecommendedCourses"
+                                    exact component ={Recommendation}
+                                />
+                                <PrivateRoute
+                                    path="/evaluation"
+                                    exact component ={Evaluation}
+                                />
+
                             </div>
                         </Grid.Column>
 

@@ -245,6 +245,16 @@ function App() {
                 render={(props) => <HomeCourse {...props} />}
             />
             <Route
+                path="/RecommendedCourses"
+                exact
+                render={(props) => <HomeCourse {...props} />}
+            />
+            <Route
+                path="/evaluation"
+                exact
+                render={(props) => <HomeCourse {...props} />}
+            />
+            <Route
                 path="/404"
                 exact
                 render={(props) => <Page_404 {...props} />}
