@@ -40,7 +40,7 @@ function EndQuiz(props) {
     let optioncorrect = "";
     console.log(props.results)
     props.data.forEach((op,i)=> {
-      score = score + op.score
+      score = score + parseInt(op.score)
 
     })
     setScoreTotal(score)

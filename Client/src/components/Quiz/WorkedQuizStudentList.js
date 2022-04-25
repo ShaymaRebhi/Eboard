@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import {getAverageScoreQuizByStudentAndClass, getQuizByStudentWorked} from "../../utils/Quiz";
+import {
+    getAverageScoreQuizByStudentAndClass,
+    getQuizByStudentWorked
+} from "../../utils/Quiz";
 import {Header, Icon, Item, Segment} from "semantic-ui-react";
 import {useHistory} from "react-router-dom";
 
@@ -9,7 +12,8 @@ function WorkedQuizStudentList() {
     const [evaluation, setEvaluation] = useState([]);
     const idUser = JSON.parse(localStorage.getItem("idStudent"))._id;
     const [searchTerm,setSearchTerm] = useState([]);
-    const [avgScore,setAvgScore] = useState([]);
+    const [avgScore,setAvgScore] = useState(0);
+
     const getQuizs=()=>{
         getQuizByStudentWorked(idClass,idUser,(res)=> {
             setEvaluation(res.data)
@@ -131,6 +135,10 @@ function WorkedQuizStudentList() {
                         )}
 
                     </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
 
         </>
     )

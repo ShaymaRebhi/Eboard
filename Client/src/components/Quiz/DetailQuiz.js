@@ -114,8 +114,8 @@ function DetailQuiz() {
                                 </Pie>
                             </PieChart>
                             <div>
-                                <p style={{color:"#04e122"}}>Assigned: {Math.floor((nbAssigned/nbStudent) * 100)}%</p>
-                                <p style={{color:"#3f12ff"}}>Worked: {Math.floor((nbWorked/nbStudent) * 100)}%</p>
+                                <p style={{color:"#3f12ff"}}>Assigned: {Math.floor((nbAssigned/nbStudent) * 100)}%</p>
+                                <p style={{color:"#04e122"}}>Worked: {Math.floor((nbWorked/nbStudent) * 100)}%</p>
                             </div>
                         </div>
 

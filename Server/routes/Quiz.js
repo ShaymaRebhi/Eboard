@@ -26,4 +26,6 @@ router.get('/AverageScore/:id',QuizController.getAverageQuizScore);
 router.get('/getStudentListByQuizWorked/:idClass/:idQuiz',QuizController.getStudentListByQuizWorked);
 router.get('/MaxScore/:id',QuizController.getMaxQuizScore);
 router.get('/getAverageScoreQuizByStudentAndClass/:idUser/:id',QuizController.getAverageScoreQuizByStudentAndClass);
+router.get('/getAverageScoreQuizAndTaskByStudentAndClass/:idUser/:id',QuizController.getAverageScoreQuizAndTaskByStudentAndClass);
+
 module.exports = router;

@@ -34,7 +34,7 @@ function QuestionQuiz(props) {
         if(props.data.required && selected === '') {
             return setError('Question required select one option!');
         }
-        props.onAnswerUpdate(prevState => [...prevState, {q: props.data.questionText,s:props.data.score, a:selected ,b:props.data.options.filter(option => option.IsValid)
+        props.onAnswerUpdate(prevState => [...prevState, {q: props.data.questionText,s:parseInt(props.data.score), a:selected ,b:props.data.options.filter(option => option.IsValid)
         }]);
         setSelected('');
         if(props.activeQuestion < props.numberOfQuestions -1){

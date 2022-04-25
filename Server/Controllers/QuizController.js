@@ -391,3 +391,40 @@ exports.getAverageScoreQuizByStudentAndClass = async (req, res, next) => {
     }
 }
 
+exports.getAverageScoreQuizAndTaskByStudentAndClass = async (req, res, next) => {
+    let id = mongoose.Types.ObjectId(req.params.id);
+    let idUser = mongoose.Types.ObjectId(req.params.idUser);
+
+    let averageTotal = 0;
+    let averageScore = 0;
+    try {
+        Evaluation.aggregate(
+            [
+                {
+                    $match : {
+                        Class:id,
+                        Student:idUser,
+                        TaskStatus : 'Worked',
+                        TaskCorrected:"Corrected"
+
+                    }
+                },
+                {
+                    $group:
+                        {
+                            _id : "$Quiz",
+                            avgScore: { $avg: "$Score" }
+                        }
+                },
+
+            ]
+        ).then((data)=>{
+            data.forEach((item,i)=>{
+                averageTotal = averageTotal + item.avgScore
+            })
+            averageScore = averageTotal / data.length
+            res.json(averageScore)})
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
