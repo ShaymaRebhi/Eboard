@@ -27,6 +27,7 @@ import {lightTheme,darkTheme,Global} from './Themes'
 import DeleteReclamation from './components/pages/AdminPages/Action/DeleteReclamation';
 import UpdateStudent from './components/pages/AdminPages/Action/UpdateStudent';
 import DeleteTeacher from './components/pages/AdminPages/Action/DeleteTeacher';
+import DeleteOrganization from './components/pages/AdminPages/Action/DeleteOrganization';
 function App() {
     
     const [theme,setTheme]=useState("light");
@@ -76,6 +77,11 @@ function App() {
                 render={(props) => <HomeAdmin {...props} />}
             />
             <Route
+                path="/Eboard/Organizations/update/:id"
+                exact
+                render={(props) => <HomeAdmin {...props} />}
+            />
+            <Route
                 path="/Eboard/Teachers/update/:id"
                 exact
                 render={(props) => <HomeAdmin {...props} />}
@@ -93,6 +99,7 @@ function App() {
             <Route exact path="/chat" component={ChatUser} />
             
             <Route exact path="/Eboard/Students/delete/:id" component={DeleteStudent} />
+            <Route exact path="/Eboard/Organizations/delete/:id" component={DeleteOrganization} />
             <Route exact path="/Eboard/Teachers/delete/:id" component={DeleteTeacher} />
             <Route exact path="/Eboard/Reclamations/delete/:id" component={DeleteReclamation} />
             <Route exact path='/Eboard/auth/admin' component={Admin} />

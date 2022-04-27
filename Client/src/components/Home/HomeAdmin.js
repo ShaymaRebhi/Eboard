@@ -10,6 +10,7 @@ import Home from '../pages/AdminPages/Home';
 import { useHistory } from 'react-router-dom';
 import UpdateStudent from '../pages/AdminPages/Action/UpdateStudent';
 import UpdateTeacher from '../pages/AdminPages/Action/UpdateTeacher';
+import UpdateOrganization from '../pages/AdminPages/Action/UpdateOrganization';
 export default function HomeAdmin() {
     const history=useHistory();
     const data=  JSON.parse(localStorage.getItem('login'));
@@ -64,6 +65,12 @@ export default function HomeAdmin() {
             exact
             component={UpdateTeacher}
             />
+            <PrivateRoute
+            path="/Eboard/Organizations/update/:id"
+            exact
+            component={UpdateOrganization} />
+
+            
         <PrivateRoute
               path="/Eboard/Teachers"
               exact

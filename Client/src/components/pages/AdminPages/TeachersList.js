@@ -90,13 +90,14 @@ export default function TeachersList() {
   }
   const columns = [
 
-    { field: 'ide', headerName: 'ID', width: 150 },
+    { field: 'ide', headerName: 'ID', width:80 },
     
     { field: 'FirstName', headerName: 'FirstName', width: 120 },
     { field: 'LastName', headerName: 'LastName', width: 120 },
     { field: 'Email', headerName: 'Email', width: 230 },
     { field: 'CIN', headerName: 'CIN', width: 120 },
     { field: 'Gender', headerName: 'Gender', width: 100 },
+   
     { field: 'STATUS', headerName: 'Status', width: 100,renderCell: (params)=>{
      
       return(
@@ -123,7 +124,17 @@ export default function TeachersList() {
     
     var array=student.map((stud,key)=>{
       return(
-        stud.User ? { id: stud.User._id , FirstName: stud.FirstName!==null ? stud.FirstName :"",LastName:stud.LastName!==null ?stud.LastName :"" ,Email:stud.User.email!==null ?stud.User.email :"",CIN:stud.Cin!==null ?stud.Cin :"",Gender:stud.Sexe!==null ?stud.Sexe :"",ide:key!==null ?key+1:0,idStudent:stud._id,status:stud.User.Etat} :{id: 0 , FirstName:"",LastName:"" ,Email:"",CIN:"",Gender:"",ide:""}
+        stud.User ? { 
+           id: stud.User._id,
+          
+           FirstName: stud.FirstName!==null ? stud.FirstName :"",
+           LastName:stud.LastName!==null ?stud.LastName :"" ,
+           Email:stud.User.email!==null ?stud.User.email :"",
+           CIN:stud.Cin!==null ?stud.Cin :"",Gender:stud.Sexe!==null ?stud.Sexe :""
+           ,ide:key!==null ?key+1:0,idStudent:stud._id,status:stud.User.Etat
+          
+          }:{ 
+            id: 0}
       )
     })
   }

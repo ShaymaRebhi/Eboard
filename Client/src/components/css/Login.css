@@ -1,14 +1,4 @@
-.modal {
-    
-    z-index:1;
-    display: flex !important;
-    justify-content: center !important;
-    background: #8EB2CD !important;
-    color: white;
-    outline: none;
-    padding: 3.2rem;
-    text-align: center;
-}
+
 .contentModel{
     z-index:99999;
     

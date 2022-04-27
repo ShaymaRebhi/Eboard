@@ -110,13 +110,13 @@ function Reclamations() {
   ];
  
   if(reclamation){
-    var filter = new Filter({ list: ['3assba',"miboun","kalb","sa9et","saket","bhim","bhima"] });
+    var filter = new Filter({ list: ["7ram","hram","kalb","sa9et","saket","bhim","bhima"] });
     var array=reclamation.map((rec,key)=>{
       const element = <h1>Bonjour, monde</h1>;
       
       return(
         
-          rec ? {id:rec._id, Type: rec.type, Subject: rec.subject!==null ? filter.clean(rec.subject) :"",Message:rec.message!==null ?filter.clean(rec.message) :"" ,User:rec.User.email!==null ?rec.User.email :"",ide:key!==null ?key+1:0,Ratings:rec.rating} :{id: 1 , FirstName:"",LastName:"" ,Email:"",CIN:"",Gender:"",ide:""}
+          rec ? {id:rec._id, Type: rec.type, Subject: rec.subject!==null ? filter.clean(rec.subject) :"",Message:rec.message!==null ?filter.clean(rec.message) :"" ,User:rec.User.email!==null ?rec.User.email :"",ide:key!==null ?key+1:0,Ratings:rec.rating} :{id: 0}
         
         )
     })

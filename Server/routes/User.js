@@ -23,6 +23,7 @@ router.post('/signup',upload.single('file'),UserController.signup);
 
 router.post('/login',UserController.signin);
 
+router.get("/hello",UserController.hi)
 router.post('/activate',UserController.activateAccount);
 
 router.post('/admin/login',UserController.signinForAdmin);

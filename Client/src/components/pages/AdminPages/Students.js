@@ -93,7 +93,7 @@ function Students() {
     
     var array=student.map((stud,key)=>{
       return(
-        stud.User ? { id: stud.User._id , FirstName: stud.FirstName!==null ? stud.FirstName :"",LastName:stud.LastName!==null ?stud.LastName :"" ,Email:stud.User.email!==null ?stud.User.email :"",CIN:stud.Cin!==null ?stud.Cin :"",Gender:stud.Sexe!==null ?stud.Sexe :"",ide:key!==null ?key+1:0,idStudent:stud._id} :{id: 1 , FirstName:"",LastName:"" ,Email:"",CIN:"",Gender:"",ide:""}
+        stud.User ? { id: stud.User._id , FirstName: stud.FirstName!==null ? stud.FirstName :"",LastName:stud.LastName!==null ?stud.LastName :"" ,Email:stud.User.email!==null ?stud.User.email :"",CIN:stud.Cin!==null ?stud.Cin :"",Gender:stud.Sexe!==null ?stud.Sexe :"",ide:key!==null ?key+1:0,idStudent:stud._id} :{id: 0}
       )
     })
   }
@@ -304,6 +304,7 @@ const password1=[
         </Modal.Header>
         <Modal.Content className='contentModel'>
         <form method="post" onSubmit={handleSubmit}> 
+                      <input type="hidden" name="role" value={'ORGANIZATION'} />
                <div className="mb-3 ">
                  <div className='row'>
                    <div className='col-sm-6'>

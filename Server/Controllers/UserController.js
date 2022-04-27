@@ -2,6 +2,8 @@ const User =require('../Model/User')
 const Student =require('../Model/Student')
 const Teacher =require('../Model/Teacher')
 const Organization =require('../Model/Organization')
+
+const Reclamation=require('../Model/Reclamation')
 const Admin =require('../Model/Admin')
 const jwt = require("jsonwebtoken")
 const {loginValidation}=require('../Validation/Validation.js')
@@ -262,7 +264,7 @@ exports.facebookSignin=async(req,res)=>{
                         email:email,
                         password:password,
                         role:"STUDENT",
-                        Adresse:location.name,
+                        Adresse:"",
                         file:picture.data.url
                     }   
                     user = new User(datas);
@@ -280,7 +282,7 @@ exports.facebookSignin=async(req,res)=>{
                             }
                           });
 
-                          const token1 =jwt.sign({email:datas.email,Password:data.password},process.env.VERIFEMAIL,{expiresIn:'7d'})
+                          const token1 =jwt.sign({email:email,Password:data.password},process.env.VERIFEMAIL,{expiresIn:'7d'})
                             var mailOptions = {
                                 to: datas.email,
                                 subject: 'Activate account !',
@@ -366,6 +368,7 @@ exports.signup = async(req,res) => {
     Teacher.findOne({Cin:req.body.Cin},function(errs,CinTeacher){
         if(CinTeacher && req.body.Cin!=null) return res.status(407).json({message : 'User already registred cin'})
     
+        
     User.findOne({
         email : req.body.email            
     }).exec( (error,user) => {
@@ -689,40 +692,57 @@ exports.DeleteProfile = async(req,res) => {
     
     await User.findOne({_id:req.params.id}).exec( (error,Userr) => {
        
-        if(req.user.role=="STUDENT" && Userr.role!="STUDENT") return res.status(500).send("Sorry you don't have the rights to delete this.");
-        if(req.user.role="ORGANIZATION" && Userr.role=="ADMIN")return res.status(500).send("Sorry you don't have the rights to delete this.");
-        if(req.user.role="TEACHER" && (Userr.role=="ADMIN" || Userr.role=="ORGANIZATION"))return res.status(500).send("Sorry you don't have the rights to delete this.");
+        if(req.user.role=="STUDENT" && (Userr.role!="STUDENT" && Userr.role!="ADMIN")) return res.status(500).send("Sorry you don't have the rights to delete this.");
+        if(req.user.role=="ORGANIZATION" && (Userr.role=="ADMIN" && Userr.role!="ORGANIZATION"))return res.status(500).send("Sorry you don't have the rights to delete this.");
+        if(req.user.role=="TEACHER" && (Userr.role!="ADMIN" && Userr.role=="ORGANIZATION"))return res.status(505).send("Sorry you don't have the rights to delete this.");
 
      User.findOneAndRemove({_id:req.params.id},req.body).then(User=>{
         if(!User)return res.status(400).send("User not found");
+        Reclamation.findOneAndRemove({'User':req.params.id}).then(rec=>{
+
+        
         if(User.role=="STUDENT"){
             Student.findOneAndRemove({'User':req.params.id},req.body).populate('User').then(Student=>{
                 return res.status(200).send("Student deleted");
+            }).catch(err=>{
+                return res.status(500).send(err);
             })
         }else if(User.role=="ORGANIZATION"){
             
             Organization.findOneAndRemove({'User':req.params.id},req.body).populate('User').then(Organization=>{
                 return res.status(200).send("Organization deleted");
+            }).catch(err=>{
+                return res.status(500).send(err);
             })
         }else if(User.role=="TEACHER"){
+
             Teacher.findOneAndRemove({'User':req.params.id},req.body).populate('User').then(Teacher=>{
-                return res.status(200).send("Teacher deleted");;
+
+                return res.status(200).send("Teacher deleted");
+
+            }).catch(err=>{
+                return res.status(500).send(err);
             })
         }else if(User.role=="ADMIN"){
             Admin.findOneAndRemove({'User':req.params.id},req.body).populate('User').then(Admin=>{  
                 return res.status(200).send("Admin deleted");
+            }).catch(err=>{
+                return res.status(500).send(err);
             })
         }
+    }).catch(err=>{
+        return res.status(500).send(err);
     })
     })
+})
     }
 
 exports.UpdateProfile = async(req,res) => {
     await User.findOne({_id:req.params.id}).exec( (error,Userr) => {
        
-        if(req.body.role=="STUDENT" && Userr.role!="STUDENT") return res.status(500).send("Sorry you don't have the rights to update this.");
-        if(req.body.role=="ORGANIZATION" && Userr.role!="ORGANIZATION")return res.status(500).send("Sorry you don't have the rights to update this.");
-        if(req.body.role=="TEACHER" && Userr.role!="TEACHER")return res.status(500).send("Sorry you don't have the rights to update this.");
+        if(req.body.role=="STUDENT" && (Userr.role!="STUDENT"&& Userr.role!="ADMIN")) return res.status(501).send("Sorry you don't have the rights to update this.");
+        if(req.body.role=="ORGANIZATION" && (Userr.role!="ORGANIZATION" && Userr.role!="ADMIN"))return res.status(502).send("Sorry you don't have the rights to update this.");
+        if(req.body.role=="TEACHER" && (Userr.role!="TEACHER" && Userr.role!="ADMIN"))return res.status(503).send("Sorry you don't have the rights to update this.");
 
      User.findOneAndUpdate({_id:req.params.id},req.body).then(User=>{
     if(!User)return res.status(400).send("User not found");
@@ -820,4 +840,9 @@ exports.AllUsersExceptMe = async(req,res,next) => {
         next(ex);
     }
 
+}
+
+
+exports.hi=async (req,res)=>{
+    return res.send("hello world");
 }

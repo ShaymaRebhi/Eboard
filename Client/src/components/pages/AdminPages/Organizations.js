@@ -88,6 +88,10 @@ function Organizations() {
       getAllUsers()
     })
     }
+
+    const DeleteOrganization=(id)=>{
+        
+    }
     const columns = [
   
       { field: 'ide', headerName: 'ID', width: 200 },
@@ -111,8 +115,8 @@ function Organizations() {
           return (
               <div>
                   <IconContext.Provider value={{color:'#FFF',size: '18px'}}>
-                      <Link to={`/Eboard/Teachers/update/${params.row.idStudent!==null?params.row.idStudent:null}`} ><FaICons.FaEdit></FaICons.FaEdit></Link>&nbsp;&nbsp;&nbsp;&nbsp;
-                      <Link to={`/Eboard/Teachers/delete/${params.id!==null?params.id:null}`}><MDICons.MdDeleteForever></MDICons.MdDeleteForever></Link>
+                      <Link to={`/Eboard/Organizations/update/${params.row.idStudent!==null?params.row.idStudent:null}`} ><FaICons.FaEdit></FaICons.FaEdit></Link>&nbsp;&nbsp;&nbsp;&nbsp;
+                      <Link to={`/Eboard/Organizations/delete/${params.row.idUser!==null?params.row.idUser:null}`}><MDICons.MdDeleteForever></MDICons.MdDeleteForever></Link>
                   </IconContext.Provider>
               </div>
           )} },
@@ -123,7 +127,13 @@ function Organizations() {
       
       var array=student.map((stud,key)=>{
         return(
-          stud.User ? { id: stud.User._id , Name: stud.Name!==null ? stud.Name :"" ,email:stud.User.email!==null ?stud.User.email :"",ide:key!==null ?key+1:0,idStudent:stud._id,status:stud.User.Etat,Adresse:stud.User.Adresse} :{id: 0 , Name:"" ,email:"",ide:""}
+          stud.User ? { id: stud.User._id ,
+             Name: stud.Name ? stud.Name :"" ,
+             email:stud.User.email ?stud.User.email :"",
+             ide:key ?key+1:0,
+             idStudent:stud._id ? stud._id :"",
+             idUser:stud.User._id ?stud.User._id:"",
+          status:stud.User.Etat,Adresse:stud.User.Adresse} :{id:0}
         )
       })
     }
@@ -197,7 +207,7 @@ function Organizations() {
       axios.post(signup,{
         "email":values.email,
         "Password":values.password,
-        "role":"TEACHER",
+        "role":"ORGANIZATION",
         "Adresse":values.Adresse,
         "Cin":Number(values.Cin),
         "Name":values.Name,
@@ -340,7 +350,7 @@ function Organizations() {
                         <Inputs name="name" type="text" className="form-control" placeholder="Name" errorMessage="Name required " disabled={values.role==="ORGANIZATION"} onChange={onChange} hide={values.role==="ORGANIZATION"} required></Inputs>
                        
                      </div>
-                   
+                     
                      
                    </div>
                    <div className="col">

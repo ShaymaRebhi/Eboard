@@ -19,7 +19,8 @@ var User= new Schema({
         required:true 
     },
     file:{
-        type:String
+        type:String,
+        default:"https://t4.ftcdn.net/jpg/00/32/90/45/360_F_32904522_rB7stqckrXluy8QKMQj4veFHNjeIJ3c1.jpg"
     },
 
     fileType:{
