@@ -4,8 +4,6 @@ import CardItemClass from './CardItemClass';
 import { Grid, Label, Segment ,  } from 'semantic-ui-react';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import axios from "axios";
-import { getUserConnect } from '../../utils/api';
 import { useHistory } from "react-router";
 import {
   selectclass,
@@ -26,10 +24,10 @@ export default function CardClass () {
   const pagesVisited = pageNumber * CsPerPage ;
   const history = useHistory();
   const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
-
+  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
 const aff = (id) => {
-   return "Level " + id + "th";
-  
+  if (role === "TEACHER") return "Level " + id + "th";
+  else if (role === "STUDENT") return "Year " + id;
 };
 const getObj = (obj) => {
   return  Math.ceil(obj.length / CsPerPage) ;
@@ -43,7 +41,7 @@ const selectClass = async (classSelected) => {
 };
 useEffect(() => {
 
-  dispatch(fetchclass(idUserConnect,"Active"));
+  dispatch(fetchclass(role,idUserConnect,"Active"));
 
   
   }, [dispatch]);
@@ -58,7 +56,7 @@ useEffect(() => {
   return (
       <div className='cards__Class__wrapper'>
     {classs?.map((cl, index) => (
-      <Grid columns={1} rows={3} key ={index}>
+      <Grid columns={1} key ={index}>
     <Grid.Column>
       <Segment raised>
         <Label as='a' color='red' ribbon>

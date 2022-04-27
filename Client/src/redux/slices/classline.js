@@ -78,26 +78,39 @@ const classlice = createSlice({
 
 
 //thunk
-export const fetchclass = ( iduser,status) => async (dispatch) => {
-  
-    const resp = getclassApi.getclassByYear(iduser,status);
+export const fetchclass = (role, iduser,status) => async (dispatch) => {
+  if (role === "TEACHER") {
+
+    const resp = getclassApi.getclassByLevel(iduser,status);
     resp.then((data) => {
       dispatch(getClasss(data));
     });
-
+  } else if (role === "STUDENT") {
+    const resp = getclassApi.getclassByYear(iduser,status);
+    resp.then((data) => {
+      dispatch(getClasss(data));
+     
+    });
+  }
 };
 export const fetchSingleClass = (data) => async (dispatch) => { 
 
   dispatch(selectClass(data));
 };
-export const fetchclassArchived = (iduser,status) => async (dispatch) => {
+export const fetchclassArchived = (role,iduser,status) => async (dispatch) => {
+  if (role === "TEACHER") {
 
+    const res = getclassApi.getclassByLevel(iduser,status);
+    res.then((data) => {
+      dispatch(getClassArchived(data));
+    });
+  } else if (role === "STUDENT") {
     const res = getclassApi.getclassByYear(iduser,status);
     res.then((data) => {
       dispatch(getClassArchived(data));
-  
-  
+     
     });
+  }
 };
 export const fetchActiveClass = (d) => async (dispatch) => { 
   const res = getclassApi.CountActiveClass(d);

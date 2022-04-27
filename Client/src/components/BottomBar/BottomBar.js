@@ -28,6 +28,7 @@ const BottomBar = ({
   );
 
   function Player({ srcBlob, audio }) {
+
     if (!srcBlob) {
       return null;
     }
@@ -65,13 +66,15 @@ const BottomBar = ({
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const CurrentClass = JSON.parse(localStorage.getItem("idClass"));
+  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
+
   useEffect(() => {
     if (!mediaBlob) {
       return;
     }
 
     console.log(mediaBlob);
-    const idTheme = "62656f1c16dde95ae866f17a";
+    const idTheme = "";
     const today = Date.now();
     const titre =
       "Recorded Session of : " +
@@ -87,7 +90,7 @@ const BottomBar = ({
       "this is a recorded session was added as a course automaticly beacause your teacher has recorded the lesson so you can access to this video .";
     const multiple_resources = [];
     multiple_resources.push(mediaBlob);
-    const idOwner = "";
+    const idOwner = idUserConnect;
     const idClass = CurrentClass._id;
     dispatch(
       AddCourses(

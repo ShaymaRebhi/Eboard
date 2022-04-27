@@ -12,7 +12,6 @@ import Reclamation from '../Reclamations/Reclamation';
 import CreateForum from '../Forum/CreateForum';
 import Forums from '../Forum/Forums';
 import Forum from '../Forum/Forum';
-import { useJwt } from "react-jwt";
 import GetAllClassArchivedComponent from '../Classroom/GetAllArchivedClassComponent';
 
 function HomeClassroom(){

@@ -9,6 +9,8 @@ export default function ArchieveClassComponent(props) {
   const [modalOpen, SetModalOpen] = useState(false);
   const dispatch = useDispatch();
   const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
+  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
+
   const handleOpen = (e) => SetModalOpen(true);
   const handleClose = (e) => SetModalOpen(false);
   
@@ -17,8 +19,8 @@ export default function ArchieveClassComponent(props) {
     let error = { visible: false, message: "" };
     try {
        await AddclassApi.updateClassActive(params);
-      dispatch(fetchclass(idUserConnect,"Active"));
-      dispatch(fetchclassArchived( idUserConnect,"Archive"));
+      dispatch(fetchclass(role,idUserConnect,"Active"));
+      dispatch(fetchclassArchived(role, idUserConnect,"Archive"));
       dispatch(fetchActiveClass(idUserConnect));
       handleClose();
     } catch (err) {

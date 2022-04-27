@@ -1,4 +1,4 @@
-const SchedulerModel = require("../models/Scheduler.js");
+const SchedulerModel = require("../Model/Scheduler.js");
 
 module.exports = {
   getScheduler: async (req, res) => {

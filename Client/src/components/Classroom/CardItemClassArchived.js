@@ -9,6 +9,8 @@ import ActivedClassComponent from './ActivedClassComponent';
 
 
 function CardItemClassArchived(props) {
+  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
+
   return (
     
     <>
@@ -17,7 +19,8 @@ function CardItemClassArchived(props) {
         <div className='cards__Class__item__link' >
           <div className='cards__Class__item__pic-wrap' >
           <div className='drpd'>
-            
+          {props.classes.classOwner._id === idUserConnect ? (
+
                                   <Dropdown
                                       fluid
                                      
@@ -33,7 +36,9 @@ function CardItemClassArchived(props) {
                                         />
                                       </Dropdown.Menu>
                                     </Dropdown>
-        
+         ) : (
+          <></>
+          )}
           </div>
             <img
               className='cards__Class__item__img'

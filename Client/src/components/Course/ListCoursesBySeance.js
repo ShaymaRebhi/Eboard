@@ -21,6 +21,7 @@ import ModalConfirmDeleteCourses from "./ModalConfirmDeleteCour";
 import { Link } from "react-router-dom";
 
 function ListCoursesBySeance() {
+  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
   const { id, titre } = useParams();
   const courses = useSelector((state) => state.courses.coursesByTheme);
   const dispatch = useDispatch();
@@ -94,7 +95,8 @@ function ListCoursesBySeance() {
                           </Grid.Column>
                           <Grid.Column width={5}>
                             <>
-                             
+                            {role === "TEACHER" ? (
+
                                 <>
                                   <Feed.Meta>
                                     <Feed.Like>
@@ -120,9 +122,10 @@ function ListCoursesBySeance() {
                                     </Feed.Like>
                                   </Feed.Meta>
                                 </>
-                              
+                                ) : (
+
                                 <></>
-                              
+                                )}
                             </>
                           </Grid.Column>
                         </Grid>

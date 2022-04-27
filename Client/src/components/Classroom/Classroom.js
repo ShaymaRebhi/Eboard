@@ -9,14 +9,20 @@ import styled from 'styled-components'
 
 
 function Classroom() {
+  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
 
   return (
     <>
       <classRoomStyle className='d-flex justify-content-start'>
       
       <div>
+      {role === "TEACHER" ? (
             <AddClassComponent /> 
-            
+            ) : (
+              <></>
+
+              )}
+
             <CardClass></CardClass> 
           
             <InvitationClassComonent></InvitationClassComonent>

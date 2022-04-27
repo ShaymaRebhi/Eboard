@@ -9,7 +9,7 @@ module.exports = {
         })
           .populate({
             path: "classOb",
-            populate: { path: "classOwner", model: "Student" },
+            populate: { path: "classOwner", model: "Teacher" },
           })
           .populate({
             path : "userOb", 
@@ -33,7 +33,7 @@ module.exports = {
           .populate({
             path: "classOb",
             populate: { 
-              path: "classOwner", model: "Student" 
+              path: "classOwner", model: "Teacher" 
 }
                     })
           .populate({

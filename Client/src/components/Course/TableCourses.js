@@ -28,6 +28,8 @@ import { Link } from "react-router-dom";
 function TableCourses(props) {
   const courses = useSelector((state) => state.courses.courses);
   const CurrentClass = JSON.parse(localStorage.getItem("idClass"));
+  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
+
   const dispatch = useDispatch();
   
   const [activeIndex, setActiveIndex] = useState(0);
@@ -85,6 +87,8 @@ function TableCourses(props) {
                           </Grid.Column>
                           <Grid.Column width={5}>
                             <>
+                            {role === "TEACHER" ? (
+
                                 <>
                                   <Feed.Meta>
                                     <Feed.Like>
@@ -110,7 +114,11 @@ function TableCourses(props) {
                                     </Feed.Like>
                                   </Feed.Meta>
                                 </>
+                                 ) : (
+
                                 <></>
+                                )}
+
                             </>
                           </Grid.Column>
                         </Grid>

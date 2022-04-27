@@ -6,7 +6,7 @@ const Pagination = ({ CsPerPage, totalClasss, paginate }) => {
   for (let i = 1; i <= Math.ceil(totalClasss / CsPerPage); i++) {
     pageNumbers.push(i);
   }
-
+  
   return (
     <nav>
       <ul className='pagination'>

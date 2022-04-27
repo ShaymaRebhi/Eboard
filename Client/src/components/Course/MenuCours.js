@@ -9,6 +9,7 @@ function MenuCours()  {
   const handleItemClick = (e, { name }) => setActiveItem(name);
 
   const [activeItem, setActiveItem] = useState("flow");
+  const ModuleName = JSON.parse(localStorage.getItem("idClass")).className;
 
 
  
@@ -16,7 +17,7 @@ function MenuCours()  {
   
     return (
       <Menu size='large' vertical>
-           <Header as='h2' image='/images/school.png' content='React Course' />
+           <Header as='h2' image='/images/school.png' content={ModuleName} />
            <Link to="/feed">
         <Menu.Item
         

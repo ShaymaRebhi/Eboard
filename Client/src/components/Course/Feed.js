@@ -9,6 +9,7 @@ function FeedClass () {
     const Date1 = new Date(Date.now())
     const courses = useSelector((state) => state.courses.seance);
     const [listCourses, setListCourses] = useState(courses);
+    const ModulePicture = JSON.parse(localStorage.getItem("idClass")).file;
 
     const [post, setPost] = useState(
          [{Title : "React Hook",
@@ -40,7 +41,7 @@ function FeedClass () {
            
         <div key={index}>
             <div className='top-image-feed'>
-            <Image className='image-feed' src="images/react.jpeg" />
+            <Image className='image-feed' src={ModulePicture} />
             </div>
             <br/>
         <Segment raised color="grey">

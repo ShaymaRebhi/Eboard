@@ -25,6 +25,7 @@ function TableTheme ()  {
  const themes = useSelector((state) => state.theme.theme);
 
  const CurrentClass = JSON.parse(localStorage.getItem("idClass"));
+ const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
 
  const dispatch = useDispatch();
  useEffect(() => {
@@ -72,7 +73,8 @@ function TableTheme ()  {
                            </Link>
                         </Grid.Column>
                         <Grid.Column >
-                          
+                        {role === "TEACHER" ? (
+
                             <Dropdown
                               fluid
                               pointing
@@ -100,9 +102,10 @@ function TableTheme ()  {
                                 />
                               </Dropdown.Menu>
                             </Dropdown>
-                       
+                            ) : (
+
                             <></>
-                            
+                            )}
                         </Grid.Column>
                       </Grid.Row>
                     </Grid>

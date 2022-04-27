@@ -3,7 +3,7 @@ import { Dropdown, Modal } from "semantic-ui-react";
 import FormTheme from "./FormTheme";
 
 function ModalTheme(props) {
- 
+
   return (
     <>
       <Modal className="theme"

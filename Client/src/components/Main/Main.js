@@ -41,6 +41,7 @@ const Main = (props) => {
       socket.emit('BE-check-user', { roomId: roomName, userName });
      
     }
+    sessionStorage.setItem('user', userName);
     history.push(`/room/${roomName}`);
 
   }

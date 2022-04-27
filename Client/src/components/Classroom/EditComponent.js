@@ -31,6 +31,7 @@ export default function ArchieveClassComponent(props) {
   const handleClose = (e) => SetModalOpen(false);
   let [color, setClassColor] = useState();
   const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
+  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
 
   const selectedClass = (data) => {
     console.log(data.target.innerText);
@@ -43,24 +44,35 @@ export default function ArchieveClassComponent(props) {
       className: props.classes.className,
       classSection: props.classes.classSection,
       classColor: props.classes.classColor,
+      classLevel: props.classes.classLevel,
       classStatus: props.classes.classStatus,
     },
-    
+    validationSchema: Yup.object({
+      className: Yup.string().required(),
+      classSection: Yup.string()
+        .required()
+        .matches(
+          /^[1-5]([A-Z])\w+$/,
+          "first letter of classSection must be in 1-5"
+        ),
+      classLevel: Yup.string(),
+    }),
     onSubmit: async (formData) => {
       console.log(formData);
       try {
-       
+        const lvl = formData.classSection.substring(0, 1);
         if (color === undefined) color = "red";
 
         const data = {
           className: formData.className,
           classSection: formData.classSection,
           classColor: color,
+          classLevel: lvl,
           classStatus: "Active",
         };
         const res = await AddclassApi.updateClass(props.classes._id, data);
         console.log(res);
-        dispatch(fetchclass(idUserConnect,"Active"));
+        dispatch(fetchclass(role,idUserConnect,"Active"));
         handleClose();
       } catch (err) {
         error = {
@@ -117,7 +129,15 @@ export default function ArchieveClassComponent(props) {
                 onChange={selectedClass}
                 value={color}
               />
-             
+             <Form.Field
+                control={Input}
+                label="Class Level"
+                placeholder="Class Level"
+                name="classLevel"
+                onChange={formik.handleChange}
+                value={formik.values.classSection.substring(0, 1)}
+                error={formik.errors.classLevel}
+              />
             </Form.Group>
 
             <Upload id={props.classes ? props.classes._id  :null} src={props.classes ? props.classes.file  :null} onChange={formik.handleChange} />

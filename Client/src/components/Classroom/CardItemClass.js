@@ -1,15 +1,15 @@
 import React  from 'react';
-import { Link } from 'react-router-dom';
 import { FaRegFolder , FaRegFile , FaRegComment ,FaRegGrinHearts,FaRegAngry,FaEllipsisV} from "react-icons/fa";
 import '../css/CardClass.css';
 import { Dropdown } from 'semantic-ui-react';
 import ArchieveClassComponent from './ArchieveClassComponent';
 import EditComponent from './EditComponent';
-import { DialogContent } from '@material-ui/core';
-import Upload from './upload';
+
 
 
 function CardItemClass(props) {
+  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
+
   return (
     
     <>
@@ -18,7 +18,8 @@ function CardItemClass(props) {
         <div className='cards__Class__item__link' >
           <div className='cards__Class__item__pic-wrap' >
           <div className='drpd'>
-            
+          {props.classes.classOwner._id === idUserConnect ? (
+
           <Dropdown
                                       fluid
                                      
@@ -39,7 +40,9 @@ function CardItemClass(props) {
                                         />
                                       </Dropdown.Menu>
                                     </Dropdown>
-        
+                                          ) : (
+                                            <></>
+                                            )}
           </div>
             <img
               className='cards__Class__item__img'

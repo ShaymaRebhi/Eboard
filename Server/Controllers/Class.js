@@ -1,5 +1,6 @@
 const Class = require("../Model/Class.js");
 const Student = require("../Model/Student.js");
+const Teacher = require("../Model/Teacher.js");
 const User = require("../Model/User.js");
 const mongoose = require("mongoose");
 const _=require("lodash")
@@ -190,7 +191,7 @@ module.exports = {
         },
         {
           $lookup: {
-            from: "students",
+            from: "teachers",
             localField: "classOwner",
             foreignField : "_id",
             as: "classOwner",
@@ -287,9 +288,54 @@ module.exports = {
           },
         },
         {
-          $unwind: "$classLevel",
+          $lookup: {
+            from: "teachers",
+            localField: "classOwner",
+            foreignField : "_id",
+            as: "classOwner",
+          },
         },
-       
+        {
+          $unwind: "$classOwner" ,
+        
+        },
+        {
+          $lookup: {
+            from: "users",
+            let: {
+              id: "$classOwner.User"
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $eq: [
+                      "$_id",
+                      "$$id"
+                    ]
+                  }
+                }
+              },
+              
+            ],
+            as: "classOwner.User"
+          }
+        },
+        {
+          $addFields: {
+            "classOwner.User": {
+              $ifNull: [
+                {
+                  $arrayElemAt: [
+                    "$classOwner.User",
+                    0
+                  ]
+                },
+                {}
+              ]
+            }
+          }
+        },
         {
           $group: {
             _id: "$classLevel",
@@ -302,6 +348,7 @@ module.exports = {
                 classUsers: "$classUsers",
                 classLevel: "$classLevel",
                 classColor: "$classColor",
+                file: "$file",
                 classStatus: "$classStatus",
                 _id: "$_id",
               },
