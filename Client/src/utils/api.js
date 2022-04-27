@@ -42,3 +42,31 @@ export const updateUser = (User,id)=>{
     }).then((message)  => {toast.success('Profile updated !!')})
     .catch((err)=> { toast.error('Error !!'+err)});
 }
+export const api = axios.create({
+    baseURL: "http://localhost:3000/",
+    responseType: "json",
+  });
+export const CommentsApi = {
+    async getCommentsCourse(id) {
+      
+      const { data } = await api.get(`coursesComment/course/${id}`);
+     
+      return data;
+    },
+    async getCommentsTask(id) {
+      const { data } = await api.get(`coursesComment/task/${id}`);
+      return data;
+    },
+    
+    async postComments(comment) {
+      const { data } = await api.post(`coursesComment/add/`, comment);
+      return data;
+    },
+    async deleteComments(id) {
+      const { data } = await api.delete(`coursesComment/delete/${id}`);
+      return data;
+    },
+    async putComments(newcomment, id) {
+      const { data } = await api.put(`coursesComment/update/${id}`, newcomment);
+      return data;
+    }};

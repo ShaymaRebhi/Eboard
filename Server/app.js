@@ -19,6 +19,11 @@ const classRoute = require('./routes/Class.js')
 const StudentRoute = require('./routes/Student')
 const TeacherRoute = require('./routes/Teacher')
 const OrganizationRoute = require('./routes/Organization')
+const courses_route = require("./routes/Courses.route")
+const ThemeController = require("./routes/ThemeController");
+const CommentCourse = require("./routes/CommentCourse");
+const SchedulerRouter = require("./routes/Scheduler.js");
+const InvitationClassRouter = require("./routes/InvitationClass.js");
 const Grid = require("gridfs-stream");
 require('dotenv/config');
 let gfs;
@@ -85,6 +90,11 @@ app.use('/class',classRoute);
 app.use('/student',StudentRoute);
 app.use('/teacher',TeacherRoute);
 app.use('/organization',OrganizationRoute);
+app.use('/invitationclass',InvitationClassRouter);
+app.use("/courses", courses_route);
+app.use("/theme", ThemeController);
+app.use("/coursesComment", CommentCourse);
+app.use("/scheduler", SchedulerRouter);
 
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));

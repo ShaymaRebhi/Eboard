@@ -10,6 +10,7 @@ import { AddclassApi, ClassInvitationApi } from "../../utils/Class";
 export default function InvitationClassComonent() {
   const [classinvit, err] = useSelector(selectinvitationclass);
   const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
+  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
 
  
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ export default function InvitationClassComonent() {
       dispatch(fetchInvitationclass(idUserConnect));
       dispatch(fetchActiveClass(idUserConnect));
       dispatch(fetchRequestClass(idUserConnect));
-      dispatch(fetchclass(idUserConnect,"Active"));
+      dispatch(fetchclass(role,idUserConnect,"Active"));
     } catch (error) {
       alert(error);
     }

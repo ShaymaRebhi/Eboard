@@ -28,6 +28,14 @@ import DeleteReclamation from './components/pages/AdminPages/Action/DeleteReclam
 import UpdateStudent from './components/pages/AdminPages/Action/UpdateStudent';
 import DeleteTeacher from './components/pages/AdminPages/Action/DeleteTeacher';
 import DeleteOrganization from './components/pages/AdminPages/Action/DeleteOrganization';
+import Main from './components/Main/Main';
+import Room from './components/Room/Room';
+import en from "javascript-time-ago/locale/en";
+import ru from "javascript-time-ago/locale/ru";
+import TimeAgo from "javascript-time-ago";
+
+TimeAgo.addDefaultLocale(en);
+TimeAgo.addLocale(ru);
 function App() {
     
     const [theme,setTheme]=useState("light");
@@ -49,6 +57,8 @@ function App() {
         <BrowserRouter>
 
           <Switch>  
+          <Route exact path="/meet" component={Main} />
+            <Route exact path="/room/:roomId" component={Room} />
             <Route exact path="/linkedin" component={LinkedInCallback} />
             <Route exact path="/verif/:id" component={ActivateAccount} />
             <Route
@@ -221,11 +231,26 @@ function App() {
                 exact
                 render={(props) => <HomeCourse {...props} />}
             />
+             <Route
+                path="/archived"
+                exact
+                render={(props) => <HomeClassroom {...props} />}
+            />
             <Route
                 path="/updateTask/:id"
                 exact
                 render={(props) => <HomeCourse {...props} />}
             />
+             <Route
+            path="/theme/:titre/:id"
+            exact
+            render={(props) => <HomeCourse {...props} />}
+          />
+          <Route
+            path="/detailCourses/:id"
+            exact
+            render={(props) => <HomeCourse {...props} />}
+          />
             <Route
                 path="/404"
                 exact

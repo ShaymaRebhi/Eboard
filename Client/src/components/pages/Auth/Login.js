@@ -27,7 +27,7 @@ import styled from 'styled-components';
 import { AiFillHome } from "react-icons/ai";
 import { Captcha } from 'primereact/captcha';
 import { LinkedIn } from './Buttons/LinkedIn';
-import { login, loginFacebool, loginGmail } from '../../../utils/api';
+import { getUserConnect, login, loginFacebool, loginGmail } from '../../../utils/api';
 const Login = () => {
   const toasts = useRef(null);
 const [caption,setCaption]=useState(false);
@@ -106,7 +106,25 @@ var getObject={
         AccessToken:Response.data.AccessToken,
         User:Response.data.User
       }))
-      
+      axios.get(getUserConnect,{
+        headers: {
+            'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+        }
+    }).then(res=>{
+        localStorage.setItem('Student',JSON.stringify({
+           Student: res.data[0]
+        }))
+      })
+      axios.get(getUserConnect,{
+        headers: {
+            'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+        }
+    }).then(res=>{
+        localStorage.setItem('idStudent',JSON.stringify({
+           _id: res.data[0]._id
+        }))
+        
+    })
       const token =Response.data.AccessToken;
       
       setCookie("token",token);

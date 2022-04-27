@@ -23,8 +23,10 @@ import { isAuth } from "../../Helpers/Auth";
 import ReactTimeAgo from "react-time-ago/commonjs/ReactTimeAgo";
 
 function CommentComponent(props) {
-  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
+  const idUserConnect = JSON.parse(localStorage.getItem("login")).User._id;
   const file = JSON.parse(localStorage.getItem("login")).User.file;
+  const Name = JSON.parse(localStorage.getItem("Student")).Student.FirstName+" "+JSON.parse(localStorage.getItem("Student")).Student.LastName;
+
 
 
   const dispatch = useDispatch();
@@ -116,9 +118,9 @@ function CommentComponent(props) {
 
         {commentss.map((commentt, index) => (
           <Comment key={index}>
-            <Comment.Avatar as="a" src={commentt.Writer.User.file} />
+            <Comment.Avatar as="a" src={commentt.Writer.file} />
             <Comment.Content>
-              <Comment.Author as="a">{commentt.Writer.FirstName+" "+commentt.Writer.LastName}</Comment.Author>
+              <Comment.Author as="a">{Name}</Comment.Author>
               <Comment.Metadata>
                 
                 <div>

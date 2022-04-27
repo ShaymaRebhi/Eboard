@@ -86,7 +86,16 @@
     "styled-components": "^5.3.3",
     "swiper": "^6.8.4",
     "uuid": "^8.3.2",
-    "yup": "^0.29.3"
+    "yup": "^0.29.3",
+    "react-player": "^2.10.0",
+    "@devexpress/dx-react-scheduler": "^3.0.2", 
+    "@wmik/use-media-recorder": "^1.5.0-beta.0", 
+    "devextreme": "^21.2.7", 
+    "devextreme-react": "^20.2.6", 
+    "qier-player": "^2.0.2",
+    "react-time-ago": "^6.2.2",
+    "simple-peer": "^9.11.1"
+   
   },
   "scripts": {
     "start": "react-scripts start",
