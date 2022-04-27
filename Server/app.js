@@ -27,6 +27,8 @@ const InvitationClassRouter = require("./routes/InvitationClass.js");
 const fetch = require("node-fetch");
 const cheerio = require("cheerio");
 const Grid = require("gridfs-stream");
+const firebaseRoute = require("./routes/Firebase");
+
 require('dotenv/config');
 let gfs;
 //------------la modéfication --------------------
@@ -97,6 +99,8 @@ app.use("/courses", courses_route);
 app.use("/theme", ThemeController);
 app.use("/coursesComment", CommentCourse);
 app.use("/scheduler", SchedulerRouter);
+app.use("/firebase", firebaseRoute);
+
 
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));

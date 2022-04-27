@@ -42,6 +42,10 @@
     "uuid": "^8.3.2",
     "cheerio": "^1.0.0-rc.10",
     "puppeteer": "^13.6.0",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "fcm-node": "^1.6.1",
+    "firebase-admin": "^10.0.2"
+    
+
   }
 }
