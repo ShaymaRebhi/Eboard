@@ -116,7 +116,7 @@ function Reclamations() {
       
       return(
         
-          rec ? {id:rec._id, Type: rec.type, Subject: rec.subject!==null ? filter.clean(rec.subject) :"",Message:rec.message!==null ?filter.clean(rec.message) :"" ,User:rec.User.email!==null ?rec.User.email :"",ide:key!==null ?key+1:0,Ratings:rec.rating} :{id: 0}
+          rec ? {id:rec._id, Type: rec.type, Subject: rec.subject!==null ? filter.clean(rec.subject) :"",Message:rec.message!==null ?filter.clean(rec.message) :"" ,User:rec.User.email!==null ?rec.User.email :"",ide:key!==null ?key+1:0,Ratings:rec.rating} :{id: "626079f28d391c0d0cac8dab"}
         
         )
     })

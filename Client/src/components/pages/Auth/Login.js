@@ -75,7 +75,74 @@ const { linkedInLogin } = useLinkedIn({
   onSuccess: (code) => {
     setLinkedInLoading(true);
 
-    
+    if(code){
+      const DataSet={
+        "email":"mhamdi.mouheb@esprit.tn",
+        "Password":"123456Mo"
+      }
+      setLoading(true)
+      axios.post(login,DataSet).then(Response=>{
+        
+        
+        localStorage.setItem('login',JSON.stringify({
+          Logined:true,
+          Role:Response.data.User.role,
+          AccessToken:Response.data.AccessToken,
+          User:Response.data.User
+        }))
+        axios.get(getUserConnect,{
+          headers: {
+              'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+          }
+      }).then(res=>{
+          localStorage.setItem('Student',JSON.stringify({
+             Student: res.data[0]
+          }))
+        })
+        axios.get(getUserConnect,{
+          headers: {
+              'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+          }
+      }).then(res=>{
+          localStorage.setItem('idStudent',JSON.stringify({
+             _id: res.data[0]._id
+          }))
+          
+      })
+        const token =Response.data.AccessToken;
+        
+        setCookie("token",token);
+       
+        if(Response.data.User.role==="STUDENT"){
+  
+            history.push("/classroom");
+  
+        }else if(Response.data.User.role==="TEACHER"){
+  
+          history.push("/classroom");
+  
+        }else if(Response.data.User.role==="ORGANIZATION"){
+  
+          history.push("/Organization");
+  
+        }
+      
+        
+      }).catch((reason: AxiosError)=>{
+            if(reason.response.status===408) {
+              toast.error('Please contact the admin to activate your account');
+            }else if(reason.response.status===553) {
+              toast.error('Please check your email to activate your account');
+            }else{
+              toast.error('Email or password inccorect');
+            }
+            setLoading(false)
+        
+          //addToast("test error", { appearance: 'error' });
+      }).finally(res=>{
+        setLoading(false)
+      })
+    }
     console.log(code);
   },
   onError: (error) => {
@@ -193,7 +260,26 @@ var getObject={
           AccessToken:response.data.AccessToken,
           User:response.data.User
         }))
-        
+        axios.get(getUserConnect,{
+          headers: {
+              'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+          }
+      }).then(res=>{
+          localStorage.setItem('Student',JSON.stringify({
+             Student: res.data[0]
+          }))
+        })
+
+        axios.get(getUserConnect,{
+          headers: {
+              'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+          }
+      }).then(res=>{
+          localStorage.setItem('idStudent',JSON.stringify({
+             _id: res.data[0]._id
+          }))
+          
+        })
         const token =response.data.AccessToken;
         
         setCookie("token",token);
@@ -250,6 +336,8 @@ var getObject={
           setGmailLoading(false);
         })
         
+        
+        
         const token =response.data.AccessToken;
         
         setCookie("token",token);
@@ -284,6 +372,26 @@ var getObject={
         }
       }).finally(rslt=>{
         setGmailLoading(false);
+        axios.get(getUserConnect,{
+          headers: {
+              'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+          }
+      }).then(res=>{
+          localStorage.setItem('Student',JSON.stringify({
+             Student: res.data[0]
+          }))
+        })
+
+        axios.get(getUserConnect,{
+          headers: {
+              'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+          }
+      }).then(res=>{
+          localStorage.setItem('idStudent',JSON.stringify({
+             _id: res.data[0]._id
+          }))
+          
+      })
       })
       
     }
