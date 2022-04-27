@@ -3,6 +3,8 @@ import './CheckQuizAnswers.css'
 import { Modal, ModalBody, ModalFooter} from 'reactstrap';
 function CheckQuizAnswers(props) {
     let optioncorrect = "";
+    let resultLength = props.results.length;
+    const QuestionQuiz = props.data;
 
     return (
         <Modal isOpen={props.modal} toggle={props.toggle}>
@@ -26,6 +28,26 @@ function CheckQuizAnswers(props) {
                                         'backgrounddanger p-2'}>Your answer: {result.a}</p>
                                     {result.a !== optioncorrect && <p className="backgroundlink p-2">Correct answer: {optioncorrect}</p> }
                                 </li>
+                        ))}
+                    </ul>
+                    <ul>
+                        {props.data.map((question,index)=>(
+                                question.options.map((op,i=resultLength)=>(
+                                    optioncorrect=op.optionText
+                                )),
+                                index <= resultLength ? ("") : (
+                                    <li key={index} className="mb-6 list-group-item">
+                                        <div className="questionScore">
+                                            <p className="question-quiz-option"><strong>{question.questionText}</strong></p>
+                                            <p className="question-quiz-option"><strong>Score: {question.score}</strong></p>
+                                        </div>
+                                        <p className={'' === optioncorrect ? 'backgroundsuccess  p-2' :
+                                            'backgrounddanger p-2'}>Your answer: {""}</p>
+                                        {"" !== optioncorrect && <p className="backgroundlink p-2">Correct answer: {optioncorrect}</p> }
+                                    </li>
+                                )
+
+
                         ))}
                     </ul>
                 </ModalBody>

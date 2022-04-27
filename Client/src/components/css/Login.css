@@ -1,4 +1,9 @@
 
+.contentModel{
+    z-index:99999;
+    
+    margin-top:50px !important ;
+}
 .loading-spinner{
   background-color: red;
   margin-left: auto;

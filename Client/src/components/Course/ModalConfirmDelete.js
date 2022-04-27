@@ -1,13 +1,28 @@
 import { useState } from "react";
 import { Button, Dropdown, Modal } from "semantic-ui-react";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { DeleteTheme } from "../../redux/slices/Theme";
 
 function ModalConfirmDelete(props) {
   const [modalOpen, SetModalOpen] = useState(false);
-
+  const dispatch = useDispatch();
   const handleOpen = (e) => SetModalOpen(true);
   const handleClose = (e) => SetModalOpen(false);
+  const handleSubmit = (e) => {
+    let params = e.target.getAttribute("themeid");
 
+  dispatch(DeleteTheme(params))
+  .then((response) => {
+    handleClose();
+    //props.onSeanceDeleted(response.data.result);
+    //this.props.socket.emit("delete", response.data.result);
+  })
+  .catch((err) => {
+    handleClose();
+    throw err;
+  });
+};
   
   return (
     <>
@@ -23,11 +38,13 @@ function ModalConfirmDelete(props) {
         <Modal.Header>{props.headerTitle}</Modal.Header>
         <Modal.Content>
           <p>
-            Are you sure you want to delete this theme ?
+            Are you sure you want to delete {" "}
+            <strong>{props.theme.titre}</strong>?
           </p>
         </Modal.Content>
         <Modal.Actions>
-          <Button
+          <Button onClick={handleSubmit}
+          themeid={props.theme._id}
             color="red"
           >
             Yes
@@ -39,6 +56,6 @@ function ModalConfirmDelete(props) {
       </Modal>
     </>
   );
-}
+      }
 
 export default ModalConfirmDelete;

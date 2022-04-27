@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-var ThemeSchema = new mongoose.Schema({
+var themeSchema = new mongoose.Schema({
   idClass: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Class",
@@ -17,4 +17,4 @@ var ThemeSchema = new mongoose.Schema({
   },
 });
 
-mongoose.model("Theme", ThemeSchema);
+module.exports = mongoose.model("Theme", themeSchema);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect}from 'react';
 import { Grid } from "semantic-ui-react";
 import PrivateRoute from "../../Routes/PrivateRoute";
 import SideBar from '../SideBar/Sidebar';
@@ -7,28 +7,52 @@ import Classroom from '../Classroom/Classroom';
 import '../SideBar/Sidebar.css'
 import NavbarInside from '../NavbarInside/NavbarInside';
 import Calendar from '../Classroom/Calendar';
+import CalendarComponent from '../Classroom/CalendarComponent';
 import { useHistory } from 'react-router-dom';
 import Reclamation from '../Reclamations/Reclamation';
 import CreateForum from '../Forum/CreateForum';
 import Forums from '../Forum/Forums';
 import Forum from '../Forum/Forum';
-
+import GetAllClassArchivedComponent from '../Classroom/GetAllArchivedClassComponent';
 
 function HomeClassroom(){
+    
+    
+      
     const history=useHistory();
-
+  
+    
+    
+    
     if(localStorage.getItem('login')===null ){
         history.push("/login");
     }
+    const data=  JSON.parse(localStorage.getItem('login'));
+    const parseJwt = (token) => {
+        try {
+          return JSON.parse(atob(token.split(".")[1]));
+        } catch (e) {
+          return null;
+        }
+      };
+    useEffect(()=>{
+        const  decodedToken = parseJwt(data.AccessToken);
+        if (decodedToken.exp * 1000 < Date.now()) {
+                localStorage.clear();
+                history.push("/login");
+          }else{
+            console.log("stay logedIn  "+decodedToken.exp);
+          }
+    },[])
     return (
         <div>
             <div className='spacing_3la_3ajlaa'>
                 <NavbarInside />
                 <Grid stackable celled="internally">
                     <Grid.Row>
-                        <Grid.Column className="sideb" >
+                       
                             <SideBar />
-                        </Grid.Column>
+                       
                         <Grid.Column width={13} >
                             <div className='mcontainer'>
                                 <PrivateRoute
@@ -39,7 +63,7 @@ function HomeClassroom(){
                                 <PrivateRoute
                                     path="/calendar"
                                     exact
-                                    component={Calendar}
+                                    component={CalendarComponent}
                                 />
                                 <PrivateRoute
                                     path="/Reclamation"
@@ -60,6 +84,11 @@ function HomeClassroom(){
                                     path="/forum/:id"
                                     exact
                                     component={Forum}
+                                />
+                                 <PrivateRoute
+                                    path="/archived"
+                                    exact
+                                    component={GetAllClassArchivedComponent}
                                 />
 
                             </div>

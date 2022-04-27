@@ -2,12 +2,17 @@ import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../../Assets/Images/logo.png'
-import * as AIICons from "react-icons/ai"
+import * as AIICons from "react-icons/io5"
 import axios from 'axios';
 import { getUserConnect } from '../../../utils/api';
+import { Avatar } from 'primereact/avatar';
+import 'primeicons/primeicons.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.css';
+import 'primeflex/primeflex.css';
 function Contact({contacts,currentUser,changeChat}) {
     const [currentUserName,setCurrentUserName]=useState(undefined);
-    
+    const [connect,SetConnect]=useState(undefined);
     const [Currentselected,setCurrentSelected]=useState(undefined);
     
     
@@ -18,7 +23,7 @@ function Contact({contacts,currentUser,changeChat}) {
                 'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
             }
         }).then(res=>{
-            console.log(res.data);
+            SetConnect(res.data[0]);
             setCurrentUserName(res.data[0].FirstName+' '+res.data[0].LastName)
         })
      
@@ -31,12 +36,11 @@ function Contact({contacts,currentUser,changeChat}) {
     
   return (
     <>
-     
              <Container>
                 <div className='brand'>
                     <img src={logo} alt="logo"></img>
                     
-                    <Link to="/login" className='icon'><AIICons.AiFillHome/></Link>
+                    <Link to="/login" className='icon'><AIICons.IoArrowBackCircleOutline/></Link>
                
                 </div>  
                 <div className='contacts'>
@@ -45,8 +49,8 @@ function Contact({contacts,currentUser,changeChat}) {
                             return(
                             <div onClick={()=>changeCurrentChat(index,contact)} className={`contact ${index === Currentselected ? "selected" :""}`} key={index} >
                                 <div className='avatar'>
-                                    
-                                        <img src={`https://ui-avatars.com/api/?name=${contact.FirstName}+${contact.LastName}`} alt='avatar'></img>
+                                        { contact.User.file!=null ?<img  src={contact.User.file} alt='avatar' onError={(e) => e.target.src=`https://ui-avatars.com/api/?name=${contact.FirstName}+${contact.LastName}`}></img>
+                                        :<img src={`https://ui-avatars.com/api/?name=${contact.FirstName}+${contact.LastName}`} onError={(e) => e.target.src='https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png'}  alt='avatar'></img>}
                                 </div>
                                 <div className='username'>
                                     <h3>{contact.FirstName+" "+contact.LastName}</h3>
@@ -60,11 +64,14 @@ function Contact({contacts,currentUser,changeChat}) {
                      
                 </div>
                 <div className='current-user'>
-                <div className='avatar'>
-                                <img src={`https://ui-avatars.com/api/?name=mouheb+mhamdi`} alt='avatar'></img>
-                                </div>
+                        
+                        
+                            
+                                {connect && connect.User.file!=null ?  <Avatar className='currentAvatar' image={connect.User.file}  shape="circle" size="large"  /> :<Avatar image={`https://ui-avatars.com/api/?name=mouheb+mhamdi`} className='currentAvatar' shape="circle" size="large"  />}
+                         
                                 <div className='username'>
                                     <h3>{currentUserName}</h3>
+                                    
                                 </div>
                 </div>
              </Container>
@@ -78,6 +85,22 @@ const Container=styled.div`
         grid-template-rows:10% 75% 15%;
         overflow:hidden;
         background-color:#4c7391;
+        @media(max-width: 615px) {
+            .currentAvatar{
+                margin-left:-40px;
+            }
+            h3{
+                display:none;
+            }
+        max-width: 34%;
+        .brand{
+           
+            img{
+                display:none;
+            }
+        }
+        
+      }
         .brand{
             display:flex;
             align-items:center;
@@ -134,14 +157,7 @@ const Container=styled.div`
                 display:flex;
                 transition:0.5s ease-in-out;
             } 
-          .avatar{  
-              img{
-                vertical-align: middle;
-                height: 3rem;
-                border-radius: 50%;
-
-             }
-          }
+          
           .username{
               h3{
                   color:white;
@@ -155,10 +171,9 @@ const Container=styled.div`
         .current-user{
             background-color:#4c7391;
             display:flex;
-            justify-content:center;
-            align-items:center;
-            gap:0.5rem;
-            
+            margin:auto 0px 0px 0px;
+            width:100%;
+            padding:50px;
             .avatar{
                 margin-bottom:20px;
                 img{
@@ -177,7 +192,7 @@ const Container=styled.div`
                     }
             }
             @media screen and (min-width:720px)and (max-width:1080px){
-                gap:0.5rem;
+                
                 .username{
                     h3{
                         font-size:1rem;
