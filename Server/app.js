@@ -24,6 +24,8 @@ const ThemeController = require("./routes/ThemeController");
 const CommentCourse = require("./routes/CommentCourse");
 const SchedulerRouter = require("./routes/Scheduler.js");
 const InvitationClassRouter = require("./routes/InvitationClass.js");
+const fetch = require("node-fetch");
+const cheerio = require("cheerio");
 const Grid = require("gridfs-stream");
 require('dotenv/config');
 let gfs;
@@ -118,4 +120,32 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+const newCourses = []
+async function fetchData(url){
+    try {
+        const response = await fetch(url)
+        const data = await response.text()
+        getCourses(data)
+    }catch (error) {
+        console.error(error)
+    }
+}
+fetchData("https://www.udemy.com/courses/development/")
+async function getCourses(html){
+    const $ = cheerio.load(html)
+    $(".popper--popper--2r2To",html).each(function () {
+        const newCourse = {
+            id: newCourses.length + 1 ,
+            title : $(this).text().trim(),
+            image: $(this).find(".course-card--course-image--3QvbQ").text(),
+            url :`https://www.udemy.com/courses${$(this).children("a").attr("href")}`
+        }
+        newCourses.push(newCourse)
+    })
+    try {
+        // fs.writeFile("Courses.json", JSON.stringify(newCourses))
+    } catch (error){
+        console.error(error)
+    }
+}
 module.exports = app;

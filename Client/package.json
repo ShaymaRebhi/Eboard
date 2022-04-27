@@ -94,7 +94,11 @@
     "devextreme-react": "^20.2.6", 
     "qier-player": "^2.0.2",
     "react-time-ago": "^6.2.2",
-    "simple-peer": "^9.11.1"
+    "simple-peer": "^9.11.1",
+    "@mui/x-date-pickers": "^5.0.0-alpha.1",
+    "@syncfusion/ej2-react-calendars": "^20.1.47",
+    "react-simple-timefield": "^3.2.5",
+    "recharts": "^2.1.9"
    
   },
   "scripts": {

@@ -21,6 +21,16 @@ import EditQuiz from "../Quiz/EditQuiz";
 import ListCoursesBySeance from '../Course/ListCoursesBySeance';
 import TableCourses from '../Course/TableCourses';
 import DetailCourses from '../Course/DetailCourses';
+import AssignedQuizStudentList from "../Quiz/AssignedQuizStudentList";
+import WorkedQuizStudentList from "../Quiz/WorkedQuizStudentList";
+import AssignedTaskStudentList from "../Task/AssignedTaskStudentList";
+import WorkedTaskStudentList from "../Task/WorkedTaskStudentList";
+import DetailQuiz from "../Quiz/DetailQuiz";
+import DetailTask from "../Task/DetailTask";
+import CorrectionTask from "../Task/CorrectionTask";
+import Recommendation from "../RecommendedCourses/Recommendation";
+import Evaluation from "../Evaluation/Evaluation";
+import EvaluationTeacherPage from "../Evaluation/EvaluationTeacherPage";
 
 function HomeCourse(){
 
@@ -80,14 +90,6 @@ function HomeCourse(){
                                     exact component ={EditQuiz}
                                 />
                                 <PrivateRoute
-                                    path="/displayQuiz"
-                                    exact component ={DisplayQuiz}
-                                />
-                                <PrivateRoute
-                                    path="/displayTask"
-                                    exact component ={DisplayTask}
-                                />
-                                <PrivateRoute
                                     path="/formAddTask"
                                     exact component ={CreateTask}
                                 />
@@ -103,6 +105,7 @@ function HomeCourse(){
                                     path="/members"
                                     exact component ={Members}
                                 />
+
                                 <Route
                                 path="/theme/:titre/:id"
                                 exact
@@ -114,6 +117,54 @@ function HomeCourse(){
                              exact
                              render={(props) => <DetailCourses {...props} />}
                               />
+                                <PrivateRoute
+                                    path="/displayQuiz/:id"
+                                    exact component ={DisplayQuiz}
+                                />
+                                <PrivateRoute
+                                    path="/displayTask/:id"
+                                    exact component ={DisplayTask}
+                                />
+                                <PrivateRoute
+                                    path="/assignedQuizStudentList"
+                                    exact component={AssignedQuizStudentList}
+                                />
+                                <PrivateRoute
+                                    path="/workedQuizStudentList"
+                                    exact component={WorkedQuizStudentList}
+                                />
+                                <PrivateRoute
+                                    path="/assignedTaskStudentList"
+                                    exact component={AssignedTaskStudentList}
+                                />
+                                <PrivateRoute
+                                    path="/workedTaskStudentList"
+                                    exact component={WorkedTaskStudentList}
+                                />
+                                <PrivateRoute
+                                    path="/detailQuiz/:id"
+                                    exact component ={DetailQuiz}
+                                />
+                                <PrivateRoute
+                                    path="/detailTask/:id"
+                                    exact component ={DetailTask}
+                                />
+                                <PrivateRoute
+                                    path="/correctTask/:idStudent/:id"
+                                    exact component ={CorrectionTask}
+                                />
+                                <PrivateRoute
+                                    path="/RecommendedCourses"
+                                    exact component ={Recommendation}
+                                />
+                                <PrivateRoute
+                                    path="/evaluation"
+                                    exact component ={Evaluation}
+                                />
+                                <PrivateRoute
+                                    path="/evaluationTeacherPage"
+                                    exact component ={EvaluationTeacherPage}
+                                />
                               
                             </div>
                         </Grid.Column>

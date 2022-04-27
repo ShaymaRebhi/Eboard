@@ -46,10 +46,6 @@ function DisplayTask() {
 
     useEffect(()=>{
         getTask();
-        console.log("task")
-        console.log(task);
-        console.log("evaluation")
-        console.log(evaluation)
     })
     function componentDidMount(time) {
         setTimeout(() => {history.push("/assignedTaskStudentList")}, time)

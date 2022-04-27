@@ -11,7 +11,6 @@ import {
     GetNumberStudentWorkedTask,
     GetAverageTaskScore, getListTaskWorkedNotCorrected, getListTaskWorkedCorrected, getOneTask,
 } from "../../utils/Task";
-import {Item, Segment} from "semantic-ui-react";
 
 function DetailTask() {
     const match = useRouteMatch();
