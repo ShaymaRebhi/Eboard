@@ -9,6 +9,7 @@ import styled from 'styled-components'
 
 
 function Classroom() {
+  console.log(JSON.parse(localStorage.getItem("Student")))
   const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
 
   return (

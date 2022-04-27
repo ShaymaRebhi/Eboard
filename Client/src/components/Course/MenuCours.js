@@ -10,7 +10,7 @@ function MenuCours()  {
 
   const [activeItem, setActiveItem] = useState("flow");
   const ModuleName = JSON.parse(localStorage.getItem("idClass")).className;
-
+  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
 
  
 
@@ -40,37 +40,46 @@ function MenuCours()  {
           <Icon name='server' />Theme
         </Menu.Item>
         </Link>
-        <Link to="/TaskList">
-        <Menu.Item
-          name='task'
-          active={activeItem === 'task'}
-          onClick={handleItemClick}
-        >
-          <Label>51</Label>
-          <Icon name='file alternate' /> Task
-        </Menu.Item>
-</Link>
-<Link to ="/displayQuiz">
-        <Menu.Item
-          name='exam'
-          active={activeItem === 'exam'}
-          onClick={handleItemClick}
-        >
-          <Label>1</Label>
-          <Icon name='compose' /> Exam
-          
-        </Menu.Item>
-        </Link>
-        <Link to ="/quizlist">
-        <Menu.Item
-          name='quiz'
-          active={activeItem === 'quiz'}
-          onClick={handleItemClick}
-        >
-          <Label>1</Label>
-          <Icon name='time' /> Quiz
-        </Menu.Item>
-        </Link>
+          {role === "TEACHER" ? (
+                  <Link to ="/evaluationTeacherPage">
+                      <Menu.Item
+                          name='evaluation'
+                          active={activeItem === 'evaluation'}
+                          onClick={handleItemClick}
+                      >
+                          <Label>1</Label>
+                          <Icon name='time' /> Evaluation
+
+                      </Menu.Item>
+                  </Link>):("")
+          }
+          {role === "STUDENT" ? (
+              <Link to ="/evaluation">
+                  <Menu.Item
+                      name='evaluation'
+                      active={activeItem === 'evaluation'}
+                      onClick={handleItemClick}
+                  >
+                      <Label>1</Label>
+                      <Icon name='time' /> Evaluation
+
+                  </Menu.Item>
+              </Link>
+          ):("")
+          }
+          {role === "STUDENT" ? (
+              <Link to ="/RecommendedCourses">
+                  <Menu.Item
+                      name='RecommendedCourses'
+                      active={activeItem === 'RecommendedCourses'}
+                      onClick={handleItemClick}
+                  >
+                      <Label>1</Label>
+                      <Icon name='file alternate' /> Recommendation
+                  </Menu.Item>
+              </Link>
+          ):("")
+          }
         <Menu.Item
           name='disc'
           active={activeItem === 'disc'}

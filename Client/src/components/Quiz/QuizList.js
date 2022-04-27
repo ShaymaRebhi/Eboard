@@ -1,39 +1,42 @@
 import React, {useEffect, useState} from 'react'
 import "./QuizList.css"
-import {useHistory} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {FaTrash} from 'react-icons/fa' ;
 import {GrUpdate} from 'react-icons/gr' ;
 import {MdAssignment} from 'react-icons/md'
-import {getAllQuizs,deleteQuiz} from "../../utils/Quiz";
+import {assignQuizAfterSave, deleteQuiz, getQuizByTeacher, updateQuizStatus} from "../../utils/Quiz";
 import {toast, ToastContainer} from "react-toastify";
 import {Header, Icon, Item, Segment} from "semantic-ui-react";
-
+import ReactPaginate from "react-paginate";
 
 
 function QuizList() {
+    const idUser=JSON.parse(localStorage.getItem("login")).User._id;
+    const idClass = JSON.parse(localStorage.getItem("idClass"))._id;
     const history = useHistory();
+
+
     const [quiz, setQuizs] = useState([
         {Title : "",
             Theme:"",
             Description:"",
-            questions :[]
+            questions :[],
+            creator:idUser
         }]
     )
     const [searchTerm,setSearchTerm] = useState([]);
     const getQuizs=()=>{
-        getAllQuizs((res)=> {
+        getQuizByTeacher(idUser,idClass,(res)=> {
             setQuizs(res.data)
         })
     }
+
     const getQuizEditPage = (id) => {
         history.push(`/updateQuiz/${id}`);
     }
     useEffect(()=>{
         getQuizs();
     })
-    const assignHomeWork= () => {
-        history.push("/createquiz");
-    }
     const handelformadd = () => {
         history.push("/createquiz");
     }
@@ -41,7 +44,31 @@ function QuizList() {
         let value = e.target.value.toLowerCase();
         setSearchTerm(value);
     }
-  return (
+    const assignQuiz = (quiz,id) => {
+        assignQuizAfterSave(idClass,quiz, () => (
+            toast.success('Quiz assigned successfuly', {
+                position: "bottom-right"
+            })
+        ))
+        const newQuiz ={
+            status : "Assigned"
+        }
+        updateQuizStatus(id,newQuiz,()=>(
+            getQuizs()
+        ))
+    }
+
+    const [pageNumber, setPageNumber] = useState (0)
+    const quizsPerPage = 2;
+    const pagesVisited = pageNumber * quizsPerPage;
+    const pageCount = Math.ceil(quiz.length / quizsPerPage);
+
+    const changePage = ({ selected }) => {
+
+            setPageNumber(selected);
+        };
+
+    return (
     <>
         <ToastContainer
             position="top-right"
@@ -57,16 +84,20 @@ function QuizList() {
         <div style={{display:"flex"}}>
             <img src="images/quizlist2.jpg" alt="quizpicture" width="60%"  />
             <div className="headers text-center">
-                <h1>Quiz List</h1>
+                <h1 style={{color:"rgb(140,177,192)" ,fontSize:"50px"}}>Quiz List</h1>
+            </div>
+        </div>
+        <div style={{display:"flex" ,justifyContent:"space-between"}}>
+            <div className="wrap">
+                <div className="search">
+                    <input type="text" className="searchTerm" placeholder="Search" onChange={handelSearchTerm}/>
+                </div>
+            </div>
+            <div className="buttons">
                 <button className="btn btn--primary"  onClick={handelformadd}>Add Quiz</button>
             </div>
         </div>
-        <div className="wrap">
-            <div className="search">
-                <input type="text" className="searchTerm" placeholder="Search" onChange={handelSearchTerm}/>
-                <i className="fa fa-search"></i>
-            </div>
-        </div>
+        <br/>
         <div className="container pb-5 ">
             {quiz.length <= 0 ? (
                 <Segment placeholder>
@@ -79,13 +110,16 @@ function QuizList() {
             ):(
                 quiz.filter((q)=>{
                     return q.Title.toLowerCase().includes(searchTerm)
-                }).map((q,i)=>(
+                }).slice(pagesVisited, pagesVisited + quizsPerPage).map((q,i)=>(
+                    <>
                     <Segment color='grey' raised >
                         <Item.Group divided key={i}>
                             <Item>
                                 <Item.Image size='tiny' avatar src='images/quizz.jpg' />
                                 <Item.Content>
-                                    <Item.Header>{q.Title}</Item.Header>
+                                    <Link to={"/DetailQuiz/"+q._id}>
+                                    <Item.Header >{q.Title}</Item.Header>
+                                    </Link>
                                     <Item.Meta>
                                         <span className='cinema'>{q.Theme}</span>
                                     </Item.Meta>
@@ -94,6 +128,7 @@ function QuizList() {
                             </Item>
                             <Item className="buttons">
                                 <button className="btn btn-outline-primary"  onClick={()=>getQuizEditPage(q._id)}><GrUpdate/> </button>
+                                {q.status === "Not Assigned" ? (
                                 <button className="btn btn-outline-danger"  onClick={()=>deleteQuiz(q._id,()=>{
                                         toast.success('Task deleted successfuly', {
                                             position: "bottom-right"
@@ -101,15 +136,40 @@ function QuizList() {
                                     },
                                     getQuizs()
                                 )}> <FaTrash/> </button>
-                                <button className="btn btn-outline-success" onClick={assignHomeWork}><MdAssignment/></button>
+                                ):("")
+                                }
+                                {q.status === "Not Assigned" ? (
+                                <button className="btn btn-outline-success" onClick={()=>{assignQuiz(q,q._id)}}><MdAssignment/></button>
+                                ):("")
+                                }
                             </Item>
                         </Item.Group>
-
                     </Segment>
+                    </>
+
 
                 ))
+
             )}
+            {quiz.length <= 0 ? ("") :(
+                <ReactPaginate
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"paginationBttns"}
+                    previousLinkClassName={"previousBttn"}
+                    nextLinkClassName={"nextBttn"}
+                    disabledClassName={"paginationDisabled"}
+                    activeClassName={"paginationActive"}
+
+                />
+            )}
+
+
         </div>
+
+
         
     </>
   )

@@ -30,6 +30,7 @@ function NavbarInside() {
   }, []);
 
   window.addEventListener('resize', showButton);
+  const [selected, setSelected] = useState("home");
   
   
   return (

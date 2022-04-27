@@ -130,10 +130,10 @@ function Organizations() {
           stud.User ? { id: stud.User._id ,
              Name: stud.Name ? stud.Name :"" ,
              email:stud.User.email ?stud.User.email :"",
-             ide:key ?key+1:0,
+             ide:key ?key+1:1,
              idStudent:stud._id ? stud._id :"",
              idUser:stud.User._id ?stud.User._id:"",
-          status:stud.User.Etat,Adresse:stud.User.Adresse} :{id:0}
+          status:stud.User.Etat,Adresse:stud.User.Adresse} :{id:"626079f28d391c0d0cac8dab"}
         )
       })
     }
@@ -347,7 +347,7 @@ function Organizations() {
                  <div className="mb-3 ">
                    <div className='col'>
                      <div className='col-sm-12'>
-                        <Inputs name="name" type="text" className="form-control" placeholder="Name" errorMessage="Name required " disabled={values.role==="ORGANIZATION"} onChange={onChange} hide={values.role==="ORGANIZATION"} required></Inputs>
+                        <Inputs name="Name" type="text" className="form-control" placeholder="Name" errorMessage="Name required " disabled={values.role==="ORGANIZATION"} onChange={onChange} hide={values.role==="ORGANIZATION"} required></Inputs>
                        
                      </div>
                      

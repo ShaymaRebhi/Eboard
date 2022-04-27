@@ -7,7 +7,16 @@ function QuestionQuiz(props) {
     const [selected, setSelected]= useState('');
     const [error, setError] = useState('');
     const radioWrapper = useRef();
+    const [buttonTitle ,setButtonTitle] = useState("Next");
 
+    const formatTime = time =>{
+        if (time < 60){
+            return time < 10 ? `0${time}s` : `${time}s`;
+        }
+        else {
+            return Math.floor(time/60) + 'm' + (time % 60) + 's' ;
+        }
+    }
     useEffect(() => {
         const findCheckedInput = radioWrapper.current.querySelector('input:checked');
         if(findCheckedInput){
@@ -25,7 +34,7 @@ function QuestionQuiz(props) {
         if(props.data.required && selected === '') {
             return setError('Question required select one option!');
         }
-        props.onAnswerUpdate(prevState => [...prevState, {q: props.data.questionTitle,s:props.data.score, a:selected ,b:props.data.options.filter(option => option.IsValid)
+        props.onAnswerUpdate(prevState => [...prevState, {q: props.data.questionText,s:parseInt(props.data.score), a:selected ,b:props.data.options.filter(option => option.IsValid)
         }]);
         setSelected('');
         if(props.activeQuestion < props.numberOfQuestions -1){
@@ -33,6 +42,10 @@ function QuestionQuiz(props) {
         }
         else {
             props.onSetStep(3);
+        }
+        if(props.activeQuestion === props.numberOfQuestions -2){
+            setButtonTitle("End Quiz")
+
         }
   }
   return (
@@ -42,13 +55,19 @@ function QuestionQuiz(props) {
           <AccordionDetails>
             <div className="card-content-Quiz">
                 <div className="content-Quiz">
-                  <h2 className="mb-5 Questionquiz">{props.data.questionTitle}</h2>
-                  <div className="control-Quiz" ref={radioWrapper}>
+                    <div style={{display:"flex"}}>
+                        <h3 style={{color:"red"}}><strong>Time : </strong>{formatTime(props.quizTimeDecrement)}</h3>
+                    </div>
+                    <br/>
+                    <div>
+                        <h2 className="mb-5 Questionquiz">{props.data.questionText}</h2>
+                    </div>
+                  <div ref={radioWrapper}>
                       {props.data.options.map((option, i ) =>(
-                          <label className="radio has-background-light labeloption" key={i}>
+                          <label className="labeloption" key={i}>
                               <input className="inputoption" type="radio" name="option" value={option.optionText} onChange={changeHandler}/>
                               {option.optionText}
-
+                              <span className="checkquizmark"></span>
                           </label>
                       ))}
                   </div>
@@ -56,7 +75,7 @@ function QuestionQuiz(props) {
                         <h6 className="scorehandler2">Score: {props.data.score}</h6>
                   </div>
                     {error && <div className="has-text-danger errorquiz">{error}</div>}
-                  <button className="btn btn-primary mt-4" onClick={nextClickHandler}>Next</button>
+                  <button className="btn btn-primary mt-4" onClick={nextClickHandler}>{buttonTitle}</button>
                 </div>
             </div>
           </AccordionDetails>
