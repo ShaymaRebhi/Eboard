@@ -1,14 +1,15 @@
 import React  from 'react';
-import { Link } from 'react-router-dom';
 import { FaRegFolder , FaRegFile , FaRegComment ,FaRegGrinHearts,FaRegAngry,FaEllipsisV} from "react-icons/fa";
 import '../css/CardClass.css';
 import { Dropdown } from 'semantic-ui-react';
 import ArchieveClassComponent from './ArchieveClassComponent';
 import EditComponent from './EditComponent';
-import { DialogContent } from '@material-ui/core';
+
 
 
 function CardItemClass(props) {
+  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
+
   return (
     
     <>
@@ -17,7 +18,8 @@ function CardItemClass(props) {
         <div className='cards__Class__item__link' >
           <div className='cards__Class__item__pic-wrap' >
           <div className='drpd'>
-            
+          {props.classes.classOwner._id === idUserConnect ? (
+
           <Dropdown
                                       fluid
                                      
@@ -29,21 +31,22 @@ function CardItemClass(props) {
                                         <EditComponent
                                           headerTitle="Archive Class"
                                           buttonTriggerTitle="Archive"
-                                          
+                                          classes={props.classes}
                                         />
                                         <ArchieveClassComponent
                                           headerTitle="Archive Class"
                                           buttonTriggerTitle="Archive"
-                                          
+                                          classes={props.classes}
                                         />
                                       </Dropdown.Menu>
                                     </Dropdown>
-        
+                                          ) : (
+                                            <></>
+                                            )}
           </div>
-          
             <img
               className='cards__Class__item__img'
-              alt='Travel Image'
+              alt='backround image'
               src={props.src}
             />
             
@@ -56,9 +59,9 @@ function CardItemClass(props) {
               />
               </div>
           <div className='cards__Class__item__info'>
-            <Link to={props.path} >
+            
             <h1 className='cards__Class__item__course'>{props.course}</h1>
-            </Link>
+            
             <h5 className='cards__Class__item__teacher'>{props.teacher}</h5>
             <h6 className='cards__Class__item__class'>{props.class}</h6>
             <ul className='icons'>

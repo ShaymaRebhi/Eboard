@@ -15,6 +15,10 @@ const Reclamation=new Schema({
         type:String,
         required:true
     },
+    rating:{
+        type:Number,
+        default:1
+    },
     User:{
         type : mongoose.Schema.Types.ObjectId,
         ref:'users'

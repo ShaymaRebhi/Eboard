@@ -67,7 +67,7 @@ const Container = styled.div`
       position: relative;
       svg {
         font-size: 1.5rem;
-        color: #ffff00c8;
+        color: #9a86f3;
         cursor: pointer;
       }
       .emoji-picker-react {

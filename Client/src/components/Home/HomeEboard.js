@@ -5,6 +5,7 @@ import Home from '../pages/Home/Home';
 import SignUp from '../pages/Auth/SignUp';
 import ContactUs from '../pages/Home/ContactUs';
 import AboutUs from '../pages/Home/AboutUs';
+import Map from '../pages/GoogleMap/Map';
 import Footer from '../pages/Shared/Footer';
 import ChatUser from '../pages/Chat/ChatUser';
 import Reclamation from '../Reclamations/Reclamation';
@@ -20,7 +21,11 @@ function HomeEboard() {
               exact
               component={Home}
             />
-           
+           <PrivateRoute
+              path="/Map"
+              exact
+              component={Map}
+            />
             <PrivateRoute
                 path="Reclamation"
                 exact

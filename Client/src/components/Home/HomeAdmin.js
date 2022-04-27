@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PrivateRoute from "../../Routes/PrivateRoute";
 import NavBar from '../pages/Shared/SideBarAdmin/NavBar';
 import TeachersList from '../pages/AdminPages/TeachersList';
@@ -8,9 +8,29 @@ import Reclamations from '../pages/AdminPages/Reclamations';
 import Supports from '../pages/AdminPages/Supports';
 import Home from '../pages/AdminPages/Home';
 import { useHistory } from 'react-router-dom';
+import UpdateStudent from '../pages/AdminPages/Action/UpdateStudent';
+import UpdateTeacher from '../pages/AdminPages/Action/UpdateTeacher';
+import UpdateOrganization from '../pages/AdminPages/Action/UpdateOrganization';
 export default function HomeAdmin() {
     const history=useHistory();
     const data=  JSON.parse(localStorage.getItem('login'));
+   
+    const parseJwt = (token) => {
+        try {
+          return JSON.parse(atob(token.split(".")[1]));
+        } catch (e) {
+          return null;
+        }
+      };
+    useEffect(()=>{
+        const  decodedToken = parseJwt(data.AccessToken);
+        if (decodedToken.exp * 1000 < Date.now()) {
+                localStorage.clear();
+                history.push("/Eboard/auth/admin");
+          }else{
+            console.log("stay logedIn  "+decodedToken.exp);
+          }
+    },[])
   if(localStorage.getItem('login')===null ){
         history.push("/Eboard/auth/admin");
     }else{
@@ -36,6 +56,21 @@ export default function HomeAdmin() {
               component={Organizations}
               
             />
+            <PrivateRoute 
+            path="/Eboard/Students/update/:id"
+            exact
+            component={UpdateStudent} />
+            <PrivateRoute 
+            path="/Eboard/Teachers/update/:id"
+            exact
+            component={UpdateTeacher}
+            />
+            <PrivateRoute
+            path="/Eboard/Organizations/update/:id"
+            exact
+            component={UpdateOrganization} />
+
+            
         <PrivateRoute
               path="/Eboard/Teachers"
               exact

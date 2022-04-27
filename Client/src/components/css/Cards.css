@@ -157,9 +157,19 @@ h1 {
 
 
 @media(max-width:667px){
+  .cards__item__link {
+    width: 75%;
+  }
+  .ui[class*="one column"].grid>.column:not(.row), .ui[class*="one column"].grid>.row>.column {
+    width: 87% !important;
+  }
+  .cards ul{
+    margin-left: -150px;
+  }
   .cards__container {
+   
    width: 400px !important;
-   padding-left: -650px !important;
+    right:-650px;
    text-align: left;
    text-justify: auto;
     

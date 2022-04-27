@@ -16,22 +16,58 @@ const bodyparser = require("body-parser")
 const socket=require('socket.io')
 const ReclamationRoute = require('./routes/Reclamations') 
 const classRoute = require('./routes/Class.js')
-require('dotenv/config');
+const StudentRoute = require('./routes/Student')
+const TeacherRoute = require('./routes/Teacher')
+const OrganizationRoute = require('./routes/Organization')
+const courses_route = require("./routes/Courses.route")
+const ThemeController = require("./routes/ThemeController");
+const CommentCourse = require("./routes/CommentCourse");
+const SchedulerRouter = require("./routes/Scheduler.js");
+const InvitationClassRouter = require("./routes/InvitationClass.js");
+const fetch = require("node-fetch");
+const cheerio = require("cheerio");
+const Grid = require("gridfs-stream");
+const firebaseRoute = require("./routes/Firebase");
 
+require('dotenv/config');
+let gfs;
 //------------la modéfication --------------------
-var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' })
 
 var mongoose=require('mongoose');
+
 var config=require('./Database/db.json')
 mongoose.connect(config.mongo.uri,{useNewUrlParser: true,useUnifiedTopology: true},()=>console.log("CONNETED DB"));
 
+const conn = mongoose.connection;
+conn.once("open", function () {
+    gfs = Grid(conn.db, mongoose.mongo);
+    gfs.collection("photos");
+});
 
 
 
 //-------------------------------------------
 var app = express();
+// media routes
+app.get("/file/:filename", async (req, res) => {
+  try {
+      const file = await gfs.files.findOne({ filename: req.params.filename });
+      const readStream = gfs.createReadStream(file.filename);
+      readStream.pipe(res);
+  } catch (error) {
+      res.send("not found");
+  }
+});
 
+app.delete("/file/:filename", async (req, res) => {
+  try {
+      await gfs.files.deleteOne({ filename: req.params.filename });
+      res.send("success");
+  } catch (error) {
+      console.log(error);
+      res.send("An error occured.");
+  }
+});
 // view engine setup
 app.use(cors());
 app.use(cors({origin: '*'}));
@@ -55,6 +91,16 @@ app.use('/forum',forumRouter);
 app.use('/reclamation',ReclamationRoute);
 app.use('/comment',CommentRoute);
 app.use('/class',classRoute);
+app.use('/student',StudentRoute);
+app.use('/teacher',TeacherRoute);
+app.use('/organization',OrganizationRoute);
+app.use('/invitationclass',InvitationClassRouter);
+app.use("/courses", courses_route);
+app.use("/theme", ThemeController);
+app.use("/coursesComment", CommentCourse);
+app.use("/scheduler", SchedulerRouter);
+app.use("/firebase", firebaseRoute);
+
 
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));
@@ -78,4 +124,32 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+const newCourses = []
+async function fetchData(url){
+    try {
+        const response = await fetch(url)
+        const data = await response.text()
+        getCourses(data)
+    }catch (error) {
+        console.error(error)
+    }
+}
+fetchData("https://www.udemy.com/courses/development/")
+async function getCourses(html){
+    const $ = cheerio.load(html)
+    $(".popper--popper--2r2To",html).each(function () {
+        const newCourse = {
+            id: newCourses.length + 1 ,
+            title : $(this).text().trim(),
+            image: $(this).find(".course-card--course-image--3QvbQ").text(),
+            url :`https://www.udemy.com/courses${$(this).children("a").attr("href")}`
+        }
+        newCourses.push(newCourse)
+    })
+    try {
+        // fs.writeFile("Courses.json", JSON.stringify(newCourses))
+    } catch (error){
+        console.error(error)
+    }
+}
 module.exports = app;

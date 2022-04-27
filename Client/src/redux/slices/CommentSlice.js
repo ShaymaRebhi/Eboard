@@ -88,6 +88,15 @@ export const like = (like) => async (dispatch) => {
     }
 };
 
+export const dislike = (like) => async (dispatch) => {
+    try {
+        let comment= await api.dislikeComment(like);
+        dispatch(updateComment(comment.data));
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
 export const selectComment = (state) => state.commentSlice.values;
 
 

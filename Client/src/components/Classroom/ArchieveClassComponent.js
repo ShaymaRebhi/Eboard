@@ -1,15 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React  from 'react';
 import { Button, Dropdown, Modal } from "semantic-ui-react";
-
+import { fetchActiveClass, fetchclass, fetchclassArchived } from "../../redux/slices/classline";
+import { AddclassApi } from "../../utils/Class";
+import { useDispatch } from "react-redux";
 
 export default function ArchieveClassComponent(props) {
   const [modalOpen, SetModalOpen] = useState(false);
-  
- 
+  const dispatch = useDispatch();
+  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
+  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
+
   const handleOpen = (e) => SetModalOpen(true);
   const handleClose = (e) => SetModalOpen(false);
-
+  
+  const handleSubmit = async (e) => {
+    let params = e.target.getAttribute("classid");
+    let error = { visible: false, message: "" };
+    try {
+       await AddclassApi.updateClassActive(params);
+      dispatch(fetchclass(role,idUserConnect,"Active"));
+      dispatch(fetchclassArchived(role, idUserConnect,"Archive"));
+      dispatch(fetchActiveClass(idUserConnect));
+      handleClose();
+    } catch (err) {
+      error = {
+        visible: true,
+        message: JSON.stringify(err.errors, null, 2),
+      };
+    }
+  };
  
   return (
     <>
@@ -22,17 +42,17 @@ export default function ArchieveClassComponent(props) {
         dimmer="inverted"
         size="tiny"
       >
-        <Modal.Header></Modal.Header>
+        <Modal.Header>{props.headerTitle}</Modal.Header>
         <Modal.Content>
-          <p>
-            Are you sure you want to archive class named
-            <strong></strong> ?
+          <p className="ps">
+            Are you sure you want to archive class named{" "}
+            <strong>{props.classes.className}</strong> ?
           </p>
         </Modal.Content>
         <Modal.Actions>
           <Button
-            onClick
-           
+            onClick={handleSubmit}
+            classid={props.classes._id}
             color="red"
           >
             Yes
