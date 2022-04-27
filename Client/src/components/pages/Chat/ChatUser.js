@@ -16,7 +16,8 @@ export default function ChatUser() {
 
   const [currenChat,setCurrentChat]=useState(undefined);
   useEffect(()=>{
-    axios.get(`${process.env.REACT_APP_API_URL}user/chat/all/${JSON.parse(localStorage.getItem('login')).User._id}`).then(res=>{
+    console.log(JSON.parse(localStorage.getItem('login')).Role)
+    axios.get(`http://localhost:3000/user/chat/all/${JSON.parse(localStorage.getItem('login')).User._id}/${JSON.parse(localStorage.getItem('login')).Role}`).then(res=>{
       setContacts(res.data);
     });
   },[])

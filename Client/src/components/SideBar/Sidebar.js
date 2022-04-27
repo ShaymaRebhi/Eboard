@@ -70,10 +70,12 @@ useEffect(()=>{
                          </div>
                     );
                 })}
-                 <div className='avatar'>
+                 <Link to="/profile">
+                 <Tooltip target=".imageAvatar" content="Profile" />
+                   <div className='avatar'>
                    
-                   {connect && connect.User.file!=null ?  <Avatar image={connect.User.file}  shape="circle"  /> :<Avatar image={`https://ui-avatars.com/api/?name=mouheb+mhamdi`} shape="circle"   />}
-                </div>
+                   {connect && connect.User.file!=null ?  <Avatar image={connect.User.file} className='imageAvatar' shape="circle"  /> :<Avatar image={`https://ui-avatars.com/api/?name=mouheb+mhamdi`} shape="circle"  className='imageAvatar' />}
+                </div></Link>
             </ul>
              
         </nav>
@@ -133,7 +135,9 @@ const SideBars=styled.div`
 }
 display:initial;
 .avatar{
-  margin:270px 50px -50px -20px ;
+  position:absolute;
+  margin:0% 50px -50px -20px ;
+  top:75%;
   color:red;
 }
 @media(max-width:615px){

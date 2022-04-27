@@ -48,7 +48,8 @@ const options = [
 
 export default function AddClassComponent() {
  
-  const [currentUser,setCurrentUser]=useState(undefined);
+  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
+  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
 
   
   let [color, setClassColor] = useState();
@@ -64,6 +65,7 @@ export default function AddClassComponent() {
       classUsers: [],
       className: "",
       classSection: "",
+      classLevel: "",
       classDatePost: Date.now(),
       classOwner: "",
       classColor: "",
@@ -78,24 +80,27 @@ export default function AddClassComponent() {
           /^[1-5]([A-Z])\w+$/,
           "first letter of classSection must be in 1-5"
         ),
-   
+        classLevel: Yup.string(),
+
     }),
     onSubmit: async (formData) => {
       try {
-        
+        const lvl = formData.classSection.substring(0, 1);
+
 
         const data = {
           className: formData.className,
           classSection: formData.classSection,
-          classOwner: currentUser,
+          classOwner: idUserConnect,
           classColor: color,
+          classLevel: lvl,
           classStatus:"Active",
          
         };
 
         dispatch(addClass(data));
         dis({ type: "CLOSE_MODAL" });
-        dispatch(fetchclass(currentUser,"Active"));
+        dispatch(fetchclass(role ,idUserConnect,"Active"));
         
       } catch (err) {
         error = {
@@ -113,17 +118,7 @@ export default function AddClassComponent() {
     dimmer: undefined,
   });
   const { open, dimmer } = state;
-  useEffect(() => {
-    axios.get(getUserConnect,{
-      headers: {
-          'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
-      }
-  }).then(rs=>{
-     
-      setCurrentUser(rs.data[0]._id)
-  })
-
-  }, [currentUser]);
+  
 
   return (
     <div>
@@ -187,7 +182,15 @@ export default function AddClassComponent() {
                 options={options}
                 onChange={selectedClass}
               />
-              
+              <Form.Field
+                control={Input}
+                label="Class Level"
+                placeholder="Class Level"
+                name="classLevel"
+                onChange={formik.handleChange}
+                value={formik.values.classSection.substring(0, 1)}
+                error={formik.errors.classLevel}
+              />
             </Form.Group>
             <Form.Group>
 

@@ -5,9 +5,9 @@ const authenticateToken =require('./VerifyToken')
 require('dotenv').config()  
 
 
-router.post('/add/:id',ReclamationController.add);
-router.get('/all',ReclamationController.all);
-router.delete('/:id',ReclamationController.delete);
+router.post('/add/:id',authenticateToken,ReclamationController.add);
+router.get('/all',authenticateToken,ReclamationController.all);
+router.delete('/:id',authenticateToken,ReclamationController.delete);
 
 
 

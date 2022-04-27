@@ -337,7 +337,10 @@ router.post(
 
 router.get("/", (req, res) => {
   Courses.find({})
-    .populate("idOwner")
+  .populate({
+    path: "idOwner",
+    populate: "User" ,
+  })
     .then((result) => {
       res.json(result);
     })
@@ -351,7 +354,10 @@ router.get("/", (req, res) => {
 // READ (ONE)
 router.get("/:id", (req, res) => {
   Courses.findById(req.params.id)
-    .populate("idOwner")
+  .populate({
+    path: "idOwner",
+    populate: "User" ,
+  })
     .then((result) => {
       success: true, res.json(result);
     })
@@ -363,7 +369,10 @@ router.get("/:id", (req, res) => {
 // READ (ONE BY ID CLASS)
 router.get("/findByIdClass/:id", (req, res) => {
   Courses.find({ idClass: req.params.id })
-    .populate("idOwner")
+  .populate({
+    path: "idOwner",
+    populate: "User" ,
+  })
     .then((result) => {
       success: true, res.json(result);
     })

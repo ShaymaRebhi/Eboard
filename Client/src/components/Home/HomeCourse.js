@@ -19,16 +19,8 @@ import { Route, useHistory } from 'react-router-dom';
 import EditTask from "../Task/EditTask";
 import EditQuiz from "../Quiz/EditQuiz";
 import ListCoursesBySeance from '../Course/ListCoursesBySeance';
-import AssignedQuizStudentList from "../Quiz/AssignedQuizStudentList";
-import WorkedQuizStudentList from "../Quiz/WorkedQuizStudentList";
-import AssignedTaskStudentList from "../Task/AssignedTaskStudentList";
-import WorkedTaskStudentList from "../Task/WorkedTaskStudentList";
-import DetailQuiz from "../Quiz/DetailQuiz";
-import DetailTask from "../Task/DetailTask";
-import CorrectionTask from "../Task/CorrectionTask";
-import Recommendation from "../RecommendedCourses/Recommendation";
-import Evaluation from "../Evaluation/Evaluation";
-import EvaluationTeacherPage from "../Evaluation/EvaluationTeacherPage";
+import TableCourses from '../Course/TableCourses';
+import DetailCourses from '../Course/DetailCourses';
 
 function HomeCourse(){
 
@@ -88,11 +80,11 @@ function HomeCourse(){
                                     exact component ={EditQuiz}
                                 />
                                 <PrivateRoute
-                                    path="/displayQuiz/:id"
+                                    path="/displayQuiz"
                                     exact component ={DisplayQuiz}
                                 />
                                 <PrivateRoute
-                                    path="/displayTask/:id"
+                                    path="/displayTask"
                                     exact component ={DisplayTask}
                                 />
                                 <PrivateRoute
@@ -116,47 +108,13 @@ function HomeCourse(){
                                 exact
                                render={(props) => <ListCoursesBySeance {...props} />}
                                  />
-                                <PrivateRoute
-                                    path="/assignedQuizStudentList"
-                                    exact component={AssignedQuizStudentList}
-                                />
-                                <PrivateRoute
-                                    path="/workedQuizStudentList"
-                                    exact component={WorkedQuizStudentList}
-                                />
-                                <PrivateRoute
-                                    path="/assignedTaskStudentList"
-                                    exact component={AssignedTaskStudentList}
-                                />
-                                <PrivateRoute
-                                    path="/workedTaskStudentList"
-                                    exact component={WorkedTaskStudentList}
-                                />
-                                <PrivateRoute
-                                    path="/detailQuiz/:id"
-                                    exact component ={DetailQuiz}
-                                />
-                                <PrivateRoute
-                                    path="/detailTask/:id"
-                                    exact component ={DetailTask}
-                                />
-                                <PrivateRoute
-                                    path="/correctTask/:idStudent/:id"
-                                    exact component ={CorrectionTask}
-                                />
-                                <PrivateRoute
-                                    path="/RecommendedCourses"
-                                    exact component ={Recommendation}
-                                />
-                                <PrivateRoute
-                                    path="/evaluation"
-                                    exact component ={Evaluation}
-                                />
-                                <PrivateRoute
-                                    path="/evaluationTeacherPage"
-                                    exact component ={EvaluationTeacherPage}
-                                />
-
+                                
+                                  <Route
+                           path="/detailCourses/:id"
+                             exact
+                             render={(props) => <DetailCourses {...props} />}
+                              />
+                              
                             </div>
                         </Grid.Column>
 

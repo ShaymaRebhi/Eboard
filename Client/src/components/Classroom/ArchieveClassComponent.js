@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import React  from 'react';
 import { Button, Dropdown, Modal } from "semantic-ui-react";
 import { fetchActiveClass, fetchclass, fetchclassArchived } from "../../redux/slices/classline";
-import axios from "axios";
-import { getUserConnect } from '../../utils/api';
 import { AddclassApi } from "../../utils/Class";
 import { useDispatch } from "react-redux";
 
 export default function ArchieveClassComponent(props) {
   const [modalOpen, SetModalOpen] = useState(false);
   const dispatch = useDispatch();
-  const [currentUser,setCurrentUser]=useState(undefined);
+  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
+  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
+
   const handleOpen = (e) => SetModalOpen(true);
   const handleClose = (e) => SetModalOpen(false);
   
@@ -19,9 +19,9 @@ export default function ArchieveClassComponent(props) {
     let error = { visible: false, message: "" };
     try {
        await AddclassApi.updateClassActive(params);
-      dispatch(fetchclass(currentUser,"Active"));
-      dispatch(fetchclassArchived( currentUser,"Archive"));
-      dispatch(fetchActiveClass(currentUser));
+      dispatch(fetchclass(role,idUserConnect,"Active"));
+      dispatch(fetchclassArchived(role, idUserConnect,"Archive"));
+      dispatch(fetchActiveClass(idUserConnect));
       handleClose();
     } catch (err) {
       error = {
@@ -30,16 +30,7 @@ export default function ArchieveClassComponent(props) {
       };
     }
   };
-  useEffect(() => {
-    axios.get(getUserConnect,{
-      headers: {
-          'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
-      }
-  }).then(rslt=>{
-      setCurrentUser(rslt.data[0]._id)
-  })
-
-  }, [currentUser]);
+ 
   return (
     <>
       <Modal className="add"

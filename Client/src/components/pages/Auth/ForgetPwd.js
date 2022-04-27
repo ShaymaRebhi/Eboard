@@ -10,6 +10,7 @@ import  { useHistory } from 'react-router-dom'
 import {  AxiosError } from 'axios'
 import ClipLoader from "react-spinners/ClipLoader";
 import styled from 'styled-components';
+import { forgetPwd } from '../../../utils/api';
 const ForgetPwd = () => {
 let [loading, setLoading] = useState(false);
 
@@ -51,7 +52,7 @@ var getObject={
       "email":values.email
     }
     setLoading(true)
-    axios.post(`${process.env.REACT_APP_API_URL}user/forgetpassword`,DataSet).then(Response=>{
+    axios.post(forgetPwd,DataSet).then(Response=>{
       setLoading(true)
       toast.success('Please check your email: '+values.email);
       

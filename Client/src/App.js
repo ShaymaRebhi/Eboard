@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter as Router,Redirect, Route, Switch } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/pages/Auth/Login';
+import 'devextreme/dist/css/dx.light.css';
 import Admin from './components/pages/Auth/Admin';
 import HomeEboard from './components/Home/HomeEboard';
 import { BrowserRouter }  from "react-router-dom";
@@ -16,9 +17,20 @@ import SignUp from './components/pages/Auth/SignUp';
 import Chat from './components/ChatBot/Chat';
 import ChatUser from './components/pages/Chat/ChatUser';
 import HomeAdmin from './components/Home/HomeAdmin';
-
+import { LinkedInCallback } from 'react-linkedin-login-oauth2';
 import ForgetPwdAdmin from './components/pages/Auth/ForetPwdAdmin';
 import Profile from './components/pages/Profile/Profile';
+import DeleteStudent from './components/pages/AdminPages/Action/DeleteStudent';
+import ActivateAccount from './components/pages/Auth/ActivateAccount';
+import ResetPwdAdmin from './components/pages/Auth/ResetPwdAdmin';
+import styled,{ThemeProvider} from 'styled-components';
+import {lightTheme,darkTheme,Global} from './Themes'
+import DeleteReclamation from './components/pages/AdminPages/Action/DeleteReclamation';
+import UpdateStudent from './components/pages/AdminPages/Action/UpdateStudent';
+import DeleteTeacher from './components/pages/AdminPages/Action/DeleteTeacher';
+import DeleteOrganization from './components/pages/AdminPages/Action/DeleteOrganization';
+import Main from './components/Main/Main';
+import Room from './components/Room/Room';
 import en from "javascript-time-ago/locale/en";
 import ru from "javascript-time-ago/locale/ru";
 import TimeAgo from "javascript-time-ago";
@@ -26,21 +38,31 @@ import EvaluationTeacherPage from "./components/Evaluation/EvaluationTeacherPage
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
-
 function App() {
+    
+    const [theme,setTheme]=useState("light");
+    
+    const  themeToggler=()=>{
+        theme==="light" ?setTheme("dark") :setTheme("light");
+    };
 
 
 
   return (
-      <>
+      <ThemeProvider theme={theme==="light" ?lightTheme:darkTheme}>
+          <Global/>
+          <StyledApp>
         <div className='chatbot'>
           <Chat></Chat>
         </div>
 
         <BrowserRouter>
 
-          <Switch>
-
+          <Switch>  
+          <Route exact path="/meet" component={Main} />
+            <Route exact path="/room/:roomId" component={Room} />
+            <Route exact path="/linkedin" component={LinkedInCallback} />
+            <Route exact path="/verif/:id" component={ActivateAccount} />
             <Route
                 path="/Eboard/home"
                 exact
@@ -62,6 +84,21 @@ function App() {
                 render={(props) => <HomeAdmin {...props} />}
             />
             <Route
+                path="/Eboard/Students/update/:id"
+                exact
+                render={(props) => <HomeAdmin {...props} />}
+            />
+            <Route
+                path="/Eboard/Organizations/update/:id"
+                exact
+                render={(props) => <HomeAdmin {...props} />}
+            />
+            <Route
+                path="/Eboard/Teachers/update/:id"
+                exact
+                render={(props) => <HomeAdmin {...props} />}
+            />
+            <Route
                 path="/Eboard/Reclamations"
                 exact
                 render={(props) => <HomeAdmin {...props} />}
@@ -72,6 +109,11 @@ function App() {
                 render={(props) => <HomeAdmin {...props} />}
             />
             <Route exact path="/chat" component={ChatUser} />
+            
+            <Route exact path="/Eboard/Students/delete/:id" component={DeleteStudent} />
+            <Route exact path="/Eboard/Organizations/delete/:id" component={DeleteOrganization} />
+            <Route exact path="/Eboard/Teachers/delete/:id" component={DeleteTeacher} />
+            <Route exact path="/Eboard/Reclamations/delete/:id" component={DeleteReclamation} />
             <Route exact path='/Eboard/auth/admin' component={Admin} />
             <Route exact path='/Eboard/auth/forget' component={ForgetPwdAdmin} />
 
@@ -79,6 +121,7 @@ function App() {
             <Route exact path='/profile' component={Profile} />
             <Route path="/forget" component={ForgetPwd} />
             <Route exact path='/reset/:id' component={ResetPwd} />
+            <Route exact path='/Adminreset/:id' component={ResetPwdAdmin} />
             <Route  exact path='/sign-up' component={SignUp} />
             <Route
                 path="/"
@@ -101,11 +144,6 @@ function App() {
             />
             <Route
                 path="/forum/new"
-                exact
-                render={(props) => <HomeClassroom {...props} />}
-            />
-             <Route
-                path="/archived"
                 exact
                 render={(props) => <HomeClassroom {...props} />}
             />
@@ -195,12 +233,17 @@ function App() {
                 exact
                 render={(props) => <HomeCourse {...props} />}
             />
+             <Route
+                path="/archived"
+                exact
+                render={(props) => <HomeClassroom {...props} />}
+            />
             <Route
                 path="/updateTask/:id"
                 exact
                 render={(props) => <HomeCourse {...props} />}
             />
-              <Route
+             <Route
             path="/theme/:titre/:id"
             exact
             render={(props) => <HomeCourse {...props} />}
@@ -272,9 +315,14 @@ function App() {
 
 
         </BrowserRouter>
-
-      </>
+        </StyledApp>
+      </ThemeProvider>
   );
 }
 
 export default App;
+
+const StyledApp=styled.div`
+color:${props=>props.theme.fontColor}
+
+`

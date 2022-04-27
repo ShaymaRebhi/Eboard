@@ -32,7 +32,7 @@ const ClassSchema = new Schema({
       },
       classOwner :{
         type: Schema.Types.ObjectId,
-        ref : 'Student'
+        ref : 'Teacher'
     },
     classUsers :[{
         type: Schema.Types.ObjectId,

@@ -17,12 +17,13 @@ import CardItemClassArchived from "./CardItemClassArchived";
 
 
 export default function GetAllClassArchivedComponent() {
-  const [currentUser,setCurrentUser]=useState(undefined);
   const [archived] = useSelector(selectclassarchived);
   const [pageNumber, setPageNumber] = useState(0);
   const [CsPerPage] = useState(3);
   const pagesVisited = pageNumber * CsPerPage ;
   const dispatch = useDispatch();
+  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
+  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
 
   const aff = (id) => {
     return "Year " + id;
@@ -36,16 +37,9 @@ export default function GetAllClassArchivedComponent() {
     };
 
   useEffect(() => {
-    dispatch(fetchclassArchived(currentUser,"Archive"));
-      axios.get(getUserConnect,{
-        headers: {
-            'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
-        }
-    }).then(rslt=>{
-        setCurrentUser(rslt.data[0]._id);
-    })
-   
-    }, [currentUser]);
+    dispatch(fetchclassArchived(role,idUserConnect,"Archive"));
+
+    }, [dispatch]);
   return (
     <div>
       {archived?.map((cl, index) => (

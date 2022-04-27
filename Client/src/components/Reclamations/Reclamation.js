@@ -1,5 +1,6 @@
 import Select from 'react-select'
 import React, { useState } from 'react'
+import StarRatingComponent from 'react-star-rating-component';
 
 import styled from 'styled-components'
 import login from '../../Assets/Images/reclamation.jpg'
@@ -7,8 +8,13 @@ import { Button } from 'semantic-ui-react'
 import ClipLoader from "react-spinners/ClipLoader";
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify'
+import { addReclamation } from '../../utils/api'
 function Reclamation() {
     let [loading, setLoading] = useState(false);
+    const [rating,setRating]=useState(1);
+    const onStarClick=(nextValue, prevValue, name)=> {
+      setRating(nextValue);
+    }
     const options = [
         { value: 'ORGANIZATION', label: 'About organization' },
         { value: 'TEACHER', label: 'About teacher' },
@@ -43,11 +49,16 @@ function Reclamation() {
       
         console.log(Object.fromEntries(Data.entries()).role)
         setLoading(true)
-        axios.post(`http://localhost:3000/reclamation/add/${id}`,{
+        axios.post(addReclamation+id,{
             "type":values.type,
             "subject":values.subject,
-            "message":values.message
-        }).then(Response=>{
+            "message":values.message,
+            "rating":rating
+        },{
+          headers: {
+              'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+          }
+      }).then(Response=>{
           
           toast.success('Reclamation saved successfuly', {
             position: "bottom-right" 
@@ -84,12 +95,25 @@ function Reclamation() {
             <div className='image_holder'>
              
             </div>
+            
             <form method='POST' onSubmit={handleSubmit}>
                 <h1>Reclamation</h1>
-              
-                <Select options={options} className="mb-3" name="type" onChange={handleChange } value={options.find(obj => obj.value === selectedValue)}  placeholder="Type"/>
-                <input type="text" name="subject" onChange={onChange} className="form-control mb-3" placeholder='Subject'></input>
-                <textarea name="message" onChange={onChange} placeholder='Message'  rows="5" className="form-control " cols="33"></textarea>
+                <div className='d-flex justify-content-center pb-5'>
+                 <p className='pt-1 '>Rate this reclamation : </p> <StarRatingComponent
+                  className='rating' 
+                  name="rate1" 
+                  starCount={5}
+                  value={rating}
+                  onStarClick={onStarClick.bind(this)}
+                  color={'black'}
+                  starColor={'#FFF'}
+                  
+                  />
+                </div>
+               
+                <Select options={options} className="mb-3" name="type" onChange={handleChange } value={options.find(obj => obj.value === selectedValue)}  placeholder="Type" required/>
+                <input type="text" name="subject" onChange={onChange} className="form-control mb-3" placeholder='Subject' required></input>
+                <textarea name="message" onChange={onChange} placeholder='Message'  rows="5" className="form-control " cols="33" required></textarea>
                 <Button className='btn' type="submit">{loading ? <ClipLoader  color='#FFF' loading={loading}  size={20} /> : "Send"}</Button>
             </form>
 
@@ -98,7 +122,18 @@ function Reclamation() {
   )
 }
 const Container =styled.div`
-   
+.dv-star-rating-star {.dv-star-rating-empty-star{
+  i{
+    color:red !important;
+  }
+}
+}
+.rating {
+padding-left:15px;
+ font-size:20pt;
+
+}
+margin-left:200px;
 height: 100%;
  
 .form_container{
@@ -123,8 +158,8 @@ form{
     display: table-cell;
     height: 100% !important;
     width: 420px;
-    background: #8EB2CD;
-    padding: 20px 30px;
+    background:linear-gradient(90deg, rgb(2,0,36) 0%, rgb(140,177,192) 0%, rgb(140,177,192) 100%);
+    padding: 50px 30px;
     color:#676767 ;
     h1{
         margin-top:50px;

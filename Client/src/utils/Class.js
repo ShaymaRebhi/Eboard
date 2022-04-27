@@ -32,6 +32,10 @@ export const getclassApi = {
       const { data } = await api.get(`class/usersall/`);
       return data;
     },
+    async getclassByLevel(iduser,status) {
+      const { data } = await api.get(`class/bylevel/${iduser}/${status}`);
+      return data;
+    },
 }
 export const ClassInvitationApi = {
   async getClassInvitation(email) {

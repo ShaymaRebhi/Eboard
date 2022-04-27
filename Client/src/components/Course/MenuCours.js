@@ -1,23 +1,29 @@
-import React, { Component } from 'react'
+import React, {  useState } from 'react'
 import {  Label, Menu , Icon, Header } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
-export default class MenuCours extends Component {
-  state = { activeItem: 'inbox' }
+import Main from '../Main/Main';
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+function MenuCours()  {
 
-  render() {
-    const { activeItem } = this.state
 
+  const handleItemClick = (e, { name }) => setActiveItem(name);
+
+  const [activeItem, setActiveItem] = useState("flow");
+  const ModuleName = JSON.parse(localStorage.getItem("idClass")).className;
+
+
+ 
+
+  
     return (
       <Menu size='large' vertical>
-           <Header as='h2' image='/images/school.png' content='React Course' />
+           <Header as='h2' image='/images/school.png' content={ModuleName} />
            <Link to="/feed">
         <Menu.Item
         
           name='flow'
           active={activeItem === 'flow'}
-          onClick={this.handleItemClick}
+          onClick={handleItemClick}
         >
           <Label color='teal'>1</Label>
           <Icon name='sitemap' />Flow
@@ -28,50 +34,47 @@ export default class MenuCours extends Component {
         
           name='Theme'
           active={activeItem === 'Theme'}
-          onClick={this.handleItemClick}
+          onClick={handleItemClick}
         >
           <Label >1</Label>
           <Icon name='server' />Theme
         </Menu.Item>
         </Link>
-          {/*student*/}
-        <Link to ="/evaluation">
+        <Link to="/TaskList">
         <Menu.Item
-          name='evaluation'
-          active={activeItem === 'evaluation'}
-          onClick={this.handleItemClick}
+          name='task'
+          active={activeItem === 'task'}
+          onClick={handleItemClick}
+        >
+          <Label>51</Label>
+          <Icon name='file alternate' /> Task
+        </Menu.Item>
+</Link>
+<Link to ="/displayQuiz">
+        <Menu.Item
+          name='exam'
+          active={activeItem === 'exam'}
+          onClick={handleItemClick}
         >
           <Label>1</Label>
-          <Icon name='time' /> Evaluation
+          <Icon name='compose' /> Exam
           
         </Menu.Item>
         </Link>
-        {/*teacher*/}
-          <Link to ="/evaluationTeacherPage">
-              <Menu.Item
-                  name='evaluation'
-                  active={activeItem === 'evaluation'}
-                  onClick={this.handleItemClick}
-              >
-                  <Label>1</Label>
-                  <Icon name='time' /> Evaluation Teacher
-
-              </Menu.Item>
-          </Link>
-          <Link to ="/RecommendedCourses">
-              <Menu.Item
-                  name='RecommendedCourses'
-                  active={activeItem === 'RecommendedCourses'}
-                  onClick={this.handleItemClick}
-              >
-                  <Label>1</Label>
-                  <Icon name='file alternate' /> Recommendation
-              </Menu.Item>
-          </Link>
+        <Link to ="/quizlist">
+        <Menu.Item
+          name='quiz'
+          active={activeItem === 'quiz'}
+          onClick={handleItemClick}
+        >
+          <Label>1</Label>
+          <Icon name='time' /> Quiz
+        </Menu.Item>
+        </Link>
         <Menu.Item
           name='disc'
           active={activeItem === 'disc'}
-          onClick={this.handleItemClick}
+          onClick={handleItemClick}
         >
           <Label>1</Label>
           <Icon name='chat' /> Discussion
@@ -80,12 +83,13 @@ export default class MenuCours extends Component {
         <Menu.Item
           name='members'
           active={activeItem === 'members'}
-          onClick={this.handleItemClick}
+          onClick={handleItemClick}
         >
           <Label>1</Label>
           <Icon name='user' /> Members
         </Menu.Item>
         </Link>
+        <Main></Main>
         <br>
         </br>
         <br></br>
@@ -105,4 +109,5 @@ export default class MenuCours extends Component {
       </Menu>
     )
   }
-}
+
+  export default MenuCours;

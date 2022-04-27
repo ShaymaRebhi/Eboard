@@ -3,13 +3,12 @@ import { useDispatch } from "react-redux";
 import { Button, Dropdown, Modal } from "semantic-ui-react";
 import {  fetchclass,fetchActiveClass,fetchclassArchived } from "../../redux/slices/classline";
 import { AddclassApi} from "../../utils/Class";
-import axios from "axios";
-import { getUserConnect } from '../../utils/api';
 
 export default function ActivedClassComponent(props) {
   const [modalOpen, SetModalOpen] = useState(false);
   const dispatch = useDispatch();
-  const [currentUser,setCurrentUser]=useState(undefined);
+  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
+  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
   const handleOpen = (e) => SetModalOpen(true);
   const handleClose = (e) => SetModalOpen(false);
   const handleSubmit = async (e) => {
@@ -17,9 +16,9 @@ export default function ActivedClassComponent(props) {
     let error = { visible: false, message: "" };
     try {
       await AddclassApi.updateClassArchive(params);
-      dispatch(fetchclass(currentUser,"Active"));
-      dispatch(fetchclassArchived(currentUser,"Archive"));
-      dispatch(fetchActiveClass(currentUser));
+      dispatch(fetchclass(role,idUserConnect,"Active"));
+      dispatch(fetchclassArchived(role,idUserConnect,"Archive"));
+      dispatch(fetchActiveClass(idUserConnect));
       handleClose();
     } catch (err) {
       error = {
@@ -28,16 +27,7 @@ export default function ActivedClassComponent(props) {
       };
     }
   };
-  useEffect(() => {
-      axios.get(getUserConnect,{
-        headers: {
-            'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
-        }
-    }).then(rslt=>{
-        setCurrentUser(rslt.data[0]._id);
-    })
-   
-    }, [currentUser]);
+ 
   return (
     <>
       <Modal className="add"

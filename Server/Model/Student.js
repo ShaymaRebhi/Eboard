@@ -24,6 +24,10 @@ var Student =new Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref:'users',
         required:true
+    },
+    Organization:{
+        type : mongoose.Schema.Types.ObjectId,
+        ref:'organization'
     }
     
 
