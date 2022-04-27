@@ -1,7 +1,8 @@
 .bodyy{
-    margin-top:20px;
-    background:#eee;
-    color: #708090;
+    background: linear-gradient(90deg, rgb(2,0,36) 0%, rgb(140,177,192) 0%, rgb(140,177,192) 100%);
+  margin-left:  200px;
+    margin-right: auto;
+   
 }
 .icon-1x {
     font-size: 24px !important;
@@ -96,13 +97,13 @@ a {
 
 .form-control {
     height: 48px;
-    border-radius: 25px
+   
 }
 
 .form-control:focus {
     color: #495057;
     background-color: #fff;
-    border-color: #35b69f;
+  
     outline: 0;
     box-shadow: none;
     text-indent: 10px
