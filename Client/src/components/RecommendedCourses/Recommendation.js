@@ -2,14 +2,13 @@ import React, {useEffect, useState} from 'react'
 import {getAverageScoreQuizAndTaskByStudentAndClass} from "../../utils/Quiz";
 import {Header, Icon, Item, Segment} from "semantic-ui-react";
 import coursesRec from "./Courses.json"
-import {Link} from "react-router-dom";
 
 function Recommendation() {
   const [avgScoreModule,setAvgScoreModule] = useState(0);
   const idClass = JSON.parse(localStorage.getItem("idClass"))._id;
   const idUser = JSON.parse(localStorage.getItem("idStudent"))._id;
   const ModuleName = JSON.parse(localStorage.getItem("idClass")).className;
-  const [listCourses,setListCourses] = useState([]) ;
+  const [listCourses] = useState([]) ;
   const courses = coursesRec;
   const getAVGQuizScoreModule=()=>{
     getAverageScoreQuizAndTaskByStudentAndClass(idUser,idClass,(res)=> {
@@ -38,9 +37,10 @@ function Recommendation() {
         <div style={{display:"flex"}}>
             <img src="https://previews.123rf.com/images/melitas/melitas1904/melitas190400003/120582457-partagez-et-suivez-mains-color%C3%A9es-avec-les-pouces-vers-le-haut-notion-de-r%C3%A9seau-social-positif-et-ap.jpg" alt="quizpicture" width="50px"  />
             <div className="headers text-center">
-              <h1 style={{color:"rgb(140,177,192)"}}>Recommended Courses From <br/> our partner Udemy</h1>
+              <h1 style={{color:"rgb(140,177,192)" ,fontSize:"50px"}}>Recommended Courses From <br/> our partner Udemy</h1>
             </div>
         </div>
+        <br/>
         {avgScoreModule < 10 ? (
 
             listCourses.length <=0 ? (

@@ -28,6 +28,7 @@ import DetailTask from "../Task/DetailTask";
 import CorrectionTask from "../Task/CorrectionTask";
 import Recommendation from "../RecommendedCourses/Recommendation";
 import Evaluation from "../Evaluation/Evaluation";
+import EvaluationTeacherPage from "../Evaluation/EvaluationTeacherPage";
 
 function HomeCourse(){
 
@@ -150,6 +151,10 @@ function HomeCourse(){
                                 <PrivateRoute
                                     path="/evaluation"
                                     exact component ={Evaluation}
+                                />
+                                <PrivateRoute
+                                    path="/evaluationTeacherPage"
+                                    exact component ={EvaluationTeacherPage}
                                 />
 
                             </div>

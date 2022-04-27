@@ -3,7 +3,6 @@ import axios from "axios";
 
 export const AddTask = (
     Title,
-    Theme,
     Description,
     QuestionFile,
     status,
@@ -19,11 +18,10 @@ export const AddTask = (
     formData.append("Title", Title);
 
     formData.append("Description", Description);
-    if (Theme !== "") {
-        formData.append("Theme", Theme);
-    }
     formData.append("status",status)
-    formData.append("listStudents", listStudents);
+    for (const key of Object.keys(listStudents)) {
+        formData.append("listStudents", listStudents[key]);
+    }
     formData.append("Creator", Creator);
     formData.append("Class", Class);
 
@@ -46,9 +44,6 @@ export const AddTask = (
     return data;
 };
 
-/*TaskStatus : "Worked",
-    TaskCorrected : "Not Corrected",
-    TaskResponseFile : req.body.TaskResponseFile*/
 export const UpdateEvaluation = (
     evaluationId,
     TaskStatus,
@@ -79,6 +74,53 @@ export const UpdateEvaluation = (
     console.log(data);
     return data;
 };
+export const UpdateTask = (
+    taskId,
+    Title,
+    Description,
+    ResourcesQuestionFile
+) => async (dispatch) => {
+    const task = {
+        Title : Title,
+        Description : Description,
+        QuestionFile : ResourcesQuestionFile
+    };
+    console.log("this is task");
+    console.log(task);
+
+    const promise = await axios
+        .put("http://localhost:3000/task/updateQuestionTask/" + taskId, task)
+        .then((response) => {
+            const data = response.data;
+
+            // assign data
+            return data;
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    const data = promise;
+    console.log("this is data");
+    console.log(data);
+    return data;
+};
+export const UpdateResourcesQuestionFile = createAsyncThunk(
+    "task/UpdateResourcesQuestionFile",
+
+    async (resources) => {
+        //CoursesSlice.state.Resources.push(resources);
+        console.log(resources);
+        return resources;
+    }
+);
+export const DeleteResourcesQuestionFile = createAsyncThunk(
+    "task/DeleteResourcesQuestionFile",
+
+    async (index) => {
+        return index;
+    }
+);
+
 export const UpdateResources = createAsyncThunk(
     "Evaluation/UpdateResources",
 
@@ -121,6 +163,20 @@ export const TaskSlice = createSlice({
             });
             state.ResourcesResponse = resourcesResponse;
         },
+        [UpdateResourcesQuestionFile.fulfilled]: (state, action) => {
+            //state.Resources.push(action.payload);
+
+            state.ResourcesQuestionFile.push(action.payload);
+        },
+        [DeleteResourcesQuestionFile.fulfilled]: (state, action) => {
+            //state.Resources.splice(action.payload, 1);
+            let res = action.payload;
+            let resourcesResponse = state.ResourcesResponse.slice();
+            resourcesResponse = resourcesResponse.filter((u) => {
+                return u.url !== res;
+            });
+            state.ResourcesQuestionFile = resourcesResponse;
+        },
         AddTask: (state, action) => {
             state.task.push(action.payload.result);
         },
@@ -133,6 +189,19 @@ export const TaskSlice = createSlice({
                     state.evaluations[i].TaskStatus = evaluation.TaskStatus;
                     state.evaluations[i].TaskCorrected = evaluation.TaskCorrected;
                     state.evaluations[i].TaskResponseFile = evaluation.TaskResponseFile;
+
+                    break; // Stop this loop, we found it!
+                }
+            }
+        },
+        UpdateTask: (state, action) => {
+            let task = action.payload.result;
+
+            for (let i = 0, n = state.task.length; i < n; i++) {
+                if (state.task[i]._id === task._id) {
+                    state.task[i].Title = task.Title;
+                    state.task[i].Description = task.Description;
+                    state.task[i].QuestionFile = task.QuestionFile;
 
                     break; // Stop this loop, we found it!
                 }

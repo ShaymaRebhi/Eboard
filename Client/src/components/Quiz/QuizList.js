@@ -7,12 +7,15 @@ import {MdAssignment} from 'react-icons/md'
 import {assignQuizAfterSave, deleteQuiz, getQuizByTeacher, updateQuizStatus} from "../../utils/Quiz";
 import {toast, ToastContainer} from "react-toastify";
 import {Header, Icon, Item, Segment} from "semantic-ui-react";
+import ReactPaginate from "react-paginate";
 
 
 function QuizList() {
     const idUser=JSON.parse(localStorage.getItem("login")).User._id;
     const idClass = JSON.parse(localStorage.getItem("idClass"))._id;
     const history = useHistory();
+
+
     const [quiz, setQuizs] = useState([
         {Title : "",
             Theme:"",
@@ -54,7 +57,18 @@ function QuizList() {
             getQuizs()
         ))
     }
-  return (
+
+    const [pageNumber, setPageNumber] = useState (0)
+    const quizsPerPage = 2;
+    const pagesVisited = pageNumber * quizsPerPage;
+    const pageCount = Math.ceil(quiz.length / quizsPerPage);
+
+    const changePage = ({ selected }) => {
+
+            setPageNumber(selected);
+        };
+
+    return (
     <>
         <ToastContainer
             position="top-right"
@@ -70,7 +84,7 @@ function QuizList() {
         <div style={{display:"flex"}}>
             <img src="images/quizlist2.jpg" alt="quizpicture" width="60%"  />
             <div className="headers text-center">
-                <h1>Quiz List</h1>
+                <h1 style={{color:"rgb(140,177,192)" ,fontSize:"50px"}}>Quiz List</h1>
             </div>
         </div>
         <div style={{display:"flex" ,justifyContent:"space-between"}}>
@@ -96,7 +110,7 @@ function QuizList() {
             ):(
                 quiz.filter((q)=>{
                     return q.Title.toLowerCase().includes(searchTerm)
-                }).map((q,i)=>(
+                }).slice(pagesVisited, pagesVisited + quizsPerPage).map((q,i)=>(
                     <>
                     <Segment color='grey' raised >
                         <Item.Group divided key={i}>
@@ -133,11 +147,28 @@ function QuizList() {
                     </Segment>
                     </>
 
+
                 ))
 
             )}
+            {quiz.length <= 0 ? ("") :(
+                <ReactPaginate
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"paginationBttns"}
+                    previousLinkClassName={"previousBttn"}
+                    nextLinkClassName={"nextBttn"}
+                    disabledClassName={"paginationDisabled"}
+                    activeClassName={"paginationActive"}
+
+                />
+            )}
+
 
         </div>
+
 
         
     </>

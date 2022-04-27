@@ -55,7 +55,7 @@ function DetailQuiz() {
         avgScore(match.params.id);
         getEvaluations(match.params.id);
 
-    },[])
+    })
 
     const BackToListQuiz = () => {
         history.push('/QuizList');

@@ -22,6 +22,7 @@ import Profile from './components/pages/Profile/Profile';
 import en from "javascript-time-ago/locale/en";
 import ru from "javascript-time-ago/locale/ru";
 import TimeAgo from "javascript-time-ago";
+import EvaluationTeacherPage from "./components/Evaluation/EvaluationTeacherPage";
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
@@ -251,6 +252,11 @@ function App() {
             />
             <Route
                 path="/evaluation"
+                exact
+                render={(props) => <HomeCourse {...props} />}
+            />
+            <Route
+                path="/evaluationTeacherPage"
                 exact
                 render={(props) => <HomeCourse {...props} />}
             />

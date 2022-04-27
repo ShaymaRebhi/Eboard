@@ -29,56 +29,6 @@ const uploader = multer({
         cb(null, Date.now() + "-" + fileName);
     },
 });
-function UploadingArray(files) {
-    const reqFiles = [];
-    let wakt;
-    try {
-        for (let i = 0; i < files.length; i++) {
-            if (!files[i]) {
-                return;
-            }
-
-            const blob = bucket.file(files[i].originalname);
-
-            const blobWriter = blob.createWriteStream({
-                metadata: {
-                    contentType: files[i].mimetype,
-                },
-            });
-
-            blobWriter.on("error", (err) => next(err));
-            {
-                perf.start();
-                blobWriter.on("finish", async () => {
-
-                    await reqFiles.push({
-                        type: files[i].mimetype,
-                        originalname: files[i].originalname,
-
-                        url: `https://firebasestorage.googleapis.com/v0/b/${
-                            bucket.name
-                        }/o/${encodeURI(blob.name)}?alt=media`,
-                    });
-
-
-                    const results = perf.stop();
-                    console.log(results.time);
-                });
-            }
-
-            blobWriter.end(files[i].buffer);
-        }
-    } catch (error) {
-        return;
-    }
-    console.log("time !!!!!!!!!!");
-    console.log(wakt);
-    const test = {
-        reqFiles: reqFiles,
-        timer: wakt,
-    };
-    return test;
-}
 
 router.post(
     "/api/upload",
@@ -285,10 +235,127 @@ router.post(
 
             return;
         }
-        console.log("this is idClass");
     }
 );
+router.post(
+    "/api/uploadTaskFile",
+    uploader.array("QuestionFile", 6),
+    async (req, res, next) => {
+        const reqFiles = [];
+        try {
+            perf.start();
+            for (let i = 0; i < req.files.length; i++) {
+                if (!req.files[i]) {
+                    return;
+                }
 
+                const blob = bucket.file(Date.now() + "-" + req.files[i].originalname);
+
+                const blobWriter = blob.createWriteStream({
+                    metadata: {
+                        contentType: req.files[i].mimetype,
+                    },
+                });
+
+                blobWriter.on("error", (err) => next(err));
+                {
+                    blobWriter.on("finish", async () => {
+
+                        await reqFiles.push({
+                            type: req.files[i].mimetype,
+                            originalname: req.files[i].originalname,
+
+                            url: `https://firebasestorage.googleapis.com/v0/b/${
+                                bucket.name
+                            }/o/${encodeURI(blob.name)}?alt=media`,
+                        });
+
+
+                        if (i + 1 === req.files.length) {
+                            const results = perf.stop();
+                            console.log(results.time);
+                            setTimeout(() => {
+                                res.status(200).send({
+                                    result: {
+                                        reqFiles,
+                                    },
+                                });
+                            }, results.time);
+                        }
+
+                    });
+                }
+
+                blobWriter.end(req.files[i].buffer);
+            }
+        } catch (error) {
+            return;
+        }
+    }
+);
+router.put("/updateQuestionTask/:id", (req, res) => {
+    let updatedTask = {
+        Title:req.body.Title,
+        Description:req.body.Description,
+        QuestionFile : req.body.QuestionFile,
+    };
+
+    console.log(updatedTask);
+
+    Task.findOneAndUpdate({ _id: req.params.id }, updatedTask, {
+        runValidators: true,
+        context: "query",
+    })
+
+        .then((oldResult) => {
+            console.log("true");
+            Task.findOne({ _id: req.params.id })
+                .then((result) => {
+                    console.log("this is result " + result);
+                    res.json({
+                        success: true,
+                        msg: `Successfully updated!`
+                    });
+                })
+
+                .catch((err) => {
+                    console.log("false1");
+                    res
+                        .status(501)
+                        .json({ success: false, msg: `Something went wrong. ${err}` });
+                    return;
+                });
+        })
+        .catch((err) => {
+            console.log(err);
+            if (err.errors) {
+                if (err.errors.Title) {
+                    res
+                        .status(400)
+                        .json({ success: false, msg: err.errors.Title.message });
+                    return;
+                }
+                if (err.errors.Description) {
+                    res
+                        .status(400)
+                        .json({ success: false, msg: err.errors.Description.message });
+                    return;
+                }
+                if (err.errors.QuestionFile) {
+                    res
+                        .status(400)
+                        .json({ success: false, msg: err.errors.QuestionFile.message });
+                    return;
+                }
+
+                // Show failed if all else fails for some reasons
+                res
+                    .status(500)
+                    .json({ success: false, msg: `Something went wrong. ${err}` });
+                console.log("ereuuuurrrrrr")
+            }
+        });
+});
 router.put("/updateEvaluationStatus/:id", (req, res) => {
     let updatedEvaluation = {
         TaskStatus : "Worked",
@@ -356,9 +423,8 @@ router.put("/updateEvaluationStatus/:id", (req, res) => {
 router.get('/',TaskController.GetTask);
 router.get('/:id',TaskController.GetOneTask);
 router.delete('/:id',TaskController.deleteTask);
-router.post('/update/:id',TaskController.updateTask);
+//router.post('/update/:id',TaskController.updateTask);
 router.get('/getTaskByTeacher/:idUserr/:idClasse',TaskController.getTaskByTeacher);
-router.post('/assign/:idClass',TaskController.assignTask);
 router.post('/assignTaskAfterSave/:idClass',TaskController.assignTaskAfterSave);
 router.get('/getTaskByStudentAssigned/:idClass/:idUserr',TaskController.getTaskByStudentAssigned);
 router.get('/getTaskByStudentWorked/:idClass/:idUserr',TaskController.getTaskByStudentWorked);

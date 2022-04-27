@@ -36,7 +36,6 @@ exports.updateQuiz = async(req,res)=> {
             res.status(404).send('data is not found');
         else
             quiz.Title = req.body.Title;
-            quiz.Theme = req.body.Theme;
             quiz.Description = req.body.Description;
             quiz.Questions = req.body.Questions
             quiz.save().then(quiz => {

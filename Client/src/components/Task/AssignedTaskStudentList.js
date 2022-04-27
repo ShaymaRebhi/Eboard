@@ -5,6 +5,7 @@ import {
     getTaskByStudentAssigned
 } from "../../utils/Task";
 import { Header, Icon, Item, Segment, } from 'semantic-ui-react'
+import ReactPaginate from "react-paginate";
 function AssignedTaskStudentList() {
     const idUser = JSON.parse(localStorage.getItem("idStudent"))._id;
     const history = useHistory();
@@ -34,12 +35,22 @@ function AssignedTaskStudentList() {
         let value = e.target.value.toLowerCase();
         setSearchTerm(value);
     }
+    const [pageNumber, setPageNumber] = useState (0)
+    const quizsPerPage = 2;
+    const pagesVisited = pageNumber * quizsPerPage;
+    const pageCount = Math.ceil(evaluation.length / quizsPerPage);
+
+    const changePage = ({ selected }) => {
+
+        setPageNumber(selected);
+    };
+
     return (
         <>
             <div style={{display:"flex", justifyContent:"space-around"}}>
                 <img src="images/tasks.jpg" alt="task" width="100%"/>
                 <div className="headers text-center">
-                    <h1>Assigned Task Student List</h1>
+                    <h1 style={{color:"rgb(140,177,192)" ,fontSize:"50px"}}>Assigned Task Student List</h1>
                 </div>
             </div>
             <div style={{display:"flex" ,justifyContent:"space-between"}}>
@@ -65,7 +76,7 @@ function AssignedTaskStudentList() {
                 ):(
                     evaluation.filter((e)=>{
                         return e.Task.Title.toLowerCase().includes(searchTerm)
-                    }).map((e,i)=>(
+                    }).slice(pagesVisited, pagesVisited + quizsPerPage).map((e,i)=>(
                         <Segment color='grey' raised key={i}>
                             <Item.Group divided >
                                 <Item>
@@ -87,6 +98,20 @@ function AssignedTaskStudentList() {
                     ))
                 )}
             </div>
+            {evaluation.length <= 0 ? ("") :(
+                <ReactPaginate
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"paginationBttns"}
+                    previousLinkClassName={"previousBttn"}
+                    nextLinkClassName={"nextBttn"}
+                    disabledClassName={"paginationDisabled"}
+                    activeClassName={"paginationActive"}
+
+                />
+            )}
         </>
     )
 }

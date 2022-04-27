@@ -6,10 +6,6 @@ var Quiz = new Schema ({
         type:String,
         required:true
     },
-    Theme:{
-        type:String,
-    /*    required:true*/
-    },
     Description:{
         type:String,
         required:true

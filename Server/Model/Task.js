@@ -6,10 +6,6 @@ var Task = new Schema ({
         type:String,
         required:true
     },
-    Theme:{
-        type:String,
-        //required:true
-    },
     CreationDate:{
         type:Date,
         default:Date.now,

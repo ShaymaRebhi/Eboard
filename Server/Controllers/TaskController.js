@@ -17,20 +17,6 @@ exports.deleteTask = async (req,res) =>{
         .then(res.status(200).send(`Task is succussffully deleted`))
         .catch(err => res.status(400).json(err));
 }
-exports.addTask = async(req,res) => {
-    const taskBody = req.body ;
-    taskBody.status = "Not Assigned"
-    const newTask = new Task(taskBody)
-    await newTask.save((err, task) => {
-        if (err) return res.status(503).json({error: err});
-        if (task) return res.status(200).json({
-            success: true,
-            id: task._id,
-            message: 'Task Created'
-        });
-        req.body.User=User._id;
-    })
-}
 
 exports.updateTask = async(req,res)=> {
     Task.findById(req.params.id, function (err,task){
@@ -38,7 +24,6 @@ exports.updateTask = async(req,res)=> {
             res.status(404).send('data is not found');
         else
             task.Title = req.body.Title;
-            task.Theme = req.body.Theme;
             task.Description = req.body.Description;
             task.QuestionFile = req.body.QuestionFile
 
@@ -73,31 +58,6 @@ exports.getTaskByTeacher = async (req, res, next) => {
     }
 }
 
-exports.assignTask= async (req, res) => {
-    const idClass = req.params.idClass
-    const task = req.body;
-    task.status = "Assigned";
-    const newTask = new Task(task);
-
-    try {
-        newTask.save();
-        task.listStudents
-            .forEach((element) => {
-                const newEvaluation = new Evaluation({
-                    Task: newTask._id,
-                    Student: element,
-                    Class : idClass,
-                    Type : "Task"
-                });
-                newEvaluation.save();
-            })
-            .then((task) => res.json(task));
-
-        res.status(201).json(newTask);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
-    }
-}
 exports.assignTaskAfterSave= async (req, res) => {
     const idClass = req.params.idClass
     const task = req.body;

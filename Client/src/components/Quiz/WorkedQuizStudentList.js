@@ -5,6 +5,7 @@ import {
 } from "../../utils/Quiz";
 import {Header, Icon, Item, Segment} from "semantic-ui-react";
 import {useHistory} from "react-router-dom";
+import ReactPaginate from "react-paginate";
 
 function WorkedQuizStudentList() {
     const idClass = JSON.parse(localStorage.getItem("idClass"))._id;
@@ -36,12 +37,22 @@ function WorkedQuizStudentList() {
         let value = e.target.value.toLowerCase();
         setSearchTerm(value);
     }
+
+    const [pageNumber, setPageNumber] = useState (0)
+    const quizsPerPage = 2;
+    const pagesVisited = pageNumber * quizsPerPage;
+    const pageCount = Math.ceil(evaluation.length / quizsPerPage);
+
+    const changePage = ({ selected }) => {
+
+        setPageNumber(selected);
+    };
     return (
         <>
             <div style={{display:"flex"}}>
                 <img src="images/quizlist2.jpg" alt="quizpicture" width="60%"  />
                 <div className="headers text-center">
-                    <h1>Student Quiz List Worked</h1>
+                    <h1 style={{color:"rgb(140,177,192)",fontSize:"50px"}}>Student Quiz List Worked</h1>
                 </div>
             </div>
             {evaluation.length <=0 ? ("") :(
@@ -93,7 +104,7 @@ function WorkedQuizStudentList() {
                         ):(
                             evaluation.filter((e)=>{
                                 return e.Quiz.Title.toLowerCase().includes(searchTerm)
-                            }).map((e,i)=>(
+                            }).slice(pagesVisited, pagesVisited + quizsPerPage).map((e,i)=>(
 
                                 <Segment color='grey' raised key={i}>
                                     <Item.Group divided >
@@ -135,6 +146,20 @@ function WorkedQuizStudentList() {
                         )}
 
                     </div>
+            {evaluation.length <= 0 ? ("") :(
+                <ReactPaginate
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    pageCount={pageCount}
+                    onPageChange={changePage}
+                    containerClassName={"paginationBttns"}
+                    previousLinkClassName={"previousBttn"}
+                    nextLinkClassName={"nextBttn"}
+                    disabledClassName={"paginationDisabled"}
+                    activeClassName={"paginationActive"}
+
+                />
+            )}
             <br/>
             <br/>
             <br/>

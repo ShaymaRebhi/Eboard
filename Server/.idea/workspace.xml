@@ -2,7 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="923abaec-0f51-4318-aa23-44b094adba5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Course/MenuCours.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Course/MenuCours.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Evaluation/Evaluation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Evaluation/Evaluation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Home/HomeCourse.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Home/HomeCourse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Quiz/AssignedQuizStudentList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Quiz/AssignedQuizStudentList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Quiz/CreateQuiz.css" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Quiz/CreateQuiz.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Quiz/CreateQuiz.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Quiz/CreateQuiz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Quiz/DetailQuiz.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Quiz/DetailQuiz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Quiz/EditQuiz.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Quiz/EditQuiz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Quiz/QuizList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Quiz/QuizList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Quiz/WorkedQuizStudentList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Quiz/WorkedQuizStudentList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/RecommendedCourses/Recommendation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/RecommendedCourses/Recommendation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Task/AssignedTaskStudentList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Task/AssignedTaskStudentList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Task/CorrectionTask.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Task/CorrectionTask.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Task/CreateTask.css" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Task/CreateTask.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Task/CreateTask.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Task/CreateTask.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Task/DisplayTask.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Task/DisplayTask.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Task/EditTask.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Task/EditTask.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Task/TaskList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Task/TaskList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Task/WorkedTaskStudentList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Task/WorkedTaskStudentList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/pages/Auth/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/pages/Auth/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/redux/slices/Task.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/redux/slices/Task.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/QuizController.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/QuizController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/TaskController.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/TaskController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Quiz.js" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Quiz.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Model/Task.js" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Task.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/Task.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/Task.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +57,8 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="16.13.2" />
+    <property name="javascript.nodejs.core.library.typings.version" value="16.11.27" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -60,6 +92,23 @@
       <workItem from="1648753910412" duration="387000" />
       <workItem from="1648826090579" duration="7715000" />
       <workItem from="1648901459799" duration="9238000" />
+      <workItem from="1650552631336" duration="19000" />
+      <workItem from="1650552664447" duration="5101000" />
+      <workItem from="1650580695865" duration="6969000" />
+      <workItem from="1650623020717" duration="550000" />
+      <workItem from="1650626152946" duration="8922000" />
+      <workItem from="1650670247285" duration="6000" />
+      <workItem from="1650670259377" duration="6975000" />
+      <workItem from="1650719159205" duration="10363000" />
+      <workItem from="1650754030641" duration="13421000" />
+      <workItem from="1650811692828" duration="2160000" />
+      <workItem from="1650846636332" duration="623000" />
+      <workItem from="1650882822426" duration="1379000" />
+      <workItem from="1650886538266" duration="2000" />
+      <workItem from="1650919571811" duration="1037000" />
+      <workItem from="1650932548732" duration="6542000" />
+      <workItem from="1650982283172" duration="3454000" />
+      <workItem from="1651011697943" duration="5166000" />
     </task>
     <servers />
   </component>

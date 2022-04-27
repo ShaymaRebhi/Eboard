@@ -22,7 +22,7 @@ function Evaluation() {
       <div style={{display:"flex"}}>
         <img src="https://www.bienenseigner.com/wp-content/uploads/2021/08/auto-evaluation-1280x720.jpeg" alt="quizpicture" width="60%"  />
         <div className="headers text-center">
-          <h1 style={{color:"rgb(140,177,192)"}}>Evaluation</h1>
+          <h1 style={{color:"rgb(140,177,192)",fontSize:"50px"}}>Evaluation</h1>
         </div>
       </div>
       <div style={{display:"flex" ,flexDirection:"column-reverse"}}>
@@ -48,8 +48,9 @@ function Evaluation() {
         }
         <h3 style={{color:"black", textAlign:"center"}}>Average Module Score  : {Number(avgScoreModule).toFixed(2)}</h3>
       </div>
-      <div className="container pb-5 ">
-        <Segment color='grey' raised >
+      <br/>
+      <div style={{display:"flex",justifyContent: "space-evenly" ,margin:0}}>
+        <Segment color='grey' raised style={{margin:0}}>
           <Item.Group divided>
             <Item>
               <Item.Image size='tiny' avatar src='images/quizz.jpg' />
@@ -61,7 +62,8 @@ function Evaluation() {
             </Item>
           </Item.Group>
         </Segment>
-        <Segment color='grey' raised >
+        &nbsp;
+        <Segment color='grey' raised  style={{margin:0}}>
           <Item.Group divided>
             <Item>
               <Item.Image size='tiny' avatar src='images/task.jpg' />

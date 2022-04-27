@@ -35,16 +35,21 @@ body,
     font-weight: bold;
 }
 .text_input_homeWork {
-    outline: none;
-    border: none;
+    outline: rgba(140,177,192,1);
+    border:  rgba(140,177,192,1);
     height: 40px;
-    width: 150px;
+    width: 300px;
     /* width: 490px;*/
     font-family: Roboto, Arial, sans-serif;
     font-size: 14px;
     font-weight: 400;
     letter-spacing: .2px;
     color:  #202124;
+    border-radius: 8px;
+    border-top: 2px solid rgba(140,177,192,1) ;
+    border-left: 2px solid rgba(140,177,192,1) ;
+    border-right: 2px solid rgba(140,177,192,1) ;
+    border-bottom: 2px solid rgba(140,177,192,1) ;
 }
 .text_input_homeWork:focus {
     border-bottom: 1.5px solid rgba(140,177,192,1);
@@ -54,13 +59,18 @@ body,
     outline: none;
     border: none;
     height: 40px;
-    width: 150px;
+    width: 300px;
     /* width: 490px;*/
     font-family: Roboto, Arial, sans-serif;
     font-size: 14px;
     font-weight: 400;
     letter-spacing: .2px;
     color:  #202124;
+    border-radius: 8px;
+    border-top: 2px solid rgba(140,177,192,1) ;
+    border-left: 2px solid rgba(140,177,192,1) ;
+    border-right: 2px solid rgba(140,177,192,1) ;
+    border-bottom: 2px solid rgba(140,177,192,1) ;
 
 }
 .text_input_homeWork_question:focus {

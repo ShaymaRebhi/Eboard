@@ -7,6 +7,7 @@ import {toast, ToastContainer} from "react-toastify";
 import {Grid, Header} from "semantic-ui-react";
 import QierPlayer from "qier-player";
 import ReactPlayer from "react-player";
+import "./CorrectionTask.css"
 
 function CorrectionTask() {
     const match = useRouteMatch();
@@ -318,13 +319,14 @@ function CorrectionTask() {
                         <div style={{display:"flex"}} className="directioninput">
                             <div style={{display:"flex",flexDirection:"column"}}>
                                 <label className="labelHomeWork" htmlFor="questionscore">Score :</label>
-                                <input className="text_input_homeWork_question" placeholder="write score here" id="questionscore"
+                                <input className="text_input_homeWork_score_comment" placeholder="write score here" id="questionscore"
                                        value={evaluation.Score}
                                        onChange={(e) =>setEvaluation({...evaluation, Score: e.target.value})} />
                             </div>
+                            &nbsp;
                             <div style={{display:"flex",flexDirection:"column"}}>
                                 <label className="labelHomeWork" htmlFor="questionscore">Comment :</label>
-                                <input className="text_input_homeWork_question" placeholder="write comment here" id="questionscore"
+                                <input className="text_input_homeWork_score_comment" placeholder="write comment here" id="questionscore"
                                        value={evaluation.Comment}
                                        onChange={(e) =>setEvaluation({...evaluation, Comment: e.target.value})} />
                             </div>

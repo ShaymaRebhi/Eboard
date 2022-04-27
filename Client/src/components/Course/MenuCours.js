@@ -34,6 +34,7 @@ export default class MenuCours extends Component {
           <Icon name='server' />Theme
         </Menu.Item>
         </Link>
+          {/*student*/}
         <Link to ="/evaluation">
         <Menu.Item
           name='evaluation'
@@ -45,26 +46,18 @@ export default class MenuCours extends Component {
           
         </Menu.Item>
         </Link>
-        <Link to="/TaskList">
+        {/*teacher*/}
+          <Link to ="/evaluationTeacherPage">
               <Menu.Item
-                  name='task'
-                  active={activeItem === 'task'}
+                  name='evaluation'
+                  active={activeItem === 'evaluation'}
                   onClick={this.handleItemClick}
               >
-                  <Label>51</Label>
-                  <Icon name='file alternate' /> Task
+                  <Label>1</Label>
+                  <Icon name='time' /> Evaluation Teacher
+
               </Menu.Item>
-        </Link>
-        <Link to ="/quizlist">
-        <Menu.Item
-          name='quiz'
-          active={activeItem === 'quiz'}
-          onClick={this.handleItemClick}
-        >
-          <Label>1</Label>
-          <Icon name='time' /> Quiz
-        </Menu.Item>
-        </Link>
+          </Link>
           <Link to ="/RecommendedCourses">
               <Menu.Item
                   name='RecommendedCourses'

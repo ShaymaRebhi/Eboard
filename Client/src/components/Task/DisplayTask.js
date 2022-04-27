@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import './DisplayTask.css'
 import "react-dropzone-uploader/dist/styles.css";
 import {useHistory, useRouteMatch} from "react-router-dom";
-import {DisplayTaskStudent, updateTaskStudentStatus} from "../../utils/Task";
+import {DisplayTaskStudent} from "../../utils/Task";
 import {toast, ToastContainer} from "react-toastify";
 import {Feed,Grid, Header} from "semantic-ui-react";
 import QierPlayer from "qier-player";
@@ -105,17 +105,6 @@ function DisplayTask() {
             .catch((error) => {
                 console.log(error);
             });
-
-        /*const newEvaluation ={
-            TaskStatus : "Worked",
-            TaskCorrected : "Not Corrected"
-        }
-        updateTaskStudentStatus(evaluation._id,newEvaluation,()=> {
-            toast.success('Task Sent Successfully', {
-                position: "bottom-right"
-            })
-            componentDidMount(3000)
-        })*/
     }
     return (
         <>

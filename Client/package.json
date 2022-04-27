@@ -83,7 +83,11 @@
     "styled-components": "^5.3.3",
     "swiper": "^6.8.4",
     "uuid": "^8.3.2",
-    "yup": "^0.29.3"
+    "yup": "^0.29.3",
+    "@mui/x-date-pickers": "^5.0.0-alpha.1",
+    "@syncfusion/ej2-react-calendars": "^20.1.47",
+    "react-simple-timefield": "^3.2.5",
+    "recharts": "^2.1.9"
   },
   "scripts": {
     "start": "react-scripts start",

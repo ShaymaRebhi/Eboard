@@ -8,6 +8,7 @@ import {toast, ToastContainer} from "react-toastify";
 import { Header, Icon, Item, Segment, } from 'semantic-ui-react'
 import moment from 'moment';
 import {MdAssignment} from "react-icons/md";
+import ReactPaginate from "react-paginate";
 
 function TaskList() {
     const idUser=JSON.parse(localStorage.getItem("login")).User._id;
@@ -48,7 +49,17 @@ function TaskList() {
      let value = e.target.value.toLowerCase();
      setSearchTerm(value);
   }
-  return (
+    const [pageNumber, setPageNumber] = useState (0)
+    const quizsPerPage = 2;
+    const pagesVisited = pageNumber * quizsPerPage;
+    const pageCount = Math.ceil(task.length / quizsPerPage);
+
+    const changePage = ({ selected }) => {
+
+        setPageNumber(selected);
+    };
+
+    return (
       <>
           <ToastContainer
               position="top-right"
@@ -64,7 +75,7 @@ function TaskList() {
         <div style={{display:"flex", justifyContent:"space-around"}}>
             <img src="images/tasks.jpg" alt="task" width="100%"/>
             <div className="headers text-center">
-                <h1>Task List</h1>
+                <h1 style={{color:"rgb(140,177,192)" ,fontSize:"50px"}}>Task List</h1>
             </div>
         </div>
           <div style={{display:"flex" ,justifyContent:"space-between"}}>
@@ -90,7 +101,7 @@ function TaskList() {
             ):(
             task.filter((t)=>{
                 return t.Title.toLowerCase().includes(searchTerm)
-            }).map((t,i)=>(
+            }).slice(pagesVisited, pagesVisited + quizsPerPage).map((t,i)=>(
                 <Segment color='grey' raised key={i}>
                     <Item.Group divided >
                         <Item>
@@ -100,7 +111,7 @@ function TaskList() {
                                 <Item.Header>{t.Title}</Item.Header>
                                 </Link>
                                 <Item.Meta>
-                                    <span className='cinema'>Created At {moment(t.CreationDate).format("MMMM Do YYYY")}</span>
+                                    <span className='cinema'>Status : {t.status}</span>
                                 </Item.Meta>
                                 <Item.Description>{t.Description}</Item.Description>
                             </Item.Content>
@@ -132,6 +143,18 @@ function TaskList() {
                 ))
             )}
         </div>
+          <ReactPaginate
+              previousLabel={"Previous"}
+              nextLabel={"Next"}
+              pageCount={pageCount}
+              onPageChange={changePage}
+              containerClassName={"paginationBttns"}
+              previousLinkClassName={"previousBttn"}
+              nextLinkClassName={"nextBttn"}
+              disabledClassName={"paginationDisabled"}
+              activeClassName={"paginationActive"}
+
+          />
       </>
   )
 }
