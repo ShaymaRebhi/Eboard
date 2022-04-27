@@ -4,6 +4,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter as Router,Redirect, Route, Switch } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/pages/Auth/Login';
+import 'devextreme/dist/css/dx.light.css';
 import Admin from './components/pages/Auth/Admin';
 import HomeEboard from './components/Home/HomeEboard';
 import { BrowserRouter }  from "react-router-dom";

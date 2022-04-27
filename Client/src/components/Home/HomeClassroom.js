@@ -7,6 +7,7 @@ import Classroom from '../Classroom/Classroom';
 import '../SideBar/Sidebar.css'
 import NavbarInside from '../NavbarInside/NavbarInside';
 import Calendar from '../Classroom/Calendar';
+import CalendarComponent from '../Classroom/CalendarComponent';
 import { useHistory } from 'react-router-dom';
 import Reclamation from '../Reclamations/Reclamation';
 import CreateForum from '../Forum/CreateForum';
@@ -62,7 +63,7 @@ function HomeClassroom(){
                                 <PrivateRoute
                                     path="/calendar"
                                     exact
-                                    component={Calendar}
+                                    component={CalendarComponent}
                                 />
                                 <PrivateRoute
                                     path="/Reclamation"
