@@ -4,12 +4,15 @@ import { useParams } from "react-router"
 import  * as api from "../../utils/Forum";
 
 import {useDispatch, useSelector} from 'react-redux'
-import {createComment,affichageComment, selectComment,supprimer,update,like} from "../../redux/slices/CommentSlice";
+import {createComment,affichageComment, selectComment,supprimer,update,like,dislike} from "../../redux/slices/CommentSlice";
 import Navbar from "../pages/Shared/Navbar";
 import Footer from "../pages/Shared/Footer";
 import CreateForum from "./CreateForum";
 import UpdateForum from "./UpdateForum";
 import {selectForum, getForumById, selectF} from "../../redux/slices/ForumSlice";
+import {WhatsappShareButton,EmailShareButton,LinkedinShareButton} from "react-share";
+import  {EmailIcon,WhatsappIcon, LinkedinIcon}from "react-share";
+
 import FacebookShareButton from "react-share/es/FacebookShareButton";
 import FacebookIcon from "react-share/es/FacebookIcon";
 
@@ -77,13 +80,16 @@ function Forum() {
         dispatch(like(l));
     };
 
+    const Dislike = (l) => {
+        dispatch(dislike(l));
+    };
+
     return (
         <div>
           
-            <div className="bodyy" >
+            <div className="bodyy" style={{padding: '2% 0% 2%'}}>
                 <div className="container">
-                    <div >
-                        
+                    <div className="container-fluid mt-100">
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="card mb-4">
@@ -123,17 +129,45 @@ function Forum() {
                                                 :''
                                             }
                                             {(forum!==null)?
+                                            <div>
                                                 <FacebookShareButton
-                                                    url={"https://eboardbackend2022.herokuapp.com/forum/"+forum._id}
+                                                    url={"https://www.youtube.com/watch?v=IYCa1F-OWmk&ab_channel=TraversyMedia"+forum._id}
                                                     quote={forum.Title}
-                                                    hashtag={forum.Tags}
+                                                    hashtag={'#EBOARD'}
                                                     description={forum.Description}
-                                                    className="Demo__some-network__share-button pr-4"
+                                                    className="Demo__some-network__share-button"
                                                 >
                                                     <FacebookIcon size={32} round />
                                                 </FacebookShareButton>
+
+                                                 <WhatsappShareButton
+                                                 url={"http://localhost:3001/forum/"+forum._id}
+                                                 title={forum.Title}
+                                                 >
+                                                     <WhatsappIcon size={32} round />
+                                                 </WhatsappShareButton>
+                                                 <EmailShareButton
+                                                 url={"http://localhost:3001/forum/"+forum._id}
+                                                 subject={forum.Title}
+                                                 body={forum.Description}
+
+                                                 >
+                                                     <EmailIcon size={32} round />
+                                                 </EmailShareButton>
+                                                 <LinkedinShareButton
+                                                 url={"http://localhost:3002/forum/"+forum._id}
+                                                 title={forum.Title}
+                                                 summary={forum.Description}
+                                                 
+
+                                                 >
+                                                     <LinkedinIcon size={32} round />
+                                                 </LinkedinShareButton>
+                                                 </div>
+                                             
                                                 :
                                                 ''
+                                                
                                             }
 
                                         </div>
@@ -148,13 +182,13 @@ function Forum() {
                                         {comments.map((c,i) => (
                                             <div className="d-flex flex-row p-3">
 
-                                                <img src="https://i.imgur.com/zQZSWrt.jpg" className="rounded-circle mr-3" style={{width:'45px',height:'45px'}} alt="ph"/>
+                                                <img src="https://i.imgur.com/zQZSWrt.jpg" className="rounded-circle mr-3" style={{width:'45px',height:'45px'}}/>
                                                 <div className="w-100">
                                                     <div className="d-flex justify-content-between align-items-center">
                                                         <div className="d-flex flex-row align-items-center">
                                                             <span className="mr-2">{(c.User.email)}</span>
-                                                            
-                                                        </div><small className='text-dark pr-4'>12h ago</small>
+                                                        </div>
+                                                        <small>12h ago</small>
                                                     </div>
                                                     {(form &&(c._id===commentU._id))?
                                                         <div>
@@ -170,15 +204,15 @@ function Forum() {
                                                         </p>
                                                     }
                                                     <div className="d-flex flex-row user-feed">
-                                                        <span className="wish">
+                                                    <span className="wish">
                                                             {(c.Likes.findIndex((item) => item.User === login.User._id) === -1) ?
                                                                 <a href="javascript:void(0)" onClick={() => Like({
-                                                                    User: '623113a28d227d001659e502',
+                                                                    User: login.User._id,
                                                                     Comment: c._id
                                                                 })}><i className="fa fa-heart text-hover-black"/></a>
                                                             :
-                                                                <a href="javascript:void(0)" onClick={() => Like({
-                                                                    User: '623113a28d227d001659e502',
+                                                                <a href="javascript:void(0)" onClick={() => Dislike({
+                                                                    User: login.User._id,
                                                                     Comment: c._id
                                                                 })}><i className="fa fa-heart text-danger"/></a>
                                                             }

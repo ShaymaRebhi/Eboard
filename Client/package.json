@@ -98,7 +98,12 @@
     "@mui/x-date-pickers": "^5.0.0-alpha.1",
     "@syncfusion/ej2-react-calendars": "^20.1.47",
     "react-simple-timefield": "^3.2.5",
-    "recharts": "^2.1.9"
+    "recharts": "^2.1.9",
+   "@material-ui/icons": "^4.11.2",
+   "firebase": "^9.6.11",
+   "react-mui-pagination": "^1.1.0"
+    
+    
    
   },
   "scripts": {

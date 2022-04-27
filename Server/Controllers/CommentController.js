@@ -100,4 +100,28 @@ exports.like = async (req,res) => {
         res.send(err);
 
     }
+
+}
+
+exports.dislike = async (req,res) => {
+
+    try{
+
+        let like = await  Like.findOne({User:req.body.User,Comment:req.body.Comment});
+        await Like.deleteOne({_id:like._id});
+
+        const comment =await Comment.findOne({_id:req.body.Comment})
+        comment.Likes.pull({_id:like._id});
+        await comment.save();
+
+        await Comment.findOne({_id:req.body.Comment}).populate('User').populate('Likes').then(Comment=>{
+            res.json(Comment);
+        }).catch(err=>{
+            res.json(err);
+        });
+
+    }catch(err){
+        res.send(err);
+
+    }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { BrowserRouter as Router,Redirect, Route, Switch } from "react-router-dom";
@@ -35,25 +35,63 @@ import en from "javascript-time-ago/locale/en";
 import ru from "javascript-time-ago/locale/ru";
 import TimeAgo from "javascript-time-ago";
 import EvaluationTeacherPage from "./components/Evaluation/EvaluationTeacherPage";
+import { requestForToken, onMessageListener } from "./utils/firebase";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Toast } from "react-bootstrap";
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
+
 function App() {
+
+    const [show, setShow] = useState(false);
+  const [notification, setNotification] = useState({ title: "", body: "" });
+  const [theme,setTheme]=useState("light");
     
-    const [theme,setTheme]=useState("light");
+  const  themeToggler=()=>{
+      theme==="light" ?setTheme("dark") :setTheme("light");
+  };
+
+  useEffect(() => {
+    if (notification?.title) {
+      setShow(true);
+    }
+  }, [notification]);
+
+  if (!Notification) {
+    alert("Desktop notifications not available in your browser. Try Chromium.");
+    return;
+  }
+
+  if (Notification.permission !== "granted") Notification.requestPermission();
+
+  requestForToken();
+
+  onMessageListener()
+    .then((payload) => {
+      setNotification({
+        title: payload.notification.title,
+        body: payload.notification.body,
+      });
+      setShow(true);
+      toast(payload.notification.body);
+    })
+    .catch((err) => console.log("failed: ", err));
     
-    const  themeToggler=()=>{
-        theme==="light" ?setTheme("dark") :setTheme("light");
-    };
+   
 
 
 
   return (
+    <div className="root">
+
       <ThemeProvider theme={theme==="light" ?lightTheme:darkTheme}>
           <Global/>
           <StyledApp>
         <div className='chatbot'>
           <Chat></Chat>
+          <ToastContainer position="bottom-left" />
         </div>
 
         <BrowserRouter>
@@ -317,7 +355,7 @@ function App() {
         </BrowserRouter>
         </StyledApp>
       </ThemeProvider>
-  );
+ </div> );
 }
 
 export default App;
