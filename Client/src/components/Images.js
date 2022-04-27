@@ -6,7 +6,7 @@ import { updatePic } from "../utils/api";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/inject-style';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { MdOutlineMonochromePhotos } from "react-icons/md";
 export default function Images(prop) {
   
     const [images, setImages] = React.useState([]);
@@ -35,10 +35,7 @@ export default function Images(prop) {
   }).catch(err=>{
     console.log(err)
   }).finally(msg=>{
-    toast.success('Image updated !!', {
-      position: "bottom-right" 
-     });
-  })
+    toast.success('Image updated !!')})
   };
   return (
    <div className="App">
@@ -54,7 +51,7 @@ export default function Images(prop) {
               pauseOnHover
               theme={'colored'}
       />
-     {console.log(images.length)}
+     
       <ImageUploading
         
         value={images}
@@ -82,6 +79,7 @@ export default function Images(prop) {
 
             }
             {images.length===0 ? <img className="img" onClick={onImageUpload} {...dragProps} src={prop.src ? prop.src: ""} alt="profile pic" onError={(e) => e.target.src=`https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg`}/> : ""}
+            <span onClick={onImageUpload} {...dragProps} className='update text-muted'>{prop.text}<MdOutlineMonochromePhotos/></span>
           </div>
         )}
       </ImageUploading>

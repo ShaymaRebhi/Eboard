@@ -1,12 +1,11 @@
 
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled , { css }from 'styled-components';
 import * as AIICons from "react-icons/ai"
 
 
-export const Gmail = ({
+export const LinkedIn = ({
  
   text2,
   icon,
@@ -21,13 +20,13 @@ export const Gmail = ({
 
     
     
-     <Button gmail
+     <Button linkedIn
         onClick={onClick}
         type={type}
         disabled={active}
         showIcon={icon}
       >
-        {icon && <AIICons.AiFillGoogleCircle className='icon'/>} {text2}
+        {icon && <AIICons.AiFillLinkedin className='icon'/>} {text2}
       </Button>
     
       
@@ -54,21 +53,18 @@ const Button = styled.button`
   padding: 10px 20px; !Important;
   margin: 0.25em 0em;
  
-  ${props => props.gmail && css`
-    background: #EA4335;
+  ${props => props.linkedIn && css`
+    background: #0072b1;
     color: white;
     &:hover {
-        background-color:#C5392D;
+        background-color:#027DC1;
     }
     &:disabled{
      
-      background-color: #F04739;
+      background-color: #2C87B9;
       color: #ECEBEB;
     }
   `}
  
 `;
 
-const Container = styled.div`
-  text-align: center;
-`

@@ -3,9 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const http = require("http");
-const socketIo = require("socket.io");
-
 var cors = require('cors');
 const userRoute = require('./routes/User')
 var forumRouter = require('./routes/Forum');
@@ -16,14 +13,12 @@ const questionRoute = require('./routes/QuestionQuiz')
 const taskRoute = require('./routes/Task')
 const ChatRoute = require('./routes/Chat')
 const bodyparser = require("body-parser")
+const socket=require('socket.io')
 const ReclamationRoute = require('./routes/Reclamations') 
 const classRoute = require('./routes/Class.js')
-const InvitationClassRouter = require("./routes/InvitationClass.js")
-const courses_route = require("./routes/Courses.route")
-const ThemeController = require("./routes/ThemeController");
-const CommentCourse = require("./routes/CommentCourse");
-const SchedulerRouter = require("./routes/Scheduler.js");
-
+const StudentRoute = require('./routes/Student')
+const TeacherRoute = require('./routes/Teacher')
+const OrganizationRoute = require('./routes/Organization')
 const Grid = require("gridfs-stream");
 require('dotenv/config');
 let gfs;
@@ -87,13 +82,9 @@ app.use('/forum',forumRouter);
 app.use('/reclamation',ReclamationRoute);
 app.use('/comment',CommentRoute);
 app.use('/class',classRoute);
-app.use('/invitationclass',InvitationClassRouter);
-app.use("/courses", courses_route);
-app.use("/theme", ThemeController);
-app.use("/coursesComment", CommentCourse);
-app.use("/scheduler", SchedulerRouter);
-
-
+app.use('/student',StudentRoute);
+app.use('/teacher',TeacherRoute);
+app.use('/organization',OrganizationRoute);
 
 app.get("/",(req,res)=>{
   res.sendFile(path.join(__dirname, '/views/index.html'));
@@ -117,7 +108,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-//////////////////////////
-
-
-module.exports = app ;
+module.exports = app;

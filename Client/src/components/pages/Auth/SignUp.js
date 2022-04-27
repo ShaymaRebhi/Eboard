@@ -12,6 +12,7 @@ import {  toast, ToastContainer } from 'react-toastify';
 
 import Select from 'react-select'
 import ClipLoader from "react-spinners/ClipLoader";
+import { signup } from '../../../utils/api';
 export default function SignUp() {
   let [loading, setLoading] = useState(false);
   const history=useHistory();
@@ -85,7 +86,7 @@ const password1=[
     console.log(Object.fromEntries(Data.entries()).role)
 
     setLoading(true)
-    axios.post("https://eboardbackend2022.herokuapp.com/user/signup",{
+    axios.post(signup,{
       "email":values.email,
       "Password":values.password,
       "role":values.role,
@@ -99,16 +100,11 @@ const password1=[
    
       
     }).then(Response=>{
-      
-      toast.success('Account added successfuly please sign in  ', {
-        position: "bottom-right" 
-      });
+      toast.success('Please check your email to activate your account !! ');
       componentDidMount(5000);
     }).catch(err => {
           
-          toast.error('Account already exist try to login or contact the admin', {
-                    position: "bottom-right" 
-            });
+          toast.error('Account already exist try to login or contact the admin');
        
         //addToast("test error", { appearance: 'error' });
     }).finally(res=>{

@@ -29,6 +29,10 @@ var Teacher =new Schema({
     User:{
         type : mongoose.Schema.Types.ObjectId,
         ref:'users'
+    },
+    Organization:{
+        type : mongoose.Schema.Types.ObjectId,
+        ref:'organization'
     }
 
 })

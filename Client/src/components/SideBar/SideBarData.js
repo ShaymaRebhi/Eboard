@@ -1,7 +1,8 @@
 import React from 'react'
 
 import * as AiIcons from "react-icons/ai";
-import * as MDIcons from "react-icons/md"
+import * as MDIcons from "react-icons/md";
+import * as BSIcons from "react-icons/bs"
 import {SiGoogleclassroom} from "react-icons/si"
 import {BiArchive} from "react-icons/bi"
 export const SidebarData=[
@@ -17,6 +18,15 @@ export const SidebarData=[
         icon:<MDIcons.MdOutlineForum />,
         cName:'nav-text',
         tooltip:"Forums",
+    },
+    
+    
+    {
+       
+        path:'/chat',
+        icon:<BSIcons.BsChatDots />,
+        cName:'nav-text',
+        tooltip:"Chat",
     },
     {
         
