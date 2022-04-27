@@ -6,13 +6,18 @@ import TableTheme from '../Course/TableTheme'
 
 
 export class Theme extends Component {
+  
   render() {
+    const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
+
     return (
       <div>
+             
+
           <Menu pointing secondary>
         
       
-        
+          {role === "TEACHER" ? (
           <Menu.Item position="left">
             <Dropdown floating className="icon" icon="add circle" value="add" > 
               <Dropdown.Menu>
@@ -38,12 +43,15 @@ export class Theme extends Component {
               </Dropdown.Menu>
             </Dropdown>
           </Menu.Item>
-      
-          <></>
+          ) : (
+            <></>
+
+            )}
       
       </Menu>
       <br/>
       <TableTheme />
+      
       </div>
     )
   }

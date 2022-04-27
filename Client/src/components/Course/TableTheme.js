@@ -60,7 +60,7 @@ function TableTheme ()  {
          
           <Card.Group className="cardt">
           {themes.map((theme) => (
-          <Card key={theme._id}>
+          <Card key={theme._id}  >
                 <Card.Content>   
                   <Card.Header>                  
                     <Grid stackable>

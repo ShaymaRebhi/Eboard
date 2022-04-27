@@ -11,7 +11,7 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from 'react-redux'
-import {addClass , fetchclass} from "../../redux/slices/classline";
+import {addClass , fetchActiveClass, fetchclass} from "../../redux/slices/classline";
 import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
 import { getUserConnect } from '../../utils/api';
@@ -101,6 +101,7 @@ export default function AddClassComponent() {
         dispatch(addClass(data));
         dis({ type: "CLOSE_MODAL" });
         dispatch(fetchclass(role ,idUserConnect,"Active"));
+        dispatch(fetchActiveClass(idUserConnect));
         
       } catch (err) {
         error = {

@@ -73,7 +73,6 @@ function FormCoursesEdit(props) {
     )
       .then((response) => {
         const CurrentClass = JSON.parse(localStorage.getItem("idClass"));
-        console.log(CurrentClass._id);
         dispatch(RetrieveCoursesByIdClass(CurrentClass._id));
         console.log(response);
         SetFormClassName("success");

@@ -5,7 +5,7 @@ import FormCoursesEdit from "./FormCoursesEdit";
 function ModalCoursesEdit(props) {
   return (
     <div>
-      <Modal
+      <Modal className="theme"
         trigger={
           <Feed.Like>
             <Icon name={props.icon} /> {props.buttonTriggerTitle}

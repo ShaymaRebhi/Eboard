@@ -52,7 +52,7 @@ function TableCourses(props) {
           <Image
             centered
             size="medium"
-            src={process.env.PUBLIC_URL + "/NoFileFound.png"}
+            src={process.env.PUBLIC_URL + "/noFileFound.jpg"}
           />
           <Header as="h2" textAlign="center">
             <Header.Content>Sorry No Courses Found </Header.Content>

@@ -26,11 +26,9 @@ function ModalConfirmDeleteCour(props) {
   };
   return (
     <div>
-      <Modal
+      <Modal className="add"
         trigger={
-          // <Button onClick={this.handleOpen} color={this.props.buttonColor}>
-          //   {this.props.buttonTriggerTitle}
-          // </Button>
+         
 
           <Feed.Like onClick={handleOpen}>
             <Icon onClick={handleOpen} name="trash" /> Remove
@@ -43,7 +41,7 @@ function ModalConfirmDeleteCour(props) {
       >
         <Modal.Header>{props.headerTitle}</Modal.Header>
         <Modal.Content>
-          <p>
+          <p className="ps">
             Are you sure you want to delete{" "}
             <strong>{props.courses.titre}</strong>?
           </p>

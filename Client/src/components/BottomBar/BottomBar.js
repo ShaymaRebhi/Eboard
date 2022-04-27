@@ -177,7 +177,7 @@ const BottomBar = ({
         >
           <Header icon="record" content="Information about Record Session" />
           <Modal.Content>
-            <p>
+            <p className="ps">
               After this session got recorded it will be added automatically as
               a new courses in your class timeline and it will take as a title
               "Recorded Session of today"

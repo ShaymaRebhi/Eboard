@@ -48,7 +48,7 @@ function ListCoursesBySeance() {
           <Image
             centered
             size="medium"
-            src={process.env.PUBLIC_URL + "/NoFileFound.png"}
+            src={process.env.PUBLIC_URL + "/noFileFound.jpg"}
           />
           <Header as="h2" textAlign="center">
             <Header.Content>Sorry No Courses Found </Header.Content>
@@ -73,7 +73,7 @@ function ListCoursesBySeance() {
               <Segment raised color="grey">
                 <Feed key={c._id}>
                   <Feed.Event>
-                    <Feed.Label image={c.idOwner.User.file} />
+                    
 
                     <Feed.Content>
                       <Accordion.Title
@@ -84,7 +84,12 @@ function ListCoursesBySeance() {
                         <Grid stackable>
                           <Grid.Column width={11}>
                             <Feed.Summary>
-                              <a>{c.idOwner.name}</a> posted a new course
+                          <Header
+                            as="h3"
+                            icon="file alternate outline"
+                            content={c.titre}
+                          />
+                        <Feed.Date>{c.idOwner.FirstName+" "+c.idOwner.LastName} .</Feed.Date>
                               <Feed.Date>
                                 <ReactTimeAgo
                                   date={c.dateCreation}
@@ -132,15 +137,10 @@ function ListCoursesBySeance() {
                       </Accordion.Title>
 
                       <Accordion.Content active={activeIndex === index}>
-                        <Link to={"/detailCourses/" + c._id}>
-                          <Header
-                            as="h3"
-                            icon="file alternate outline"
-                            content={c.titre}
-                          />
-                        </Link>
-
+                        
+                      <Link to={"/detailCourses/" + c._id}>
                         <Feed.Extra text>{c.description}</Feed.Extra>
+                        </Link>
                         <Feed.Extra images>
                           <Grid stackable>
                             <Grid.Row>
@@ -153,7 +153,7 @@ function ListCoursesBySeance() {
                                       rel="noopener noreferrer"
                                     >
                                       <div>
-                                        <Grid.Column width={3}>
+                                        <Grid.Column width={5}>
                                           <img
                                             src={
                                               process.env.PUBLIC_URL +
@@ -169,17 +169,13 @@ function ListCoursesBySeance() {
                                             alt=""
                                           />
                                         </Grid.Column>
-                                        <Grid.Column width={3}>
+                                        <Grid.Column width={5}>
                                           <Grid.Row>
                                             <Header as="h4" color="red">
                                               {files.originalname}
                                             </Header>
                                           </Grid.Row>
-                                          <Grid.Row>
-                                            <Header as="h4" color="grey">
-                                              {files.type.slice(0, 7)} File
-                                            </Header>
-                                          </Grid.Row>
+                                          
                                         </Grid.Column>
                                       </div>
                                     </a>
@@ -193,7 +189,7 @@ function ListCoursesBySeance() {
                                       rel="noopener noreferrer"
                                     >
                                       <div>
-                                        <Grid.Column width={3}>
+                                        <Grid.Column width={5}>
                                           <img
                                             src={
                                               process.env.PUBLIC_URL +
@@ -209,17 +205,13 @@ function ListCoursesBySeance() {
                                             alt=""
                                           />
                                         </Grid.Column>
-                                        <Grid.Column width={3}>
+                                        <Grid.Column width={5}>
                                           <Grid.Row>
                                             <Header as="h4" color="red">
-                                              {files.originalname}
+                                              "   "+{files.originalname}
                                             </Header>
                                           </Grid.Row>
-                                          <Grid.Row>
-                                            <Header as="h4" color="grey">
-                                              {files.type.slice(0, 7)} File
-                                            </Header>
-                                          </Grid.Row>
+                                          
                                         </Grid.Column>
                                       </div>
                                     </a>
@@ -233,7 +225,7 @@ function ListCoursesBySeance() {
                                       rel="noopener noreferrer"
                                     >
                                       <div>
-                                        <Grid.Column width={3}>
+                                        <Grid.Column width={5}>
                                           <img
                                             src={
                                               process.env.PUBLIC_URL +
@@ -252,21 +244,17 @@ function ListCoursesBySeance() {
                                         <Grid.Column width={3}>
                                           <Grid.Row>
                                             <Header as="h4" color="red">
-                                              {files.originalname}
+                                            {files.originalname}
                                             </Header>
                                           </Grid.Row>
-                                          <Grid.Row>
-                                            <Header as="h4" color="grey">
-                                              {files.type.slice(0, 7)} File
-                                            </Header>
-                                          </Grid.Row>
+                                          
                                         </Grid.Column>
                                       </div>
                                     </a>
                                   </div>
                                 ) : files.type === "video/mp4" ? (
                                   <div>
-                                    <Grid.Column width={3}>
+                                    <Grid.Column width={5}>
                                       <QierPlayer
                                         width={250}
                                         height={100}
@@ -275,17 +263,13 @@ function ListCoursesBySeance() {
                                         srcOrigin={files.url}
                                       />
                                     </Grid.Column>
-                                    <Grid.Column width={3}>
+                                    <Grid.Column width={5}>
                                       <Grid.Row>
                                         <Header as="h4" color="red">
                                           {files.originalname.slice(0, 7)}
                                         </Header>
                                       </Grid.Row>
-                                      <Grid.Row>
-                                        <Header as="h4" color="grey">
-                                          {files.type.slice(0, 7)} File
-                                        </Header>
-                                      </Grid.Row>
+                                     
                                     </Grid.Column>
                                   </div>
                                 ) : files.type === "audio/mpeg" ? (
@@ -307,11 +291,7 @@ function ListCoursesBySeance() {
                                           {files.originalname.slice(0, 7)}
                                         </Header>
                                       </Grid.Row>
-                                      <Grid.Row>
-                                        <Header as="h4" color="grey">
-                                          {files.type.slice(0, 7)} File
-                                        </Header>
-                                      </Grid.Row>
+                                      
                                     </Grid.Column>
                                   </div>
                                 ) : files.type === "image/png" ||
@@ -339,14 +319,10 @@ function ListCoursesBySeance() {
                                     <Grid.Column width={3}>
                                       <Grid.Row>
                                         <Header as="h4" color="red">
-                                          {files.originalname}
+                                        {files.originalname}
                                         </Header>
                                       </Grid.Row>
-                                      <Grid.Row>
-                                        <Header as="h4" color="grey">
-                                          {files.type.slice(0, 7)} File
-                                        </Header>
-                                      </Grid.Row>
+                                     
                                     </Grid.Column>
                                   </div>
                                 ) : (
@@ -375,14 +351,10 @@ function ListCoursesBySeance() {
                                       <Grid.Column width={3}>
                                         <Grid.Row>
                                           <Header as="h4" color="red">
-                                            {files.originalname}
+                                         {files.originalname}
                                           </Header>
                                         </Grid.Row>
-                                        <Grid.Row>
-                                          <Header as="h4" color="grey">
-                                            {files.type.slice(0, 7)} File
-                                          </Header>
-                                        </Grid.Row>
+                                       
                                       </Grid.Column>
                                     </div>
                                   </a>
