@@ -39,6 +39,7 @@ import { requestForToken, onMessageListener } from "./utils/firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Toast } from "react-bootstrap";
+import HomeOrganization from './components/Home/HomeOrganization';
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
@@ -105,6 +106,16 @@ function App() {
                 path="/Eboard/home"
                 exact
                 render={(props) => <HomeAdmin {...props} />}
+            />
+            <Route
+                path="/Organization"
+                exact
+                render={(props) => <HomeOrganization {...props} />}
+            />
+            <Route
+                path="/Organization/payement"
+                exact
+                render={(props) => <HomeOrganization {...props} />}
             />
             <Route
                 path="/Eboard/Teachers"

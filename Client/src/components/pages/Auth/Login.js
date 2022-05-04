@@ -233,7 +233,7 @@ var getObject={
         if(getObject.Role==="STUDENT"){
           history.push("/classroom");
         }else if(getObject.Role==="ORGANIZATION"){
-          history.push("/ORG");
+          history.push("/Organization");
         }if(getObject.Role==="TEACHER"){
           history.push("/classroom");
         }else if(getObject.Role==="ADMIN"){

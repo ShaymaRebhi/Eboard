@@ -4,7 +4,6 @@ const UserController = require('../Controllers/UserController')
 const authenticateToken =require('./VerifyToken')
 const upload =require('../MiddelWare/Upload')
 require('dotenv').config()  
-
 var multer  = require('multer')
 
 
@@ -23,7 +22,8 @@ router.post('/signup',upload.single('file'),UserController.signup);
 
 router.post('/login',UserController.signin);
 
-router.get("/hello",UserController.hi)
+router.get("/hello",UserController.hi);
+
 router.post('/activate',UserController.activateAccount);
 
 router.post('/admin/login',UserController.signinForAdmin);
