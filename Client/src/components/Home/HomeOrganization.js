@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import OrganizationSideBar from '../SideBar/OrganizationSideBar';
 import PrivateRoute from '../../Routes/PrivateRoute';
 import Payement from '../pages/Organization/Payement';
+import TeacherList from '../pages/Organization/TeacherList';
 
 function HomeOrganization() {
    
@@ -48,6 +49,11 @@ function HomeOrganization() {
                                     path="/Organization/payement"
                                     exact
                                     component={Payement}
+                                />
+                            <PrivateRoute
+                                    path="/Organization"
+                                    exact
+                                    component={TeacherList}
                                 />
 
                     </Grid.Row>

@@ -173,7 +173,7 @@ var getObject={
         AccessToken:Response.data.AccessToken,
         User:Response.data.User
       }))
-      axios.get(getUserConnect,{
+    axios.get(getUserConnect,{
         headers: {
             'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
         }
@@ -244,7 +244,6 @@ var getObject={
     }
     
     const responseFacebook = (response) => {
-      console.log(response)
       if(!response.email || !response.picture.data.url){
         setFacebookLoading(false);
         toast.error('Facebook service temporarily unavailable ');
@@ -331,15 +330,31 @@ var getObject={
           Logined:true,
           Role:response.data.User.role,
           AccessToken:response.data.AccessToken,
-          User:response.data.User
-        })).finally(rs=>{
-          setGmailLoading(false);
+          User:response.data.User})
+        )
+
+        axios.get(getUserConnect,{
+          headers: {
+              'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+          }
+      }).then(res=>{
+          localStorage.setItem('Student',JSON.stringify({
+             Student: res.data[0]
+          }))
         })
-        
-        
-        
+
+        axios.get(getUserConnect,{
+          headers: {
+              'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+          }
+      }).then(res=>{
+          localStorage.setItem('idStudent',JSON.stringify({
+             _id: res.data[0]._id
+          }))
+          
+        })
+       
         const token =response.data.AccessToken;
-        
         setCookie("token",token);
 
         if(response.data.User.role==="STUDENT"){
@@ -412,19 +427,7 @@ var getObject={
     <>
    
   
-    <ToastContainer
-              position="top-right"
-              autoClose={5000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme={'colored'}
-      />
-  
+    
       
       <LoginWithPhoto>
         <div className="form-container">

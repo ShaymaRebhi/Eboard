@@ -20,7 +20,7 @@ export const PayementButton = ({
         showIcon={icon}
         disabled={active}
       >
-         <FAICons.FaCcMastercard  className='icon' /> <FAICons.FaCcVisa  className='icon' /> <FAICons.FaCcAmex  className='icon' />  <FAICons.FaCcDiscover  className='icon' />
+         <FAICons.FaCcMastercard  className='icon' /> <FAICons.FaCcVisa  className='icon' /> <FAICons.FaCcAmex  className='icon' />  <FAICons.FaCcDiscover  className='icon' /> {text}
       </Button>
     
       

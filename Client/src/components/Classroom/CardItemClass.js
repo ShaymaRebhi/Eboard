@@ -1,15 +1,30 @@
-import React  from 'react';
+import React, { useEffect, useState }  from 'react';
 import { FaRegFolder , FaRegFile , FaRegComment ,FaRegGrinHearts,FaRegAngry,FaEllipsisV} from "react-icons/fa";
 import '../css/CardClass.css';
 import { Dropdown } from 'semantic-ui-react';
 import ArchieveClassComponent from './ArchieveClassComponent';
 import EditComponent from './EditComponent';
+import { getUserConnect } from '../../utils/api';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 
 function CardItemClass(props) {
-  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
-
+  const [idUserConnect,setIdUserConnect]=useState(undefined);
+  
+  useEffect(()=>{
+    axios.get(getUserConnect,{
+      headers: {
+          'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+      }
+  }).then(res=>{
+    console.log(res.data[0])
+      setIdUserConnect(res.data[0].User.role);
+    })
+    
+    
+  },[])
   return (
     
     <>
@@ -46,7 +61,7 @@ function CardItemClass(props) {
           </div>
             <img
               className='cards__Class__item__img'
-              alt='backround image'
+              alt='backround img'
               src={props.src}
             />
             
@@ -66,17 +81,17 @@ function CardItemClass(props) {
             <h6 className='cards__Class__item__class'>{props.class}</h6>
             <ul className='icons'>
               
-              <li> <a href="#"> <i><FaRegFolder /> </i> </a></li>
-              <li> <a href="#"> <i> <FaRegFile /></i></a></li>
-              <li><a href='#'><i ><FaRegComment /></i></a></li>
+              <li> <Link to="#"> <i><FaRegFolder /> </i> </Link></li>
+              <li> <Link to="#"> <i> <FaRegFile /></i></Link></li>
+              <li><Link to='#'><i ><FaRegComment /></i></Link></li>
             
               
             </ul>
             <ul className='react'>
-            <li><a href='#'><i ><FaRegGrinHearts /></i></a></li>
-              <li><a href='#'><i ><FaRegAngry /></i></a></li>
+            <li><Link to='#'><i ><FaRegGrinHearts /></i></Link></li>
+              <li><Link to='#'><i ><FaRegAngry /></i></Link></li>
            </ul>
-        {props.meet =='IN MEETING NOW' ? (
+        {props.meet ==='IN MEETING NOW' ? (
         <div className='meet-btns'>        
         <h5><i className='fas fa-circle' /> {props.meet} 
         </h5>

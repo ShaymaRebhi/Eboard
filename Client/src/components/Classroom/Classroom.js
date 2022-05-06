@@ -1,31 +1,57 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../css/CardClass.css';
 import CardClass from './CardClass';
 import AddClassComponent from './AddClassComponent';
 import InvitationClassComonent from "./InvitationClassComonent";
 import RecentActivites from './RecentActivities';
 import styled from 'styled-components'
+import { getUserConnect } from '../../utils/api';
+import axios from 'axios';
 
 
 
 function Classroom() {
-  console.log(JSON.parse(localStorage.getItem("Student")))
-  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
+  const [role,setRole]=useState("");
+  const [idUserConnect,setIdUserConnect]=useState("");
+  useEffect(()=>{
+    axios.get(getUserConnect,{
+        headers: {
+            'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+        }
+    }).then(res=>{
+        localStorage.setItem('Student',JSON.stringify({
+           Student: res.data[0]
+        }))
+        setIdUserConnect(res.data[0]._id)
+      })
+      axios.get(getUserConnect,{
+        headers: {
+            'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+        }
+    }).then(res=>{
+        localStorage.setItem('idStudent',JSON.stringify({
+           _id: res.data[0]._id
+        }))
+        setRole(res.data[0].User.role);
+    })
+},[])
+  
+  
 
   return (
     <>
       <ClassRoomStyle className='d-flex justify-content-start'>
       
       <div>
-      {role === "TEACHER" ? (
+      { role === "TEACHER" ? (
             <AddClassComponent /> 
             ) : (
               <></>
 
               )}
 
-            <CardClass></CardClass> 
-          
+            {role && idUserConnect && <CardClass role={role} idUserConnect={idUserConnect} ></CardClass> }
+              
             <InvitationClassComonent></InvitationClassComonent>
         </div>
         <RecentActivites></RecentActivites>

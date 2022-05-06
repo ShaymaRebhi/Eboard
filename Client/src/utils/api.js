@@ -27,6 +27,7 @@ export const getStudentBYids=`${host1}/teacher/getStudentById/`;
 export const getOrganizationBYid=`${host1}/organization/getStudentById/`;
 export const getallOrganization=`${host1}/organization/all`;
 export const deleteStudent=`${host1}/user/delete/`;
+export const payementUrl=`${host1}/organization/payement`;
 export const LinkedInApi = {
     clientId: '78k73vnm4gj65z',
     redirectUrl: host1+'/linkedin',

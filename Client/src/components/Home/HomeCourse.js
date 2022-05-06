@@ -31,6 +31,8 @@ import CorrectionTask from "../Task/CorrectionTask";
 import Recommendation from "../RecommendedCourses/Recommendation";
 import Evaluation from "../Evaluation/Evaluation";
 import EvaluationTeacherPage from "../Evaluation/EvaluationTeacherPage";
+import axios from 'axios';
+import { getUserConnect } from '../../utils/api';
 
 function HomeCourse(){
 
@@ -55,6 +57,7 @@ function HomeCourse(){
     if(localStorage.getItem('login')===null ){
         history.push("/login");
     }
+    
     return (
         <div>
             <div className='spacing_3la_3ajlaa'>
