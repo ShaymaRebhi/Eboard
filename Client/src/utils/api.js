@@ -70,3 +70,16 @@ export const CommentsApi = {
       const { data } = await api.put(`coursesComment/update/${id}`, newcomment);
       return data;
     }};
+
+
+export const GetNumberStudents  = (callback)=>{
+    axios.get(`${host1}/user/GetNumberStudent/`).then((res)=> {callback(res)})
+}
+
+export const GetNumberTeachers  = (callback)=>{
+    axios.get(`${host1}/user/GetNumberTeacher/`).then((res)=> {callback(res)})
+}
+
+export const GetNumberOrganizations  = (callback)=>{
+    axios.get(`${host1}/user/GetNumberOrganization/`).then((res)=> {callback(res)})
+}

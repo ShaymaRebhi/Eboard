@@ -23,7 +23,6 @@ router.post('/signup',upload.single('file'),UserController.signup);
 
 router.post('/login',UserController.signin);
 
-router.get("/hello",UserController.hi)
 router.post('/activate',UserController.activateAccount);
 
 router.post('/admin/login',UserController.signinForAdmin);
@@ -43,5 +42,10 @@ router.post('/facebookLogin',UserController.facebookSignin)
 router.post('/gmailLogin',UserController.gmailSignin)
 
 router.get('/chat/all/:id/:role',UserController.AllUsersExceptMe);
+
+
+router.get('/GetNumberStudent',UserController.GetNumberStudent);
+router.get('/GetNumberTeacher',UserController.GetNumberTeacher);
+router.get('/GetNumberOrganization',UserController.GetNumberOrganization);
 
 module.exports = router;
