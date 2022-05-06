@@ -44,4 +44,5 @@ router.post('/gmailLogin',UserController.gmailSignin)
 
 router.get('/chat/all/:id/:role',UserController.AllUsersExceptMe);
 
+router.post('/contactus',UserController.contactUs);
 module.exports = router;

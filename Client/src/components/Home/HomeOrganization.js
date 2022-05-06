@@ -9,6 +9,7 @@ import OrganizationSideBar from '../SideBar/OrganizationSideBar';
 import PrivateRoute from '../../Routes/PrivateRoute';
 import Payement from '../pages/Organization/Payement';
 import TeacherList from '../pages/Organization/TeacherList';
+import UpdateTeachers from '../pages/Organization/Action/UpdateTeacher';
 
 function HomeOrganization() {
    
@@ -55,7 +56,12 @@ function HomeOrganization() {
                                     exact
                                     component={TeacherList}
                                 />
-
+                            
+                            <PrivateRoute
+                                    path="/Organization/update/:id"
+                                    exact
+                                    component={UpdateTeachers}
+                                />
                     </Grid.Row>
                 </Grid>
 

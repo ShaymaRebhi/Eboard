@@ -68,7 +68,7 @@ function OrganizationSideBar() {const [hideNav,setHideNav]=useState(false);
                            </div>
                       );
                   })}
-                   <Link to="/profile">
+                   <Link to="/Organization/profile">
                    <Tooltip target=".imageAvatar" content="Profile" />
                      <div className='avatar'>
                      

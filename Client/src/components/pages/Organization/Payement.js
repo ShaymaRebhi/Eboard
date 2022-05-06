@@ -10,7 +10,7 @@ import {loadStripe} from '@stripe/stripe-js';
 import axios from 'axios';
 import { getUserConnect, payementUrl } from '../../../utils/api';
 import { useHistory } from 'react-router-dom';
-
+import { ToastContainer, toast } from 'react-toastify';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 function Payement() {
@@ -18,6 +18,7 @@ function Payement() {
   const [userConnect,setUserConnect]=useState(undefined);
   const [pay,setPay]=useState(false);
   const [idOrganization,setiIdOrganization]=useState(undefined);
+  const [email,setEmail]=useState(undefined);
   const history=useHistory();
   useEffect(()=>{
     if(pay){
@@ -33,6 +34,7 @@ function Payement() {
       console.log(res.data[0])
       setiIdOrganization(res.data[0]._id);
       setUserConnect(res.data[0].Name);
+      setEmail(res.data[0].User.email)
       setPay(res.data[0].Payement);
     })
     
@@ -59,6 +61,8 @@ function Payement() {
         console.log("RESPONSE ",response)
         const {status}=response;
         console.log("STATUS",status);
+        toast.success("Payement success !!");
+        history.push('/Organization');
       })
       .catch(error=>{
         console.log(error);
@@ -90,8 +94,9 @@ function Payement() {
         <StripeCheckout 
           stripeKey={process.env.REACT_APP_KEY}
          token={makePayement} 
-         name={`Buy for ${userConnect}`} 
+         name={`Buy for ${userConnect? userConnect:""}`} 
          amount={amounts * 100}
+         email={email ? email:""}
          >
           <PayementButton  icon={true}  />
         </StripeCheckout>

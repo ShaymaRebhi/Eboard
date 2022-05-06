@@ -11,7 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/inject-style';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button } from 'primereact/button';
-function Profile() {
+function OrganizationProfile() {
     const [values,setValues]=useState({
         FirstName:"",
         LastName:"",
@@ -85,53 +85,7 @@ function Profile() {
         var date =new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(new Date(currentUser.User.updatedAt));
 
     }
-    const input1=[
-        {
-          id:0,
-          name:"FirstName",
-          type:"text",
-          label:"FirstName",
-          className:"form-control ",
-          placeholder:"First Name",
-          defaults:currentUser ? currentUser.FirstName :"",
-          errorMessage:"The firstName is required !",
-          required:true
-        
-        },{
-          id:1,
-          name:"LastName",
-          type:"text",
-          label:"LastName",
-          defaults:currentUser ? currentUser.LastName :"",
-          className:"form-control",
-          placeholder:"LastName",
-          errorMessage:"The lastName is required ! ",
-          required:true
-      
-        },{
-            id:2,
-            name:"email",
-            type:"email",
-            label:"Email ID",
-            className:"form-control ",
-            defaults:currentUser ? currentUser.User.email :"",
-            placeholder:"Email ID",
-            errorMessage:"It should be a valid email adress!",
-            required:true
-        
-          },{
-            id:3,
-            name:"Cin",
-            type:"Number",
-            className:"form-control",
-            defaults:currentUser ? currentUser.Cin :"",
-            label:"CIN",
-            placeholder:"CIN",
-            errorMessage:"The CIN is required ! ",
-            required:true
-        
-          }
-      ]
+    
       const input2=[
         {
             id:0,
@@ -195,7 +149,7 @@ function Profile() {
                                         <Images text={`update`} id={currentUser ? currentUser.User._id  :null} src={currentUser ? currentUser.User.file  :null}/>
                                        
                                     </div>
-                                    <h5 className="user-name">{currentUser ? currentUser.FirstName +' ' +currentUser.LastName  :""}</h5>
+                                    <h5 className="user-name">{currentUser ? currentUser.Name :""}</h5>
 						            <h6 className="user-email">{currentUser ? currentUser.User.email  :""}</h6>
                                 </div>
                                 <div className="about">
@@ -220,15 +174,8 @@ function Profile() {
                                     <div className="col-sm-12 col-sm-12 col-md-12 col-sm-12 col-12">
                                         <h6 className="mb-3 text-primary">Personal Details</h6>
                                     </div>
-                                   
-                                    {!org && input1.map(v=>(
-                                            <div className=" col-sm-6 col-sm-6 col-md-6 col-sm-6 col-12" key={v.id}>
-                                                <div className="form-group">
-                                                    <Inputs  {...v}  onChange={onChange} ></Inputs>
-                                                </div>
-                                            </div>
-                                    ))}
-                                    {org && input2.map(v=>(
+                                
+                                { input2.map(v=>(
                                             <div className=" col-sm-6 col-sm-6 col-md-6 col-sm-6 col-12" key={v.id}>
                                                 <div className="form-group">
                                                     <Inputs  {...v}  onChange={onChange} ></Inputs>
@@ -276,13 +223,22 @@ function Profile() {
   )
 }
 const Container =styled.div`
-@media(max-width:615px){
-    
-    .container{
+.container{
+    margin-top:100px;
+    width:50%;
+}
+.card-body{
         
-       .card-body{
-        width:88%;
+        height:500px !important;
        }
+@media(max-width:615px){
+    .card-body{
+        width:88%;
+        height:1500px !important;
+       }
+    .container{
+        height:1800px !important;
+       
         .form-group{
             width:78%;
             margin-left:40px;
@@ -298,10 +254,12 @@ const Container =styled.div`
             margin:-50px 60px;
             margin-left:90px;
             
+            
         }
         .hollas{
             margin:0px 60px;
             margin-left:10px;
+           
         
         }
 
@@ -314,6 +272,7 @@ const Container =styled.div`
     
 }
 margin-top:30px;
+
 height:100%;
 color: #FFF;
 background: #FFF;
@@ -324,6 +283,8 @@ background: #FFF;
     border-radius: 5px;
     border: 0;
     margin-bottom: 1rem;
+    
+    
 }
 .account-settings {
     .back{
@@ -400,4 +361,4 @@ background: #FFF;
     color: black;
 }
 `
-export default Profile
+export default OrganizationProfile

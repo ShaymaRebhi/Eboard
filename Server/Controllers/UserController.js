@@ -740,9 +740,9 @@ exports.DeleteProfile = async(req,res) => {
 exports.UpdateProfile = async(req,res) => {
     await User.findOne({_id:req.params.id}).exec( (error,Userr) => {
        
-        if(req.body.role=="STUDENT" && (Userr.role!="STUDENT"&& Userr.role!="ADMIN")) return res.status(501).send("Sorry you don't have the rights to update this.");
-        if(req.body.role=="ORGANIZATION" && (Userr.role!="ORGANIZATION" && Userr.role!="ADMIN"))return res.status(502).send("Sorry you don't have the rights to update this.");
-        if(req.body.role=="TEACHER" && (Userr.role!="TEACHER" && Userr.role!="ADMIN"))return res.status(503).send("Sorry you don't have the rights to update this.");
+        if(req.body.role=="STUDENT" && (Userr.role!="STUDENT"&& Userr.role!="ADMIN")) return res.status(501).send("Sorry you don't have the rights to update this. organization");
+        if(req.body.role=="ORGANIZATION" && (Userr.role!="ORGANIZATION" && Userr.role!="ADMIN"))return res.status(502).send("Sorry you don't have the rights to update this organization.");
+        if(req.body.role=="TEACHER" && (Userr.role!="TEACHER" && Userr.role!="ADMIN"))return res.status(503).send("Sorry you don't have the rights to update this. organization");
 
      User.findOneAndUpdate({_id:req.params.id},req.body).then(User=>{
     if(!User)return res.status(400).send("User not found");
@@ -754,7 +754,6 @@ exports.UpdateProfile = async(req,res) => {
           })
     }else if(User.role=="ORGANIZATION"){
        
-        
         Organization.findOneAndUpdate({'User':req.params.id},req.body).populate('User').then(Organization=>{
             return res.status(200).json(Organization);
         })
@@ -846,3 +845,35 @@ exports.AllUsersExceptMe = async(req,res,next) => {
 exports.hi=async (req,res)=>{
     return res.send("hello world");
 }
+
+exports.contactUs=async(req,res)=>{
+
+    const {name,email,phone,message}=req.body;
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'eboardlearn@gmail.com',
+          pass: 'umhfeidsyelslwut'
+        }
+      });
+      var mailOptions = {
+        to: "eboardlearn@gmail.com",
+        subject: 'Contact us forum',
+        html: `
+                <h1><b>E-BOARD</b></h1>
+                <h2>From :${name} |${email}</h2>
+                <p>Phone : ${phone}</p>
+                <p>${message}</p>
+                
+        `
+        };
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+        return res.status(500).send("Error sending email");
+        } else {
+        return res.status(200).send('Email sent: ' + info.response);
+        }
+    });
+
+}
+

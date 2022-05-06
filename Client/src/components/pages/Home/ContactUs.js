@@ -1,11 +1,54 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from './Buttons/Button'
 import '../../css/ContactUs.css'
-function ContactUs() {
+import { contactUs } from '../../../utils/api'
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
 
+function ContactUs() {
+    const [values,setValues]=useState({
+        name:"",
+        email:"",
+        phone:"",
+        message:""
+    })
+    const onChange=(e)=>{
+        setValues({...values,[e.target.name]:e.target.value});
+    }
+
+    const handleSubmit =(e)=>{
+
+        e.preventDefault();
+        const Data= new FormData(e.target)
+        const DataSet={
+          "name":values.name,
+          "email":values.email,
+          "phone":values.phone,
+          "message":values.message
+        }
+
+        axios.post(contactUs,DataSet).then(response=>{
+            toast.success("Your message has been sent thank you");
+        }).catch(err=>{
+            toast.error("You have an error please try again");
+        })
+        console.log(DataSet)
+
+    }
   return (
     <div>
-  
+        <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme={'colored'}
+      />
       <div className="container  contact3 py-5">
             <div className="row no-gutters mt-5 ml-5 mr-5 mb-5">
                 <div className="container">
@@ -18,26 +61,26 @@ function ContactUs() {
                     <div className="col-lg-6">
                     <div className="contact-box ">
                         <h1 className="font-weight-light mt-2">Quick Contact</h1>
-                        <form className="mt-4">
+                        <form className="mt-4" onSubmit={handleSubmit}>
                         <div className="row">
                             <div className="col-lg-12">
                             <div className="form-group mt-2">
-                                <input className="form-control" type="text" placeholder="name"></input>
+                                <input className="form-control" name='name' onChange={onChange} type="text" placeholder="name" required></input>
                             </div>
                             </div>
                             <div className="col-lg-12">
                             <div className="form-group mt-2">
-                                <input className="form-control" type="email" placeholder="email address"></input>
+                                <input className="form-control" type="email"  name="email" onChange={onChange} placeholder="email address" required></input>
                             </div>
                             </div>
                             <div className="col-lg-12">
                             <div className="form-group mt-2">
-                                <input className="form-control" type="text" placeholder="phone"></input>
+                                <input className="form-control" type="number" name="phone" onChange={onChange} placeholder="phone" required></input>
                             </div>
                             </div>
                             <div className="col-lg-12">
                             <div className="form-group mt-2">
-                                <textarea className="form-control" rows="3" placeholder="message"></textarea>
+                                <textarea className="form-control" rows="3" name="message" onChange={onChange} placeholder="message" required></textarea>
                             </div>
                             </div>
                             <div className="col-lg-12 mt-5">

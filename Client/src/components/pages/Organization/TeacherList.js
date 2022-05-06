@@ -111,8 +111,8 @@ export default function TeacherList() {
         return (
             <div>
                 <IconContext.Provider value={{color:'#FFF',size: '18px'}}>
-                    <Link to={`/Eboard/Teachers/update/${params.row.idStudent!==null?params.row.idStudent:null}`} ><FaICons.FaEdit></FaICons.FaEdit></Link>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Link to={`/Eboard/Teachers/delete/${params.id!==null?params.id:null}`}><MDICons.MdDeleteForever></MDICons.MdDeleteForever></Link>
+                    <Link to={`/Organization/update/${params.row.idStudent!==null?params.row.idStudent:null}`} ><FaICons.FaEdit></FaICons.FaEdit></Link>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Link to={`/Organization/delete/${params.id!==null?params.id:null}`}><MDICons.MdDeleteForever></MDICons.MdDeleteForever></Link>
                 </IconContext.Provider>
             </div>
         )} },
@@ -263,7 +263,7 @@ const password1=[
                 <Box
                       sx={{
                           height: 375,
-                           backgroundColor:'#8cb1cc',
+                           background:'linear-gradient(90deg, rgb(2,0,36) 0%, rgb(140,177,192) 0%, rgb(140,177,192) 100%)',
                           color: 'text.white'
                       }}
                       className='text-white'
@@ -412,6 +412,7 @@ const password1=[
 }
 
 const STUDENT=styled.div`
+margin-top:30px;
 .add{
  z-index:99999;
 }
@@ -433,7 +434,7 @@ h1:last-child{
  align-items:center;
  justify-content:center;
  
- background-color:#8cb1cc;
+ background: linear-gradient(90deg, rgb(2,0,36) 0%, rgb(140,177,192) 0%, rgb(140,177,192) 100%);
  color:white;
 }
 button{
@@ -444,7 +445,7 @@ button{
            display:flex;
            justify-content:end;
    font-size:2rem;
-   background-color:#8EB2CD;
+   background: linear-gradient(90deg, rgb(2,0,36) 0%, rgb(140,177,192) 0%, rgb(140,177,192) 100%);
    border:none;
    color:#fff;
    &:hover{
