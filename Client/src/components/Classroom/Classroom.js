@@ -40,6 +40,7 @@ function Classroom() {
 
   return (
     <>
+    
       <ClassRoomStyle className='d-flex justify-content-start'>
       
       <div>
@@ -52,9 +53,9 @@ function Classroom() {
 
             {role && idUserConnect && <CardClass role={role} idUserConnect={idUserConnect} ></CardClass> }
               
-            <InvitationClassComonent></InvitationClassComonent>
+            {role && idUserConnect &&<InvitationClassComonent idclass={idUserConnect}></InvitationClassComonent>}
         </div>
-        <RecentActivites></RecentActivites>
+        <RecentActivites idUserConnect={idUserConnect}></RecentActivites>
       </ClassRoomStyle>
 
 
