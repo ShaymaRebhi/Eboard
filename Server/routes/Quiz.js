@@ -20,12 +20,14 @@ router.get('/quizEvaluation/:id',QuizController.GetOneQuizEvaluation);
 router.get('/GetNumberStudentByQuizEvaluation/:id',QuizController.GetNumberStudentByQuizEvaluation);
 router.get('/GetNumberStudentWorkedQuiz/:id',QuizController.GetNumberStudentWorkedQuiz);
 router.get('/GetNumberStudentAssignedQuiz/:id',QuizController.GetNumberStudentAssignedQuiz);
-router.get('/getNumberQuizAssigned/:idUserr',QuizController.getNumberQuizAssigned);
-router.get('/getNumberQuizWorked/:idUserr',QuizController.getNumberQuizWorked);
+router.get('/getNumberEvaluationAssigned/:idUserr',QuizController.getNumberEvaluationAssigned);
+router.get('/getNumberEvaluationWorked/:idUserr',QuizController.getNumberEvaluationWorked);
 router.get('/AverageScore/:id',QuizController.getAverageQuizScore);
 router.get('/getStudentListByQuizWorked/:idClass/:idQuiz',QuizController.getStudentListByQuizWorked);
 router.get('/MaxScore/:id',QuizController.getMaxQuizScore);
 router.get('/getAverageScoreQuizByStudentAndClass/:idUser/:id',QuizController.getAverageScoreQuizByStudentAndClass);
 router.get('/getAverageScoreQuizAndTaskByStudentAndClass/:idUser/:id',QuizController.getAverageScoreQuizAndTaskByStudentAndClass);
+router.get('/getAverageScoreStudent/:idUser',QuizController.getAverageScoreStudent);
+
 
 module.exports = router;

@@ -5,6 +5,7 @@ import AddClassComponent from './AddClassComponent';
 import InvitationClassComonent from "./InvitationClassComonent";
 import RecentActivites from './RecentActivities';
 import styled from 'styled-components'
+import ChartsBox2 from "../pages/Charts/ChartsBox2";
 
 
 
@@ -23,6 +24,14 @@ function Classroom() {
               <></>
 
               )}
+          {role === "STUDENT" ? (
+
+              <ChartsBox2/>
+
+          ) : (
+              <></>
+
+          )}
 
             <CardClass></CardClass> 
           

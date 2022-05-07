@@ -92,4 +92,18 @@ export const getAverageScoreQuizAndTaskByStudentAndClass  = (idUser,id,callback)
     axios.get(url+`/quiz/getAverageScoreQuizAndTaskByStudentAndClass/${idUser}/${id}`).then( (res)=>{callback(res)})
 }
 
+export const getAverageScoreStudent  = (idUser,callback)=>{
+    axios.get(url+`/quiz/getAverageScoreStudent/${idUser}`).then( (res)=>{callback(res)})
+}
+
+export const getNumberEvaluationWorked  = (idUser,callback)=>{
+    axios.get(url+`/quiz/getNumberEvaluationWorked/${idUser}`).then( (res)=>{callback(res)})
+}
+
+export const getNumberEvaluationAssigned  = (idUser,callback)=>{
+    axios.get(url+`/quiz/getNumberEvaluationAssigned/${idUser}`).then( (res)=>{callback(res)})
+}
+
+
+
 
