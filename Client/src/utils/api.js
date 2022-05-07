@@ -10,7 +10,6 @@ export const getUserConnect=`${host}/user/connect`;
 export const getStudent=`${host1}/student/all`;
 export const getTeacher=`${host1}/teacher/all`;
 export const contactUs=`${host1}/user/contactus`;
-
 export const forgetPwd=`${host1}/user/forgetpassword`;
 export const resetPwd=`${host1}/user/resetpassword`;
 export const loginGmail=`${host1}/user/gmailLogin`;

@@ -1,14 +1,22 @@
 .forum-img{
    
     margin: auto;
-    border-radius: 50px;
+    
     overflow: hidden;
-    padding: 20px;
+    padding:  50px ;
 
+}
+.forum-img h1{
+   color:white;
+   font-size: 55pt;
+   box-shadow: 10px 10px 30px rgba(0,0,0,0.5);
 }
 
 .immmg{
     transform: scale(1.3);
 
 
+}
+.create-button{
+    width: 100% !important;
 }

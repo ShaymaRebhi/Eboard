@@ -33,7 +33,7 @@ function CardItemClass(props) {
         <div className='cards__Class__item__link' >
           <div className='cards__Class__item__pic-wrap' >
           <div className='drpd'>
-          {props.classes.classOwner._id === idUserConnect ? (
+          {props.classes.classOwner._id === props.id ? (
 
           <Dropdown
                                       fluid
@@ -49,6 +49,7 @@ function CardItemClass(props) {
                                           classes={props.classes}
                                         />
                                         <ArchieveClassComponent
+                                          id={props.id}
                                           headerTitle="Archive Class"
                                           buttonTriggerTitle="Archive"
                                           classes={props.classes}

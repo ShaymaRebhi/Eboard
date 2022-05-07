@@ -44,8 +44,10 @@ exports.add = async (req, res) => {
 };
 
 exports.getAll = async (req, res) => {
-  await Forum.find({})
+  await Forum.find({}).populate('User')
     .then((Forum) => {
+      
+    
       return res.status(200).json(Forum);
     })
     .catch((err) => {
@@ -60,7 +62,7 @@ exports.search = async (req, res) => {
       { Description: { $regex: ".*" + req.body.search + ".*" } },
       { Tags: { $regex: ".*" + req.body.search + ".*" } },
     ],
-  })
+  }).populate('User')
     .then((Forum) => {
       return res.status(200).json(Forum);
     })
@@ -70,7 +72,7 @@ exports.search = async (req, res) => {
 };
 
 exports.findById = async (req, res) => {
-  await Forum.findOne({ _id: req.params.id })
+  await Forum.findOne({ _id: req.params.id }).populate('User')
     .then((Forum) => {
       return res.status(200).json(Forum);
     })
@@ -80,9 +82,9 @@ exports.findById = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  const forum = await Forum.findOne({ _id: req.body._id });
-  await Forum.findByIdAndUpdate(forum._id, req.body);
-  await Forum.findOne({ _id: forum._id })
+  const forum = await Forum.findOne({ _id: req.body._id }).populate('User');
+  await Forum.findByIdAndUpdate(forum._id, req.body).populate('User');
+  await Forum.findOne({ _id: forum._id }).populate('User')
     .then((f) => {
       return res.status(200).json(f);
     })

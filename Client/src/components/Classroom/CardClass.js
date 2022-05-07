@@ -70,6 +70,7 @@ useEffect(() => {
           {cl.classObjet?.slice(pagesVisited, pagesVisited + CsPerPage).map((f , i) => (
         <div  key={i} onClick={() => selectClass(f._id)}>
             <CardItemClass  
+              id={idUserConnect}
               src={f.file}
               course={f.className}
               teacher={f.classOwner.FirstName+' '+f.classOwner.LastName}
