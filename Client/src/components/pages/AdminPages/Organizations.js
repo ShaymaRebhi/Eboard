@@ -21,9 +21,9 @@ function Organizations() {
  
     const [student,setStudent]=React.useState([]);
 
-    const [modalOpen, SetModalOpen] = React.useState(false);
     const [modalOpen2, SetModalOpen2] = React.useState(false);
     const handleOpen = (e) => SetModalOpen(true);
+    const [modalOpen, SetModalOpen] = React.useState(false);
     const handleClose = (e) => SetModalOpen(false);
     const handleOpen2 = (e) => SetModalOpen2(true);
     const handleClose2 = (e) => SetModalOpen2(false);

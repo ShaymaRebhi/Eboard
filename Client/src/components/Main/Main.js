@@ -2,8 +2,13 @@ import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import socket from '../../socket';
 import { useHistory } from "react-router-dom";
+import { Button } from 'primereact/button';
+import { SiGooglemeet } from "react-icons/si";
 
-
+import 'primeicons/primeicons.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.css';
+import 'primeflex/primeflex.css';
 
 const Main = (props) => {
   
@@ -48,27 +53,25 @@ const Main = (props) => {
 
   return (
 
-
-      <JoinButton onClick={clickJoin}> Join Meet </JoinButton>
-
+    <JoinButton>
+        <Button className='btn p-button-raised p-button-danger' onClick={clickJoin} label={`Join meet`} icon="pi pi-video"> </Button>
+      </JoinButton>
   );
 };
 
 const JoinButton = styled.label`
-  padding-left: 35px;
-  padding-right: 35px;
+width:100% !important;
+position:relative;
+top:280px;
 
-  outline: none;
-  border: none;
-  border-radius: 15px;
-  color: #d8e9ef;
-  background-color: grey;
- 
-
-  :hover {
-    background-color: red;
-    cursor: pointer;
-  }
+ Button{
+   width:100% !important;
+   font-size:10pt;
+   vertical-align:middle;
+   text-align:center;
+  
+   
+ }
 `;
 
 export default Main;

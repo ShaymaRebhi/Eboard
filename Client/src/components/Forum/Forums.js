@@ -33,7 +33,7 @@ function Forums() {
   const login = JSON.parse(localStorage.getItem("login"));
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(10);
+  const [postsPerPage] = useState(5);
 
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
@@ -49,12 +49,11 @@ function Forums() {
         <div className="container">
           <div className="row">
             <div className="forum-img">
-              <img src="images/fo4.png" alt="forumpicture" className="immmg" />
+              <h1>FORUM</h1>
             </div>
-
-            <div className="col-lg-12 mb-12" style={{ padding: "5% 0% 0%" }}>
-              <div className="row text-left mb-5">
-                <div className="col-lg-12 mb-3 mb-sm-0">
+            <div className="col-lg-12 " style={{ padding: "0% 0% 0%" }}>
+              <div className="row text-left ">
+                <div className="col-lg-12  mb-sm-0">
                   <input
                     type="text"
                     placeholder="Recherche"

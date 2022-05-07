@@ -80,14 +80,7 @@ function MenuCours()  {
               </Link>
           ):("")
           }
-        <Menu.Item
-          name='disc'
-          active={activeItem === 'disc'}
-          onClick={handleItemClick}
-        >
-          <Label>1</Label>
-          <Icon name='chat' /> Discussion
-        </Menu.Item>
+        
         <Link to="/members">
         <Menu.Item
           name='members'

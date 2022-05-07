@@ -7,6 +7,6 @@ require('dotenv').config() ;
 
 router.get('/all',OrganizationController.getAll);
 router.get('/getStudentById/:id',authenticateToken,OrganizationController.getUserById);
-
+router.post('/payement',OrganizationController.payement);
 
 module.exports = router;

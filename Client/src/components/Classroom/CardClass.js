@@ -16,18 +16,19 @@ import { getclassApi } from '../../utils/Class';
 
 
 
-export default function CardClass () {
+export default function CardClass ({role,idUserConnect}) {
+
   const dispatch = useDispatch();
   const [classs] = useSelector(selectclass);
   const [pageNumber, setPageNumber] = useState(0);
   const [CsPerPage] = useState(3);
   const pagesVisited = pageNumber * CsPerPage ;
   const history = useHistory();
-  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
-  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
+
+  
 const aff = (id) => {
-  if (role === "TEACHER") return "Level " + id + "th";
-  else if (role === "STUDENT") return "Year " + id;
+  if ( role === "TEACHER") return "Level " + id + "th";
+   return "Year " + id;
 };
 const getObj = (obj) => {
   return  Math.ceil(obj.length / CsPerPage) ;
@@ -41,6 +42,7 @@ const selectClass = async (classSelected) => {
 };
 useEffect(() => {
 
+  
   dispatch(fetchclass(role,idUserConnect,"Active"));
 
   
@@ -68,6 +70,7 @@ useEffect(() => {
           {cl.classObjet?.slice(pagesVisited, pagesVisited + CsPerPage).map((f , i) => (
         <div  key={i} onClick={() => selectClass(f._id)}>
             <CardItemClass  
+              id={idUserConnect}
               src={f.file}
               course={f.className}
               teacher={f.classOwner.FirstName+' '+f.classOwner.LastName}

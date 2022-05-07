@@ -15,6 +15,9 @@ import  {EmailIcon,WhatsappIcon, LinkedinIcon}from "react-share";
 
 import FacebookShareButton from "react-share/es/FacebookShareButton";
 import FacebookIcon from "react-share/es/FacebookIcon";
+import axios from 'axios';
+import { getUserConnect } from '../../utils/api';
+import { Link } from 'react-router-dom';
 
 
 
@@ -83,10 +86,24 @@ function Forum() {
     const Dislike = (l) => {
         dispatch(dislike(l));
     };
-
+    const [UserConnect,setUserconnect]=useState(undefined);
+    const [image,setImage]=useState(undefined);
+    const [name,setName]=useState(undefined);
+    useEffect(()=>{
+        axios.get(getUserConnect,{
+            headers: {
+                'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+            }
+        }).then(res=>{
+            
+            setUserconnect(res.data[0])
+            setImage(res.data[0].User.file)
+            setName(res.data[0].FirstName+' '+res.data[0].LastName)
+          })
+    },[])
     return (
         <div>
-          
+         
             <div className="bodyy" style={{padding: '2% 0% 2%'}}>
                 <div className="container">
                     <div className="container-fluid mt-100">
@@ -94,13 +111,15 @@ function Forum() {
                             <div className="col-md-12">
                                 <div className="card mb-4">
                                     <div className="card-header">
-                                        <div className="media flex-wrap w-100 align-items-center"><img
-                                            src="https://i.imgur.com/iNmBizf.jpg" className="d-block ui-w-40 rounded-circle"
+                                        <div className="media flex-wrap w-100 align-items-center">
+                                            
+                                            <div className="media-body mt-3 mb-5">
+                                            <img
+                                            src={(forum!==null)?forum.User.file:''} className="d-block ui-w-40 rounded-circle"
                                             alt=""/>
-                                            <div className="media-body ml-3">
-                                                <a href="javascript:void(0)" data-abc="true">
+                                                <Link to="javascript:void(0)" data-abc="true">
                                                     {(forum!==null)?forum.Title:''}
-                                                </a>
+                                                </Link>
                                                 <div className="text-muted small">{(forum!==null)?forum.Date:''}</div>
                                             </div>
                                             <div className="text-muted small ml-3">
@@ -131,7 +150,7 @@ function Forum() {
                                             {(forum!==null)?
                                             <div>
                                                 <FacebookShareButton
-                                                    url={"https://www.youtube.com/watch?v=IYCa1F-OWmk&ab_channel=TraversyMedia"+forum._id}
+                                                    url={"https://eboardfrontendapplication.herokuapp.com/forum/"+forum._id}
                                                     quote={forum.Title}
                                                     hashtag={'#EBOARD'}
                                                     description={forum.Description}
@@ -141,21 +160,14 @@ function Forum() {
                                                 </FacebookShareButton>
 
                                                  <WhatsappShareButton
-                                                 url={"http://localhost:3001/forum/"+forum._id}
+                                                 url={"https://eboardfrontendapplication.herokuapp.com/forum/"+forum._id}
                                                  title={forum.Title}
                                                  >
                                                      <WhatsappIcon size={32} round />
                                                  </WhatsappShareButton>
-                                                 <EmailShareButton
-                                                 url={"http://localhost:3001/forum/"+forum._id}
-                                                 subject={forum.Title}
-                                                 body={forum.Description}
-
-                                                 >
-                                                     <EmailIcon size={32} round />
-                                                 </EmailShareButton>
+                                                
                                                  <LinkedinShareButton
-                                                 url={"http://localhost:3002/forum/"+forum._id}
+                                                 url={"https://eboardfrontendapplication.herokuapp.com/forum/"+forum._id}
                                                  title={forum.Title}
                                                  summary={forum.Description}
                                                  
@@ -181,14 +193,14 @@ function Forum() {
                                     <div className="mt-2">
                                         {comments.map((c,i) => (
                                             <div className="d-flex flex-row p-3">
-
-                                                <img src="https://i.imgur.com/zQZSWrt.jpg" className="rounded-circle mr-3" style={{width:'45px',height:'45px'}}/>
+                                                {console.log(c)}
+                                                <img src={c.User ?c.User.file :""} alt='immmg' className="rounded-circle mr-3" style={{width:'45px',height:'45px'}}/>
                                                 <div className="w-100">
                                                     <div className="d-flex justify-content-between align-items-center">
                                                         <div className="d-flex flex-row align-items-center">
-                                                            <span className="mr-2">{(c.User.email)}</span>
+                                                            <span className="mr-2">{c.User.email}</span>
                                                         </div>
-                                                        <small>12h ago</small>
+                                                       
                                                     </div>
                                                     {(form &&(c._id===commentU._id))?
                                                         <div>
@@ -236,9 +248,9 @@ function Forum() {
                                             </div>
                                         ))}
                                     </div>
-                                    <div className="mt-3 d-flex flex-row align-items-center p-3 form-color">
+                                    <div className="mt-3 d-flex flex-row align-items-center p-3 form-color barbouzo">
                                         <img
-                                        src="https://i.imgur.com/zQZSWrt.jpg" width="50" className="d-block ui-w-40 rounded-circle" style={{width:'45px'}}/>
+                                        src={image ?image :""} width="50" className="d-block  rounded-circle" style={{width:'45px'}}/>
                                         <input type="text" className="form-control" placeholder="Enter your comment..." value={comment.Comment}
                                         onChange={(e)=>setComment({...comment,Comment:e.target.value})}
                                         />

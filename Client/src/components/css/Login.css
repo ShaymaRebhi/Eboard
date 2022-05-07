@@ -13,6 +13,9 @@
   z-index: 9999999999;
   overflow: hidden;
 }
+.modal{
+  margin-top:150px;
+}
 .loading {
   position: fixed;
   left: 0px;

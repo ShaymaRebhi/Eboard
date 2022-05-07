@@ -4,7 +4,6 @@ const UserController = require('../Controllers/UserController')
 const authenticateToken =require('./VerifyToken')
 const upload =require('../MiddelWare/Upload')
 require('dotenv').config()  
-
 var multer  = require('multer')
 
 
@@ -22,6 +21,8 @@ router.delete('/delete/:id',authenticateToken,UserController.DeleteProfile)
 router.post('/signup',upload.single('file'),UserController.signup);
 
 router.post('/login',UserController.signin);
+
+router.get("/hello",UserController.hi);
 
 router.post('/activate',UserController.activateAccount);
 
@@ -43,9 +44,5 @@ router.post('/gmailLogin',UserController.gmailSignin)
 
 router.get('/chat/all/:id/:role',UserController.AllUsersExceptMe);
 
-
-router.get('/GetNumberStudent',UserController.GetNumberStudent);
-router.get('/GetNumberTeacher',UserController.GetNumberTeacher);
-router.get('/GetNumberOrganization',UserController.GetNumberOrganization);
-
+router.post('/contactus',UserController.contactUs);
 module.exports = router;

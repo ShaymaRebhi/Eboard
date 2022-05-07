@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useEffect, useState }  from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegFolder , FaRegFile , FaRegComment ,FaRegGrinHearts,FaRegAngry,FaEllipsisV} from "react-icons/fa";
 import '../css/CardClass.css';
@@ -6,10 +6,25 @@ import { Dropdown } from 'semantic-ui-react';
 import ArchieveClassComponent from './ArchieveClassComponent';
 
 import ActivedClassComponent from './ActivedClassComponent';
+import axios from 'axios';
+import { getUserConnect } from '../../utils/api';
 
 
 function CardItemClassArchived(props) {
-  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
+  const [idUserConnect,setIdUserConnect]=useState(undefined);
+  
+  useEffect(()=>{
+    axios.get(getUserConnect,{
+      headers: {
+          'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+      }
+  }).then(res=>{
+    console.log(res.data[0])
+      setIdUserConnect(res.data[0].User.role);
+    })
+    
+    
+  },[])
 
   return (
     
@@ -19,7 +34,7 @@ function CardItemClassArchived(props) {
         <div className='cards__Class__item__link' >
           <div className='cards__Class__item__pic-wrap' >
           <div className='drpd'>
-          {props.classes.classOwner._id === idUserConnect ? (
+          {props.classes.classOwner._id === props.id ? (
 
                                   <Dropdown
                                       fluid
@@ -30,6 +45,7 @@ function CardItemClassArchived(props) {
                                     >
                                       <Dropdown.Menu>
                                         <ActivedClassComponent
+
                                           headerTitle="Archive Class"
                                           buttonTriggerTitle="Archive"
                                           classes={props.classes}

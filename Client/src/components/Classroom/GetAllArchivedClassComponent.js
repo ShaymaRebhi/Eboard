@@ -54,6 +54,7 @@ export default function GetAllClassArchivedComponent() {
           {cl.classObjet?.slice(pagesVisited, pagesVisited + CsPerPage).map((f , i) => (
         <div  key={i}>
             <CardItemClassArchived  
+              id={idUserConnect}
               src={f.file}
               course={f.className}
               teacher={f.classOwner.FirstName+' '+f.classOwner.LastName}

@@ -1,16 +1,41 @@
 import { Grid, Image, Label, Segment, Button, Card } from "semantic-ui-react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchActiveClass, fetchclass, fetchInvitationclass, fetchRequestClass, selectinvitationclass } from "../../redux/slices/classline";
 import { AddclassApi, ClassInvitationApi } from "../../utils/Class";
+import axios from "axios";
+import { getUserConnect } from "../../utils/api";
 
 
 
-export default function InvitationClassComonent() {
+export default function InvitationClassComonent({idclass}) {
   const [classinvit, err] = useSelector(selectinvitationclass);
-  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
-  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
+  const [role,setRole]=useState(undefined);
+  const [idUserConnect,setIdUserConnect]=useState("");
+  const [id,setId]=React.useState();
+  
+  useEffect(()=>{
+    axios.get(getUserConnect,{
+      headers: {
+          'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+      }
+  }).then(res=>{
+     
+      setId(res.data[0]._id);
+    })
+
+    axios.get(getUserConnect,{
+      headers: {
+          'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+      }
+  }).then(res=>{
+      setRole(res.data[0].User.role);
+      
+  })
+    
+  },[])
+ 
 
  
   const dispatch = useDispatch();
@@ -19,9 +44,9 @@ export default function InvitationClassComonent() {
   const Decline = async (idq) => {
     try {
       const res = await ClassInvitationApi.deleteClassInvitation(idq);
-      dispatch(fetchInvitationclass(idUserConnect));
-      dispatch(fetchActiveClass(idUserConnect));
-      dispatch(fetchRequestClass(idUserConnect));
+      dispatch(fetchInvitationclass(idclass));
+      dispatch(fetchActiveClass(idclass));
+      dispatch(fetchRequestClass(idclass));
     } catch (error) {
       alert(error);
     }
@@ -30,20 +55,23 @@ export default function InvitationClassComonent() {
     try {
       const res = await AddclassApi.addUserToClass(idclass,idUser);
       const res2 = await ClassInvitationApi.deleteClassInvitation(idinviation);
-      dispatch(fetchInvitationclass(idUserConnect));
-      dispatch(fetchActiveClass(idUserConnect));
-      dispatch(fetchRequestClass(idUserConnect));
-      dispatch(fetchclass(role,idUserConnect,"Active"));
+      dispatch(fetchInvitationclass(idclass));
+      dispatch(fetchActiveClass(idclass));
+      dispatch(fetchRequestClass(idclass));
+      dispatch(fetchclass(role,idclass,"Active"));
+      
     } catch (error) {
       alert(error);
     }
   };
   useEffect(() => {
-    dispatch(fetchInvitationclass(idUserConnect));
+    dispatch(fetchInvitationclass(idclass));
+    console.log(idclass)
     
   }, [dispatch]);
   return (
     <InvitationStyledCompoenent >
+      
       <Grid columns={1} >
         <Grid.Column >
           <Segment raised className="mobile">
