@@ -7,6 +7,7 @@ import RecentActivites from './RecentActivities';
 import styled from 'styled-components'
 import { getUserConnect } from '../../utils/api';
 import axios from 'axios';
+import ChartsBox2 from "../pages/Charts/ChartsBox2";
 
 
 
@@ -50,6 +51,14 @@ function Classroom() {
               <></>
 
               )}
+          {role === "STUDENT" ? (
+
+              <ChartsBox2/>
+
+          ) : (
+              <></>
+
+          )}
 
             {role && idUserConnect && <CardClass role={role} idUserConnect={idUserConnect} ></CardClass> }
               

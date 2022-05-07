@@ -45,4 +45,11 @@ router.post('/gmailLogin',UserController.gmailSignin)
 router.get('/chat/all/:id/:role',UserController.AllUsersExceptMe);
 
 router.post('/contactus',UserController.contactUs);
+
+router.get('/GetNumberStudent',UserController.GetNumberStudent);
+
+router.get('/GetNumberTeacher',UserController.GetNumberTeacher);
+
+router.get('/GetNumberOrganization',UserController.GetNumberOrganization);
+
 module.exports = router;

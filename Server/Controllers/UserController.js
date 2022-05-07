@@ -877,3 +877,40 @@ exports.contactUs=async(req,res)=>{
 
 }
 
+
+exports.GetNumberStudent=async (req,res)=>{
+
+    try {
+        User.find({
+            role:"STUDENT"
+        }).count().then((number)=>res.json(number))
+    }
+    catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
+exports.GetNumberTeacher=async (req,res)=>{
+
+    try {
+        User.find({
+            role:"TEACHER"
+        }).count().then((number)=>res.json(number))
+    }
+    catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
+exports.GetNumberOrganization=async (req,res)=>{
+
+    try {
+        User.find({
+            role:"ORGANIZATION"
+        }).count().then((number)=>res.json(number))
+    }
+    catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
