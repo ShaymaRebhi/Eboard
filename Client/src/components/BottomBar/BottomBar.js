@@ -199,7 +199,7 @@ const BottomBar = ({
           </div>
           Share Screen
         </ScreenButton>
-        <a href="http://localhost:3000/WhiteBoard" target="_blank"
+        <a href="http://localhost:3001/WhiteBoard" target="_blank"
                                       rel="noopener noreferrer" >
            <WhiteBoard>
            <div>

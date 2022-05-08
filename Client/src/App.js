@@ -36,6 +36,7 @@ import TimeAgo from "javascript-time-ago";
 import { requestForToken, onMessageListener } from "./utils/firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import WhiteBoard from "./components/container/WhiteBoard";
 import HomeOrganization from './components/Home/HomeOrganization';
 import DeleteTeachers from './components/pages/Organization/Action/DeleteTeacher';
 import OrganizationProfile from './components/pages/Profile/OrganizationProfile';
@@ -298,6 +299,11 @@ function App() {
                 exact
                 render={(props) => <HomeCourse {...props} />}
             />
+               <Route
+            path="/WhiteBoard"
+            exact
+            render={(props) => <WhiteBoard {...props} />}
+          />
              <Route
             path="/theme/:titre/:id"
             exact
