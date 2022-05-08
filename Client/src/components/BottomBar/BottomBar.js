@@ -2,7 +2,6 @@ import React, { useCallback, useEffect } from "react";
 import styled from "styled-components";
 import useMediaRecorder from "@wmik/use-media-recorder";
 import { useDispatch } from "react-redux";
-import axios from "axios";
 import { AddCourses } from "../../redux/slices/Courses";
 import { Button, Header, Icon, Modal } from "semantic-ui-react";
 import ListUsers from "./ListUsers";

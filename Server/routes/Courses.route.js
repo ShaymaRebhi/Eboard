@@ -341,6 +341,10 @@ router.get("/", (req, res) => {
     path: "idOwner",
     populate: "User" ,
   })
+  .populate({
+    path: "idClass",
+    populate: "Class" ,
+  })
     .then((result) => {
       res.json(result);
     })
