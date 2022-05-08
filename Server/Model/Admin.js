@@ -28,6 +28,10 @@ var Admin =new Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref:'users',
         required:true
+    },
+    returned:{
+        type:Number,
+        default:0
     }
     
 

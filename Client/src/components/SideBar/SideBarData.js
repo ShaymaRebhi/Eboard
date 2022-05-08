@@ -19,10 +19,7 @@ export const SidebarData=[
         cName:'nav-text',
         tooltip:"Forums",
     },
-    
-    
-    {
-       
+    { 
         path:'/chat',
         icon:<BSIcons.BsChatDots />,
         cName:'nav-text',

@@ -340,6 +340,9 @@ router.get("/", (req, res) => {
   .populate({
     path: "idOwner",
     populate: "User" ,
+  }).populate({
+    path: "idClass",
+    populate: "Class" ,
   })
   .populate({
     path: "idClass",

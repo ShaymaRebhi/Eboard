@@ -165,26 +165,24 @@ exports.DisplayQuizByStudent = async (req, res, next) => {
     }
 }
 
-exports.getNumberQuizAssigned = async (req, res, next) => {
+exports.getNumberEvaluationAssigned = async (req, res, next) => {
     const idUser = req.params.idUserr;
     try {
         Evaluation.find({
             Student: idUser,
             TaskStatus : 'Assigned',
-            Type : "Quiz"
         }).count().then((number) => res.json(number))
     } catch (error) {
         res.status(404).json({message: error.message});
     }
 }
 
-exports.getNumberQuizWorked = async (req, res, next) => {
+exports.getNumberEvaluationWorked = async (req, res, next) => {
     const idUser = req.params.idUserr;
     try {
         Evaluation.find({
             Student: idUser,
             TaskStatus : 'Worked',
-            Type : "Quiz"
         }).count().then((number) => res.json(number))
     } catch (error) {
         res.status(404).json({message: error.message});
@@ -402,6 +400,42 @@ exports.getAverageScoreQuizAndTaskByStudentAndClass = async (req, res, next) => 
                 {
                     $match : {
                         Class:id,
+                        Student:idUser,
+                        TaskStatus : 'Worked',
+                        TaskCorrected:"Corrected"
+
+                    }
+                },
+                {
+                    $group:
+                        {
+                            _id : "$Quiz",
+                            avgScore: { $avg: "$Score" }
+                        }
+                },
+
+            ]
+        ).then((data)=>{
+            data.forEach((item,i)=>{
+                averageTotal = averageTotal + item.avgScore
+            })
+            averageScore = averageTotal / data.length
+            res.json(averageScore)})
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+}
+
+exports.getAverageScoreStudent = async (req, res, next) => {
+    let idUser = mongoose.Types.ObjectId(req.params.idUser);
+
+    let averageTotal = 0;
+    let averageScore = 0;
+    try {
+        Evaluation.aggregate(
+            [
+                {
+                    $match : {
                         Student:idUser,
                         TaskStatus : 'Worked',
                         TaskCorrected:"Corrected"

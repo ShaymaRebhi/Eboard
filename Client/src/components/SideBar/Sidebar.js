@@ -43,6 +43,8 @@ useEffect(()=>{
    })
 
 },[])
+
+
   return (
     <>
     <IconContext.Provider value={{color:'#fff'}}>
@@ -59,14 +61,14 @@ useEffect(()=>{
                       
                       <div className="flex align-items-center" key={index}>
                         
-                        
+                        {connect&& connect.User.role!=="STUDENT" && item.path==="/forums" ?"":
                          <li  className={`${item.cName} hel-${index}`} >
                               <Tooltip target={`.hel-${index}`} content={`${item.tooltip}`} />
                              <Link  to={item.path} onClick={showSidebar}>
                                  {item.icon}
                                  
                              </Link>
-                         </li>
+                         </li>}
                          </div>
                     );
                 })}

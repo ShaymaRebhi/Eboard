@@ -44,35 +44,6 @@ function FeedClass () {
             <Image className='image-feed' src={ModulePicture} />
             </div>
             <br/>
-        <Segment raised color="grey">
-        <Form >
-        
-            <Form.Field
-              control={TextArea}
-              placeholder="Announce something to your class"
-              label="Content"
-              name="Body"
-            />
-         
-
-  
-            <div style={{ float: "right", marginRight: "5%" }}>
-                    <Button
-                      style={{ maxHeight: "40px" }}
-                      type="submit"
-                      content="Reply"
-                      icon="edit"
-                    />
-                  </div>
-                  <div style={{ display: "flex" }}>
-                    
-                  <input type="file" id="postfile" name="fileupload" className="inputFilePost form-control"  multiple HTMLInputElement={p.TypeRec} onChange={(e)=>{changePostFile(e.target.files,index)}} />
-
-                
-                   
-                  </div>
-          </Form>
-        </Segment>
       </div>
        ))}
        <br/>

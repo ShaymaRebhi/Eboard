@@ -29,8 +29,8 @@ export default function RecentActivites () {
           <Feed.Label image={c.idOwner.User.file} />
           <Feed.Content>
             <Feed.Date content='1 day ago' />
-            <Feed.Summary>
-            {c.idOwner.FirstName} added <a>a new ressource</a> to the <a>{c.idClass.className}</a> Class.
+            <Feed.Summary>{console.log((c.idOwner))}
+             {c.idOwner.FirstName} added a new ressource to the <a>{ c.idClass.className}</a> Class.
             </Feed.Summary>
           </Feed.Content>
           

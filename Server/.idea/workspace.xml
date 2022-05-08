@@ -2,17 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="923abaec-0f51-4318-aa23-44b094adba5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Course/MenuCours.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Course/MenuCours.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Home/HomeCourse.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Home/HomeCourse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Task/DetailTask.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Task/DetailTask.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Task/DisplayTask.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Task/DisplayTask.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Classroom/Classroom.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Classroom/Classroom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Course/Feed.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Course/Feed.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/UserController.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/UserController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/User.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/User.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +85,10 @@
       <workItem from="1650932548732" duration="6542000" />
       <workItem from="1650982283172" duration="3454000" />
       <workItem from="1651011697943" duration="8142000" />
+      <workItem from="1651048180133" duration="2898000" />
+      <workItem from="1651872291037" duration="2251000" />
+      <workItem from="1651948496172" duration="4430000" />
+      <workItem from="1651966234131" duration="895000" />
     </task>
     <servers />
   </component>

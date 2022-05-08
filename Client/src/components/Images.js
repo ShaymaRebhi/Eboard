@@ -79,7 +79,6 @@ export default function Images(prop) {
 
             }
             {images.length===0 ? <img className="img" onClick={onImageUpload} {...dragProps} src={prop.src ? prop.src: ""} alt="profile pic" onError={(e) => e.target.src=`https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg`}/> : ""}
-            <span onClick={onImageUpload} {...dragProps} className='update text-muted'>{prop.text}<MdOutlineMonochromePhotos/></span>
           </div>
         )}
       </ImageUploading>

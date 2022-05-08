@@ -26,7 +26,6 @@ import ResetPwdAdmin from './components/pages/Auth/ResetPwdAdmin';
 import styled,{ThemeProvider} from 'styled-components';
 import {lightTheme,darkTheme,Global} from './Themes'
 import DeleteReclamation from './components/pages/AdminPages/Action/DeleteReclamation';
-import UpdateStudent from './components/pages/AdminPages/Action/UpdateStudent';
 import DeleteTeacher from './components/pages/AdminPages/Action/DeleteTeacher';
 import DeleteOrganization from './components/pages/AdminPages/Action/DeleteOrganization';
 import Main from './components/Main/Main';
@@ -34,11 +33,12 @@ import Room from './components/Room/Room';
 import en from "javascript-time-ago/locale/en";
 import ru from "javascript-time-ago/locale/ru";
 import TimeAgo from "javascript-time-ago";
-import EvaluationTeacherPage from "./components/Evaluation/EvaluationTeacherPage";
 import { requestForToken, onMessageListener } from "./utils/firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Toast } from "react-bootstrap";
+import HomeOrganization from './components/Home/HomeOrganization';
+import DeleteTeachers from './components/pages/Organization/Action/DeleteTeacher';
+import OrganizationProfile from './components/pages/Profile/OrganizationProfile';
 
 TimeAgo.addDefaultLocale(en);
 TimeAgo.addLocale(ru);
@@ -91,7 +91,7 @@ function App() {
           <StyledApp>
         <div className='chatbot'>
           <Chat></Chat>
-          <ToastContainer position="bottom-left" />
+          
         </div>
 
         <BrowserRouter>
@@ -105,6 +105,16 @@ function App() {
                 path="/Eboard/home"
                 exact
                 render={(props) => <HomeAdmin {...props} />}
+            />
+            <Route
+                path="/Organization"
+                exact
+                render={(props) => <HomeOrganization {...props} />}
+            />
+            <Route
+                path="/Organization/payement"
+                exact
+                render={(props) => <HomeOrganization {...props} />}
             />
             <Route
                 path="/Eboard/Teachers"
@@ -137,6 +147,11 @@ function App() {
                 render={(props) => <HomeAdmin {...props} />}
             />
             <Route
+                path="/Organization/update/:id"
+                exact
+                render={(props) => <HomeOrganization {...props} />}
+            />
+            <Route
                 path="/Eboard/Reclamations"
                 exact
                 render={(props) => <HomeAdmin {...props} />}
@@ -151,12 +166,14 @@ function App() {
             <Route exact path="/Eboard/Students/delete/:id" component={DeleteStudent} />
             <Route exact path="/Eboard/Organizations/delete/:id" component={DeleteOrganization} />
             <Route exact path="/Eboard/Teachers/delete/:id" component={DeleteTeacher} />
+            <Route exact path="/Organization/delete/:id" component={DeleteTeachers} />
             <Route exact path="/Eboard/Reclamations/delete/:id" component={DeleteReclamation} />
             <Route exact path='/Eboard/auth/admin' component={Admin} />
             <Route exact path='/Eboard/auth/forget' component={ForgetPwdAdmin} />
 
             <Route exact path='/login' component={Login} />
             <Route exact path='/profile' component={Profile} />
+            <Route exact path='/Organization/profile' component={OrganizationProfile} />
             <Route path="/forget" component={ForgetPwd} />
             <Route exact path='/reset/:id' component={ResetPwd} />
             <Route exact path='/Adminreset/:id' component={ResetPwdAdmin} />
