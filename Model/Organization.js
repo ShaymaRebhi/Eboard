@@ -7,6 +7,10 @@ var Organiation =new Schema({
         type:String,
         required:true
     },
+    Payement:{
+        type:Boolean,
+        default:false
+    },
     User:{
         type : mongoose.Schema.Types.ObjectId,
         ref:'users',

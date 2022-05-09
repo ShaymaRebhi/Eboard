@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const ForumController = require('../Controllers/ForumController');
+const ForumController = require('../controllers/ForumController');
 
 
 router.get('/all',ForumController.getAll);
