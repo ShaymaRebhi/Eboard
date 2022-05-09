@@ -51,6 +51,21 @@
     width: 260px;
     background  :linear-gradient(3deg, rgba(37,57,78,-8) 1%, rgba(139,177,192,1) 90%, rgba(196,215,229,1) 106%);
   }
+  .cards__Class__item_Archived{
+    display: flex;
+    margin: 0 1rem;
+    border-radius: 10px;
+    height: 350px;
+    width: 260px;
+    background  :	repeating-linear-gradient(
+      -55deg,
+      #E0E0E0,
+      #E0E0E0 10px,
+      #D0D0D0 10px,
+      #D0D0D0 20px
+    );
+  
+  }
 
   @media(max-width:615px){
     .cards__Class__item { 
@@ -67,6 +82,9 @@
     border-radius: 10px;
     overflow: hidden;
     text-decoration: none;
+  }
+  .ps{
+    color : black;
   }
   
   .cards__Class__item__pic-wrap {

@@ -7,9 +7,9 @@ import * as AIICons from "react-icons/ai"
 
 
 export const Gmail = ({
-  text1,
+ 
   text2,
-  text3,
+  icon,
   type,
   onClick,
   active
@@ -25,8 +25,9 @@ export const Gmail = ({
         onClick={onClick}
         type={type}
         disabled={active}
+        showIcon={icon}
       >
-        <AIICons.AiFillGoogleCircle className='icon'/> {text2}
+        {icon && <AIICons.AiFillGoogleCircle className='icon'/>} {text2}
       </Button>
     
       

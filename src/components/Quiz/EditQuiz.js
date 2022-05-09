@@ -8,9 +8,10 @@ import Accordion from '@material-ui/core/Accordion'
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Button from '@material-ui/core/Button';
 import {useHistory, useRouteMatch} from "react-router-dom";
-import Select from "react-select";
 import {getOneQuiz, updateQuiz} from "../../utils/Quiz";
 import {toast, ToastContainer} from "react-toastify";
+import {MultiSelect} from "react-multi-select-component";
+import TimeField from "react-simple-timefield";
 
 
 function EditQuiz() {
@@ -40,12 +41,6 @@ function EditQuiz() {
         setQuizs(newQuiz);
         console.log(newQuiz)
     }
-    /*const changeQuizTheme = (text) => {
-        var newQuiz = {...quiz};
-        newQuiz.Theme = text ;
-        setQuizs(newQuiz);
-        console.log(newQuiz)
-    }*/
     const changeQuizDescription = (text) => {
         var newQuiz = {...quiz};
         newQuiz.Description = text ;
@@ -83,6 +78,12 @@ function EditQuiz() {
         newQuestion[j].options[k].IsValid = valid;
         setQuestions(newQuestion);
         console.log(newQuestion)
+    }
+    const changeQuizTime = (text) => {
+        var newQuiz = {...quiz};
+        newQuiz.Time = text ;
+        setQuizs(newQuiz);
+        console.log(newQuiz)
     }
 
 
@@ -144,6 +145,10 @@ function EditQuiz() {
 
     }
 
+    const BackToListQuiz =() =>{
+        history.push("/QuizList")
+    }
+
 
     return (
         <div>
@@ -165,25 +170,29 @@ function EditQuiz() {
                         <div className="Quiz_title_section">
                             <div className="Quiz_form_top">
                                 <>
-                                    <h1 style={{color:"rgba(140,177,192,1)", fontSize:"35px"}}>Update Quiz</h1>
-                                    <input type="text" id="Title" className="Quiz_form_top_Name" placeholder="Write Title here"
-                                           value={quiz.Title} onChange={(e)=>{changeQuizTitle(e.target.value)}} />
+                                    <h1 style={{color:"rgba(140,177,192,1)",fontSize:"35px"}}>Add Quiz</h1>
                                     <br/>
-                                    {/*         <input type="text" id="class" className="Quiz_form_top_class" placeholder="Class"
-                                         value={qz.Theme} onChange={(e)=>{changeQuizTheme(e.target.value, i)}} />*/}
-                                    {/*<select name="categorieProduit" value={qz.Theme} onChange={(e)=>{changeQuizTheme(e.target.value, i)}}>
-                                              <option value=""  disabled selected>Select Theme</option>
-                                              <option value="Seance1">Seance1</option>
-                                              <option value="Seance2">Seance2</option>
-                                              <option value="Seance3">Seance3</option>
-                                  </select>*/}
-                                    <Select
-                                        value={quiz.Theme}
-                                        options={listTheme}
-                                        placeholder="Select Theme"
-                                    />
-                                    <input type="text" id="Description" className="Quiz_form_top_desc" placeholder="Description"
-                                           value={quiz.Description} onChange={(e)=>{changeQuizDescription(e.target.value)}} />
+                                    <div style={{display:"flex"}}>
+                                        <h1 style={{color:"black",fontSize:"32px", textAlign:"left"}}>Title: </h1>
+                                        &nbsp;
+                                        <input type="text" id="Title" className="Quiz_form_top_Name" placeholder="Write Title here"
+                                               value={quiz.Title} onChange={(e)=>{changeQuizTitle(e.target.value)}} />
+                                    </div>
+                                    <div style={{display:"flex",flexDirection:"column"}}>
+                                        <h3 style={{color:"black", textAlign:"left"}}>Description : </h3>
+                                        <textarea id="Description" className="Quiz_form_top_desc" placeholder="Write Description here"
+                                                  value={quiz.Description} onChange={(e)=>{changeQuizDescription(e.target.value)}} />
+                                    </div>
+                                    <br/>
+                                    <div style={{display:"flex",flexDirection:"column"}}>
+                                        <h3 style={{color:"black", textAlign:"left"}}>Time : </h3>
+                                        <TimeField
+                                            value={quiz.Time}
+                                            onChange={(e)=>{changeQuizTime(e.target.value)}}
+                                            colon=":"
+                                            showSeconds ={true}
+                                        />
+                                    </div>
                                 </>
 
                             </div>
@@ -265,9 +274,14 @@ function EditQuiz() {
                     </>
 
 
-
-                    <div className="SaveQuiz">
-                        <button className="btn btn-success " onClick={()=>SaveQuiz(match.params.id)}>Save Update</button>
+                    <div style={{display:"flex",justifyContent:"flex-end"}}>
+                        <div className="SaveQuiz">
+                            <button className="btn btn-success " onClick={()=>SaveQuiz(match.params.id)}>Save Update</button>
+                        </div>
+                        &nbsp;
+                        <div className="SaveQuiz">
+                            <button className="btn btn-secondary " onClick={BackToListQuiz}>Back</button>
+                        </div>
                     </div>
 
                 </div>

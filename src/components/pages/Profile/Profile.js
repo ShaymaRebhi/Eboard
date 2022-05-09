@@ -5,13 +5,11 @@ import {IoChevronBackCircleSharp} from "react-icons/io5";
 import { getUserConnect } from '../../../utils/api';
 import axios from 'axios';
 import Images from '../../Images'
-import { Tooltip } from 'primereact/tooltip';
 import {updateUser} from '../../../utils/api';
 import Inputs from '../../Inputs';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/inject-style';
 import 'react-toastify/dist/ReactToastify.css';
-import IconButton from 'material-ui/IconButton';
 import { Button } from 'primereact/button';
 function Profile() {
     const [values,setValues]=useState({
@@ -23,13 +21,13 @@ function Profile() {
     })
     const onChange=(e)=>{
         setValues({...values,[e.target.name]:e.target.value});
-        console.log(values);
+        
     }
     
     const handleSubmit= (e)=>{
         e.preventDefault();
         const Data= new FormData(e.target)
-
+        
         let data={
             FirstName:Data.get('FirstName'),
             LastName:Data.get('LastName'),
@@ -39,14 +37,11 @@ function Profile() {
         }
 
 
-        updateUser(data,"6254ac89a8f29e0016b3913f",(res)=> {
-            toast.success('Profile updated !!')
-            
-          }).catch(err=>{
-            toast.error('Error !!'+err)
-          })
+        updateUser(data,currentUser.User._id)
+        
     }
     const [currentUser,setCurrentUser]=useState(undefined);
+    const [org,setOrg]=useState(false);
     const history=useHistory();
     if(localStorage.getItem("login")!==null){
         var data=  JSON.parse(localStorage.getItem('login'));
@@ -65,7 +60,7 @@ function Profile() {
                 localStorage.clear();
                 history.replace("/404");
           }else{
-            console.log("stay logedIn  "+decodedToken.exp);
+            
           }
         }
     },[]);
@@ -80,8 +75,10 @@ function Profile() {
                 }
             }).then(res=>{
                 setCurrentUser(res.data[0]);
+                
             })
         }
+        
         
     },[])
     if(currentUser!=null){
@@ -135,8 +132,44 @@ function Profile() {
         
           }
       ]
+      const input2=[
+        {
+            id:0,
+            name:"Name",
+            type:"text",
+            label:"Name",
+            className:"form-control ",
+            defaults:currentUser ? currentUser.Name :"",
+            placeholder:"Name",
+            errorMessage:"The Name is required !",
+            required:true
+        
+          
+          
+        },{id:1,
+            name:"email",
+            type:"email",
+            label:"Email ID",
+            className:"form-control ",
+            defaults:currentUser ? currentUser.User.email :"",
+            placeholder:"Email ID",
+            errorMessage:"It should be a valid email adress!",
+            required:true
+        
+          }
+      ]
+
+      useEffect(()=>{
+         
+        if(currentUser && currentUser.User.role==="ORGANIZATION"){
+            setOrg(true);
+        }else{
+            setOrg(false);
+        }
+      },[])
   return (
     <Container>
+ 
        <ToastContainer
               position="top-right"
               autoClose={5000}
@@ -188,13 +221,21 @@ function Profile() {
                                         <h6 className="mb-3 text-primary">Personal Details</h6>
                                     </div>
                                    
-                                    {input1.map(v=>(
+                                    {!org && input1.map(v=>(
                                             <div className=" col-sm-6 col-sm-6 col-md-6 col-sm-6 col-12" key={v.id}>
                                                 <div className="form-group">
                                                     <Inputs  {...v}  onChange={onChange} ></Inputs>
                                                 </div>
                                             </div>
                                     ))}
+                                    {org && input2.map(v=>(
+                                            <div className=" col-sm-6 col-sm-6 col-md-6 col-sm-6 col-12" key={v.id}>
+                                                <div className="form-group">
+                                                    <Inputs  {...v}  onChange={onChange} ></Inputs>
+                                                </div>
+                                            </div>
+                                    ))}
+                                    {console.log(currentUser)}
                                     
                                 </div>
                                 <div className="row gutters">

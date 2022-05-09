@@ -1,4 +1,9 @@
 
+.contentModel{
+    z-index:99999;
+    
+    margin-top:50px !important ;
+}
 .loading-spinner{
   background-color: red;
   margin-left: auto;
@@ -7,6 +12,9 @@
   height: 100%;
   z-index: 9999999999;
   overflow: hidden;
+}
+.modal{
+  margin-top:150px;
 }
 .loading {
   position: fixed;

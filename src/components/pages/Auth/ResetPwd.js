@@ -10,6 +10,7 @@ import  { useHistory } from 'react-router-dom'
 import {  AxiosError } from 'axios'
 import ClipLoader from "react-spinners/ClipLoader";
 import styled from 'styled-components';
+import { resetPwd } from '../../../utils/api';
 
 const ResetPwd = () => {
 let [loading, setLoading] = useState(false);
@@ -79,7 +80,7 @@ var getObject={
       "newPassword":values.newPassword
     }
     setLoading(true)
-    axios.post(`${process.env.REACT_APP_API_URL}user/resetpassword`,DataSet).then(Response=>{
+    axios.post(resetPwd,DataSet).then(Response=>{
       setLoading(true)
       toast.success('Perfect your password has been changed please check your email to verif that ');
       

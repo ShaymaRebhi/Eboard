@@ -7,12 +7,13 @@ import Classroom from '../Classroom/Classroom';
 import '../SideBar/Sidebar.css'
 import NavbarInside from '../NavbarInside/NavbarInside';
 import Calendar from '../Classroom/Calendar';
+import CalendarComponent from '../Classroom/CalendarComponent';
 import { useHistory } from 'react-router-dom';
 import Reclamation from '../Reclamations/Reclamation';
 import CreateForum from '../Forum/CreateForum';
 import Forums from '../Forum/Forums';
 import Forum from '../Forum/Forum';
-import { useJwt } from "react-jwt";
+import GetAllClassArchivedComponent from '../Classroom/GetAllArchivedClassComponent';
 
 function HomeClassroom(){
     
@@ -62,7 +63,7 @@ function HomeClassroom(){
                                 <PrivateRoute
                                     path="/calendar"
                                     exact
-                                    component={Calendar}
+                                    component={CalendarComponent}
                                 />
                                 <PrivateRoute
                                     path="/Reclamation"
@@ -83,6 +84,11 @@ function HomeClassroom(){
                                     path="/forum/:id"
                                     exact
                                     component={Forum}
+                                />
+                                 <PrivateRoute
+                                    path="/archived"
+                                    exact
+                                    component={GetAllClassArchivedComponent}
                                 />
 
                             </div>

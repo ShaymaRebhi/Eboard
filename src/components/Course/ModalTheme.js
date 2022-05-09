@@ -3,6 +3,7 @@ import { Dropdown, Modal } from "semantic-ui-react";
 import FormTheme from "./FormTheme";
 
 function ModalTheme(props) {
+
   return (
     <>
       <Modal className="theme"
@@ -18,10 +19,11 @@ function ModalTheme(props) {
           <FormTheme className="theme"
             buttonSubmitTitle={props.buttonSubmitTitle}
             buttonColor={props.buttonColor}
-            seanceId={props.seanceId}
+            themeId={props.themeId}
             onSeanceAdded={props.onSeanceAdded}
             onSeanceUpdated={props.onSeanceUpdated}
             Title = {props.Titre}
+            server={props.server}
           />
         </Modal.Content>
       </Modal>

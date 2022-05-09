@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import DarkModeToggle from "react-dark-mode-toggle";
 import '../../css/Navbar.css';
 
 import NavHead from './NavHead';
 
 function Navbar() {
+  const [isDarkMode, setIsDarkMode] = useState(() => false);
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
 
@@ -35,11 +37,12 @@ function Navbar() {
             <i className='fab fa-typo3' />
             
           </Link>
-          
+         
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+          
             <li className='nav-item'>
               <Link to='/' 
               className='nav-links'
@@ -67,15 +70,8 @@ function Navbar() {
               </Link>
             </li>
 
-            <li>
-              <Link
-                to='/sign-up'
-                className='nav-links-mobile'
-                onClick={closeMobileMenu}
-              >
-                Sign Up
-              </Link>
-            </li>
+            
+            
           </ul>
           
       

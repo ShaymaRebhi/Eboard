@@ -4,14 +4,20 @@ import { useParams } from "react-router"
 import  * as api from "../../utils/Forum";
 
 import {useDispatch, useSelector} from 'react-redux'
-import {createComment,affichageComment, selectComment,supprimer,update,like} from "../../redux/slices/CommentSlice";
+import {createComment,affichageComment, selectComment,supprimer,update,like,dislike} from "../../redux/slices/CommentSlice";
 import Navbar from "../pages/Shared/Navbar";
 import Footer from "../pages/Shared/Footer";
 import CreateForum from "./CreateForum";
 import UpdateForum from "./UpdateForum";
 import {selectForum, getForumById, selectF} from "../../redux/slices/ForumSlice";
+import {WhatsappShareButton,EmailShareButton,LinkedinShareButton} from "react-share";
+import  {EmailIcon,WhatsappIcon, LinkedinIcon}from "react-share";
+
 import FacebookShareButton from "react-share/es/FacebookShareButton";
 import FacebookIcon from "react-share/es/FacebookIcon";
+import axios from 'axios';
+import { getUserConnect } from '../../utils/api';
+import { Link } from 'react-router-dom';
 
 
 
@@ -77,24 +83,43 @@ function Forum() {
         dispatch(like(l));
     };
 
+    const Dislike = (l) => {
+        dispatch(dislike(l));
+    };
+    const [UserConnect,setUserconnect]=useState(undefined);
+    const [image,setImage]=useState(undefined);
+    const [name,setName]=useState(undefined);
+    useEffect(()=>{
+        axios.get(getUserConnect,{
+            headers: {
+                'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
+            }
+        }).then(res=>{
+            
+            setUserconnect(res.data[0])
+            setImage(res.data[0].User.file)
+            setName(res.data[0].FirstName+' '+res.data[0].LastName)
+          })
+    },[])
     return (
         <div>
-          
-            <div className="bodyy" >
+         
+            <div className="bodyy" style={{padding: '2% 0% 2%'}}>
                 <div className="container">
-                    <div >
-                        
+                    <div className="container-fluid mt-100">
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="card mb-4">
                                     <div className="card-header">
-                                        <div className="media flex-wrap w-100 align-items-center"><img
-                                            src="https://i.imgur.com/iNmBizf.jpg" className="d-block ui-w-40 rounded-circle"
+                                        <div className="media flex-wrap w-100 align-items-center">
+                                            
+                                            <div className="media-body mt-3 mb-5">
+                                            <img
+                                            src={(forum!==null)?forum.User.file:''} className="d-block ui-w-40 rounded-circle"
                                             alt=""/>
-                                            <div className="media-body ml-3">
-                                                <a href="javascript:void(0)" data-abc="true">
+                                                <Link to="javascript:void(0)" data-abc="true">
                                                     {(forum!==null)?forum.Title:''}
-                                                </a>
+                                                </Link>
                                                 <div className="text-muted small">{(forum!==null)?forum.Date:''}</div>
                                             </div>
                                             <div className="text-muted small ml-3">
@@ -123,17 +148,38 @@ function Forum() {
                                                 :''
                                             }
                                             {(forum!==null)?
+                                            <div>
                                                 <FacebookShareButton
-                                                    url={"https://eboardbackend2022.herokuapp.com/forum/"+forum._id}
+                                                    url={"https://eboardfrontendapplication.herokuapp.com/forum/"+forum._id}
                                                     quote={forum.Title}
-                                                    hashtag={forum.Tags}
+                                                    hashtag={'#EBOARD'}
                                                     description={forum.Description}
-                                                    className="Demo__some-network__share-button pr-4"
+                                                    className="Demo__some-network__share-button"
                                                 >
                                                     <FacebookIcon size={32} round />
                                                 </FacebookShareButton>
+
+                                                 <WhatsappShareButton
+                                                 url={"https://eboardfrontendapplication.herokuapp.com/forum/"+forum._id}
+                                                 title={forum.Title}
+                                                 >
+                                                     <WhatsappIcon size={32} round />
+                                                 </WhatsappShareButton>
+                                                
+                                                 <LinkedinShareButton
+                                                 url={"https://eboardfrontendapplication.herokuapp.com/forum/"+forum._id}
+                                                 title={forum.Title}
+                                                 summary={forum.Description}
+                                                 
+
+                                                 >
+                                                     <LinkedinIcon size={32} round />
+                                                 </LinkedinShareButton>
+                                                 </div>
+                                             
                                                 :
                                                 ''
+                                                
                                             }
 
                                         </div>
@@ -147,14 +193,14 @@ function Forum() {
                                     <div className="mt-2">
                                         {comments.map((c,i) => (
                                             <div className="d-flex flex-row p-3">
-
-                                                <img src="https://i.imgur.com/zQZSWrt.jpg" className="rounded-circle mr-3" style={{width:'45px',height:'45px'}} alt="ph"/>
+                                                {console.log(c)}
+                                                <img src={c.User ?c.User.file :""} alt='immmg' className="rounded-circle mr-3" style={{width:'45px',height:'45px'}}/>
                                                 <div className="w-100">
                                                     <div className="d-flex justify-content-between align-items-center">
                                                         <div className="d-flex flex-row align-items-center">
-                                                            <span className="mr-2">{(c.User.email)}</span>
-                                                            
-                                                        </div><small className='text-dark pr-4'>12h ago</small>
+                                                            <span className="mr-2">{c.User.email}</span>
+                                                        </div>
+                                                       
                                                     </div>
                                                     {(form &&(c._id===commentU._id))?
                                                         <div>
@@ -170,15 +216,15 @@ function Forum() {
                                                         </p>
                                                     }
                                                     <div className="d-flex flex-row user-feed">
-                                                        <span className="wish">
+                                                    <span className="wish">
                                                             {(c.Likes.findIndex((item) => item.User === login.User._id) === -1) ?
                                                                 <a href="javascript:void(0)" onClick={() => Like({
-                                                                    User: '623113a28d227d001659e502',
+                                                                    User: login.User._id,
                                                                     Comment: c._id
                                                                 })}><i className="fa fa-heart text-hover-black"/></a>
                                                             :
-                                                                <a href="javascript:void(0)" onClick={() => Like({
-                                                                    User: '623113a28d227d001659e502',
+                                                                <a href="javascript:void(0)" onClick={() => Dislike({
+                                                                    User: login.User._id,
                                                                     Comment: c._id
                                                                 })}><i className="fa fa-heart text-danger"/></a>
                                                             }
@@ -202,9 +248,9 @@ function Forum() {
                                             </div>
                                         ))}
                                     </div>
-                                    <div className="mt-3 d-flex flex-row align-items-center p-3 form-color">
+                                    <div className="mt-3 d-flex flex-row align-items-center p-3 form-color barbouzo">
                                         <img
-                                        src="https://i.imgur.com/zQZSWrt.jpg" width="50" className="d-block ui-w-40 rounded-circle" style={{width:'45px'}}/>
+                                        src={image ?image :""} width="50" className="d-block  rounded-circle" style={{width:'45px'}}/>
                                         <input type="text" className="form-control" placeholder="Enter your comment..." value={comment.Comment}
                                         onChange={(e)=>setComment({...comment,Comment:e.target.value})}
                                         />

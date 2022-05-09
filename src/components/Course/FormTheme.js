@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Button, Form, Message } from "semantic-ui-react";
+import { AddTheme, EditTheme, GetThemeById } from "../../redux/slices/Theme";
 import '../css/CardClass.css';
 
 
@@ -8,11 +10,26 @@ import '../css/CardClass.css';
 function FormTheme(props) {
   const [titre, SetTitre] = useState("");
   const [description, SetDescription] = useState("");
+ 
+  const [dateCreation, SetDateCreation] = useState(Date.now());
+  const [formClassName, SetFormClassName] = useState("");
+  const [formSuccessMessage, SetFormSuccessMessage] = useState("");
+  const [formErrorMessage, SetFormErrorMessage] = useState("");
+  const CurrentClass = JSON.parse(localStorage.getItem("idClass"));
 
-  const [formClassName] = useState("");
+  const themeId = props.themeId;
+  const dispatch = useDispatch();
 
-
-  
+  useEffect(() => {
+    if (themeId) {
+      console.log(themeId);
+      dispatch(GetThemeById(themeId)).then((response) => {
+        console.log(response);
+        SetTitre(response.payload.titre);
+        SetDescription(response.payload.description);
+      });
+    }
+  }, [dispatch]);
 
   const handleTitreChanges = (e) => {
     SetTitre(e.target.value);
@@ -22,11 +39,62 @@ function FormTheme(props) {
   };
 
   const handleSubmit = (e) => {
-    // Prevent browser refresh
+   
     e.preventDefault();
 
-    // Acknowledge that if the user id is provided, we're updating via PUT
-    // Otherwise, we're creating a new data via POST
+   
+    if (themeId) {
+      const theme = {
+        titre: titre,
+        description: description,
+        idClass: CurrentClass._id,
+        dateCreation: dateCreation,
+        _id: themeId,
+      };
+
+      dispatch(EditTheme(theme))
+        .then((response) => {
+          SetFormClassName("success ");
+          SetFormSuccessMessage(response.payload.msg);
+        })
+        .catch((err) => {
+          if (err.response) {
+            if (err.response.data) {
+              SetFormClassName("warning");
+              SetFormErrorMessage(err.response.payload.msg);
+            }
+          } else {
+            SetFormClassName("warning");
+            SetFormErrorMessage("something wen wrong " + err);
+          }
+        });
+    }
+
+    if (!themeId) {
+      const theme = {
+        titre: titre,
+        description: description,
+        idClass: CurrentClass._id,
+        dateCreation: dateCreation,
+      };
+      console.log(theme);
+      dispatch(AddTheme(theme))
+        .then((response) => {
+          SetFormClassName("success");
+          SetFormSuccessMessage(response.payload.msg);
+        })
+        .catch((err) => {
+          if (err.response) {
+            if (err.response.data) {
+              SetFormClassName("warning");
+              SetFormErrorMessage(err.response.payload.msg);
+            }
+          } else {
+            SetFormClassName("warning");
+            SetFormErrorMessage("something wen wrong " + err);
+          }
+        });
+    }
   
 
    

@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Form,  TextArea, Segment , Image } from "semantic-ui-react";
 import { useState } from "react";
 import "./Feed.css";
-import Courses from './Courses';
+import { useDispatch , useSelector } from 'react-redux';
+import TableCourses from './TableCourses';
 
 function FeedClass () {
     const Date1 = new Date(Date.now())
+    const courses = useSelector((state) => state.courses.seance);
+    const [listCourses, setListCourses] = useState(courses);
+    const ModulePicture = JSON.parse(localStorage.getItem("idClass")).file;
+
     const [post, setPost] = useState(
          [{Title : "React Hook",
           Class:"seance 1",
@@ -17,7 +22,8 @@ function FeedClass () {
         ]
     )
       
-     
+    const dispatch = useDispatch();
+
    
     const changePostFile = (text, i) => {
         var newPost = [...post];
@@ -25,7 +31,8 @@ function FeedClass () {
         setPost(newPost);
         console.log(newPost)
     }
-    
+  
+  
    
     return (
         <div>
@@ -34,42 +41,15 @@ function FeedClass () {
            
         <div key={index}>
             <div className='top-image-feed'>
-            <Image className='image-feed' src="images/react.jpeg" />
+            <Image className='image-feed' src={ModulePicture} />
             </div>
             <br/>
-        <Segment raised color="grey">
-        <Form >
-        
-            <Form.Field
-              control={TextArea}
-              placeholder="Announce something to your class"
-              label="Content"
-              name="Body"
-            />
-         
-
-  
-            <div style={{ float: "right", marginRight: "5%" }}>
-                    <Button
-                      style={{ maxHeight: "40px" }}
-                      type="submit"
-                      content="Reply"
-                      icon="edit"
-                    />
-                  </div>
-                  <div style={{ display: "flex" }}>
-                    
-                  <input type="file" id="postfile" name="fileupload" className="inputFilePost form-control"  multiple HTMLInputElement={p.TypeRec} onChange={(e)=>{changePostFile(e.target.files,index)}} />
-
-                
-                   
-                  </div>
-          </Form>
-        </Segment>
       </div>
        ))}
        <br/>
-       <Courses />
+               
+       <TableCourses courses={listCourses} />
+
       </div>
     );
   
