@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const firebaseController = require("../controllers/FirebaseController");
+const firebaseController = require("../Controllers/FirebaseController");
 
 router.post("/add", firebaseController.add);
 router.get("/getall", firebaseController.getAll);

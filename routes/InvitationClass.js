@@ -8,7 +8,7 @@ const {
   getInvitationByUserClass,
   CountRequestClass,
   getInvitationByClassid
-} = require("../controllers/InvitationClass.js");
+} = require("../Controllers/InvitationClass.js");
 router.post("/", addInvitationClass);
 router.put("/:id", updateInvitationClass);
 router.delete("/:id", deleteInvitationClass);
