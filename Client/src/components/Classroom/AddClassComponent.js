@@ -46,10 +46,10 @@ const options = [
 ];
 
 
-export default function AddClassComponent() {
+export default function AddClassComponent({idUserConnect,role}) {
  
-  const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
-  const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
+  //const idUserConnect = JSON.parse(localStorage.getItem("idStudent"))._id;
+  //const role =  JSON.parse(localStorage.getItem("Student")).Student.User.role;
 
   
   let [color, setClassColor] = useState();

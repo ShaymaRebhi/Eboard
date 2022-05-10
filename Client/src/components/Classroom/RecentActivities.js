@@ -3,6 +3,7 @@ import { Card, Feed } from 'semantic-ui-react'
 import '../css/CardClass.css';
 import {RetrieveCourses} from '../../redux/slices/Courses'
 import { useDispatch, useSelector } from 'react-redux';
+import ReactTimeAgo from "react-time-ago/modules/ReactTimeAgo";
 
 
 export default function RecentActivites () {
@@ -28,7 +29,11 @@ export default function RecentActivites () {
         <Feed.Event key={index}>
           <Feed.Label image={c.idOwner.User.file} />
           <Feed.Content>
-            <Feed.Date content='1 day ago' />
+            <Feed.Date>
+              <ReactTimeAgo
+                date={c.dateCreation}
+                locale="en-US"
+            /></Feed.Date>
             <Feed.Summary>{console.log((c.idOwner))}
              {c.idOwner.FirstName} added a new ressource to the <a>{ c.idClass.className}</a> Class.
             </Feed.Summary>

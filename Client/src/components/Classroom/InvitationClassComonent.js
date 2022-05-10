@@ -4,35 +4,15 @@ import styled from 'styled-components'
 import { useDispatch, useSelector } from "react-redux";
 import { fetchActiveClass, fetchclass, fetchInvitationclass, fetchRequestClass, selectinvitationclass } from "../../redux/slices/classline";
 import { AddclassApi, ClassInvitationApi } from "../../utils/Class";
-import axios from "axios";
-import { getUserConnect } from "../../utils/api";
 
 
 
-export default function InvitationClassComonent({idclass}) {
+
+export default function InvitationClassComonent({idUserConnect,role}) {
   const [classinvit, err] = useSelector(selectinvitationclass);
-  const [role,setRole]=useState(undefined);
-  const [idUserConnect,setIdUserConnect]=useState("");
-  const [id,setId]=React.useState();
-  
   useEffect(()=>{
-    axios.get(getUserConnect,{
-      headers: {
-          'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
-      }
-  }).then(res=>{
-     
-      setId(res.data[0]._id);
-    })
-
-    axios.get(getUserConnect,{
-      headers: {
-          'Authorization':`Bearer ${JSON.parse(localStorage.getItem("login")).AccessToken}`
-      }
-  }).then(res=>{
-      setRole(res.data[0].User.role);
-      
-  })
+    console.log("idUserConnect" + idUserConnect)
+    console.log("role" + role)
     
   },[])
  
@@ -44,9 +24,9 @@ export default function InvitationClassComonent({idclass}) {
   const Decline = async (idq) => {
     try {
       const res = await ClassInvitationApi.deleteClassInvitation(idq);
-      dispatch(fetchInvitationclass(idclass));
-      dispatch(fetchActiveClass(idclass));
-      dispatch(fetchRequestClass(idclass));
+      dispatch(fetchInvitationclass(idUserConnect));
+      dispatch(fetchActiveClass(idUserConnect));
+      dispatch(fetchRequestClass(idUserConnect));
     } catch (error) {
       alert(error);
     }
@@ -55,18 +35,18 @@ export default function InvitationClassComonent({idclass}) {
     try {
       const res = await AddclassApi.addUserToClass(idclass,idUser);
       const res2 = await ClassInvitationApi.deleteClassInvitation(idinviation);
-      dispatch(fetchInvitationclass(idclass));
-      dispatch(fetchActiveClass(idclass));
-      dispatch(fetchRequestClass(idclass));
-      dispatch(fetchclass(role,idclass,"Active"));
+      dispatch(fetchInvitationclass(idUserConnect));
+      dispatch(fetchActiveClass(idUserConnect));
+      dispatch(fetchRequestClass(idUserConnect));
+      dispatch(fetchclass(role,idUserConnect,"Active"));
       
     } catch (error) {
       alert(error);
     }
   };
   useEffect(() => {
-    dispatch(fetchInvitationclass(idclass));
-    console.log(idclass)
+    dispatch(fetchInvitationclass(idUserConnect));
+    console.log(idUserConnect)
     
   }, [dispatch]);
   return (

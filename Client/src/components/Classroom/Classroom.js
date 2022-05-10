@@ -45,8 +45,8 @@ function Classroom() {
       <ClassRoomStyle className='d-flex justify-content-start'>
       
       <div>
-      { role === "TEACHER" ? (
-            <AddClassComponent /> 
+      { role && idUserConnect && role === "TEACHER"   ? (
+            <AddClassComponent idUserConnect={idUserConnect} role={role} />
             ) : (
               <></>
 
@@ -60,9 +60,9 @@ function Classroom() {
 
           )}
 
-            {role && idUserConnect && <CardClass role={role} idUserConnect={idUserConnect} ></CardClass> }
+            {role && idUserConnect && <CardClass role={role} idUserConnect={idUserConnect}  ></CardClass> }
               
-            {role && idUserConnect &&<InvitationClassComonent idclass={idUserConnect}></InvitationClassComonent>}
+            {role && idUserConnect &&<InvitationClassComonent idUserConnect={idUserConnect} role={role}></InvitationClassComonent>}
         </div>
         <RecentActivites idUserConnect={idUserConnect}></RecentActivites>
       </ClassRoomStyle>

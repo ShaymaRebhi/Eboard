@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="923abaec-0f51-4318-aa23-44b094adba5c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Quiz/CreateQuiz.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Quiz/CreateQuiz.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Quiz/QuizList.css" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Quiz/QuizList.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Quiz/QuizList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Quiz/QuizList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/Task/TaskList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Task/TaskList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client/src/components/container/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/container/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Classroom/AddClassComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Classroom/AddClassComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Classroom/Classroom.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Classroom/Classroom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Classroom/InvitationClassComonent.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Classroom/InvitationClassComonent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client/src/components/Classroom/RecentActivities.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Client/src/components/Classroom/RecentActivities.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/QuizController.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/QuizController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/TaskController.js" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/TaskController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +88,7 @@
       <workItem from="1651948496172" duration="4430000" />
       <workItem from="1651966234131" duration="895000" />
       <workItem from="1652045665628" duration="2000" />
-      <workItem from="1652206953530" duration="3976000" />
+      <workItem from="1652206953530" duration="5615000" />
     </task>
     <servers />
   </component>
