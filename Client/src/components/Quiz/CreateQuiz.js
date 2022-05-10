@@ -20,7 +20,7 @@ function CreateQuiz() {
     const [quiz, setQuizs] = useState(
         {Title : "",
             Description:"",
-            Time:'12:34',
+            Time:'00:00:00',
             Creator:id,
             Class:idClass
         }

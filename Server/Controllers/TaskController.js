@@ -13,9 +13,16 @@ exports.GetTask = async (req,res,next) =>{
 }
 
 exports.deleteTask = async (req,res) =>{
-    Task.deleteOne({ _id: req.params.id })
-        .then(res.status(200).send(`Task is succussffully deleted`))
-        .catch(err => res.status(400).json(err));
+    try {
+        Evaluation.deleteMany({Task : req.params.id }).exec(function (err, results) {
+            console.log("List Evaluations successfully removed.", results);
+        });
+        Task.deleteOne({ _id: req.params.id })
+            .then(res.status(200).send(`Task is succussffully deleted`))
+
+    }catch (error) {
+        res.status(404).json({message : error.message})
+    }
 }
 
 exports.updateTask = async(req,res)=> {

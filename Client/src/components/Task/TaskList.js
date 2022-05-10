@@ -9,6 +9,7 @@ import { Header, Icon, Item, Segment, } from 'semantic-ui-react'
 import moment from 'moment';
 import {MdAssignment} from "react-icons/md";
 import ReactPaginate from "react-paginate";
+import {deleteQuiz} from "../../utils/Quiz";
 
 function TaskList() {
     const idUser=JSON.parse(localStorage.getItem("login")).User._id;
@@ -119,20 +120,30 @@ function TaskList() {
                         <Item className="buttons">
                             {t.status === "Not Assigned" ? (
                                 <>
-                                    <button className="btn btn-outline-primary"  onClick={()=>getEditTaskPage(t._id)}><GrUpdate/></button>
-                                    <button className="btn btn-outline-danger"  onClick={()=>deleteTask(t._id, ()=>{
-                                        toast.success('Task deleted successfuly', {
-                                            position: "bottom-right"
-                                        })
-                                            },
-                                                getTasks()
-                                         )}><FaTrash/>
-                                    </button>
+                                    <div className="edit_quiz_icon">
+                                        <button className="btn btn-outline-primary"  onClick={()=>getEditTaskPage(t._id)}><GrUpdate/> </button>
+                                        <span className="edit_quiz_span">Update Task</span>
+                                    </div>
+
                                 </>
                             ):("")
                             }
+                            <div className="delete_quiz_icon">
+                                <button className="btn btn-outline-danger"  onClick={()=>deleteTask(t._id, ()=>{
+                                        toast.success('Task deleted successfuly', {
+                                            position: "bottom-right"
+                                        })
+                                    },
+                                    getTasks()
+                                )}><FaTrash/>
+                                </button>
+                                <span className="delete_quiz_span">Delete Task</span>
+                            </div>
                             {t.status === "Not Assigned" ? (
-                            <button className="btn btn-outline-success" onClick={()=>{assignTask(t,t._id)}}><MdAssignment/></button>
+                                <div className="assign_quiz_icon">
+                                    <button className="btn btn-outline-success" onClick={()=>{assignTask(t,t._id)}}><MdAssignment/></button>
+                                    <span className="assign_quiz_span">Assign Task</span>
+                                </div>
                             ):("")
                             }
                         </Item>

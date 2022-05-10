@@ -31,3 +31,80 @@
     display: flex;
     justify-content: end;
 }
+
+.delete_quiz_icon{
+
+    position: relative;
+    display: inline-block;
+}
+.delete_quiz_span{
+    font-size: 12px;
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+.delete_quiz_icon:hover .delete_quiz_span{
+    visibility: visible;
+}
+.edit_quiz_icon{
+
+    position: relative;
+    display: inline-block;
+}
+.edit_quiz_span{
+    font-size: 12px;
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+.edit_quiz_icon:hover .edit_quiz_span{
+    visibility: visible;
+}
+
+.assign_quiz_icon{
+
+    position: relative;
+    display: inline-block;
+}
+.assign_quiz_span{
+    font-size: 12px;
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+.assign_quiz_icon:hover .assign_quiz_span{
+    visibility: visible;
+}

@@ -11,9 +11,16 @@ exports.GetQuiz = async (req,res,next) =>{
     }
 }
 exports.deleteQuiz = async (req,res) =>{
-    Quiz.deleteOne({ _id: req.params.id })
-        .then(res.status(200).send(`Quiz is succussffully deleted`))
-        .catch(err => res.status(400).json(err));
+    try {
+        Evaluation.deleteMany({Quiz : req.params.id }).exec(function (err, results) {
+            console.log("List Evaluations successfully removed.", results);
+        });
+        Quiz.deleteOne({ _id: req.params.id })
+            .then(res.status(200).send(`Quiz is succussffully deleted`))
+
+    }catch (error) {
+        res.status(404).json({message : error.message})
+    }
 }
 
 exports.AddQuiz = async(req,res) => {
