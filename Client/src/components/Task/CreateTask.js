@@ -73,7 +73,7 @@ function CreateTask() {
         )
         ).then((response) => (
             SetLoader(false),
-            toast.success('Task assigned ', {
+            toast.success('Task added', {
                 position: "bottom-right"
             }),
                 componentDidMount(3000)

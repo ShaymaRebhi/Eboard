@@ -122,10 +122,6 @@ function DisplayTask() {
                         <h1 className="tasktitle"><strong>Task : </strong>{task.Title}</h1>
                       </div>
                         <br/>
-                      <div className="taskTheme ">
-                        <h3 className="taskquestion"><strong>Theme : </strong>{task.Theme}</h3>
-                      </div>
-                            <br/>
                       <div>
                         <p className="taskquestion"><strong>Description : </strong>{task.Description}</p>
                       </div>

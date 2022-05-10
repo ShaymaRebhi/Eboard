@@ -69,7 +69,7 @@ function AssignedTaskStudentList() {
                     <Segment placeholder>
                         <Header icon>
                             <Icon name='tasks' />
-                            No Tasks Added .
+                            No Tasks Assigned .
                         </Header>
 
                     </Segment>

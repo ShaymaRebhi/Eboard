@@ -120,7 +120,7 @@ function CommentComponent(props) {
           <Comment key={index}>
             <Comment.Avatar as="a" src={commentt.Writer.file} />
             <Comment.Content>
-              <Comment.Author as="a">{Name}</Comment.Author>
+              <Comment.Author as="a">{commentt.Writer.email.substring(0, 6)}</Comment.Author>
               <Comment.Metadata>
                 
                 <div>

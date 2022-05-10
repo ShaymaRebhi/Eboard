@@ -32,10 +32,10 @@ function CheckQuizAnswers(props) {
                     </ul>
                     <ul>
                         {props.data.map((question,index)=>(
-                                question.options.map((op,i=resultLength)=>(
-                                    optioncorrect=op.optionText
-                                )),
-                                index <= resultLength ? ("") : (
+                            question.options.map((op,i=resultLength)=>(
+                                optioncorrect=op.optionText
+                            )),
+                                index < resultLength ? ("") : (
                                     <li key={index} className="mb-6 list-group-item">
                                         <div className="questionScore">
                                             <p className="question-quiz-option"><strong>{question.questionText}</strong></p>
